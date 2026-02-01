@@ -1,0 +1,11 @@
+node_modules
+dashboard/node_modules
+dashboard/dist
+output/
+*.log
+.git
+.gitignore
+README.md
+*.md
+.env
+.env.*

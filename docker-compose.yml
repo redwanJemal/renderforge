@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  renderforge:
+    build: .
+    ports:
+      - "3100:3100"
+    volumes:
+      - renderforge-output:/app/output
+    environment:
+      - NODE_ENV=production
+      - PORT=3100
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+        reservations:
+          memory: 1G
+
+volumes:
+  renderforge-output:

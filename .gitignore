@@ -1,0 +1,4 @@
+node_modules/
+output/
+dashboard/node_modules/
+*.mp4
