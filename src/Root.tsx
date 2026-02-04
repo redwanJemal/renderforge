@@ -2,6 +2,7 @@ import { Composition } from 'remotion';
 import { registry } from './core/registry';
 import { FORMATS } from './types';
 import { themes } from './themes';
+import { YLDIntro, defaultYLDProps } from './templates/yld-intro/YLDIntro';
 
 // Import and register all templates (side-effect imports)
 import './templates/product-launch';
@@ -15,6 +16,17 @@ export const RemotionRoot: React.FC = () => {
 
   return (
     <>
+      {/* Custom: Your Last Dollar Intro */}
+      <Composition
+        id="yld-intro"
+        component={YLDIntro}
+        width={1080}
+        height={1920}
+        durationInFrames={270}
+        fps={30}
+        defaultProps={defaultYLDProps}
+      />
+
       {allTemplates.flatMap((template) =>
         template.meta.supportedFormats.map((format) => {
           const formatConfig = FORMATS[format];

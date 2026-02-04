@@ -190,7 +190,7 @@ Codec:      ${args.codec}
     // Bundle
     console.log('📦 Bundling project...');
     const bundleLocation = await bundle({
-      entryPoint: path.resolve(__dirname, '../src/Root.tsx'),
+      entryPoint: path.resolve(__dirname, '../src/index.ts'),
       onProgress: (progress: number) => {
         process.stdout.write(
           `\r   Progress: ${Math.round(progress * 100)}%`

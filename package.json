@@ -10,13 +10,33 @@
     "lint": "eslint src/"
   },
   "dependencies": {
-    "remotion": "^4.0.0",
-    "@remotion/cli": "^4.0.0",
-    "@remotion/renderer": "^4.0.0",
-    "@remotion/transitions": "^4.0.0",
+    "remotion": "4.0.415",
+    "@remotion/cli": "4.0.415",
+    "@remotion/renderer": "4.0.415",
+    "@remotion/transitions": "4.0.415",
     "zod": "^3.22.0",
     "express": "^4.18.0",
     "cors": "^2.8.5"
+  },
+  "overrides": {
+    "remotion": "4.0.415",
+    "@remotion/bundler": "4.0.415",
+    "@remotion/renderer": "4.0.415",
+    "@remotion/player": "4.0.415",
+    "@remotion/media-utils": "4.0.415",
+    "@remotion/streaming": "4.0.415",
+    "@remotion/studio-server": "4.0.415",
+    "@remotion/studio-shared": "4.0.415",
+    "@remotion/studio": "4.0.415",
+    "@remotion/paths": "4.0.415",
+    "@remotion/shapes": "4.0.415",
+    "@remotion/transitions": "4.0.415",
+    "@remotion/licensing": "4.0.415",
+    "@remotion/media-parser": "4.0.415",
+    "@remotion/zod-types": "4.0.415",
+    "@remotion/webcodecs": "4.0.415",
+    "@remotion/web-renderer": "4.0.415",
+    "@remotion/compositor-linux-arm64-gnu": "4.0.415"
   },
   "devDependencies": {
     "typescript": "^5.3.0",
