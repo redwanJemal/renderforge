@@ -3,6 +3,8 @@ import { registry } from './core/registry';
 import { FORMATS } from './types';
 import { themes } from './themes';
 import { YLDIntro, defaultYLDProps } from './templates/yld-intro/YLDIntro';
+import { Showcase, defaultShowcaseProps } from './templates/showcase/Showcase';
+import { Countdown, defaultCountdownProps } from './templates/countdown/Countdown';
 
 // Import and register all templates (side-effect imports)
 import './templates/product-launch';
@@ -16,7 +18,7 @@ export const RemotionRoot: React.FC = () => {
 
   return (
     <>
-      {/* Custom: Your Last Dollar Intro */}
+      {/* Premium Template: Your Last Dollar Intro */}
       <Composition
         id="yld-intro"
         component={YLDIntro}
@@ -25,6 +27,28 @@ export const RemotionRoot: React.FC = () => {
         durationInFrames={270}
         fps={30}
         defaultProps={defaultYLDProps}
+      />
+
+      {/* Premium Template: Showcase */}
+      <Composition
+        id="showcase"
+        component={Showcase}
+        width={1080}
+        height={1920}
+        durationInFrames={240}
+        fps={30}
+        defaultProps={defaultShowcaseProps}
+      />
+
+      {/* Premium Template: Countdown */}
+      <Composition
+        id="countdown"
+        component={Countdown}
+        width={1080}
+        height={1920}
+        durationInFrames={240}
+        fps={30}
+        defaultProps={defaultCountdownProps}
       />
 
       {allTemplates.flatMap((template) =>
