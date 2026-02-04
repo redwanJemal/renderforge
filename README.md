@@ -2,276 +2,261 @@
 
 **Dynamic video template engine powered by [Remotion](https://remotion.dev)**
 
-RenderForge is a configurable video generation platform where templates are React components registered with schemas. Users provide JSON config → get rendered video. Supports multiple formats, themes, and an API for SaaS delivery.
+Generate stunning short-form videos from JSON config. Every template is a React component with full prop control — colors, text, images, timing, effects. Zero design skills needed.
 
 ---
 
 ## ✨ Features
 
-- **5 Starter Templates** — Product Launch, Quote of the Day, Stats Recap, Testimonial, Announcement
+- **3 Premium Templates** — Cinematic quality with particles, glitch effects, mesh gradients
+- **5 Starter Templates** — Ready-to-use with registry system + themes
 - **Multi-Format** — Story (9:16), Post (1:1), Landscape (16:9)
 - **4 Themes** — Default, Dark, Vibrant, Minimal
-- **Schema Validation** — Every template has a Zod schema with defaults
-- **REST API** — Express server for template listing, theme browsing, and render submission
-- **CLI** — Render videos from the command line
-- **Type-Safe** — Full TypeScript, Zod schemas match types
-- **Format-Responsive** — Components adapt layout based on format
-- **Default-Rich** — Every template renders beautifully with zero config
+- **Fully Configurable** — Every layer, color, text, timing adjustable via JSON props
+- **CLI + API** — Render from command line or REST API
+- **Type-Safe** — Full TypeScript + Zod schema validation
+
+---
 
 ## 🚀 Quick Start
 
-### Prerequisites
-
-- Node.js 18+
-- Chrome/Chromium (for Remotion rendering)
-
-### Install
-
 ```bash
-cd renderforge
+# Install
 npm install
-```
 
-### Launch Remotion Studio
-
-Preview templates in the browser:
-
-```bash
+# Preview in browser (Remotion Studio)
 npm run dev
+
+# Render a video
+npx remotion render src/index.ts <template-id> output.mp4
 ```
 
-This opens Remotion Studio at `http://localhost:3000` where you can preview all template × format combinations interactively.
+---
 
-### Render from CLI
+## 🎨 Premium Templates
+
+### 1. YLD Intro (`yld-intro`)
+Brand/channel intro with cinematic effects.
+
+**Effects:** Floating particles, scan line, grid overlay, vignette, logo glow pulse
+**Animations:** charReveal, wordReveal, typewriter, glitch, slideUp, fadeIn
+**Duration:** 15s (450 frames @ 30fps)
 
 ```bash
-# Default render
-npm run render -- --template product-launch --format landscape
-
-# With custom props
-npm run render -- --template quote-of-day --props '{"quote":"Stay hungry, stay foolish","author":"Steve Jobs"}' --theme dark --format story
-
-# From a JSON file
-npm run render -- --template stats-recap --props ./my-stats.json --output ./output/recap.mp4
-
-# List templates
-npm run render -- --list
-```
-
-### Start API Server
-
-```bash
-npm run api
-# Server runs on http://localhost:3100
-```
-
-## 📋 API Reference
-
-### Health Check
-
-```
-GET /health
-```
-
-### List Templates
-
-```
-GET /api/templates
-```
-
-Returns all registered templates with metadata and default props.
-
-### Get Template
-
-```
-GET /api/templates/:id
-```
-
-### List Themes
-
-```
-GET /api/themes
-```
-
-### Submit Render
-
-```
-POST /api/render
-Content-Type: application/json
-
-{
-  "templateId": "product-launch",
-  "props": {
-    "productName": "My Awesome Product",
-    "price": "$49"
+npx remotion render src/index.ts yld-intro output.mp4 --props '{
+  "logo": { "file": "my-logo.png", "size": 400 },
+  "header": {
+    "line1": "Introducing",
+    "line2": "the future of work",
+    "highlight": "future"
   },
-  "theme": "dark",
-  "format": "story",
-  "outputFormat": "mp4"
-}
+  "subheader": { "text": "AI-powered. Human-centered." },
+  "badge": { "text": "Coming Soon" },
+  "theme": {
+    "accentColor": "#3b82f6",
+    "bgGradient": ["#1e1b4b", "#0f0d2e", "#050412"]
+  }
+}'
 ```
 
-Returns `202 Accepted` with a `jobId`.
+**Configurable layers:**
+| Layer | Props |
+|-------|-------|
+| Logo | file, size, glow, finalScale, moveUpPx |
+| Header | line1, line2, highlight, sizes, animations |
+| Subheader | text, size, animation |
+| Badge | text, enabled |
+| CTA | text, enabled, bottomOffset |
+| Divider | enabled |
+| Theme | accentColor, bgGradient, particles/scanLine/grid/vignette toggles |
+| Timing | Per-layer appear frame |
 
-### Check Render Status
+---
 
+### 2. Showcase (`showcase`)
+Product/app showcase with floating 3D hero image.
+
+**Effects:** Mesh gradient blobs, constellation particles, 3D perspective tilt, shine sweep, glow pulse
+**Duration:** 14s (420 frames @ 30fps)
+
+```bash
+npx remotion render src/index.ts showcase output.mp4 --props '{
+  "hero": {
+    "imageUrl": "https://example.com/app-screenshot.png",
+    "rotateY": 12,
+    "floatAmplitude": 15
+  },
+  "headline": {
+    "line1": "Your Brand",
+    "line2": "reimagined",
+    "highlight": "reimagined"
+  },
+  "features": {
+    "items": ["AI-Powered", "Real-time", "No-code"],
+    "pillStyle": "glass"
+  },
+  "theme": {
+    "accentColor": "#8B5CF6",
+    "secondaryAccent": "#EC4899",
+    "bgGradient": ["#13041f", "#0a0118", "#050010"]
+  }
+}'
 ```
-GET /api/render/:jobId
+
+**Configurable layers:**
+| Layer | Props |
+|-------|-------|
+| Hero Image | imageUrl, width, height, borderRadius, rotateY, floatAmplitude, glowColor, shadow |
+| Tagline | text, size, animation, enabled |
+| Headline | line1, line2, highlight, sizes, animations |
+| Description | text, size, animation |
+| Feature Pills | items[], pillStyle (solid/outline/glass) |
+| CTA | text, style (solid/outline/glow), enabled |
+| Theme | accentColor, secondaryAccent, bgGradient, meshGradient/particles/grid/vignette toggles |
+
+---
+
+### 3. Countdown (`countdown`)
+Event countdown with neon energy effects.
+
+**Effects:** Energy rings (pulsing, rotating), aurora borealis bands, rising spark embers, neon glow
+**Duration:** 13s (390 frames @ 30fps)
+
+```bash
+npx remotion render src/index.ts countdown output.mp4 --props '{
+  "countdown": {
+    "days": 5, "hours": 12, "minutes": 30, "seconds": 0,
+    "cardStyle": "neon"
+  },
+  "eventName": {
+    "line1": "Don'\''t miss",
+    "line2": "the big reveal",
+    "highlight": "big reveal"
+  },
+  "details": {
+    "date": "March 15, 2025 · 10:00 AM",
+    "location": "Dubai World Trade Centre"
+  },
+  "theme": {
+    "accentColor": "#F59E0B",
+    "secondaryAccent": "#EF4444",
+    "bgGradient": ["#1a0a00", "#0d0500", "#050200"]
+  }
+}'
 ```
 
-Returns job status: `queued` → `rendering` (with progress %) → `complete` / `failed`.
+**Configurable layers:**
+| Layer | Props |
+|-------|-------|
+| Title | text, size, animation |
+| Countdown | days, hours, minutes, seconds, digitSize, cardStyle (flat/glass/neon/flip), separatorStyle (colon/dots/none) |
+| Event Name | line1, line2, highlight, sizes, animations |
+| Details | date, location, enabled |
+| CTA | text, style (pill/underline/glow) |
+| Theme | accentColor, secondaryAccent, bgGradient, energyRings/particles/aurora/vignette toggles |
 
-## 🎨 Templates
+---
 
-### Product Launch
-Showcase a product with image, name, price, discount badge, and CTA.
-- **Scenes:** Brand intro → Product reveal → Features → CTA
-- **Best for:** E-commerce, product announcements
+## 📋 Starter Templates (Registry)
 
-### Quote of the Day
-Elegant animated quote with author attribution and gradient background.
-- **Best for:** Social media, inspiration content
+These templates use the theme/format system and support all 3 formats × 4 themes = 12 variants each.
 
-### Stats Recap
-Animated counter numbers with labels in a grid layout.
-- **Best for:** Year-in-review, milestones, performance highlights
+| Template | ID | Description | Duration |
+|----------|----|-------------|----------|
+| Product Launch | `product-launch-{format}` | Multi-scene product showcase | 6s |
+| Quote of the Day | `quote-of-day-{format}` | Elegant quote typography | 5s |
+| Stats Recap | `stats-recap-{format}` | Animated counter grid | 6s |
+| Testimonial | `testimonial-{format}` | Star rating + customer quote | 5s |
+| Announcement | `announcement-{format}` | Bold headline + CTA | 5s |
 
-### Testimonial
-Customer photo, quote, star rating, and company branding.
-- **Best for:** Social proof, reviews, case studies
+```bash
+# Render starter template with theme
+npx remotion render src/index.ts product-launch-story output.mp4
+npx remotion render src/index.ts quote-of-day-post output.mp4
+```
 
-### Announcement
-Bold headline with subtitle, date, details, and CTA.
-- **Best for:** Event announcements, product launches, news
+---
 
-## 🎭 Themes
+## 🔧 CLI Reference
 
-| Theme | Style | Best For |
-|-------|-------|----------|
-| `default` | Clean white/blue | Professional, corporate |
-| `dark` | Dark with neon accents | Tech, gaming, modern |
-| `vibrant` | Bold, colorful | Social media, youth |
-| `minimal` | B&W, elegant typography | Premium, luxury |
+```bash
+# List all compositions
+npx remotion compositions src/index.ts
+
+# Render with custom props
+npx remotion render src/index.ts <composition-id> output.mp4 \
+  --props '<json>'
+
+# Using the render-cli script (starter templates only)
+npm run render -- --template <id> --format <story|post|landscape> \
+  --theme <default|dark|vibrant|minimal> \
+  --props '<json>' \
+  --output ./output/video.mp4
+```
+
+---
+
+## 🌐 REST API
+
+```bash
+npm run api  # Starts on http://localhost:3100
+```
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/health` | GET | Health check |
+| `/api/templates` | GET | List all templates |
+| `/api/templates/:id` | GET | Get template details |
+| `/api/themes` | GET | List themes |
+| `/api/render` | POST | Submit render job |
+| `/api/render/:jobId` | GET | Check render status |
+
+---
 
 ## 🏗 Architecture
 
 ```
 src/
-├── Root.tsx              # Remotion entry - registers all compositions
-├── types.ts              # Core TypeScript types
-├── core/
-│   ├── registry.ts       # Template registry (singleton)
-│   ├── schema.ts         # Shared Zod schemas
-│   ├── fonts.ts          # Font loading utilities
-│   └── formats.ts        # Format dimensions & helpers
-├── components/           # Shared UI building blocks
-│   ├── AnimatedText      # Text with 6 animation types
-│   ├── AnimatedImage     # Image with graceful fallback
-│   ├── Background        # Solid/gradient/image backgrounds
-│   ├── Logo              # Positioned logo component
-│   ├── CTA               # Animated call-to-action
-│   ├── Overlay           # Color/gradient overlay
-│   └── transitions/      # FadeIn, SlideIn, ScaleIn
-├── templates/            # Each template: index.tsx + schema.ts + meta.ts
-├── themes/               # 4 theme definitions
-└── api/                  # Express REST API
+├── Root.tsx              # Registers all compositions
+├── types.ts              # Core types (Theme, Format, etc.)
+├── core/                 # Registry, schemas, fonts, format helpers
+├── components/           # Shared: AnimatedText, Background, CTA, Logo, transitions
+├── templates/
+│   ├── yld-intro/        # Premium: brand intro
+│   ├── showcase/         # Premium: product showcase
+│   ├── countdown/        # Premium: event countdown
+│   ├── product-launch/   # Starter: product promo
+│   ├── quote-of-day/     # Starter: quote card
+│   ├── stats-recap/      # Starter: number counters
+│   ├── testimonial/      # Starter: customer review
+│   └── announcement/     # Starter: headline + CTA
+├── themes/               # default, dark, vibrant, minimal
+└── api/                  # Express REST server
 ```
 
-### How Templates Work
+### Text Animations
 
-1. Each template is a directory with 3 files:
-   - `meta.ts` — Metadata (id, name, formats, duration, fps)
-   - `schema.ts` — Zod schema with defaults
-   - `index.tsx` — React component + `registry.register()`
+All premium templates share these animation types:
 
-2. Templates self-register via side-effect imports in `Root.tsx`
+| Animation | Effect |
+|-----------|--------|
+| `charReveal` | Each character fades/scales in with stagger |
+| `typewriter` | Characters appear one by one with blinking cursor |
+| `glitch` | Text flickers with cyan/red ghosts |
+| `slideUp` | Slides up from below with spring physics |
+| `fadeIn` | Simple opacity fade |
+| `wordReveal` | Each word fades in separately (YLD only) |
 
-3. `Root.tsx` reads the registry and creates `<Composition>` for each template × format combination
+---
 
-4. The API/CLI validates props against the schema before rendering
-
-## 🔧 Creating a New Template
+## 📦 Docker
 
 ```bash
-mkdir src/templates/my-template
+docker build -t renderforge .
+docker run -p 3100:3100 renderforge
 ```
 
-**`meta.ts`:**
-```typescript
-import { TemplateMeta } from '../../types';
-
-export const meta: TemplateMeta = {
-  id: 'my-template',
-  name: 'My Template',
-  description: 'A custom template',
-  category: 'custom',
-  tags: ['custom'],
-  supportedFormats: ['story', 'post', 'landscape'],
-  durationInFrames: 150,
-  fps: 30,
-};
-```
-
-**`schema.ts`:**
-```typescript
-import { z } from 'zod';
-
-export const myTemplateSchema = z.object({
-  title: z.string().default('Hello World'),
-  subtitle: z.string().default('This is my template'),
-});
-
-export type MyTemplateProps = z.infer<typeof myTemplateSchema>;
-export const defaultProps: MyTemplateProps = myTemplateSchema.parse({});
-```
-
-**`index.tsx`:**
-```typescript
-import React from 'react';
-import { AbsoluteFill } from 'remotion';
-import type { Theme, Format } from '../../types';
-import { registry } from '../../core/registry';
-import { meta } from './meta';
-import { myTemplateSchema, defaultProps } from './schema';
-import type { MyTemplateProps } from './schema';
-
-const MyTemplate: React.FC<MyTemplateProps & { theme: Theme; format: Format }> = ({
-  title, subtitle, theme, format,
-}) => (
-  <AbsoluteFill style={{ background: theme.colors.background }}>
-    {/* Your template content */}
-  </AbsoluteFill>
-);
-
-registry.register({ meta, schema: myTemplateSchema, component: MyTemplate, defaultProps });
-export default MyTemplate;
-```
-
-Then add `import './templates/my-template'` to `Root.tsx` and the API server.
-
-## 📦 Production
-
-### Queue-Based Rendering
-
-For production, install BullMQ for Redis-backed render queues:
-
-```bash
-npm install bullmq ioredis
-```
-
-See `src/api/queue.ts` for the queue implementation.
-
-### Docker
-
-```dockerfile
-FROM node:18-slim
-RUN apt-get update && apt-get install -y chromium
-WORKDIR /app
-COPY . .
-RUN npm ci
-EXPOSE 3100
-CMD ["npm", "run", "api"]
-```
+---
 
 ## 📄 License
 

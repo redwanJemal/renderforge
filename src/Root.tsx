@@ -5,6 +5,9 @@ import { themes } from './themes';
 import { YLDIntro, defaultYLDProps } from './templates/yld-intro/YLDIntro';
 import { Showcase, defaultShowcaseProps } from './templates/showcase/Showcase';
 import { Countdown, defaultCountdownProps } from './templates/countdown/Countdown';
+import { KineticText, defaultKineticTextProps } from './templates/kinetic-text/KineticText';
+import { SplitReveal, defaultSplitRevealProps } from './templates/split-reveal/SplitReveal';
+import { Orbit, defaultOrbitProps } from './templates/orbit/Orbit';
 
 // Import and register all templates (side-effect imports)
 import './templates/product-launch';
@@ -49,6 +52,39 @@ export const RemotionRoot: React.FC = () => {
         durationInFrames={390}
         fps={30}
         defaultProps={defaultCountdownProps}
+      />
+
+      {/* Premium Template: Kinetic Typography */}
+      <Composition
+        id="kinetic-text"
+        component={KineticText}
+        width={1080}
+        height={1920}
+        durationInFrames={390}
+        fps={30}
+        defaultProps={defaultKineticTextProps}
+      />
+
+      {/* Premium Template: Split Reveal */}
+      <Composition
+        id="split-reveal"
+        component={SplitReveal}
+        width={1080}
+        height={1920}
+        durationInFrames={360}
+        fps={30}
+        defaultProps={defaultSplitRevealProps}
+      />
+
+      {/* Premium Template: Orbit */}
+      <Composition
+        id="orbit"
+        component={Orbit}
+        width={1080}
+        height={1920}
+        durationInFrames={390}
+        fps={30}
+        defaultProps={defaultOrbitProps}
       />
 
       {allTemplates.flatMap((template) =>
