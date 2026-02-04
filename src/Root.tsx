@@ -8,6 +8,12 @@ import { Countdown, defaultCountdownProps } from './templates/countdown/Countdow
 import { KineticText, defaultKineticTextProps } from './templates/kinetic-text/KineticText';
 import { SplitReveal, defaultSplitRevealProps } from './templates/split-reveal/SplitReveal';
 import { Orbit, defaultOrbitProps } from './templates/orbit/Orbit';
+import { GlitchText, defaultGlitchTextProps } from './templates/glitch-text/GlitchText';
+import { NeonGlow, defaultNeonGlowProps } from './templates/neon-glow/NeonGlow';
+import { ParallaxLayers, defaultParallaxLayersProps } from './templates/parallax-layers/ParallaxLayers';
+import { BreakingNews, defaultBreakingNewsProps } from './templates/breaking-news/BreakingNews';
+import { MatchFixture, defaultMatchFixtureProps } from './templates/match-fixture/MatchFixture';
+import { PostMatch, defaultPostMatchProps } from './templates/post-match/PostMatch';
 
 // Import and register all templates (side-effect imports)
 import './templates/product-launch';
@@ -85,6 +91,72 @@ export const RemotionRoot: React.FC = () => {
         durationInFrames={390}
         fps={30}
         defaultProps={defaultOrbitProps}
+      />
+
+      {/* Premium Template: Glitch Text */}
+      <Composition
+        id="glitch-text"
+        component={GlitchText}
+        width={1080}
+        height={1920}
+        durationInFrames={420}
+        fps={30}
+        defaultProps={defaultGlitchTextProps}
+      />
+
+      {/* Premium Template: Neon Glow */}
+      <Composition
+        id="neon-glow"
+        component={NeonGlow}
+        width={1080}
+        height={1920}
+        durationInFrames={360}
+        fps={30}
+        defaultProps={defaultNeonGlowProps}
+      />
+
+      {/* Premium Template: Parallax Layers */}
+      <Composition
+        id="parallax-layers"
+        component={ParallaxLayers}
+        width={1080}
+        height={1920}
+        durationInFrames={360}
+        fps={30}
+        defaultProps={defaultParallaxLayersProps}
+      />
+
+      {/* Premium Template: Breaking News */}
+      <Composition
+        id="breaking-news"
+        component={BreakingNews}
+        width={1080}
+        height={1920}
+        durationInFrames={360}
+        fps={30}
+        defaultProps={defaultBreakingNewsProps}
+      />
+
+      {/* Premium Template: Match Fixture */}
+      <Composition
+        id="match-fixture"
+        component={MatchFixture}
+        width={1080}
+        height={1920}
+        durationInFrames={300}
+        fps={30}
+        defaultProps={defaultMatchFixtureProps}
+      />
+
+      {/* Premium Template: Post-Match Results */}
+      <Composition
+        id="post-match"
+        component={PostMatch}
+        width={1080}
+        height={1920}
+        durationInFrames={600}
+        fps={30}
+        defaultProps={defaultPostMatchProps}
       />
 
       {allTemplates.flatMap((template) =>
