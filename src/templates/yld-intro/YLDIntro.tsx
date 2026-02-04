@@ -10,6 +10,19 @@ import {
 } from 'remotion';
 
 // ══════════════════════════════════════════════════════════════
+// TEXT ANIMATION TYPES
+// ══════════════════════════════════════════════════════════════
+
+export type TextAnimation =
+  | 'fadeIn'       // simple fade
+  | 'slideUp'     // slide from below + fade
+  | 'typewriter'  // character by character
+  | 'charReveal'  // each char fades in with stagger
+  | 'wordReveal'  // each word fades in with stagger
+  | 'glitch'      // glitch/flicker effect
+  | 'none';       // instant, no animation
+
+// ══════════════════════════════════════════════════════════════
 // CONFIGURABLE PROPS — Every layer is customizable
 // ══════════════════════════════════════════════════════════════
 
@@ -28,8 +41,10 @@ export interface YLDIntroProps {
   header: {
     line1: string;          // smaller top line
     line1Size: number;      // font size
+    line1Animation: TextAnimation;
     line2: string;          // big bold line
     line2Size: number;
+    line2Animation: TextAnimation;
     highlight: string;      // word(s) to color with accent
     marginBottom: number;   // gap below header (px)
   };
@@ -38,6 +53,7 @@ export interface YLDIntroProps {
   subheader: {
     text: string;           // supports \n for line breaks
     size: number;
+    animation: TextAnimation;
     marginBottom: number;   // gap below subheader (px)
   };
 
@@ -96,14 +112,17 @@ export const defaultYLDProps: YLDIntroProps = {
   header: {
     line1: 'What would you build',
     line1Size: 40,
+    line1Animation: 'charReveal' as TextAnimation,
     line2: 'with your last dollar?',
     line2Size: 56,
+    line2Animation: 'slideUp' as TextAnimation,
     highlight: 'last dollar',
     marginBottom: 25,
   },
   subheader: {
     text: 'Real engineers. Zero budget.\nBuilding from nothing to something.',
     size: 30,
+    animation: 'typewriter' as TextAnimation,
     marginBottom: 45,
   },
   badge: {
@@ -196,6 +215,225 @@ const ScanLine: React.FC<{ accent: string }> = ({ accent }) => {
 };
 
 // ══════════════════════════════════════════════════════════════
+// ANIMATED TEXT COMPONENTS
+// ══════════════════════════════════════════════════════════════
+
+// Typewriter — characters appear one by one with a cursor
+const TypewriterText: React.FC<{
+  text: string; delay: number; style: React.CSSProperties;
+  charsPerFrame?: number; accent?: string;
+}> = ({ text, delay, style, charsPerFrame = 0.6, accent }) => {
+  const frame = useCurrentFrame();
+  const adj = Math.max(0, frame - delay);
+  const charCount = Math.min(text.length, Math.floor(adj * charsPerFrame));
+  const showCursor = adj > 0 && charCount < text.length;
+  const cursorBlink = Math.floor(adj / 8) % 2 === 0;
+
+  return (
+    <div style={{ ...style, whiteSpace: 'pre-wrap' }}>
+      {text.slice(0, charCount)}
+      {showCursor && (
+        <span style={{
+          opacity: cursorBlink ? 1 : 0,
+          color: accent || style.color || '#fff',
+          fontWeight: 100,
+        }}>|</span>
+      )}
+    </div>
+  );
+};
+
+// CharReveal — each character fades/scales in with stagger
+const CharRevealText: React.FC<{
+  text: string; delay: number; style: React.CSSProperties;
+  staggerFrames?: number; highlight?: string; accent?: string;
+}> = ({ text, delay, style, staggerFrames = 1.5, highlight, accent }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  const highlightStart = highlight ? text.toLowerCase().indexOf(highlight.toLowerCase()) : -1;
+  const highlightEnd = highlightStart >= 0 ? highlightStart + highlight!.length : -1;
+
+  return (
+    <div style={{ ...style, display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+      {text.split('').map((char, i) => {
+        const charDelay = delay + i * staggerFrames;
+        const adj = Math.max(0, frame - charDelay);
+        const progress = spring({
+          frame: adj, fps,
+          config: { damping: 12, stiffness: 200, mass: 0.3 },
+        });
+        const opacity = interpolate(adj, [0, 6], [0, 1], {
+          extrapolateLeft: 'clamp', extrapolateRight: 'clamp',
+        });
+        const isHighlight = accent && highlightStart >= 0 && i >= highlightStart && i < highlightEnd;
+
+        return (
+          <span
+            key={i}
+            style={{
+              display: 'inline-block',
+              opacity,
+              transform: `translateY(${(1 - progress) * 20}px) scale(${0.5 + progress * 0.5})`,
+              color: isHighlight ? accent : style.color,
+              textShadow: isHighlight ? `0 0 30px ${accent}66` : undefined,
+              whiteSpace: char === ' ' ? 'pre' : undefined,
+            }}
+          >
+            {char}
+          </span>
+        );
+      })}
+    </div>
+  );
+};
+
+// WordReveal — each word fades/slides in with stagger
+const WordRevealText: React.FC<{
+  text: string; delay: number; style: React.CSSProperties;
+  staggerFrames?: number; highlight?: string; accent?: string;
+}> = ({ text, delay, style, staggerFrames = 4, highlight, accent }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const words = text.split(' ');
+
+  return (
+    <div style={{ ...style, display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0 0.3em' }}>
+      {words.map((word, i) => {
+        const wordDelay = delay + i * staggerFrames;
+        const adj = Math.max(0, frame - wordDelay);
+        const progress = spring({
+          frame: adj, fps,
+          config: { damping: 14, stiffness: 120, mass: 0.5 },
+        });
+        const opacity = interpolate(adj, [0, 8], [0, 1], {
+          extrapolateLeft: 'clamp', extrapolateRight: 'clamp',
+        });
+        const isHighlight = accent && highlight && highlight.toLowerCase().includes(word.toLowerCase());
+
+        return (
+          <span
+            key={i}
+            style={{
+              display: 'inline-block',
+              opacity,
+              transform: `translateY(${(1 - progress) * 30}px)`,
+              color: isHighlight ? accent : style.color,
+              textShadow: isHighlight ? `0 0 30px ${accent}66` : undefined,
+            }}
+          >
+            {word}
+          </span>
+        );
+      })}
+    </div>
+  );
+};
+
+// Glitch — text flickers with random offsets
+const GlitchText: React.FC<{
+  text: string; delay: number; style: React.CSSProperties; accent?: string;
+}> = ({ text, delay, style, accent }) => {
+  const frame = useCurrentFrame();
+  const adj = Math.max(0, frame - delay);
+  const opacity = interpolate(adj, [0, 5], [0, 1], {
+    extrapolateLeft: 'clamp', extrapolateRight: 'clamp',
+  });
+
+  // Glitch bursts at specific frames
+  const isGlitching = (adj > 3 && adj < 8) || (adj > 15 && adj < 18) || (adj > 28 && adj < 30);
+  const glitchX = isGlitching ? (seededRandom(frame * 7) - 0.5) * 12 : 0;
+  const glitchY = isGlitching ? (seededRandom(frame * 13) - 0.5) * 6 : 0;
+  const glitchSkew = isGlitching ? (seededRandom(frame * 19) - 0.5) * 5 : 0;
+
+  return (
+    <div style={{ position: 'relative' }}>
+      {/* Cyan ghost */}
+      {isGlitching && (
+        <div style={{
+          ...style, position: 'absolute', opacity: 0.6,
+          color: '#00ffff', transform: `translate(${glitchX * 1.5}px, ${glitchY}px)`,
+          filter: 'blur(1px)',
+        }}>
+          {text}
+        </div>
+      )}
+      {/* Red ghost */}
+      {isGlitching && (
+        <div style={{
+          ...style, position: 'absolute', opacity: 0.6,
+          color: accent || '#ff0040', transform: `translate(${-glitchX}px, ${-glitchY}px)`,
+          filter: 'blur(1px)',
+        }}>
+          {text}
+        </div>
+      )}
+      {/* Main text */}
+      <div style={{
+        ...style, opacity,
+        transform: `translate(${glitchX}px, ${glitchY}px) skewX(${glitchSkew}deg)`,
+      }}>
+        {text}
+      </div>
+    </div>
+  );
+};
+
+// ── Render animated text based on type ──
+const AnimText: React.FC<{
+  text: string; animation: TextAnimation; delay: number;
+  style: React.CSSProperties; highlight?: string; accent?: string;
+}> = ({ text, animation, delay, style, highlight, accent }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  switch (animation) {
+    case 'typewriter':
+      return <TypewriterText text={text} delay={delay} style={style} accent={accent} />;
+    case 'charReveal':
+      return <CharRevealText text={text} delay={delay} style={style} highlight={highlight} accent={accent} />;
+    case 'wordReveal':
+      return <WordRevealText text={text} delay={delay} style={style} highlight={highlight} accent={accent} />;
+    case 'glitch':
+      return <GlitchText text={text} delay={delay} style={style} accent={accent} />;
+    case 'slideUp': {
+      const progress = spring({
+        frame: Math.max(0, frame - delay), fps,
+        config: { damping: 16, stiffness: 80, mass: 0.7 },
+      });
+      const opacity = interpolate(frame, [delay, delay + 20], [0, 1], {
+        extrapolateLeft: 'clamp', extrapolateRight: 'clamp',
+      });
+      return (
+        <div style={{
+          ...style, opacity,
+          transform: `translateY(${(1 - progress) * 40}px)`,
+        }}>
+          {highlight && accent ? highlightText(text, highlight, accent) : text}
+        </div>
+      );
+    }
+    case 'fadeIn': {
+      const opacity = interpolate(frame, [delay, delay + 20], [0, 1], {
+        extrapolateLeft: 'clamp', extrapolateRight: 'clamp',
+      });
+      return (
+        <div style={{ ...style, opacity }}>
+          {highlight && accent ? highlightText(text, highlight, accent) : text}
+        </div>
+      );
+    }
+    case 'none':
+    default:
+      return (
+        <div style={style}>
+          {highlight && accent ? highlightText(text, highlight, accent) : text}
+        </div>
+      );
+  }
+};
+
+// ══════════════════════════════════════════════════════════════
 // HIGHLIGHT HELPER
 // ══════════════════════════════════════════════════════════════
 
@@ -261,23 +499,6 @@ export const YLDIntro: React.FC<YLDIntroProps> = (rawProps) => {
     extrapolateLeft: 'clamp', extrapolateRight: 'clamp',
   });
   const divOpacity = interpolate(frame, [t.dividerAppear, t.dividerAppear + 15], [0, 1], {
-    extrapolateLeft: 'clamp', extrapolateRight: 'clamp',
-  });
-
-  // Header
-  const headerProgress = spring({
-    frame: Math.max(0, frame - t.headerAppear), fps,
-    config: { damping: 16, stiffness: 80, mass: 0.7 },
-  });
-  const headerOpacity = interpolate(frame, [t.headerAppear, t.headerAppear + 20], [0, 1], {
-    extrapolateLeft: 'clamp', extrapolateRight: 'clamp',
-  });
-
-  // Subheader
-  const subOpacity = interpolate(frame, [t.subheaderAppear, t.subheaderAppear + 25], [0, 1], {
-    extrapolateLeft: 'clamp', extrapolateRight: 'clamp',
-  });
-  const subSlide = interpolate(frame, [t.subheaderAppear, t.subheaderAppear + 25], [50, 0], {
     extrapolateLeft: 'clamp', extrapolateRight: 'clamp',
   });
 
@@ -362,42 +583,49 @@ export const YLDIntro: React.FC<YLDIntroProps> = (rawProps) => {
         )}
 
         {/* LAYER 2: Header */}
-        <div style={{
-          opacity: headerOpacity,
-          transform: `translateY(${(1 - headerProgress) * 40}px)`,
-          textAlign: 'center', marginBottom: p.header.marginBottom,
-        }}>
+        <div style={{ textAlign: 'center', marginBottom: p.header.marginBottom }}>
           {p.header.line1 && (
-            <div style={{
-              fontSize: p.header.line1Size, fontWeight: 300, fontFamily: font,
-              color: 'rgba(255, 255, 255, 0.55)',
-              letterSpacing: '0.35em', textTransform: 'uppercase', marginBottom: 14,
-            }}>
-              {p.header.line1}
+            <div style={{ marginBottom: 14 }}>
+              <AnimText
+                text={p.header.line1}
+                animation={p.header.line1Animation}
+                delay={t.headerAppear}
+                accent={accent}
+                style={{
+                  fontSize: p.header.line1Size, fontWeight: 300, fontFamily: font,
+                  color: 'rgba(255, 255, 255, 0.55)',
+                  letterSpacing: '0.35em', textTransform: 'uppercase',
+                }}
+              />
             </div>
           )}
-          <div style={{
-            fontSize: p.header.line2Size, fontWeight: 800, fontFamily: font,
-            color: '#ffffff', letterSpacing: '0.12em',
-            textTransform: 'uppercase', lineHeight: 1.2,
-          }}>
-            {highlightText(p.header.line2, p.header.highlight, accent)}
-          </div>
+          <AnimText
+            text={p.header.line2}
+            animation={p.header.line2Animation}
+            delay={t.headerAppear + 15}
+            highlight={p.header.highlight}
+            accent={accent}
+            style={{
+              fontSize: p.header.line2Size, fontWeight: 800, fontFamily: font,
+              color: '#ffffff', letterSpacing: '0.12em',
+              textTransform: 'uppercase', lineHeight: 1.2,
+            }}
+          />
         </div>
 
         {/* LAYER 3: Subheader */}
-        <div style={{
-          opacity: subOpacity,
-          transform: `translateY(${subSlide}px)`,
-          textAlign: 'center', marginBottom: p.subheader.marginBottom,
-        }}>
-          <div style={{
-            fontSize: p.subheader.size, fontWeight: 400, fontFamily: font,
-            color: 'rgba(255, 255, 255, 0.45)',
-            lineHeight: 1.7, maxWidth: 800, whiteSpace: 'pre-wrap',
-          }}>
-            {p.subheader.text}
-          </div>
+        <div style={{ textAlign: 'center', marginBottom: p.subheader.marginBottom }}>
+          <AnimText
+            text={p.subheader.text}
+            animation={p.subheader.animation}
+            delay={t.subheaderAppear}
+            accent={accent}
+            style={{
+              fontSize: p.subheader.size, fontWeight: 400, fontFamily: font,
+              color: 'rgba(255, 255, 255, 0.45)',
+              lineHeight: 1.7, maxWidth: 800,
+            }}
+          />
         </div>
 
         {/* LAYER 4: Badge */}
