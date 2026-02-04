@@ -21,6 +21,7 @@ export interface YLDIntroProps {
     glowEnabled: boolean;
     finalScale: number;     // after shrink (0.6 = 60%)
     moveUpPx: number;       // how far it moves up
+    marginBottom: number;   // gap below logo (px)
   };
 
   // ── Layer 2: Header (big title) ──
@@ -30,24 +31,34 @@ export interface YLDIntroProps {
     line2: string;          // big bold line
     line2Size: number;
     highlight: string;      // word(s) to color with accent
+    marginBottom: number;   // gap below header (px)
   };
 
   // ── Layer 3: Subheader ──
   subheader: {
     text: string;           // supports \n for line breaks
     size: number;
+    marginBottom: number;   // gap below subheader (px)
   };
 
   // ── Layer 4: Badge ──
   badge: {
     text: string;
     enabled: boolean;
+    marginBottom: number;   // gap below badge (px)
   };
 
   // ── Layer 5: CTA ──
   cta: {
     text: string;
     enabled: boolean;
+    bottomOffset: number;   // distance from bottom (px)
+  };
+
+  // ── Divider ──
+  divider: {
+    enabled: boolean;
+    marginBottom: number;   // gap below divider (px)
   };
 
   // ── Theme / Branding ──
@@ -80,6 +91,7 @@ export const defaultYLDProps: YLDIntroProps = {
     glowEnabled: true,
     finalScale: 0.6,
     moveUpPx: 160,
+    marginBottom: 15,
   },
   header: {
     line1: 'What would you build',
@@ -87,18 +99,26 @@ export const defaultYLDProps: YLDIntroProps = {
     line2: 'with your last dollar?',
     line2Size: 56,
     highlight: 'last dollar',
+    marginBottom: 25,
   },
   subheader: {
     text: 'Real engineers. Zero budget.\nBuilding from nothing to something.',
     size: 30,
+    marginBottom: 45,
   },
   badge: {
     text: 'The Challenge Begins',
     enabled: true,
+    marginBottom: 0,
   },
   cta: {
     text: 'FOLLOW THE JOURNEY →',
     enabled: true,
+    bottomOffset: 150,
+  },
+  divider: {
+    enabled: true,
+    marginBottom: 30,
   },
   theme: {
     accentColor: '#22c55e',
@@ -206,6 +226,7 @@ export const YLDIntro: React.FC<YLDIntroProps> = (rawProps) => {
     subheader: { ...defaultYLDProps.subheader, ...rawProps?.subheader },
     badge: { ...defaultYLDProps.badge, ...rawProps?.badge },
     cta: { ...defaultYLDProps.cta, ...rawProps?.cta },
+    divider: { ...defaultYLDProps.divider, ...rawProps?.divider },
     theme: { ...defaultYLDProps.theme, ...rawProps?.theme },
     timing: { ...defaultYLDProps.timing, ...rawProps?.timing },
   };
@@ -323,7 +344,7 @@ export const YLDIntro: React.FC<YLDIntroProps> = (rawProps) => {
           filter: p.logo.glowEnabled
             ? `drop-shadow(0 0 ${40 * logoPulse}px ${accent}80) drop-shadow(0 0 ${80 * logoPulse}px ${accent}33)`
             : 'none',
-          marginBottom: 15,
+          marginBottom: p.logo.marginBottom,
         }}>
           <Img
             src={staticFile(p.logo.file)}
@@ -332,17 +353,19 @@ export const YLDIntro: React.FC<YLDIntroProps> = (rawProps) => {
         </div>
 
         {/* Divider */}
-        <div style={{
-          width: `${divWidth}%`, height: 2, opacity: divOpacity,
-          background: `linear-gradient(90deg, transparent, ${accent}, transparent)`,
-          marginBottom: 30,
-        }} />
+        {p.divider.enabled && (
+          <div style={{
+            width: `${divWidth}%`, height: 2, opacity: divOpacity,
+            background: `linear-gradient(90deg, transparent, ${accent}, transparent)`,
+            marginBottom: p.divider.marginBottom,
+          }} />
+        )}
 
         {/* LAYER 2: Header */}
         <div style={{
           opacity: headerOpacity,
           transform: `translateY(${(1 - headerProgress) * 40}px)`,
-          textAlign: 'center', marginBottom: 25,
+          textAlign: 'center', marginBottom: p.header.marginBottom,
         }}>
           {p.header.line1 && (
             <div style={{
@@ -366,7 +389,7 @@ export const YLDIntro: React.FC<YLDIntroProps> = (rawProps) => {
         <div style={{
           opacity: subOpacity,
           transform: `translateY(${subSlide}px)`,
-          textAlign: 'center', marginBottom: 45,
+          textAlign: 'center', marginBottom: p.subheader.marginBottom,
         }}>
           <div style={{
             fontSize: p.subheader.size, fontWeight: 400, fontFamily: font,
@@ -400,7 +423,7 @@ export const YLDIntro: React.FC<YLDIntroProps> = (rawProps) => {
         {/* LAYER 5: CTA */}
         {p.cta.enabled && (
           <div style={{
-            position: 'absolute', bottom: 150,
+            position: 'absolute', bottom: p.cta.bottomOffset,
             opacity: ctaOpacity, textAlign: 'center',
           }}>
             <div style={{
