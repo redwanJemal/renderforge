@@ -148,13 +148,13 @@ export const defaultYLDProps: YLDIntroProps = {
     vignetteEnabled: true,
   },
   timing: {
-    logoAppear: 15,
-    logoMoveUp: 95,
-    dividerAppear: 110,
-    headerAppear: 115,
-    subheaderAppear: 160,
-    badgeAppear: 200,
-    ctaAppear: 230,
+    logoAppear: 20,
+    logoMoveUp: 130,
+    dividerAppear: 155,
+    headerAppear: 165,
+    subheaderAppear: 230,
+    badgeAppear: 290,
+    ctaAppear: 330,
   },
 };
 
@@ -222,7 +222,7 @@ const ScanLine: React.FC<{ accent: string }> = ({ accent }) => {
 const TypewriterText: React.FC<{
   text: string; delay: number; style: React.CSSProperties;
   charsPerFrame?: number; accent?: string;
-}> = ({ text, delay, style, charsPerFrame = 0.6, accent }) => {
+}> = ({ text, delay, style, charsPerFrame = 0.4, accent }) => {
   const frame = useCurrentFrame();
   const adj = Math.max(0, frame - delay);
   const charCount = Math.min(text.length, Math.floor(adj * charsPerFrame));
@@ -247,7 +247,7 @@ const TypewriterText: React.FC<{
 const CharRevealText: React.FC<{
   text: string; delay: number; style: React.CSSProperties;
   staggerFrames?: number; highlight?: string; accent?: string;
-}> = ({ text, delay, style, staggerFrames = 1.5, highlight, accent }) => {
+}> = ({ text, delay, style, staggerFrames = 2.2, highlight, accent }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 

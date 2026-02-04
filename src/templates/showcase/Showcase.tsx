@@ -164,12 +164,12 @@ export const defaultShowcaseProps: ShowcaseProps = {
     vignetteEnabled: true,
   },
   timing: {
-    heroAppear: 10,
-    taglineAppear: 60,
-    headlineAppear: 70,
-    descriptionAppear: 120,
-    featuresAppear: 160,
-    ctaAppear: 200,
+    heroAppear: 15,
+    taglineAppear: 90,
+    headlineAppear: 105,
+    descriptionAppear: 175,
+    featuresAppear: 240,
+    ctaAppear: 300,
   },
 };
 
@@ -275,7 +275,7 @@ const MeshGradient: React.FC<{ accent: string; secondary: string }> = ({
 const TypewriterText: React.FC<{
   text: string; delay: number; style: React.CSSProperties;
   charsPerFrame?: number; accent?: string;
-}> = ({ text, delay, style, charsPerFrame = 0.6, accent }) => {
+}> = ({ text, delay, style, charsPerFrame = 0.4, accent }) => {
   const frame = useCurrentFrame();
   const adj = Math.max(0, frame - delay);
   const charCount = Math.min(text.length, Math.floor(adj * charsPerFrame));
@@ -295,7 +295,7 @@ const TypewriterText: React.FC<{
 const CharRevealText: React.FC<{
   text: string; delay: number; style: React.CSSProperties;
   staggerFrames?: number; highlight?: string; accent?: string;
-}> = ({ text, delay, style, staggerFrames = 1.5, highlight, accent }) => {
+}> = ({ text, delay, style, staggerFrames = 2.2, highlight, accent }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const hlStart = highlight ? text.toLowerCase().indexOf(highlight.toLowerCase()) : -1;

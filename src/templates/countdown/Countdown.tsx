@@ -151,11 +151,11 @@ export const defaultCountdownProps: CountdownProps = {
     vignetteEnabled: true,
   },
   timing: {
-    titleAppear: 10,
-    countdownAppear: 30,
-    eventNameAppear: 90,
-    detailsAppear: 140,
-    ctaAppear: 180,
+    titleAppear: 15,
+    countdownAppear: 50,
+    eventNameAppear: 130,
+    detailsAppear: 200,
+    ctaAppear: 260,
   },
 };
 
@@ -283,7 +283,7 @@ const TypewriterText: React.FC<{
 }> = ({ text, delay, style, accent }) => {
   const frame = useCurrentFrame();
   const adj = Math.max(0, frame - delay);
-  const charCount = Math.min(text.length, Math.floor(adj * 0.6));
+  const charCount = Math.min(text.length, Math.floor(adj * 0.4));
   const showCursor = adj > 0 && charCount < text.length;
   const cursorBlink = Math.floor(adj / 8) % 2 === 0;
   return (
@@ -306,7 +306,7 @@ const CharRevealText: React.FC<{
   return (
     <div style={{ ...style, display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
       {text.split('').map((char, i) => {
-        const cd = delay + i * 1.5;
+        const cd = delay + i * 2.2;
         const adj = Math.max(0, frame - cd);
         const p = spring({ frame: adj, fps, config: { damping: 12, stiffness: 200, mass: 0.3 } });
         const o = interpolate(adj, [0, 6], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });

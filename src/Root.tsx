@@ -24,7 +24,7 @@ export const RemotionRoot: React.FC = () => {
         component={YLDIntro}
         width={1080}
         height={1920}
-        durationInFrames={270}
+        durationInFrames={450}
         fps={30}
         defaultProps={defaultYLDProps}
       />
@@ -35,7 +35,7 @@ export const RemotionRoot: React.FC = () => {
         component={Showcase}
         width={1080}
         height={1920}
-        durationInFrames={240}
+        durationInFrames={420}
         fps={30}
         defaultProps={defaultShowcaseProps}
       />
@@ -46,7 +46,7 @@ export const RemotionRoot: React.FC = () => {
         component={Countdown}
         width={1080}
         height={1920}
-        durationInFrames={240}
+        durationInFrames={390}
         fps={30}
         defaultProps={defaultCountdownProps}
       />
