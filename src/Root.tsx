@@ -14,6 +14,9 @@ import { ParallaxLayers, defaultParallaxLayersProps } from './templates/parallax
 import { BreakingNews, defaultBreakingNewsProps } from './templates/breaking-news/BreakingNews';
 import { MatchFixture, defaultMatchFixtureProps } from './templates/match-fixture/MatchFixture';
 import { PostMatch, defaultPostMatchProps } from './templates/post-match/PostMatch';
+import { DubaiLuxury, defaultDubaiLuxuryProps } from './templates/dubai-luxury/DubaiLuxury';
+import { RamadanGreeting, defaultRamadanGreetingProps } from './templates/ramadan-greeting/RamadanGreeting';
+import { GoldReveal, defaultGoldRevealProps } from './templates/gold-reveal/GoldReveal';
 
 // Import and register all templates (side-effect imports)
 import './templates/product-launch';
@@ -157,6 +160,39 @@ export const RemotionRoot: React.FC = () => {
         durationInFrames={600}
         fps={30}
         defaultProps={defaultPostMatchProps}
+      />
+
+      {/* Premium Template: Dubai Luxury */}
+      <Composition
+        id="dubai-luxury"
+        component={DubaiLuxury}
+        width={1080}
+        height={1920}
+        durationInFrames={390}
+        fps={30}
+        defaultProps={defaultDubaiLuxuryProps}
+      />
+
+      {/* Premium Template: Ramadan Greeting */}
+      <Composition
+        id="ramadan-greeting"
+        component={RamadanGreeting}
+        width={1080}
+        height={1920}
+        durationInFrames={360}
+        fps={30}
+        defaultProps={defaultRamadanGreetingProps}
+      />
+
+      {/* Premium Template: Gold Reveal */}
+      <Composition
+        id="gold-reveal"
+        component={GoldReveal}
+        width={1080}
+        height={1920}
+        durationInFrames={390}
+        fps={30}
+        defaultProps={defaultGoldRevealProps}
       />
 
       {allTemplates.flatMap((template) =>
