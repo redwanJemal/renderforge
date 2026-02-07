@@ -7,10 +7,10 @@ import {
   spring,
   Img,
 } from 'remotion';
-import { loadEthiopicFont, ETHIOPIC_FONT_STACK } from '../../core/fonts';
+import { loadEthiopicFont, loadEthiopicFontSync, ETHIOPIC_FONT_STACK } from '../../core/fonts';
 
-// Load Ethiopic font for Amharic support
-loadEthiopicFont();
+// Pre-load Ethiopic font at module level (won't delay render)
+loadEthiopicFontSync();
 
 // ══════════════════════════════════════════════════════════════
 // TEXT ANIMATIONS (shared patterns from YLDIntro)
@@ -421,6 +421,9 @@ const FeaturePill: React.FC<{
 // ══════════════════════════════════════════════════════════════
 
 export const Showcase: React.FC<ShowcaseProps> = (rawProps) => {
+  // Load Ethiopic font with delayRender for proper font loading
+  loadEthiopicFont();
+
   const p: ShowcaseProps = {
     hero: { ...defaultShowcaseProps.hero, ...rawProps?.hero },
     tagline: { ...defaultShowcaseProps.tagline, ...rawProps?.tagline },

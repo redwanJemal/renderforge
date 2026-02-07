@@ -45,6 +45,9 @@ export function loadFont(font: FontDefinition): void {
 /**
  * Load Google Fonts via the CSS API.
  * Example: loadGoogleFont('Inter', [400, 600, 700])
+ * 
+ * Note: Must be called from within a React component or useEffect.
+ * For top-level loading, use loadGoogleFontSync instead.
  */
 export function loadGoogleFont(
   family: string,
@@ -77,6 +80,29 @@ export function loadGoogleFont(
   document.head.appendChild(link);
 }
 
+/**
+ * Load Google Fonts synchronously (without delayRender).
+ * Safe to call at module-level. Font may not be immediately available.
+ */
+export function loadGoogleFontSync(
+  family: string,
+  weights: number[] = [400, 700]
+): void {
+  const key = `google-${family}-${weights.join(',')}`;
+  if (loadedFonts.has(key)) return;
+  loadedFonts.add(key);
+
+  if (typeof document === 'undefined') return;
+
+  const weightStr = weights.join(';');
+  const url = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(family)}:wght@${weightStr}&display=swap`;
+
+  const link = document.createElement('link');
+  link.href = url;
+  link.rel = 'stylesheet';
+  document.head.appendChild(link);
+}
+
 /** Default font stack used when no custom font is specified */
 export const DEFAULT_FONT_STACK =
   '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
@@ -87,8 +113,15 @@ export const ETHIOPIC_FONT_STACK =
 
 /**
  * Load Noto Sans Ethiopic for Amharic text support.
- * Call this at the top level of templates that need Amharic.
+ * Must be called from within a React component.
  */
 export function loadEthiopicFont(weights: number[] = [400, 600, 700, 900]): void {
   loadGoogleFont('Noto Sans Ethiopic', weights);
+}
+
+/**
+ * Load Noto Sans Ethiopic synchronously (safe for module-level).
+ */
+export function loadEthiopicFontSync(weights: number[] = [400, 600, 700, 900]): void {
+  loadGoogleFontSync('Noto Sans Ethiopic', weights);
 }
