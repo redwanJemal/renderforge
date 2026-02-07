@@ -2,6 +2,10 @@ import { Composition } from 'remotion';
 import { registry } from './core/registry';
 import { FORMATS } from './types';
 import { themes } from './themes';
+import { loadEthiopicFont } from './core/fonts';
+
+// Load Ethiopic font globally for Amharic/Ge'ez script support
+loadEthiopicFont();
 import { YLDIntro, defaultYLDProps } from './templates/yld-intro/YLDIntro';
 import { Showcase, defaultShowcaseProps } from './templates/showcase/Showcase';
 import { Countdown, defaultCountdownProps } from './templates/countdown/Countdown';

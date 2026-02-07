@@ -80,3 +80,15 @@ export function loadGoogleFont(
 /** Default font stack used when no custom font is specified */
 export const DEFAULT_FONT_STACK =
   '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+
+/** Font stack with Amharic/Ethiopic support */
+export const ETHIOPIC_FONT_STACK =
+  '"Noto Sans Ethiopic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+
+/**
+ * Load Noto Sans Ethiopic for Amharic text support.
+ * Call this at the top level of templates that need Amharic.
+ */
+export function loadEthiopicFont(weights: number[] = [400, 600, 700, 900]): void {
+  loadGoogleFont('Noto Sans Ethiopic', weights);
+}

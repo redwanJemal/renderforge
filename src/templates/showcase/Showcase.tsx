@@ -7,6 +7,10 @@ import {
   spring,
   Img,
 } from 'remotion';
+import { loadEthiopicFont, ETHIOPIC_FONT_STACK } from '../../core/fonts';
+
+// Load Ethiopic font for Amharic support
+loadEthiopicFont();
 
 // ══════════════════════════════════════════════════════════════
 // TEXT ANIMATIONS (shared patterns from YLDIntro)
@@ -404,7 +408,7 @@ const FeaturePill: React.FC<{
       opacity, transform: `scale(${scale})`,
       padding: '10px 24px', borderRadius: 100,
       fontSize: 18, fontWeight: 600, letterSpacing: '0.05em',
-      fontFamily: 'SF Pro Display, -apple-system, Helvetica, sans-serif',
+      fontFamily: ETHIOPIC_FONT_STACK,
       ...pillStyles[pillStyle],
     }}>
       {text}
@@ -433,7 +437,7 @@ export const Showcase: React.FC<ShowcaseProps> = (rawProps) => {
   const t = p.timing;
   const accent = p.theme.accentColor;
   const secondary = p.theme.secondaryAccent;
-  const font = 'SF Pro Display, -apple-system, Helvetica, sans-serif';
+  const font = ETHIOPIC_FONT_STACK;
 
   // ── Background fade in ──
   const bgOpacity = interpolate(frame, [0, 30], [0, 1], { extrapolateRight: 'clamp' });
