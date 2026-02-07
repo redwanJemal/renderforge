@@ -6,6 +6,10 @@ import {
   interpolate,
   spring,
 } from 'remotion';
+import { loadEthiopicFont, loadEthiopicFontSync, ETHIOPIC_FONT_STACK } from '../../core/fonts';
+
+// Pre-load Ethiopic font at module level
+loadEthiopicFontSync();
 
 // ══════════════════════════════════════════════════════════════
 // TEXT ANIMATION TYPES
@@ -390,7 +394,7 @@ const DigitCard: React.FC<{
   const scale = spring({ frame: adj, fps, config: { damping: 12, stiffness: 100, mass: 0.6 } });
   const opacity = interpolate(adj, [0, 15], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
 
-  const font = 'SF Pro Display, -apple-system, Helvetica, sans-serif';
+  const font = ETHIOPIC_FONT_STACK;
   const displayValue = String(value).padStart(2, '0');
 
   // Animated tick — value changes over time for visual interest
@@ -497,6 +501,9 @@ const Separator: React.FC<{
 // ══════════════════════════════════════════════════════════════
 
 export const Countdown: React.FC<CountdownProps> = (rawProps) => {
+  // Load Ethiopic font with delayRender for proper font loading
+  loadEthiopicFont();
+
   const p: CountdownProps = {
     title: { ...defaultCountdownProps.title, ...rawProps?.title },
     countdown: { ...defaultCountdownProps.countdown, ...rawProps?.countdown },
@@ -512,7 +519,7 @@ export const Countdown: React.FC<CountdownProps> = (rawProps) => {
   const t = p.timing;
   const accent = p.theme.accentColor;
   const secondary = p.theme.secondaryAccent;
-  const font = 'SF Pro Display, -apple-system, Helvetica, sans-serif';
+  const font = ETHIOPIC_FONT_STACK;
 
   const bgOpacity = interpolate(frame, [0, 30], [0, 1], { extrapolateRight: 'clamp' });
 

@@ -1,259 +1,218 @@
 # 🎬 RenderForge
 
-**Dynamic video template engine powered by [Remotion](https://remotion.dev)**
-
-Generate stunning short-form videos from JSON config. Every template is a React component with full prop control — colors, text, images, timing, effects. Zero design skills needed.
-
----
+Dynamic video template engine powered by [Remotion](https://remotion.dev). Create stunning promotional videos with customizable templates.
 
 ## ✨ Features
 
-- **3 Premium Templates** — Cinematic quality with particles, glitch effects, mesh gradients
-- **5 Starter Templates** — Ready-to-use with registry system + themes
-- **Multi-Format** — Story (9:16), Post (1:1), Landscape (16:9)
-- **4 Themes** — Default, Dark, Vibrant, Minimal
-- **Fully Configurable** — Every layer, color, text, timing adjustable via JSON props
-- **CLI + API** — Render from command line or REST API
-- **Type-Safe** — Full TypeScript + Zod schema validation
+- 🎨 **20+ Premium Templates** — Product launches, countdowns, sports, luxury themes
+- 🇪🇹 **Amharic/Ethiopic Support** — Full Noto Sans Ethiopic font integration
+- 🌍 **Multi-language** — Arabic, Amharic, English, and more
+- 📐 **Multiple Formats** — Story (1080x1920), YouTube (1920x1080), Square (1080x1080)
+- ⚡ **CLI Rendering** — Generate videos from command line with JSON props
 
 ---
 
 ## 🚀 Quick Start
 
 ```bash
-# Install
+# Install dependencies
 npm install
 
-# Preview in browser (Remotion Studio)
+# Start Remotion Studio (preview templates)
 npm run dev
 
 # Render a video
-npx remotion render src/index.ts <template-id> output.mp4
+npx remotion render <template-id> --props='<json>' --output-location=output.mp4
 ```
 
 ---
 
-## 🎨 Premium Templates
+## 📦 Available Templates
 
-### 1. YLD Intro (`yld-intro`)
-Brand/channel intro with cinematic effects.
+### 🎯 General Purpose
 
-**Effects:** Floating particles, scan line, grid overlay, vignette, logo glow pulse
-**Animations:** charReveal, wordReveal, typewriter, glitch, slideUp, fadeIn
-**Duration:** 15s (450 frames @ 30fps)
+| Template | ID | Description |
+|----------|-----|-------------|
+| **Showcase** | `showcase` | Product/app showcase with floating hero image |
+| **Countdown** | `countdown` | Event countdown with animated timer |
+| **Announcement** | `announcement-story` | Simple announcement with text animations |
+| **Product Launch** | `product-launch-story` | Product reveal with features |
+| **Quote of Day** | `quote-story` | Inspirational quotes with attribution |
+| **Testimonial** | `testimonial-story` | Customer testimonial cards |
+| **Stats Recap** | `stats-story` | Animated statistics display |
 
-```bash
-npx remotion render src/index.ts yld-intro output.mp4 --props '{
-  "logo": { "file": "my-logo.png", "size": 400 },
-  "header": {
-    "line1": "Introducing",
-    "line2": "the future of work",
-    "highlight": "future"
-  },
-  "subheader": { "text": "AI-powered. Human-centered." },
-  "badge": { "text": "Coming Soon" },
-  "theme": {
-    "accentColor": "#3b82f6",
-    "bgGradient": ["#1e1b4b", "#0f0d2e", "#050412"]
-  }
-}'
-```
+### ✨ Premium Effects
 
-**Configurable layers:**
-| Layer | Props |
-|-------|-------|
-| Logo | file, size, glow, finalScale, moveUpPx |
-| Header | line1, line2, highlight, sizes, animations |
-| Subheader | text, size, animation |
-| Badge | text, enabled |
-| CTA | text, enabled, bottomOffset |
-| Divider | enabled |
-| Theme | accentColor, bgGradient, particles/scanLine/grid/vignette toggles |
-| Timing | Per-layer appear frame |
+| Template | ID | Description |
+|----------|-----|-------------|
+| **Kinetic Text** | `kinetic-text` | Dynamic typography animations |
+| **Split Reveal** | `split-reveal` | Split-screen reveal effect |
+| **Glitch Text** | `glitch-text` | Cyberpunk glitch typography |
+| **Neon Glow** | `neon-glow` | Neon sign effect with glow |
+| **Orbit** | `orbit` | Circular orbiting elements |
+| **Parallax Layers** | `parallax-layers` | Multi-layer parallax depth |
+| **Gold Reveal** | `gold-reveal` | Luxury gold text reveal |
+
+### ⚽ Sports
+
+| Template | ID | Description |
+|----------|-----|-------------|
+| **Match Fixture** | `match-fixture` | Upcoming match announcement |
+| **Post Match** | `post-match` | Match results with stats |
+| **Breaking News** | `breaking-news` | Sports news ticker style |
+
+### 🌙 Special Occasions
+
+| Template | ID | Description |
+|----------|-----|-------------|
+| **Ramadan Greeting** | `ramadan-greeting` | Islamic greeting with mosque |
+| **Dubai Luxury** | `dubai-luxury` | UAE/Gulf luxury theme |
+| **YLD Intro** | `yld-intro` | Your Last Dollar branded intro |
 
 ---
 
-### 2. Showcase (`showcase`)
-Product/app showcase with floating 3D hero image.
+## 📝 Example Commands
 
-**Effects:** Mesh gradient blobs, constellation particles, 3D perspective tilt, shine sweep, glow pulse
-**Duration:** 14s (420 frames @ 30fps)
+### Showcase (Amharic - ገበያ)
 
 ```bash
-npx remotion render src/index.ts showcase output.mp4 --props '{
+npx remotion render showcase --props='{
   "hero": {
-    "imageUrl": "https://example.com/app-screenshot.png",
-    "rotateY": 12,
-    "floatAmplitude": 15
+    "imageUrl": "https://example.com/product.jpg",
+    "width": 600,
+    "height": 400,
+    "glowColor": "#10B981"
   },
+  "tagline": {"text": "አዲስ", "enabled": true},
   "headline": {
-    "line1": "Your Brand",
-    "line2": "reimagined",
-    "highlight": "reimagined"
+    "line1": "ገበያ",
+    "line2": "ለኢትዮጵያውያን",
+    "highlight": "ገበያ"
   },
-  "features": {
-    "items": ["AI-Powered", "Real-time", "No-code"],
-    "pillStyle": "glass"
-  },
+  "description": {"text": "ግዙ። ሽጡ። በቀላሉ።"},
+  "features": {"items": ["ፈጣን", "ደህንነት", "ነፃ"], "pillStyle": "glass"},
   "theme": {
-    "accentColor": "#8B5CF6",
-    "secondaryAccent": "#EC4899",
-    "bgGradient": ["#13041f", "#0a0118", "#050010"]
+    "accentColor": "#10B981",
+    "bgGradient": ["#064E3B", "#022C22", "#011614"]
   }
-}'
+}' --width=1080 --height=1920 --output-location=output/gebeya.mp4
 ```
 
-**Configurable layers:**
-| Layer | Props |
-|-------|-------|
-| Hero Image | imageUrl, width, height, borderRadius, rotateY, floatAmplitude, glowColor, shadow |
-| Tagline | text, size, animation, enabled |
-| Headline | line1, line2, highlight, sizes, animations |
-| Description | text, size, animation |
-| Feature Pills | items[], pillStyle (solid/outline/glass) |
-| CTA | text, style (solid/outline/glow), enabled |
-| Theme | accentColor, secondaryAccent, bgGradient, meshGradient/particles/grid/vignette toggles |
-
----
-
-### 3. Countdown (`countdown`)
-Event countdown with neon energy effects.
-
-**Effects:** Energy rings (pulsing, rotating), aurora borealis bands, rising spark embers, neon glow
-**Duration:** 13s (390 frames @ 30fps)
+### Countdown (Ramadan)
 
 ```bash
-npx remotion render src/index.ts countdown output.mp4 --props '{
-  "countdown": {
-    "days": 5, "hours": 12, "minutes": 30, "seconds": 0,
-    "cardStyle": "neon"
-  },
+npx remotion render countdown --props='{
+  "title": {"text": "ለታላቁ የረመዳን ወር"},
+  "countdown": {"days": 10, "hours": 0, "minutes": 0, "seconds": 0, "cardStyle": "neon"},
   "eventName": {
-    "line1": "Don'\''t miss",
-    "line2": "the big reveal",
-    "highlight": "big reveal"
+    "line1": "ረመዳን ከሪም",
+    "line2": "የቀሩት ቀናት",
+    "highlight": "ረመዳን"
   },
-  "details": {
-    "date": "March 15, 2025 · 10:00 AM",
-    "location": "Dubai World Trade Centre"
-  },
+  "details": {"date": "Feb 28, 2026", "location": "Ethiopia", "enabled": true},
+  "cta": {"text": "اللهم بلغنا رمضان", "enabled": true, "style": "glow"},
   "theme": {
-    "accentColor": "#F59E0B",
-    "secondaryAccent": "#EF4444",
-    "bgGradient": ["#1a0a00", "#0d0500", "#050200"]
+    "accentColor": "#D4AF37",
+    "secondaryAccent": "#10B981",
+    "bgGradient": ["#052e16", "#022c22", "#000000"]
   }
-}'
+}' --width=1080 --height=1920 --output-location=output/ramadan-countdown.mp4
 ```
 
-**Configurable layers:**
-| Layer | Props |
-|-------|-------|
-| Title | text, size, animation |
-| Countdown | days, hours, minutes, seconds, digitSize, cardStyle (flat/glass/neon/flip), separatorStyle (colon/dots/none) |
-| Event Name | line1, line2, highlight, sizes, animations |
-| Details | date, location, enabled |
-| CTA | text, style (pill/underline/glow) |
-| Theme | accentColor, secondaryAccent, bgGradient, energyRings/particles/aurora/vignette toggles |
-
----
-
-## 📋 Starter Templates (Registry)
-
-These templates use the theme/format system and support all 3 formats × 4 themes = 12 variants each.
-
-| Template | ID | Description | Duration |
-|----------|----|-------------|----------|
-| Product Launch | `product-launch-{format}` | Multi-scene product showcase | 6s |
-| Quote of the Day | `quote-of-day-{format}` | Elegant quote typography | 5s |
-| Stats Recap | `stats-recap-{format}` | Animated counter grid | 6s |
-| Testimonial | `testimonial-{format}` | Star rating + customer quote | 5s |
-| Announcement | `announcement-{format}` | Bold headline + CTA | 5s |
+### YouTube Format (1920x1080)
 
 ```bash
-# Render starter template with theme
-npx remotion render src/index.ts product-launch-story output.mp4
-npx remotion render src/index.ts quote-of-day-post output.mp4
+npx remotion render showcase --props='{...}' --width=1920 --height=1080 --output-location=youtube.mp4
 ```
 
----
-
-## 🔧 CLI Reference
+### Square Format (1080x1080)
 
 ```bash
-# List all compositions
-npx remotion compositions src/index.ts
-
-# Render with custom props
-npx remotion render src/index.ts <composition-id> output.mp4 \
-  --props '<json>'
-
-# Using the render-cli script (starter templates only)
-npm run render -- --template <id> --format <story|post|landscape> \
-  --theme <default|dark|vibrant|minimal> \
-  --props '<json>' \
-  --output ./output/video.mp4
+npx remotion render showcase --props='{...}' --width=1080 --height=1080 --output-location=square.mp4
 ```
 
 ---
 
-## 🌐 REST API
+## 🎨 Theme Customization
+
+All templates support theme customization:
+
+```json
+{
+  "theme": {
+    "accentColor": "#10B981",      // Primary accent color
+    "secondaryAccent": "#D4AF37",  // Secondary accent
+    "bgGradient": ["#064E3B", "#022C22", "#011614"],  // Background gradient
+    "particlesEnabled": true,      // Floating particles
+    "meshGradientEnabled": true,   // Animated mesh blobs
+    "gridEnabled": false,          // Background grid
+    "vignetteEnabled": true        // Edge vignette
+  }
+}
+```
+
+---
+
+## 🌐 Language Support
+
+### Amharic (አማርኛ)
+Noto Sans Ethiopic is loaded automatically. Just use Amharic text in your props:
+
+```json
+{
+  "headline": {
+    "line1": "ገበያ",
+    "line2": "ለኢትዮጵያውያን"
+  }
+}
+```
+
+### Arabic (العربية)
+Arabic text is supported with right-to-left rendering:
+
+```json
+{
+  "tagline": {"text": "رمضان كريم"}
+}
+```
+
+---
+
+## 📁 Project Structure
+
+```
+renderforge/
+├── src/
+│   ├── Root.tsx              # Composition definitions
+│   ├── core/
+│   │   ├── fonts.ts          # Font loading utilities
+│   │   ├── registry.ts       # Template registry
+│   │   └── formats.ts        # Video format definitions
+│   ├── templates/
+│   │   ├── showcase/         # Showcase template
+│   │   ├── countdown/        # Countdown template
+│   │   ├── kinetic-text/     # Kinetic typography
+│   │   └── ...               # Other templates
+│   └── themes/               # Theme presets
+├── public/
+│   └── fonts/                # Custom fonts
+├── output/                   # Rendered videos
+└── remotion.config.ts        # Remotion configuration
+```
+
+---
+
+## 🔧 Development
 
 ```bash
-npm run api  # Starts on http://localhost:3100
-```
+# Preview in browser
+npm run dev
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/health` | GET | Health check |
-| `/api/templates` | GET | List all templates |
-| `/api/templates/:id` | GET | Get template details |
-| `/api/themes` | GET | List themes |
-| `/api/render` | POST | Submit render job |
-| `/api/render/:jobId` | GET | Check render status |
+# Type check
+npx tsc --noEmit
 
----
-
-## 🏗 Architecture
-
-```
-src/
-├── Root.tsx              # Registers all compositions
-├── types.ts              # Core types (Theme, Format, etc.)
-├── core/                 # Registry, schemas, fonts, format helpers
-├── components/           # Shared: AnimatedText, Background, CTA, Logo, transitions
-├── templates/
-│   ├── yld-intro/        # Premium: brand intro
-│   ├── showcase/         # Premium: product showcase
-│   ├── countdown/        # Premium: event countdown
-│   ├── product-launch/   # Starter: product promo
-│   ├── quote-of-day/     # Starter: quote card
-│   ├── stats-recap/      # Starter: number counters
-│   ├── testimonial/      # Starter: customer review
-│   └── announcement/     # Starter: headline + CTA
-├── themes/               # default, dark, vibrant, minimal
-└── api/                  # Express REST server
-```
-
-### Text Animations
-
-All premium templates share these animation types:
-
-| Animation | Effect |
-|-----------|--------|
-| `charReveal` | Each character fades/scales in with stagger |
-| `typewriter` | Characters appear one by one with blinking cursor |
-| `glitch` | Text flickers with cyan/red ghosts |
-| `slideUp` | Slides up from below with spring physics |
-| `fadeIn` | Simple opacity fade |
-| `wordReveal` | Each word fades in separately (YLD only) |
-
----
-
-## 📦 Docker
-
-```bash
-docker build -t renderforge .
-docker run -p 3100:3100 renderforge
+# Render with verbose output
+npx remotion render showcase --log=verbose
 ```
 
 ---
@@ -261,3 +220,7 @@ docker run -p 3100:3100 renderforge
 ## 📄 License
 
 MIT
+
+---
+
+Made with ❤️ using [Remotion](https://remotion.dev)
