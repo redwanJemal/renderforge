@@ -8,6 +8,10 @@ import {
   Img,
 } from 'remotion';
 import { Logo } from '../../components/Logo';
+import { loadEthiopicFont, loadEthiopicFontSync, ETHIOPIC_FONT_STACK } from '../../core/fonts';
+
+// Pre-load Ethiopic font
+loadEthiopicFontSync();
 
 // ══════════════════════════════════════════════════════════════
 // RAMADAN / EID GREETING — Islamic celebration template
@@ -264,6 +268,8 @@ const OrnatePattern: React.FC<{ gold: string; opacity: number }> = ({ gold, opac
 // ══════════════════════════════════════════════════════════════
 
 export const RamadanGreeting: React.FC<RamadanGreetingProps> = (rawProps) => {
+  loadEthiopicFont();
+  
   const p: RamadanGreetingProps = {
     ...defaultRamadanGreetingProps,
     ...rawProps,
@@ -273,7 +279,7 @@ export const RamadanGreeting: React.FC<RamadanGreetingProps> = (rawProps) => {
   const frame = useCurrentFrame();
   const { fps, durationInFrames } = useVideoConfig();
   const gold = p.theme.primaryColor;
-  const font = 'SF Pro Display, -apple-system, Helvetica Neue, sans-serif';
+  const font = ETHIOPIC_FONT_STACK;
 
   // ── Animations ──
 
