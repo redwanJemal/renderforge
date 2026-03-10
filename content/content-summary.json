@@ -1,0 +1,25 @@
+{
+  "totalPosts": 240,
+  "totalDays": 60,
+  "postsPerDay": 4,
+  "startDate": "2026-03-11",
+  "endDate": "2026-05-08",
+  "templateBreakdown": {
+    "yld-intro": 120,
+    "slider": 120
+  },
+  "pillarBreakdown": {
+    "hustle": 76,
+    "money": 50,
+    "tech": 31,
+    "mindset": 40,
+    "sidehustle": 20,
+    "stories": 23
+  },
+  "formatsPerPost": [
+    "story (1080x1920)",
+    "landscape (1920x1080)",
+    "square (1080x1080)"
+  ],
+  "estimatedTotalVideos": 720
+}
