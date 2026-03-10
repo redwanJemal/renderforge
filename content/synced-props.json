@@ -1,0 +1,101 @@
+[
+  {
+    "postId": "day01-post1",
+    "template": "yld-intro",
+    "sections": [
+      {
+        "key": "intro",
+        "file": "/home/redman/renderforge/content/audio/day01-post1/intro.wav",
+        "duration": 1.5,
+        "frames": 80
+      },
+      {
+        "key": "headline",
+        "file": "/home/redman/renderforge/content/audio/day01-post1/headline.wav",
+        "duration": 2.8,
+        "frames": 119
+      },
+      {
+        "key": "subheader",
+        "file": "/home/redman/renderforge/content/audio/day01-post1/subheader.wav",
+        "duration": 3.5,
+        "frames": 140
+      },
+      {
+        "key": "badge",
+        "file": "/home/redman/renderforge/content/audio/day01-post1/badge.wav",
+        "duration": 1.8,
+        "frames": 89
+      },
+      {
+        "key": "cta",
+        "file": "/home/redman/renderforge/content/audio/day01-post1/cta.wav",
+        "duration": 2,
+        "frames": 95
+      }
+    ],
+    "totalDuration": 20.1,
+    "totalFrames": 603,
+    "props": {
+      "logo": {
+        "file": "yld-logo-white.png",
+        "size": 480,
+        "glowEnabled": true,
+        "finalScale": 0.6,
+        "moveUpPx": 160,
+        "marginBottom": 15
+      },
+      "header": {
+        "line1": "What would you build",
+        "line1Size": 40,
+        "line1Animation": "wordReveal",
+        "line2": "with your last dollar?",
+        "line2Size": 56,
+        "line2Animation": "slideUp",
+        "highlight": "last dollar",
+        "marginBottom": 25
+      },
+      "subheader": {
+        "text": "Real engineers. Zero budget.\nBuilding from nothing to something.",
+        "size": 30,
+        "animation": "typewriter",
+        "marginBottom": 45
+      },
+      "badge": {
+        "text": "The Journey Begins",
+        "enabled": true,
+        "marginBottom": 0
+      },
+      "cta": {
+        "text": "FOLLOW THE JOURNEY →",
+        "enabled": true,
+        "bottomOffset": 150
+      },
+      "divider": {
+        "enabled": true,
+        "marginBottom": 30
+      },
+      "theme": {
+        "accentColor": "#22c55e",
+        "bgGradient": [
+          "#0a2e1a",
+          "#071a10",
+          "#020a05"
+        ],
+        "particlesEnabled": true,
+        "scanLineEnabled": true,
+        "gridEnabled": true,
+        "vignetteEnabled": true
+      },
+      "timing": {
+        "logoAppear": 10,
+        "logoMoveUp": 60,
+        "dividerAppear": 90,
+        "headerAppear": 100,
+        "subheaderAppear": 219,
+        "badgeAppear": 369,
+        "ctaAppear": 468
+      }
+    }
+  }
+]
