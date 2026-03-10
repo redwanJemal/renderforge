@@ -93,12 +93,13 @@ export const RemotionRoot: React.FC = () => {
       />
 
       {/* Premium Template: Slider */}
+      {/* Slider durations set to 1200 (40s max) — actual length via --frames flag */}
       <Composition
         id="slider"
         component={Slider}
         width={1080}
         height={1920}
-        durationInFrames={710}
+        durationInFrames={1200}
         fps={30}
         defaultProps={defaultSliderProps}
       />
@@ -107,7 +108,7 @@ export const RemotionRoot: React.FC = () => {
         component={Slider}
         width={1920}
         height={1080}
-        durationInFrames={710}
+        durationInFrames={1200}
         fps={30}
         defaultProps={defaultSliderProps}
       />
@@ -116,18 +117,19 @@ export const RemotionRoot: React.FC = () => {
         component={Slider}
         width={1080}
         height={1080}
-        durationInFrames={710}
+        durationInFrames={1200}
         fps={30}
         defaultProps={defaultSliderProps}
       />
 
       {/* Premium Template: Your Last Dollar Intro */}
+      {/* Duration set to 900 (30s max) — actual length controlled via --frames flag */}
       <Composition
         id="yld-intro"
         component={YLDIntro}
         width={1080}
         height={1920}
-        durationInFrames={450}
+        durationInFrames={900}
         fps={30}
         defaultProps={defaultYLDProps}
       />
