@@ -7,6 +7,7 @@ import { loadEthiopicFontSync } from './core/fonts';
 // Load Ethiopic font globally for Amharic/Ge'ez script support
 loadEthiopicFontSync();
 import { YLDIntro, defaultYLDProps } from './templates/yld-intro/YLDIntro';
+import { Slider, defaultSliderProps } from './templates/slider/Slider';
 import { Showcase, defaultShowcaseProps } from './templates/showcase/Showcase';
 import { Countdown, defaultCountdownProps } from './templates/countdown/Countdown';
 import { KineticText, defaultKineticTextProps } from './templates/kinetic-text/KineticText';
@@ -34,6 +35,35 @@ export const RemotionRoot: React.FC = () => {
 
   return (
     <>
+      {/* Premium Template: Slider */}
+      <Composition
+        id="slider"
+        component={Slider}
+        width={1080}
+        height={1920}
+        durationInFrames={580}
+        fps={30}
+        defaultProps={defaultSliderProps}
+      />
+      <Composition
+        id="slider-landscape"
+        component={Slider}
+        width={1920}
+        height={1080}
+        durationInFrames={580}
+        fps={30}
+        defaultProps={defaultSliderProps}
+      />
+      <Composition
+        id="slider-square"
+        component={Slider}
+        width={1080}
+        height={1080}
+        durationInFrames={580}
+        fps={30}
+        defaultProps={defaultSliderProps}
+      />
+
       {/* Premium Template: Your Last Dollar Intro */}
       <Composition
         id="yld-intro"
