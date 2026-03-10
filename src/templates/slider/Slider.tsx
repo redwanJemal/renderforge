@@ -127,9 +127,9 @@ export const defaultSliderProps: SliderProps = {
       tag: '04',
     },
   ],
-  framesPerSlide: 90,
+  framesPerSlide: 140,
   transition: 'slideLeft',
-  transitionFrames: 20,
+  transitionFrames: 25,
   intro: {
     enabled: true,
     title: 'RenderForge',
@@ -430,9 +430,10 @@ const SlideContent: React.FC<{
         style={{
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: slide.imageUrl ? 'flex-end' : 'center',
-          alignItems: 'flex-start',
-          padding: slide.imageUrl ? '0 70px 220px' : '0 70px',
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: '80px 70px',
+          textAlign: 'center',
         }}
       >
         {/* Tag / Number */}
@@ -440,16 +441,17 @@ const SlideContent: React.FC<{
           <div
             style={{
               opacity: tagProgress,
-              transform: `translateX(${(1 - tagProgress) * -20}px)`,
+              transform: `translateY(${(1 - tagProgress) * -15}px)`,
               display: 'flex',
               alignItems: 'center',
+              justifyContent: 'center',
               gap: 16,
-              marginBottom: 20,
+              marginBottom: 28,
             }}
           >
             <div
               style={{
-                width: 40,
+                width: 30,
                 height: 2,
                 background: accent,
                 boxShadow: `0 0 10px ${accent}`,
@@ -467,6 +469,14 @@ const SlideContent: React.FC<{
             >
               {slide.tag}
             </span>
+            <div
+              style={{
+                width: 30,
+                height: 2,
+                background: accent,
+                boxShadow: `0 0 10px ${accent}`,
+              }}
+            />
           </div>
         )}
 
@@ -481,8 +491,9 @@ const SlideContent: React.FC<{
             color: '#ffffff',
             lineHeight: 1.15,
             letterSpacing: '0.02em',
-            marginBottom: 24,
+            marginBottom: 28,
             whiteSpace: 'pre-wrap',
+            textAlign: 'center',
           }}
         >
           {highlightWords(slide.headline, slide.highlight, accent)}
@@ -496,7 +507,7 @@ const SlideContent: React.FC<{
             borderRadius: 2,
             background: `linear-gradient(90deg, ${accent}, ${secondaryAccent})`,
             boxShadow: `0 0 15px ${accent}66`,
-            marginBottom: 20,
+            marginBottom: 24,
           }}
         />
 
@@ -510,6 +521,7 @@ const SlideContent: React.FC<{
             color: 'rgba(255, 255, 255, 0.55)',
             lineHeight: 1.6,
             maxWidth: 750,
+            textAlign: 'center',
           }}
         >
           {slide.subtext}
@@ -951,29 +963,7 @@ export const Slider: React.FC<SliderProps> = (rawProps) => {
         </AbsoluteFill>
       )}
 
-      {/* ══ LOGO (persistent, small in corner during slides) ══ */}
-      {(inSlides || isOutro) && (
-        <div
-          style={{
-            position: 'absolute',
-            ...logoPos,
-            opacity: logoOpacity,
-            filter: p.logo.glowEnabled
-              ? `drop-shadow(0 0 ${12 * logoPulse}px ${accent}60)`
-              : 'none',
-            zIndex: 100,
-          }}
-        >
-          <Img
-            src={p.logo.logoIsUrl ? p.logo.file : staticFile(p.logo.file)}
-            style={{
-              width: p.logo.size,
-              height: p.logo.size,
-              objectFit: 'contain',
-            }}
-          />
-        </div>
-      )}
+      {/* Logo only shown in outro (intro already has its own big logo) */}
 
       {/* ══ PROGRESS ══ */}
       {p.progress.enabled && inSlides && (

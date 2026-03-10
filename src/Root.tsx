@@ -41,7 +41,7 @@ export const RemotionRoot: React.FC = () => {
         component={Slider}
         width={1080}
         height={1920}
-        durationInFrames={580}
+        durationInFrames={710}
         fps={30}
         defaultProps={defaultSliderProps}
       />
@@ -50,7 +50,7 @@ export const RemotionRoot: React.FC = () => {
         component={Slider}
         width={1920}
         height={1080}
-        durationInFrames={580}
+        durationInFrames={710}
         fps={30}
         defaultProps={defaultSliderProps}
       />
@@ -59,7 +59,7 @@ export const RemotionRoot: React.FC = () => {
         component={Slider}
         width={1080}
         height={1080}
-        durationInFrames={580}
+        durationInFrames={710}
         fps={30}
         defaultProps={defaultSliderProps}
       />
