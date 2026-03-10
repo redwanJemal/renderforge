@@ -11,6 +11,18 @@
     "day03-post1-story": true,
     "day03-post2-story": true
   },
+  "thumbs": {
+    "day01-post1-story-thumb": true,
+    "day01-post2-story-thumb": true,
+    "day01-post3-story-thumb": true,
+    "day01-post4-story-thumb": true,
+    "day02-post1-story-thumb": true,
+    "day02-post2-story-thumb": true,
+    "day02-post3-story-thumb": true,
+    "day02-post4-story-thumb": true,
+    "day03-post1-story-thumb": true,
+    "day03-post2-story-thumb": true
+  },
   "failed": {},
-  "lastUpdated": "2026-03-10T10:28:33.692Z"
+  "lastUpdated": "2026-03-10T12:46:44.698Z"
 }
