@@ -26,7 +26,10 @@ interface Post {
   date: string;         // ISO date
   pillar: string;
   template: 'slider' | 'yld-intro';
-  caption: string;      // social media caption with hashtags
+  title: string;        // short post title (for TikTok, Reels)
+  description: string;  // longer description (for YouTube, LinkedIn)
+  tags: string[];       // hashtags without #
+  caption: string;      // legacy — full caption with hashtags
   props: Record<string, any>;
 }
 
@@ -55,6 +58,9 @@ const themes = [
 
 interface SliderContent {
   pillar: string;
+  title: string;
+  description: string;
+  tags: string[];
   caption: string;
   intro: { title: string; subtitle: string };
   slides: Array<{
@@ -68,6 +74,9 @@ interface SliderContent {
 
 interface YLDContent {
   pillar: string;
+  title: string;
+  description: string;
+  tags: string[];
   caption: string;
   line1: string;
   line2: string;
@@ -551,6 +560,34 @@ const sliderContent: SliderContent[] = [
 // GENERATE PLAN
 // ──────────────────────────────────────────────
 
+// Tag pools for building per-post hashtags
+const BASE_TAGS = ['yourlstdollar', 'dubai', 'uae', 'entrepreneur'];
+const PILLAR_TAGS: Record<string, string[]> = {
+  hustle: ['startup', 'hustle', 'business', 'dubailife', 'dubaientrepreneur', 'buildingempire', 'grindset', 'founderstory', 'startuplife', 'dubaibusiness'],
+  money: ['money', 'financialfreedom', 'investing', 'wealthmindset', 'passiveincome', 'dubaifinance', 'moneytips', 'personalfinance', 'dubairealestate', 'wealthbuilding'],
+  tech: ['tech', 'ai', 'aitools', 'automation', 'coding', 'dubaitech', 'futureofwork', 'digitalnomad', 'remotework', 'solopreneur'],
+  mindset: ['mindset', 'motivation', 'discipline', 'success', 'growthmindset', 'selfimprovement', 'morningroutine', 'stoic', 'leveling', 'successhabits'],
+  sidehustle: ['sidehustle', 'makemoneyonline', 'freelance', 'passiveincome', 'extraincome', 'onlinebusiness', 'digitalproducts', 'workfromhome', 'dubaihustle', 'incomestreams'],
+  stories: ['successstory', 'inspiration', 'nevergiveup', 'resilience', 'billionaire', 'startupstory', 'failureislearning', 'entrepreneurlife', 'motivation', 'legacy'],
+};
+
+// Load metadata for titles, descriptions, and extra tags
+const yldMetadata: Array<{ title: string; description: string; extraTags: string[] }> =
+  JSON.parse(fs.readFileSync(path.join(__dirname, 'metadata-yld.json'), 'utf-8'));
+const sliderMetadata: Array<{ title: string; description: string; extraTags: string[] }> =
+  JSON.parse(fs.readFileSync(path.join(__dirname, 'metadata-slider.json'), 'utf-8'));
+
+function buildTags(pillar: string, extraTags: string[], idx: number): string[] {
+  const pillarPool = PILLAR_TAGS[pillar] || [];
+  // Pick 3-4 rotating pillar tags
+  const picked = [
+    pillarPool[idx % pillarPool.length],
+    pillarPool[(idx + 3) % pillarPool.length],
+    pillarPool[(idx + 7) % pillarPool.length],
+  ];
+  return [...BASE_TAGS, ...picked, ...extraTags];
+}
+
 function generatePlan(startDate: string): Post[] {
   const posts: Post[] = [];
   const start = new Date(startDate);
@@ -577,6 +614,9 @@ function generatePlan(startDate: string): Post[] {
         const t = postNum === 1 ? theme : altTheme;
         yldIdx++;
 
+        const meta = yldMetadata[yldIdx % yldMetadata.length];
+        const tags = buildTags(content.pillar, meta.extraTags, yldIdx);
+
         posts.push({
           id,
           day: dayNum,
@@ -584,6 +624,9 @@ function generatePlan(startDate: string): Post[] {
           date: dateStr,
           pillar: content.pillar,
           template: 'yld-intro',
+          title: meta.title,
+          description: meta.description,
+          tags,
           caption: content.caption,
           props: {
             logo: {
@@ -645,6 +688,9 @@ function generatePlan(startDate: string): Post[] {
         const t = postNum === 2 ? theme : altTheme;
         sliderIdx++;
 
+        const meta = sliderMetadata[sliderIdx % sliderMetadata.length];
+        const tags = buildTags(content.pillar, meta.extraTags, sliderIdx);
+
         posts.push({
           id,
           day: dayNum,
@@ -652,6 +698,9 @@ function generatePlan(startDate: string): Post[] {
           date: dateStr,
           pillar: content.pillar,
           template: 'slider',
+          title: meta.title,
+          description: meta.description,
+          tags,
           caption: content.caption,
           props: {
             logo: {
