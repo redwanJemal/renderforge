@@ -8,6 +8,7 @@ import { loadEthiopicFontSync } from './core/fonts';
 loadEthiopicFontSync();
 import { YLDIntro, defaultYLDProps } from './templates/yld-intro/YLDIntro';
 import { Slider, defaultSliderProps } from './templates/slider/Slider';
+import { Cover, defaultCoverProps } from './templates/cover/Cover';
 import { Showcase, defaultShowcaseProps } from './templates/showcase/Showcase';
 import { Countdown, defaultCountdownProps } from './templates/countdown/Countdown';
 import { KineticText, defaultKineticTextProps } from './templates/kinetic-text/KineticText';
@@ -35,6 +36,62 @@ export const RemotionRoot: React.FC = () => {
 
   return (
     <>
+      {/* Cover Images — profile pics & banners */}
+      <Composition
+        id="cover-profile"
+        component={Cover}
+        width={1080}
+        height={1080}
+        durationInFrames={1}
+        fps={30}
+        defaultProps={defaultCoverProps}
+      />
+      <Composition
+        id="cover-youtube-banner"
+        component={Cover}
+        width={2560}
+        height={1440}
+        durationInFrames={1}
+        fps={30}
+        defaultProps={defaultCoverProps}
+      />
+      <Composition
+        id="cover-twitter-banner"
+        component={Cover}
+        width={1500}
+        height={500}
+        durationInFrames={1}
+        fps={30}
+        defaultProps={defaultCoverProps}
+      />
+      <Composition
+        id="cover-facebook-banner"
+        component={Cover}
+        width={820}
+        height={312}
+        durationInFrames={1}
+        fps={30}
+        defaultProps={defaultCoverProps}
+      />
+      <Composition
+        id="cover-linkedin-banner"
+        component={Cover}
+        width={1584}
+        height={396}
+        durationInFrames={1}
+        fps={30}
+        defaultProps={defaultCoverProps}
+      />
+      <Composition
+        id="cover-tiktok-profile"
+        component={Cover}
+        width={200}
+        height={200}
+        durationInFrames={1}
+        fps={30}
+        defaultProps={{...defaultCoverProps, logo: {...defaultCoverProps.logo, size: 120}, brandName: '', tagline: '', handle: ''}}
+      />
+
       {/* Premium Template: Slider */}
       <Composition
         id="slider"
