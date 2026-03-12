@@ -4,7 +4,7 @@
     "file": "les_brown.wav",
     "style": "Deep, powerful, passionate. Gold standard motivational energy.",
     "source": "Internet Archive — 'It's Not Over Until You Win' Georgia Dome speech",
-    "ref_text": "You gotta be hungry. When you get up in the morning you've got to have drive. Most people have no drive. They let circumstances determine their life.",
+    "ref_text": "I want to share something with you that has changed my life. I started out as was indicated by Jack. It's very humble beginnings. I don't know what that dream is that you have. I don't care how far past it might appear to be. I don't care how disappointing.",
     "test_lines": [
       "Your last dollar could be the first dollar of your empire. Stop making excuses and start building.",
       "You have greatness within you. Don't let anyone tell you otherwise. Rise up and claim what's yours.",
@@ -17,7 +17,7 @@
     "file": "eric_thomas.wav",
     "style": "Raw intensity, street-smart delivery. Hip Hop Preacher energy.",
     "source": "Internet Archive — Eric Thomas motivational compilation",
-    "ref_text": "When you want to succeed as bad as you want to breathe, then you'll be successful. I'm telling you, most of you say you want to be successful but you don't want it bad.",
+    "ref_text": "You ain't scared, you ain't scared. You ain't scared, you're scared to fail you. You're scared to make a mistake. You're scared that you're not perfect. And I'm telling you today, you ain't gotta be perfect. Are you hearing what I'm saying? You don't have to be perfect to get what you want, to do what you want, to have what you want, to be what you want. You don't have to be perfect. It's a lie. You don't.",
     "test_lines": [
       "Your last dollar could be the first dollar of your empire. Stop making excuses and start building.",
       "You're not where you want to be because you haven't decided to get there yet. Make the decision today.",
@@ -30,7 +30,7 @@
     "file": "david_goggins.wav",
     "style": "Gritty, no-nonsense, aggressive. Pure discipline and mental toughness.",
     "source": "Internet Archive — Team Never Quit podcast excerpt",
-    "ref_text": "Who's going to carry the boats? Nobody is coming to save you. You have to be your own hero. You have to dig deep and find that inner strength.",
+    "ref_text": "man. And all I wanted to be was a man. So I developed goggins. You know, my name is David goggins. And goggins is the evil force that is able to come out and conquer all. It's a person that doesn't care what you say about it. It's a person that doesn't care about how he feels or how he acts or anything.",
     "test_lines": [
       "Your last dollar could be the first dollar of your empire. Stop making excuses and start building.",
       "You think you're done? You're not even close. Your mind is trying to protect you from greatness.",
@@ -43,7 +43,7 @@
     "file": "tony_robbins.wav",
     "style": "Commanding, high-energy, authoritative. Legendary motivational cadence.",
     "source": "Internet Archive — TED Talk 'Why we do what we do'",
-    "ref_text": "The defining factor is never resources. It's resourcefulness. Human emotion is the ultimate resource. When you're creative, when you're determined, you find your way.",
+    "ref_text": "is that I'm really in a position, I'm not here to motivate you obviously, you don't need that. And a lot of times that's what people think I do and it's the furthest thing from it. What happens though is people say to me, well I don't need any motivation and I say, well that's interesting, it's not what I do. I'm the wide guy. I don't know why you do what you do. What is your motive for action?",
     "test_lines": [
       "Your last dollar could be the first dollar of your empire. Stop making excuses and start building.",
       "It's not about the money. It's about who you become in the process of building something extraordinary.",
@@ -56,7 +56,7 @@
     "file": "denzel_washington.wav",
     "style": "Smooth authority with gravitas. Calm but powerful.",
     "source": "Internet Archive — Motivational speech compilation",
-    "ref_text": "Fall forward. Every failed experiment is one step closer to success. You've got to take risks. If I'm going to fall, I don't want to fall back on anything.",
+    "ref_text": "you'll never finish. So do what you feel passionate about, passionate about. Take chances. Don't be afraid to fail. This is an all IQ test was nine dots. And you had to draw five lines with a pencil within these nine dots.",
     "test_lines": [
       "Your last dollar could be the first dollar of your empire. Stop making excuses and start building.",
       "Dreams without goals are just dreams. Put your dreams in front of you every single day.",
@@ -69,7 +69,7 @@
     "file": "morgan_freeman.wav",
     "style": "Warm, deep, trustworthy. The narrator voice everyone recognizes.",
     "source": "Internet Archive — Motivational narration compilation",
-    "ref_text": "Success is not about how much money you make. It's about the difference you make in people's lives. Your purpose is greater than your problems.",
+    "ref_text": "Let me share with you what it is not. It is not a quick fix program. It is not a program of the month. It is a process of personal and interpersonal growth and development that will require not only your continuing best efforts but also your patience. As we all know, real quick.",
     "test_lines": [
       "Your last dollar could be the first dollar of your empire. Stop making excuses and start building.",
       "In the quiet moments of reflection, you'll find the strength to face whatever comes your way.",
@@ -82,7 +82,7 @@
     "file": "lisa_nichols.wav",
     "style": "Powerful, emotional, transformational. Moves audiences to tears.",
     "source": "Internet Archive — 'Do It For You' motivational speech",
-    "ref_text": "At some point I had to stop asking for permission to be great. I had to believe that I was enough. You are enough, exactly as you are right now.",
+    "ref_text": "You're gonna be told you're not good enough. Your faith is going to be tested. Your family's gonna look you in the eye and say how do we got health insurance the next month? I don't know, but I know we're gonna make it. You know who's gonna bail you out? You know who's gonna come in and rescue you? You know who's gonna come and save the day?",
     "test_lines": [
       "Your last dollar could be the first dollar of your empire. Stop making excuses and start building.",
       "You are not broken. You are not behind. You are exactly where you need to be to become who you're meant to be.",
@@ -95,7 +95,7 @@
     "file": "mel_robbins.wav",
     "style": "Direct, energetic, no-BS. Practical motivation.",
     "source": "Internet Archive — Motivational speech compilation",
-    "ref_text": "Motivation is garbage. You're never going to feel like doing the things you need to do. You have to force yourself. Five, four, three, two, one, go.",
+    "ref_text": "It's too important. Emotions are everything. I mean, you got a ton of money, you got everybody loves you, and your primary emotions are pissed off and frustrated, and your life's pissed off and frustrated. It doesn't matter if you've got a billion dollars or a million people loving you, your life is not great. Relationships, intimate relationships especially.",
     "test_lines": [
       "Your last dollar could be the first dollar of your empire. Stop making excuses and start building.",
       "Stop waiting to feel ready. You'll never feel ready. The secret is to start before you're ready.",
