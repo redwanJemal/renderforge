@@ -5,5 +5,23 @@
     { "key": "subheader", "start": 14, "end": 20  },
     { "key": "badge",     "start": 20, "end": 25  },
     { "key": "cta",       "start": 25, "end": 31  }
-  ]
+  ],
+  "props": {
+    "header": {
+      "line1": "Your mind is a control room",
+      "line1Size": 38,
+      "line2": "with two operators inside",
+      "line2Size": 52,
+      "highlight": "control room"
+    },
+    "subheader": {
+      "text": "Imagine that inside your head\nthere is a command center"
+    },
+    "badge": {
+      "text": "One Runs Confidence"
+    },
+    "cta": {
+      "text": "THE OTHER RUNS DOUBT — WHICH ONE WINS?"
+    }
+  }
 }

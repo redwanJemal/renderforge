@@ -76,6 +76,16 @@ async function runPipeline(opts: PipelineOptions): Promise<void> {
     console.log('\n  Step 2: No splits.json found, skipping split (using individual audio files as-is)');
   }
 
+  // Step 2b: Load content props from splits.json (if present)
+  let contentProps: Record<string, any> = {};
+  if (fs.existsSync(splitsPath)) {
+    const splitsData = JSON.parse(fs.readFileSync(splitsPath, 'utf-8'));
+    if (splitsData.props) {
+      contentProps = splitsData.props;
+      console.log(`    Loaded content props: ${Object.keys(contentProps).join(', ')}`);
+    }
+  }
+
   // Step 3: Generate manifest
   console.log('\n  Step 3: Generating frame manifest...');
   const manifestPath = path.join(audioDir, 'manifest.json');
@@ -94,13 +104,15 @@ async function runPipeline(opts: PipelineOptions): Promise<void> {
   console.log(`    ${manifest.segments.length} segments, ${manifest.totalAudioDuration.toFixed(1)}s total`);
 
   // Step 4: Render video
+  // Merge content props from splits.json with any CLI props override
+  const mergedProps = { ...contentProps, ...opts.propsOverride };
   console.log('\n  Step 4: Rendering video...');
   const renderResult = renderFromManifest({
     manifest,
     nicheId: opts.nicheId,
     templateId: opts.templateId,
     format: opts.format,
-    propsOverride: opts.propsOverride,
+    propsOverride: Object.keys(mergedProps).length > 0 ? mergedProps : undefined,
     syncOnly: opts.syncOnly,
   });
 
