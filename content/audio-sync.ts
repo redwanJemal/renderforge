@@ -395,10 +395,13 @@ function mergeAudioVideo(
   }
 
   // Merge video + audio
+  // Use -map 0:v -map 1:a to explicitly select video from Remotion output
+  // and audio from our file (Remotion includes a silent audio track by default,
+  // which ffmpeg picks up without explicit mapping)
   try {
     console.log(`    Merging audio + video...`);
     execSync(
-      `ffmpeg -y -i "${videoOnly}" -i "${audioPath}" -c:v copy -c:a aac -b:a 192k -shortest "${outputPath}"`,
+      `ffmpeg -y -i "${videoOnly}" -i "${audioPath}" -map 0:v -map 1:a -c:v copy -c:a aac -ar 44100 -ac 2 -b:a 128k -shortest "${outputPath}"`,
       { stdio: 'pipe', timeout: 120_000 }
     );
 

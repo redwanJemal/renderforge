@@ -1,0 +1,90 @@
+[
+  {
+    "id": "kids-cheerful",
+    "name": "Kids Cheerful",
+    "refAudioPath": "inputaudio/kids.wav",
+    "refText": "Hey kids! A is for Apple! Apples are yummy and come in red, green, and yellow! Can you say Apple?",
+    "style": "Bright, bubbly, enthusiastic. Like a beloved kindergarten teacher who makes learning exciting.",
+    "bestFor": ["kids-education", "kids-quiz"]
+  },
+  {
+    "id": "gentle-storyteller",
+    "name": "Gentle Storyteller",
+    "refAudioPath": "inputaudio/gentle_storyteller.wav",
+    "refText": "Once upon a time, in a cozy little forest, there lived a small bear named Twinkle. Twinkle had the softest brown fur and the brightest eyes that sparkled like stars.",
+    "style": "Gentle, calm, nurturing. Like a loving mother reading a bedtime story by candlelight.",
+    "bestFor": ["kids-bedtime", "calm", "stories"]
+  },
+  {
+    "id": "whimsical-fairy",
+    "name": "Whimsical Fairy",
+    "refAudioPath": "inputaudio/whimsical_fairy.wav",
+    "refText": "Once upon a time, in a cozy little forest, there lived a small bear named Twinkle. Twinkle had the softest brown fur and the brightest eyes that sparkled like stars.",
+    "style": "Light, magical, airy. Musical fairy tale narrator with storybook enchantment.",
+    "bestFor": ["kids-fantasy", "kids-bedtime", "fairy-tales"]
+  },
+  {
+    "id": "les-brown",
+    "name": "Les Brown",
+    "refAudioPath": "content/audio/voices/les_brown.wav",
+    "refText": "I want to share something with you that has changed my life. I started out as was indicated by Jack. It's very humble beginnings. I don't know what that dream is that you have. I don't care how far past it might appear to be. I don't care how disappointing.",
+    "style": "Deep, powerful, passionate. Gold standard motivational energy.",
+    "bestFor": ["motivational", "inspirational", "empowerment"]
+  },
+  {
+    "id": "eric-thomas",
+    "name": "Eric Thomas",
+    "refAudioPath": "content/audio/voices/eric_thomas.wav",
+    "refText": "You ain't scared, you ain't scared. You ain't scared, you're scared to fail you. You're scared to make a mistake. You're scared that you're not perfect. And I'm telling you today, you ain't gotta be perfect. Are you hearing what I'm saying? You don't have to be perfect to get what you want, to do what you want, to have what you want, to be what you want. You don't have to be perfect. It's a lie. You don't.",
+    "style": "Raw intensity, street-smart delivery. Hip Hop Preacher energy.",
+    "bestFor": ["motivational", "hustle", "discipline"]
+  },
+  {
+    "id": "david-goggins",
+    "name": "David Goggins",
+    "refAudioPath": "content/audio/voices/david_goggins.wav",
+    "refText": "man. And all I wanted to be was a man. So I developed goggins. You know, my name is David goggins. And goggins is the evil force that is able to come out and conquer all. It's a person that doesn't care what you say about it. It's a person that doesn't care about how he feels or how he acts or anything.",
+    "style": "Gritty, no-nonsense, aggressive. Pure discipline and mental toughness.",
+    "bestFor": ["discipline", "mental-toughness", "fitness"]
+  },
+  {
+    "id": "tony-robbins",
+    "name": "Tony Robbins",
+    "refAudioPath": "content/audio/voices/tony_robbins.wav",
+    "refText": "is that I'm really in a position, I'm not here to motivate you obviously, you don't need that. And a lot of times that's what people think I do and it's the furthest thing from it. What happens though is people say to me, well I don't need any motivation and I say, well that's interesting, it's not what I do. I'm the wide guy. I don't know why you do what you do. What is your motive for action?",
+    "style": "Commanding, high-energy, authoritative. Legendary motivational cadence.",
+    "bestFor": ["motivational", "business", "personal-development"]
+  },
+  {
+    "id": "denzel-washington",
+    "name": "Denzel Washington",
+    "refAudioPath": "content/audio/voices/denzel_washington.wav",
+    "refText": "you'll never finish. So do what you feel passionate about, passionate about. Take chances. Don't be afraid to fail. This is an all IQ test was nine dots. And you had to draw five lines with a pencil within these nine dots.",
+    "style": "Smooth authority with gravitas. Calm but powerful.",
+    "bestFor": ["inspirational", "wisdom", "commencement"]
+  },
+  {
+    "id": "morgan-freeman",
+    "name": "Morgan Freeman",
+    "refAudioPath": "content/audio/voices/morgan_freeman.wav",
+    "refText": "Let me share with you what it is not. It is not a quick fix program. It is not a program of the month. It is a process of personal and interpersonal growth and development that will require not only your continuing best efforts but also your patience. As we all know, real quick.",
+    "style": "Warm, deep, trustworthy. The narrator voice everyone recognizes.",
+    "bestFor": ["narration", "documentary", "news", "calm-wisdom"]
+  },
+  {
+    "id": "lisa-nichols",
+    "name": "Lisa Nichols",
+    "refAudioPath": "content/audio/voices/lisa_nichols.wav",
+    "refText": "You're gonna be told you're not good enough. Your faith is going to be tested. Your family's gonna look you in the eye and say how do we got health insurance the next month? I don't know, but I know we're gonna make it. You know who's gonna bail you out? You know who's gonna come in and rescue you? You know who's gonna come and save the day?",
+    "style": "Powerful, emotional, transformational. Moves audiences to tears.",
+    "bestFor": ["empowerment", "women", "transformation"]
+  },
+  {
+    "id": "mel-robbins",
+    "name": "Mel Robbins",
+    "refAudioPath": "content/audio/voices/mel_robbins.wav",
+    "refText": "It's too important. Emotions are everything. I mean, you got a ton of money, you got everybody loves you, and your primary emotions are pissed off and frustrated, and your life's pissed off and frustrated. It doesn't matter if you've got a billion dollars or a million people loving you, your life is not great. Relationships, intimate relationships especially.",
+    "style": "Direct, energetic, no-BS. Practical motivation.",
+    "bestFor": ["practical", "productivity", "how-to"]
+  }
+]
