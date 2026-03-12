@@ -1,0 +1,106 @@
+[
+  {
+    "name": "Les Brown",
+    "file": "les_brown.wav",
+    "style": "Deep, powerful, passionate. Gold standard motivational energy.",
+    "source": "Internet Archive — 'It's Not Over Until You Win' Georgia Dome speech",
+    "ref_text": "You gotta be hungry. When you get up in the morning you've got to have drive. Most people have no drive. They let circumstances determine their life.",
+    "test_lines": [
+      "Your last dollar could be the first dollar of your empire. Stop making excuses and start building.",
+      "You have greatness within you. Don't let anyone tell you otherwise. Rise up and claim what's yours.",
+      "The grind doesn't stop because you're tired. Champions push through when everyone else quits."
+    ],
+    "best_for": ["motivational", "inspirational", "empowerment"]
+  },
+  {
+    "name": "Eric Thomas",
+    "file": "eric_thomas.wav",
+    "style": "Raw intensity, street-smart delivery. Hip Hop Preacher energy.",
+    "source": "Internet Archive — Eric Thomas motivational compilation",
+    "ref_text": "When you want to succeed as bad as you want to breathe, then you'll be successful. I'm telling you, most of you say you want to be successful but you don't want it bad.",
+    "test_lines": [
+      "Your last dollar could be the first dollar of your empire. Stop making excuses and start building.",
+      "You're not where you want to be because you haven't decided to get there yet. Make the decision today.",
+      "While they sleep, you grind. While they party, you study. That's the difference between them and you."
+    ],
+    "best_for": ["motivational", "hustle", "discipline"]
+  },
+  {
+    "name": "David Goggins",
+    "file": "david_goggins.wav",
+    "style": "Gritty, no-nonsense, aggressive. Pure discipline and mental toughness.",
+    "source": "Internet Archive — Team Never Quit podcast excerpt",
+    "ref_text": "Who's going to carry the boats? Nobody is coming to save you. You have to be your own hero. You have to dig deep and find that inner strength.",
+    "test_lines": [
+      "Your last dollar could be the first dollar of your empire. Stop making excuses and start building.",
+      "You think you're done? You're not even close. Your mind is trying to protect you from greatness.",
+      "Suffering is the true test of character. Embrace the pain and become something nobody thought possible."
+    ],
+    "best_for": ["discipline", "mental_toughness", "fitness"]
+  },
+  {
+    "name": "Tony Robbins",
+    "file": "tony_robbins.wav",
+    "style": "Commanding, high-energy, authoritative. Legendary motivational cadence.",
+    "source": "Internet Archive — TED Talk 'Why we do what we do'",
+    "ref_text": "The defining factor is never resources. It's resourcefulness. Human emotion is the ultimate resource. When you're creative, when you're determined, you find your way.",
+    "test_lines": [
+      "Your last dollar could be the first dollar of your empire. Stop making excuses and start building.",
+      "It's not about the money. It's about who you become in the process of building something extraordinary.",
+      "Your decisions, not your conditions, determine your destiny. Choose to be extraordinary."
+    ],
+    "best_for": ["motivational", "business", "personal_development"]
+  },
+  {
+    "name": "Denzel Washington",
+    "file": "denzel_washington.wav",
+    "style": "Smooth authority with gravitas. Calm but powerful.",
+    "source": "Internet Archive — Motivational speech compilation",
+    "ref_text": "Fall forward. Every failed experiment is one step closer to success. You've got to take risks. If I'm going to fall, I don't want to fall back on anything.",
+    "test_lines": [
+      "Your last dollar could be the first dollar of your empire. Stop making excuses and start building.",
+      "Dreams without goals are just dreams. Put your dreams in front of you every single day.",
+      "Without commitment you will never start. Without consistency you will never finish."
+    ],
+    "best_for": ["inspirational", "wisdom", "commencement"]
+  },
+  {
+    "name": "Morgan Freeman",
+    "file": "morgan_freeman.wav",
+    "style": "Warm, deep, trustworthy. The narrator voice everyone recognizes.",
+    "source": "Internet Archive — Motivational narration compilation",
+    "ref_text": "Success is not about how much money you make. It's about the difference you make in people's lives. Your purpose is greater than your problems.",
+    "test_lines": [
+      "Your last dollar could be the first dollar of your empire. Stop making excuses and start building.",
+      "In the quiet moments of reflection, you'll find the strength to face whatever comes your way.",
+      "Every journey begins with a single step. The question is not whether you can, but whether you will."
+    ],
+    "best_for": ["narration", "documentary", "calm_wisdom"]
+  },
+  {
+    "name": "Lisa Nichols",
+    "file": "lisa_nichols.wav",
+    "style": "Powerful, emotional, transformational. Moves audiences to tears.",
+    "source": "Internet Archive — 'Do It For You' motivational speech",
+    "ref_text": "At some point I had to stop asking for permission to be great. I had to believe that I was enough. You are enough, exactly as you are right now.",
+    "test_lines": [
+      "Your last dollar could be the first dollar of your empire. Stop making excuses and start building.",
+      "You are not broken. You are not behind. You are exactly where you need to be to become who you're meant to be.",
+      "Stop waiting for someone to hand you your dream. Go out there and grab it with both hands."
+    ],
+    "best_for": ["empowerment", "women", "transformation"]
+  },
+  {
+    "name": "Mel Robbins",
+    "file": "mel_robbins.wav",
+    "style": "Direct, energetic, no-BS. Practical motivation.",
+    "source": "Internet Archive — Motivational speech compilation",
+    "ref_text": "Motivation is garbage. You're never going to feel like doing the things you need to do. You have to force yourself. Five, four, three, two, one, go.",
+    "test_lines": [
+      "Your last dollar could be the first dollar of your empire. Stop making excuses and start building.",
+      "Stop waiting to feel ready. You'll never feel ready. The secret is to start before you're ready.",
+      "Five seconds is all it takes. Count down and move. Your brain will try to stop you. Don't let it."
+    ],
+    "best_for": ["practical", "productivity", "women"]
+  }
+]
