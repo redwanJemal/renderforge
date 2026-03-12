@@ -31,6 +31,11 @@ import './templates/stats-recap';
 import './templates/testimonial';
 import './templates/announcement';
 
+// Kids templates (long-form, audio-sync ready)
+import './templates/kids-alphabet-adventure';
+import './templates/kids-counting-fun';
+import './templates/kids-icon-quiz';
+
 export const RemotionRoot: React.FC = () => {
   const allTemplates = registry.getAll();
 

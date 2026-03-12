@@ -44,7 +44,7 @@ const TRANSITION_PAD = 10; // extra frames between sections for transitions
 
 interface Post {
   id: string;
-  template: 'slider' | 'yld-intro';
+  template: 'slider' | 'yld-intro' | 'kids-alphabet-adventure' | 'kids-counting-fun' | 'kids-icon-quiz';
   title: string;
   props: Record<string, any>;
 }
@@ -91,7 +91,26 @@ function discoverAudioSections(postId: string): AudioSection[] {
     .filter((f) => f !== 'full.wav'); // skip full narration file
 
   // Sort: intro first, then slides/sections in order, outro last
-  const order = ['intro', 'headline', 'subheader', 'badge', 'cta', 'slide1', 'slide2', 'slide3', 'slide4', 'slide5', 'slide6', 'outro'];
+  // Supports YLD, Slider, and Kids templates (letter1-26, number1-20, round1-20)
+  const order = [
+    'intro',
+    'headline', 'subheader', 'badge', 'cta',
+    'slide1', 'slide2', 'slide3', 'slide4', 'slide5', 'slide6',
+    'letter1', 'letter2', 'letter3', 'letter4', 'letter5', 'letter6',
+    'letter7', 'letter8', 'letter9', 'letter10', 'letter11', 'letter12',
+    'letter13', 'letter14', 'letter15', 'letter16', 'letter17', 'letter18',
+    'letter19', 'letter20', 'letter21', 'letter22', 'letter23', 'letter24',
+    'letter25', 'letter26',
+    'number1', 'number2', 'number3', 'number4', 'number5',
+    'number6', 'number7', 'number8', 'number9', 'number10',
+    'number11', 'number12', 'number13', 'number14', 'number15',
+    'number16', 'number17', 'number18', 'number19', 'number20',
+    'round1', 'round2', 'round3', 'round4', 'round5',
+    'round6', 'round7', 'round8', 'round9', 'round10',
+    'round11', 'round12', 'round13', 'round14', 'round15',
+    'round16', 'round17', 'round18', 'round19', 'round20',
+    'outro',
+  ];
   files.sort((a, b) => {
     const keyA = path.basename(a, path.extname(a));
     const keyB = path.basename(b, path.extname(b));
@@ -196,6 +215,94 @@ function syncSliderTiming(post: Post, sections: AudioSection[]): { props: Record
 }
 
 // ──────────────────────────────────────────────
+// KIDS TEMPLATE TIMING
+// ──────────────────────────────────────────────
+
+/**
+ * Generic kids template sync — works for alphabet, counting, and quiz.
+ *
+ * Audio directory structure:
+ *   content/audio/{postId}/
+ *     intro.wav
+ *     letter1.wav / number1.wav / round1.wav   (section audio)
+ *     letter2.wav / number2.wav / round2.wav
+ *     ...
+ *     outro.wav
+ *
+ * Maps each audio section to the corresponding template section's
+ * startFrame and durationFrames props, so animations sync with narration.
+ */
+function syncKidsTiming(
+  post: Post,
+  sections: AudioSection[],
+): { props: Record<string, any>; totalFrames: number } {
+  const props = JSON.parse(JSON.stringify(post.props));
+  let currentFrame = 0;
+
+  const introSection = sections.find((s) => s.key === 'intro');
+  const outroSection = sections.find((s) => s.key === 'outro');
+
+  // Determine section prefix based on template
+  let sectionPrefix: string;
+  let propsArrayKey: string;
+  if (post.template === 'kids-alphabet-adventure') {
+    sectionPrefix = 'letter';
+    propsArrayKey = 'letters';
+  } else if (post.template === 'kids-counting-fun') {
+    sectionPrefix = 'number';
+    propsArrayKey = 'sections';
+  } else {
+    // kids-icon-quiz
+    sectionPrefix = 'round';
+    propsArrayKey = 'rounds';
+  }
+
+  const contentSections = sections.filter((s) =>
+    s.key.startsWith(sectionPrefix) && /\d+$/.test(s.key)
+  );
+
+  // Sort by numeric suffix
+  contentSections.sort((a, b) => {
+    const numA = parseInt(a.key.replace(sectionPrefix, ''), 10);
+    const numB = parseInt(b.key.replace(sectionPrefix, ''), 10);
+    return numA - numB;
+  });
+
+  // Intro
+  if (introSection) {
+    props.introDurationFrames = introSection.frames;
+    currentFrame = introSection.frames;
+  } else {
+    currentFrame = props.introDurationFrames || 120;
+  }
+
+  // Content sections — set startFrame and durationFrames on each
+  const propsArray = props[propsArrayKey] || [];
+  for (let i = 0; i < contentSections.length && i < propsArray.length; i++) {
+    const audioSection = contentSections[i];
+
+    propsArray[i].startFrame = currentFrame;
+    propsArray[i].durationFrames = audioSection.frames;
+
+    // For quiz template, set revealFrame at 60% through the section
+    if (post.template === 'kids-icon-quiz') {
+      propsArray[i].revealFrame = Math.floor(audioSection.frames * 0.6);
+    }
+
+    currentFrame += audioSection.frames + TRANSITION_PAD;
+  }
+
+  // Outro
+  if (outroSection) {
+    props.outroDurationFrames = outroSection.frames;
+  }
+
+  const totalFrames = currentFrame + (props.outroDurationFrames || 120) + 30; // 1s trailing hold
+
+  return { props, totalFrames };
+}
+
+// ──────────────────────────────────────────────
 // RENDER + MERGE
 // ──────────────────────────────────────────────
 
@@ -211,8 +318,11 @@ function renderSyncedVideo(
   let compositionId: string;
   if (post.template === 'slider') {
     compositionId = format === 'story' ? 'slider' : `slider-${format}`;
-  } else {
+  } else if (post.template === 'yld-intro') {
     compositionId = 'yld-intro';
+  } else {
+    // Kids templates use registry format: {templateId}-{format}
+    compositionId = `${post.template}-${format}`;
   }
 
   const FORMATS: Record<string, { width: number; height: number }> = {
@@ -377,10 +487,16 @@ function main() {
     console.log(`  Total audio: ${totalAudioDuration.toFixed(2)}s`);
 
     // 2. Calculate synced timing
-    const { props: syncedProps, totalFrames } =
-      post.template === 'yld-intro'
-        ? syncYLDTiming(post, sections)
-        : syncSliderTiming(post, sections);
+    let syncResult: { props: Record<string, any>; totalFrames: number };
+    if (post.template === 'yld-intro') {
+      syncResult = syncYLDTiming(post, sections);
+    } else if (post.template === 'slider') {
+      syncResult = syncSliderTiming(post, sections);
+    } else {
+      // Kids templates: kids-alphabet-adventure, kids-counting-fun, kids-icon-quiz
+      syncResult = syncKidsTiming(post, sections);
+    }
+    const { props: syncedProps, totalFrames } = syncResult;
 
     console.log(`  Synced video: ${totalFrames} frames (${(totalFrames / FPS).toFixed(1)}s)`);
 
