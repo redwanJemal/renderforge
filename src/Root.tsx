@@ -35,6 +35,7 @@ import './templates/announcement';
 import './templates/kids-alphabet-adventure';
 import './templates/kids-counting-fun';
 import './templates/kids-icon-quiz';
+import './templates/kids-bedtime-story';
 
 export const RemotionRoot: React.FC = () => {
   const allTemplates = registry.getAll();

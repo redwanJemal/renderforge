@@ -1,0 +1,462 @@
+[
+  {
+    "postId": "alphabet-af",
+    "template": "kids-alphabet-adventure",
+    "title": "ABC Adventure: A to F",
+    "sections": [
+      {
+        "key": "intro",
+        "text": "Hey kids! It's time for an ABC Adventure! Let's learn the alphabet together! Are you ready? Let's go!",
+        "audioFile": "alphabet-af/intro.wav",
+        "voice": "cheerful"
+      },
+      {
+        "key": "letter1",
+        "text": "A! A is for Apple! Apples are yummy and come in red, green, and yellow!",
+        "audioFile": "alphabet-af/letter1.wav",
+        "voice": "cheerful"
+      },
+      {
+        "key": "letter2",
+        "text": "B! B is for Bird! Birds can fly high up in the sky!",
+        "audioFile": "alphabet-af/letter2.wav",
+        "voice": "cheerful"
+      },
+      {
+        "key": "letter3",
+        "text": "C! C is for Cat! Cats say meow and love to play!",
+        "audioFile": "alphabet-af/letter3.wav",
+        "voice": "cheerful"
+      },
+      {
+        "key": "letter4",
+        "text": "D! D is for Dog! Dogs are our best friends! Woof woof!",
+        "audioFile": "alphabet-af/letter4.wav",
+        "voice": "cheerful"
+      },
+      {
+        "key": "letter5",
+        "text": "E! E is for Elephant! Elephants are the biggest animals on land!",
+        "audioFile": "alphabet-af/letter5.wav",
+        "voice": "cheerful"
+      },
+      {
+        "key": "letter6",
+        "text": "F! F is for Fish! Fish swim in the ocean and rivers!",
+        "audioFile": "alphabet-af/letter6.wav",
+        "voice": "cheerful"
+      },
+      {
+        "key": "outro",
+        "text": "Amazing job! You learned so many letters today! You're a super star! See you next time for more ABC fun!",
+        "audioFile": "alphabet-af/outro.wav",
+        "voice": "cheerful"
+      }
+    ],
+    "fullScript": "Hey kids! It's time for an ABC Adventure! Let's learn the alphabet together! Are you ready? Let's go! A! A is for Apple! Apples are yummy and come in red, green, and yellow! B! B is for Bird! Birds can fly high up in the sky! C! C is for Cat! Cats say meow and love to play! D! D is for Dog! Dogs are our best friends! Woof woof! E! E is for Elephant! Elephants are the biggest animals on land! F! F is for Fish! Fish swim in the ocean and rivers! Amazing job! You learned so many letters today! You're a super star! See you next time for more ABC fun!",
+    "audioDir": "audio/alphabet-af",
+    "voicePreset": "kids-cheerful"
+  },
+  {
+    "postId": "counting-1to5",
+    "template": "kids-counting-fun",
+    "title": "Count to 5!",
+    "sections": [
+      {
+        "key": "intro",
+        "text": "Hey friends! Let's count together! Can you count with me? Here we go!",
+        "audioFile": "counting-1to5/intro.wav",
+        "voice": "cheerful"
+      },
+      {
+        "key": "number1",
+        "text": "Let's count to One! One! One Star! Great counting!",
+        "audioFile": "counting-1to5/number1.wav",
+        "voice": "cheerful"
+      },
+      {
+        "key": "number2",
+        "text": "Let's count to Two! One, Two! Two Hearts! Great counting!",
+        "audioFile": "counting-1to5/number2.wav",
+        "voice": "cheerful"
+      },
+      {
+        "key": "number3",
+        "text": "Let's count to Three! One, Two, Three! Three Apples! Great counting!",
+        "audioFile": "counting-1to5/number3.wav",
+        "voice": "cheerful"
+      },
+      {
+        "key": "number4",
+        "text": "Let's count to Four! One, Two, Three, Four! Four Fish! Great counting!",
+        "audioFile": "counting-1to5/number4.wav",
+        "voice": "cheerful"
+      },
+      {
+        "key": "number5",
+        "text": "Let's count to Five! One, Two, Three, Four, Five! Five Cats! Great counting!",
+        "audioFile": "counting-1to5/number5.wav",
+        "voice": "cheerful"
+      },
+      {
+        "key": "outro",
+        "text": "Wow, you're a counting champion! You did such an amazing job! Keep counting everywhere you go! See you next time!",
+        "audioFile": "counting-1to5/outro.wav",
+        "voice": "cheerful"
+      }
+    ],
+    "fullScript": "Hey friends! Let's count together! Can you count with me? Here we go! Let's count to One! One! One Star! Great counting! Let's count to Two! One, Two! Two Hearts! Great counting! Let's count to Three! One, Two, Three! Three Apples! Great counting! Let's count to Four! One, Two, Three, Four! Four Fish! Great counting! Let's count to Five! One, Two, Three, Four, Five! Five Cats! Great counting! Wow, you're a counting champion! You did such an amazing job! Keep counting everywhere you go! See you next time!",
+    "audioDir": "audio/counting-1to5",
+    "voicePreset": "kids-cheerful"
+  },
+  {
+    "postId": "quiz-animals",
+    "template": "kids-icon-quiz",
+    "title": "Animal & Shape Quiz!",
+    "sections": [
+      {
+        "key": "intro",
+        "text": "Welcome to the Quiz Show! Can you guess the right answer? Let's find out how smart you are! Ready? Let's play!",
+        "audioFile": "quiz-animals/intro.wav",
+        "voice": "cheerful"
+      },
+      {
+        "key": "round1",
+        "text": "Which one is a Cat? Is it the Dog or Fish? Or is it the Cat? That's right! It's the Cat! Great job!",
+        "audioFile": "quiz-animals/round1.wav",
+        "voice": "cheerful"
+      },
+      {
+        "key": "round2",
+        "text": "Which one is a Bird? Is it the Butterfly or Lion? Or is it the Bird? That's right! It's the Bird! Great job!",
+        "audioFile": "quiz-animals/round2.wav",
+        "voice": "cheerful"
+      },
+      {
+        "key": "round3",
+        "text": "Which one is an Elephant? Is it the Cat or Dog? Or is it the Elephant? That's right! It's the Elephant! Great job!",
+        "audioFile": "quiz-animals/round3.wav",
+        "voice": "cheerful"
+      },
+      {
+        "key": "round4",
+        "text": "Which shape is a Star? Is it the Circle or Triangle? Or is it the Star? That's right! It's the Star! Great job!",
+        "audioFile": "quiz-animals/round4.wav",
+        "voice": "cheerful"
+      },
+      {
+        "key": "round5",
+        "text": "Which one is a Butterfly? Is it the Fish or Bird? Or is it the Butterfly? That's right! It's the Butterfly! Great job!",
+        "audioFile": "quiz-animals/round5.wav",
+        "voice": "cheerful"
+      },
+      {
+        "key": "outro",
+        "text": "You got them all! You're a quiz champion! Give yourself a big round of applause! See you next time for more fun quizzes!",
+        "audioFile": "quiz-animals/outro.wav",
+        "voice": "cheerful"
+      }
+    ],
+    "fullScript": "Welcome to the Quiz Show! Can you guess the right answer? Let's find out how smart you are! Ready? Let's play! Which one is a Cat? Is it the Dog or Fish? Or is it the Cat? That's right! It's the Cat! Great job! Which one is a Bird? Is it the Butterfly or Lion? Or is it the Bird? That's right! It's the Bird! Great job! Which one is an Elephant? Is it the Cat or Dog? Or is it the Elephant? That's right! It's the Elephant! Great job! Which shape is a Star? Is it the Circle or Triangle? Or is it the Star? That's right! It's the Star! Great job! Which one is a Butterfly? Is it the Fish or Bird? Or is it the Butterfly? That's right! It's the Butterfly! Great job! You got them all! You're a quiz champion! Give yourself a big round of applause! See you next time for more fun quizzes!",
+    "audioDir": "audio/quiz-animals",
+    "voicePreset": "kids-cheerful"
+  },
+  {
+    "postId": "quiz-extended",
+    "template": "kids-icon-quiz",
+    "title": "Animal & Shape Quiz!",
+    "sections": [
+      {
+        "key": "intro",
+        "text": "Welcome to the Quiz Show! Can you guess the right answer? Let's find out how smart you are! Ready? Let's play!",
+        "audioFile": "quiz-extended/intro.wav",
+        "voice": "cheerful"
+      },
+      {
+        "key": "round1",
+        "text": "Which one is a Cat? Is it the Dog or Fish? Or is it the Cat? That's right! It's the Cat! Great job!",
+        "audioFile": "quiz-extended/round1.wav",
+        "voice": "cheerful"
+      },
+      {
+        "key": "round2",
+        "text": "Which one is a Bird? Is it the Butterfly or Lion? Or is it the Bird? That's right! It's the Bird! Great job!",
+        "audioFile": "quiz-extended/round2.wav",
+        "voice": "cheerful"
+      },
+      {
+        "key": "round3",
+        "text": "Which one is an Elephant? Is it the Cat or Dog? Or is it the Elephant? That's right! It's the Elephant! Great job!",
+        "audioFile": "quiz-extended/round3.wav",
+        "voice": "cheerful"
+      },
+      {
+        "key": "round4",
+        "text": "Which shape is a Star? Is it the Circle or Triangle? Or is it the Star? That's right! It's the Star! Great job!",
+        "audioFile": "quiz-extended/round4.wav",
+        "voice": "cheerful"
+      },
+      {
+        "key": "round5",
+        "text": "Which one is a Butterfly? Is it the Fish or Bird? Or is it the Butterfly? That's right! It's the Butterfly! Great job!",
+        "audioFile": "quiz-extended/round5.wav",
+        "voice": "cheerful"
+      },
+      {
+        "key": "round6",
+        "text": "Which shape is a Heart? Is it the Diamond or Square? Or is it the Heart? That's right! It's the Heart! Great job!",
+        "audioFile": "quiz-extended/round6.wav",
+        "voice": "cheerful"
+      },
+      {
+        "key": "round7",
+        "text": "Which one is a Lion? Is it the Elephant or Dog? Or is it the Lion? That's right! It's the Lion! Great job!",
+        "audioFile": "quiz-extended/round7.wav",
+        "voice": "cheerful"
+      },
+      {
+        "key": "round8",
+        "text": "Which one is a Fish? Is it the Bird or Cat? Or is it the Fish? That's right! It's the Fish! Great job!",
+        "audioFile": "quiz-extended/round8.wav",
+        "voice": "cheerful"
+      },
+      {
+        "key": "outro",
+        "text": "You got them all! You're a quiz champion! Give yourself a big round of applause! See you next time for more fun quizzes!",
+        "audioFile": "quiz-extended/outro.wav",
+        "voice": "cheerful"
+      }
+    ],
+    "fullScript": "Welcome to the Quiz Show! Can you guess the right answer? Let's find out how smart you are! Ready? Let's play! Which one is a Cat? Is it the Dog or Fish? Or is it the Cat? That's right! It's the Cat! Great job! Which one is a Bird? Is it the Butterfly or Lion? Or is it the Bird? That's right! It's the Bird! Great job! Which one is an Elephant? Is it the Cat or Dog? Or is it the Elephant? That's right! It's the Elephant! Great job! Which shape is a Star? Is it the Circle or Triangle? Or is it the Star? That's right! It's the Star! Great job! Which one is a Butterfly? Is it the Fish or Bird? Or is it the Butterfly? That's right! It's the Butterfly! Great job! Which shape is a Heart? Is it the Diamond or Square? Or is it the Heart? That's right! It's the Heart! Great job! Which one is a Lion? Is it the Elephant or Dog? Or is it the Lion? That's right! It's the Lion! Great job! Which one is a Fish? Is it the Bird or Cat? Or is it the Fish? That's right! It's the Fish! Great job! You got them all! You're a quiz champion! Give yourself a big round of applause! See you next time for more fun quizzes!",
+    "audioDir": "audio/quiz-extended",
+    "voicePreset": "kids-cheerful"
+  },
+  {
+    "postId": "bedtime-twinkle-bear",
+    "template": "kids-bedtime-story",
+    "title": "Twinkle Bear and the Moonlight Garden",
+    "sections": [
+      {
+        "key": "intro",
+        "text": "It's story time. Tonight's story is called, Twinkle Bear and the Moonlight Garden. Get cozy, close your eyes, and listen.",
+        "audioFile": "bedtime-twinkle-bear/intro.wav",
+        "voice": "soothing"
+      },
+      {
+        "key": "page1",
+        "text": "Once upon a time, in a cozy little forest, there lived a small bear named Twinkle. Twinkle had the softest brown fur and the brightest eyes that sparkled like stars.",
+        "audioFile": "bedtime-twinkle-bear/page1.wav",
+        "voice": "soothing"
+      },
+      {
+        "key": "page2",
+        "text": "Every night, when the moon rose high above the trees, Twinkle would look up at the sky and wonder, Where do the stars go during the day?",
+        "audioFile": "bedtime-twinkle-bear/page2.wav",
+        "voice": "soothing"
+      },
+      {
+        "key": "page3",
+        "text": "One magical evening, a tiny firefly named Flicker landed on Twinkle's nose. Hello little bear! said Flicker. I know where the stars hide! Would you like to see?",
+        "audioFile": "bedtime-twinkle-bear/page3.wav",
+        "voice": "soothing"
+      },
+      {
+        "key": "page4",
+        "text": "Twinkle followed Flicker through the whispering trees, past the gentle stream where the frogs sang their lullaby, deeper into the enchanted forest.",
+        "audioFile": "bedtime-twinkle-bear/page4.wav",
+        "voice": "soothing"
+      },
+      {
+        "key": "page5",
+        "text": "And there it was! A secret garden where flowers glowed with starlight. Each petal held a tiny piece of the sky. This is the Moonlight Garden, whispered Flicker.",
+        "audioFile": "bedtime-twinkle-bear/page5.wav",
+        "voice": "soothing"
+      },
+      {
+        "key": "page6",
+        "text": "Twinkle danced among the glowing flowers, touching each one gently. As he did, the flowers floated up into the sky, becoming stars once more.",
+        "audioFile": "bedtime-twinkle-bear/page6.wav",
+        "voice": "soothing"
+      },
+      {
+        "key": "page7",
+        "text": "The stars twinkled and danced, painting the night sky with silver light. Thank you, little bear, the stars seemed to whisper. You helped us find our way home.",
+        "audioFile": "bedtime-twinkle-bear/page7.wav",
+        "voice": "soothing"
+      },
+      {
+        "key": "page8",
+        "text": "Twinkle yawned a big, sleepy yawn and curled up right there in the moonlight garden. The flowers sang a soft lullaby, and the stars watched over him.",
+        "audioFile": "bedtime-twinkle-bear/page8.wav",
+        "voice": "soothing"
+      },
+      {
+        "key": "page9",
+        "text": "And as Twinkle's eyes slowly closed, he smiled, knowing that every night, the stars would come out to play. And so will you, in your dreams. Goodnight, little one. Sweet dreams.",
+        "audioFile": "bedtime-twinkle-bear/page9.wav",
+        "voice": "soothing"
+      },
+      {
+        "key": "outro",
+        "text": "The end. Goodnight. Sweet dreams.",
+        "audioFile": "bedtime-twinkle-bear/outro.wav",
+        "voice": "soothing"
+      }
+    ],
+    "fullScript": "It's story time. Tonight's story is called, Twinkle Bear and the Moonlight Garden. Get cozy, close your eyes, and listen. Once upon a time, in a cozy little forest, there lived a small bear named Twinkle. Twinkle had the softest brown fur and the brightest eyes that sparkled like stars. Every night, when the moon rose high above the trees, Twinkle would look up at the sky and wonder, Where do the stars go during the day? One magical evening, a tiny firefly named Flicker landed on Twinkle's nose. Hello little bear! said Flicker. I know where the stars hide! Would you like to see? Twinkle followed Flicker through the whispering trees, past the gentle stream where the frogs sang their lullaby, deeper into the enchanted forest. And there it was! A secret garden where flowers glowed with starlight. Each petal held a tiny piece of the sky. This is the Moonlight Garden, whispered Flicker. Twinkle danced among the glowing flowers, touching each one gently. As he did, the flowers floated up into the sky, becoming stars once more. The stars twinkled and danced, painting the night sky with silver light. Thank you, little bear, the stars seemed to whisper. You helped us find our way home. Twinkle yawned a big, sleepy yawn and curled up right there in the moonlight garden. The flowers sang a soft lullaby, and the stars watched over him. And as Twinkle's eyes slowly closed, he smiled, knowing that every night, the stars would come out to play. And so will you, in your dreams. Goodnight, little one. Sweet dreams. The end. Goodnight. Sweet dreams.",
+    "audioDir": "audio/bedtime-twinkle-bear",
+    "voicePreset": "kids-soothing"
+  },
+  {
+    "postId": "bedtime-cloud-bunny",
+    "template": "kids-bedtime-story",
+    "title": "Cloud Bunny and the Rainbow Bridge",
+    "sections": [
+      {
+        "key": "intro",
+        "text": "It's story time. Tonight's story is called, Cloud Bunny and the Rainbow Bridge. Get cozy, close your eyes, and listen.",
+        "audioFile": "bedtime-cloud-bunny/intro.wav",
+        "voice": "soothing"
+      },
+      {
+        "key": "page1",
+        "text": "High up in the sky, above the fluffy white clouds, lived a little bunny named Cloud. Cloud was no ordinary bunny. She was as white as snow and as soft as a pillow.",
+        "audioFile": "bedtime-cloud-bunny/page1.wav",
+        "voice": "soothing"
+      },
+      {
+        "key": "page2",
+        "text": "Cloud loved to hop from cloud to cloud, making shapes for the children below. Look! It's a bunny cloud! the children would say, and Cloud would wiggle her nose with joy.",
+        "audioFile": "bedtime-cloud-bunny/page2.wav",
+        "voice": "soothing"
+      },
+      {
+        "key": "page3",
+        "text": "One day, Cloud noticed something beautiful. A rainbow stretched across the sky after a gentle rain. I wonder what's at the other end, she thought.",
+        "audioFile": "bedtime-cloud-bunny/page3.wav",
+        "voice": "soothing"
+      },
+      {
+        "key": "page4",
+        "text": "Cloud hopped onto the rainbow bridge. It felt warm under her paws, like walking on sunshine. Each color hummed a different note, making the most beautiful melody.",
+        "audioFile": "bedtime-cloud-bunny/page4.wav",
+        "voice": "soothing"
+      },
+      {
+        "key": "page5",
+        "text": "At the end of the rainbow, Cloud found a garden of moon flowers. They only bloomed at night and glowed with a gentle silver light. Hello, Cloud Bunny, the flowers sang.",
+        "audioFile": "bedtime-cloud-bunny/page5.wav",
+        "voice": "soothing"
+      },
+      {
+        "key": "page6",
+        "text": "The moon flowers gave Cloud a special gift. A tiny glowing seed. Plant this in your cloud, they said, and you'll grow your very own star.",
+        "audioFile": "bedtime-cloud-bunny/page6.wav",
+        "voice": "soothing"
+      },
+      {
+        "key": "page7",
+        "text": "Cloud hopped back along the rainbow, holding the seed carefully. She planted it in the softest, fluffiest cloud she could find and watered it with dewdrops.",
+        "audioFile": "bedtime-cloud-bunny/page7.wav",
+        "voice": "soothing"
+      },
+      {
+        "key": "page8",
+        "text": "That night, the seed grew into a beautiful little star that twinkled and glowed. Cloud curled up next to her star, warm and safe in the sky.",
+        "audioFile": "bedtime-cloud-bunny/page8.wav",
+        "voice": "soothing"
+      },
+      {
+        "key": "page9",
+        "text": "And if you look up at the night sky, you might just see Cloud Bunny's star, twinkling just for you. Close your eyes now. Cloud Bunny is watching over you. Goodnight, sweet child. Sleep tight.",
+        "audioFile": "bedtime-cloud-bunny/page9.wav",
+        "voice": "soothing"
+      },
+      {
+        "key": "outro",
+        "text": "The end. Goodnight. Sweet dreams.",
+        "audioFile": "bedtime-cloud-bunny/outro.wav",
+        "voice": "soothing"
+      }
+    ],
+    "fullScript": "It's story time. Tonight's story is called, Cloud Bunny and the Rainbow Bridge. Get cozy, close your eyes, and listen. High up in the sky, above the fluffy white clouds, lived a little bunny named Cloud. Cloud was no ordinary bunny. She was as white as snow and as soft as a pillow. Cloud loved to hop from cloud to cloud, making shapes for the children below. Look! It's a bunny cloud! the children would say, and Cloud would wiggle her nose with joy. One day, Cloud noticed something beautiful. A rainbow stretched across the sky after a gentle rain. I wonder what's at the other end, she thought. Cloud hopped onto the rainbow bridge. It felt warm under her paws, like walking on sunshine. Each color hummed a different note, making the most beautiful melody. At the end of the rainbow, Cloud found a garden of moon flowers. They only bloomed at night and glowed with a gentle silver light. Hello, Cloud Bunny, the flowers sang. The moon flowers gave Cloud a special gift. A tiny glowing seed. Plant this in your cloud, they said, and you'll grow your very own star. Cloud hopped back along the rainbow, holding the seed carefully. She planted it in the softest, fluffiest cloud she could find and watered it with dewdrops. That night, the seed grew into a beautiful little star that twinkled and glowed. Cloud curled up next to her star, warm and safe in the sky. And if you look up at the night sky, you might just see Cloud Bunny's star, twinkling just for you. Close your eyes now. Cloud Bunny is watching over you. Goodnight, sweet child. Sleep tight. The end. Goodnight. Sweet dreams.",
+    "audioDir": "audio/bedtime-cloud-bunny",
+    "voicePreset": "kids-soothing"
+  },
+  {
+    "postId": "bedtime-ocean-turtle",
+    "template": "kids-bedtime-story",
+    "title": "Little Turtle and the Ocean Lullaby",
+    "sections": [
+      {
+        "key": "intro",
+        "text": "It's story time. Tonight's story is called, Little Turtle and the Ocean Lullaby. Get cozy, close your eyes, and listen.",
+        "audioFile": "bedtime-ocean-turtle/intro.wav",
+        "voice": "soothing"
+      },
+      {
+        "key": "page1",
+        "text": "Deep in the warm blue ocean, a tiny sea turtle named Splash was born on a sandy beach under a sky full of stars. She took her first steps toward the sparkling water.",
+        "audioFile": "bedtime-ocean-turtle/page1.wav",
+        "voice": "soothing"
+      },
+      {
+        "key": "page2",
+        "text": "The ocean welcomed Splash with gentle waves that rocked her back and forth, like a cradle made of water. Welcome, little one, the ocean seemed to say.",
+        "audioFile": "bedtime-ocean-turtle/page2.wav",
+        "voice": "soothing"
+      },
+      {
+        "key": "page3",
+        "text": "Splash met all kinds of wonderful friends. A friendly seahorse named Swirl, a cheerful clownfish named Bubble, and a wise old whale named Deep. They all played together in the coral garden.",
+        "audioFile": "bedtime-ocean-turtle/page3.wav",
+        "voice": "soothing"
+      },
+      {
+        "key": "page4",
+        "text": "But when the sun began to set and the water turned golden, Splash felt a little scared. Where do I sleep? she asked. The ocean is so big.",
+        "audioFile": "bedtime-ocean-turtle/page4.wav",
+        "voice": "soothing"
+      },
+      {
+        "key": "page5",
+        "text": "Don't worry, said Deep the whale, with the kindest voice. Listen closely. Can you hear it? The ocean sings a lullaby every night.",
+        "audioFile": "bedtime-ocean-turtle/page5.wav",
+        "voice": "soothing"
+      },
+      {
+        "key": "page6",
+        "text": "And sure enough, Splash could hear it. The waves made a soft whooshing sound, the dolphins hummed, the seashells chimed, and the coral swayed like gentle hands.",
+        "audioFile": "bedtime-ocean-turtle/page6.wav",
+        "voice": "soothing"
+      },
+      {
+        "key": "page7",
+        "text": "Splash found a perfect little spot in the soft sea grass, where the current was warm and calm. The bioluminescent jellyfish floated nearby, glowing like tiny lanterns.",
+        "audioFile": "bedtime-ocean-turtle/page7.wav",
+        "voice": "soothing"
+      },
+      {
+        "key": "page8",
+        "text": "The ocean's lullaby wrapped around Splash like a cozy blanket. The stars reflected in the water above, and the whole ocean sparkled like a million diamonds.",
+        "audioFile": "bedtime-ocean-turtle/page8.wav",
+        "voice": "soothing"
+      },
+      {
+        "key": "page9",
+        "text": "Splash closed her little eyes and smiled. She was home. And the ocean would sing to her every single night. Close your eyes too. Can you hear the ocean singing? Goodnight, little dreamer. Sleep well.",
+        "audioFile": "bedtime-ocean-turtle/page9.wav",
+        "voice": "soothing"
+      },
+      {
+        "key": "outro",
+        "text": "The end. Goodnight. Sweet dreams.",
+        "audioFile": "bedtime-ocean-turtle/outro.wav",
+        "voice": "soothing"
+      }
+    ],
+    "fullScript": "It's story time. Tonight's story is called, Little Turtle and the Ocean Lullaby. Get cozy, close your eyes, and listen. Deep in the warm blue ocean, a tiny sea turtle named Splash was born on a sandy beach under a sky full of stars. She took her first steps toward the sparkling water. The ocean welcomed Splash with gentle waves that rocked her back and forth, like a cradle made of water. Welcome, little one, the ocean seemed to say. Splash met all kinds of wonderful friends. A friendly seahorse named Swirl, a cheerful clownfish named Bubble, and a wise old whale named Deep. They all played together in the coral garden. But when the sun began to set and the water turned golden, Splash felt a little scared. Where do I sleep? she asked. The ocean is so big. Don't worry, said Deep the whale, with the kindest voice. Listen closely. Can you hear it? The ocean sings a lullaby every night. And sure enough, Splash could hear it. The waves made a soft whooshing sound, the dolphins hummed, the seashells chimed, and the coral swayed like gentle hands. Splash found a perfect little spot in the soft sea grass, where the current was warm and calm. The bioluminescent jellyfish floated nearby, glowing like tiny lanterns. The ocean's lullaby wrapped around Splash like a cozy blanket. The stars reflected in the water above, and the whole ocean sparkled like a million diamonds. Splash closed her little eyes and smiled. She was home. And the ocean would sing to her every single night. Close your eyes too. Can you hear the ocean singing? Goodnight, little dreamer. Sleep well. The end. Goodnight. Sweet dreams.",
+    "audioDir": "audio/bedtime-ocean-turtle",
+    "voicePreset": "kids-soothing"
+  }
+]

@@ -44,7 +44,7 @@ const TRANSITION_PAD = 10; // extra frames between sections for transitions
 
 interface Post {
   id: string;
-  template: 'slider' | 'yld-intro' | 'kids-alphabet-adventure' | 'kids-counting-fun' | 'kids-icon-quiz';
+  template: 'slider' | 'yld-intro' | 'kids-alphabet-adventure' | 'kids-counting-fun' | 'kids-icon-quiz' | 'kids-bedtime-story';
   title: string;
   props: Record<string, any>;
 }
@@ -109,6 +109,10 @@ function discoverAudioSections(postId: string): AudioSection[] {
     'round6', 'round7', 'round8', 'round9', 'round10',
     'round11', 'round12', 'round13', 'round14', 'round15',
     'round16', 'round17', 'round18', 'round19', 'round20',
+    'page1', 'page2', 'page3', 'page4', 'page5',
+    'page6', 'page7', 'page8', 'page9', 'page10',
+    'page11', 'page12', 'page13', 'page14', 'page15',
+    'page16', 'page17', 'page18', 'page19', 'page20',
     'outro',
   ];
   files.sort((a, b) => {
@@ -251,6 +255,9 @@ function syncKidsTiming(
   } else if (post.template === 'kids-counting-fun') {
     sectionPrefix = 'number';
     propsArrayKey = 'sections';
+  } else if (post.template === 'kids-bedtime-story') {
+    sectionPrefix = 'page';
+    propsArrayKey = 'pages';
   } else {
     // kids-icon-quiz
     sectionPrefix = 'round';
