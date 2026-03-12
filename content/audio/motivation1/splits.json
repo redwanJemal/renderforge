@@ -1,0 +1,9 @@
+{
+  "segments": [
+    { "key": "intro",     "start": 0,  "end": 4   },
+    { "key": "headline",  "start": 4,  "end": 14  },
+    { "key": "subheader", "start": 14, "end": 20  },
+    { "key": "badge",     "start": 20, "end": 25  },
+    { "key": "cta",       "start": 25, "end": 31  }
+  ]
+}

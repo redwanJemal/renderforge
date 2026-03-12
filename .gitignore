@@ -1,2 +1,15 @@
 node_modules/
 dashboard/node_modules/
+.env
+.env.*
+
+# Rendered output
+output/
+
+# Audio files (downloaded/generated — keep config files like splits.json)
+content/audio/**/*.wav
+content/audio/**/*.mp3
+content/audio/**/*.ogg
+content/audio/**/*.m4a
+inputaudio/*.wav
+inputaudio/*.mp3

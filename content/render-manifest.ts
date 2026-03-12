@@ -165,20 +165,25 @@ function renderVideo(
   format: string,
   outputPath: string,
 ): boolean {
-  const propsJson = JSON.stringify(syncedProps);
   const { width, height } = FORMATS[format] || FORMATS.story;
   const frameRange = `0-${totalFrames - 1}`;
   const videoOnly = outputPath.replace(/\.mp4$/, '-video.mp4');
 
-  const cmd = `npx remotion render ${compositionId} --frames=${frameRange} --width=${width} --height=${height} --props='${propsJson.replace(/'/g, "'\\''")}' "${videoOnly}"`;
+  // Write props to temp file to avoid shell escaping issues
+  const propsFile = path.join(OUTPUT_DIR, `_render-props-${Date.now()}.json`);
+  fs.writeFileSync(propsFile, JSON.stringify(syncedProps));
+
+  const cmd = `npx remotion render ${compositionId} --frames=${frameRange} --width=${width} --height=${height} --props="${propsFile}" "${videoOnly}"`;
 
   try {
     console.log(`    Rendering ${totalFrames} frames (${(totalFrames / FPS).toFixed(1)}s) → ${compositionId}...`);
     execSync(cmd, { cwd: ROOT, stdio: 'pipe', timeout: 600_000 });
     return true;
   } catch (err: any) {
-    console.error(`    Render failed: ${err.stderr?.toString().slice(-300) || err.message}`);
+    console.error(`    Render failed: ${err.stderr?.toString().slice(-1000) || err.message}`);
     return false;
+  } finally {
+    if (fs.existsSync(propsFile)) fs.unlinkSync(propsFile);
   }
 }
 
@@ -246,7 +251,118 @@ function resolveCompositionId(templateId: string, format: string): string {
 }
 
 // ──────────────────────────────────────────────
-// MAIN
+// EXPORTABLE RENDER FUNCTION
+// ──────────────────────────────────────────────
+
+export interface RenderFromManifestOptions {
+  manifest: FrameManifest;
+  nicheId: string;
+  templateId?: string;
+  format?: string;
+  propsOverride?: Record<string, any>;
+  syncOnly?: boolean;
+}
+
+export interface RenderFromManifestResult {
+  outputPath: string;
+  totalFrames: number;
+  syncedPropsPath: string;
+}
+
+/**
+ * Render a video from a frame manifest using niche configuration.
+ * Extracted from main() so it can be called programmatically by other pipelines.
+ */
+export function renderFromManifest(options: RenderFromManifestOptions): RenderFromManifestResult | null {
+  const { manifest, nicheId, propsOverride, syncOnly } = options;
+
+  const niche = niches[nicheId];
+  if (!niche) {
+    console.error(`Unknown niche: ${nicheId}`);
+    console.error(`Available: ${Object.keys(niches).join(', ')}`);
+    return null;
+  }
+
+  const effectiveTemplateId = options.templateId || niche.defaultTemplateId;
+  const nicheTemplate = getNicheTemplate(nicheId, effectiveTemplateId);
+  if (!nicheTemplate) {
+    console.error(`Template '${effectiveTemplateId}' not configured for niche '${nicheId}'`);
+    return null;
+  }
+
+  const effectiveFormat = options.format || niche.defaultFormat;
+
+  console.log('═══════════════════════════════════════════════');
+  console.log('  UNIVERSAL MANIFEST RENDERER');
+  console.log('═══════════════════════════════════════════════');
+  console.log(`  Project:  ${manifest.projectId}`);
+  console.log(`  Niche:    ${niche.name} (${nicheId})`);
+  console.log(`  Template: ${effectiveTemplateId}`);
+  console.log(`  Format:   ${effectiveFormat}`);
+  console.log(`  Voice:    ${niche.voiceId}`);
+  console.log(`  Segments: ${manifest.segments.length}`);
+  console.log(`  Audio:    ${manifest.totalAudioDuration.toFixed(1)}s`);
+  console.log(`  Mode:     ${syncOnly ? 'sync-only' : 'sync + render + merge'}`);
+  console.log('═══════════════════════════════════════════════\n');
+
+  for (const seg of manifest.segments) {
+    console.log(`  ${seg.key}: ${seg.audioDuration.toFixed(2)}s → ${seg.frames}f (${seg.startFrame}-${seg.endFrame})`);
+  }
+
+  let baseProps: Record<string, any> = {};
+  if (propsOverride) {
+    Object.assign(baseProps, propsOverride);
+  }
+
+  console.log('\n  Applying prop mappings...');
+  const { props: syncedProps, totalFrames } = applyMappings(manifest, nicheTemplate, baseProps);
+  console.log(`  Total frames: ${totalFrames} (${(totalFrames / FPS).toFixed(1)}s video)`);
+
+  fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+  const syncedPath = path.join(OUTPUT_DIR, `${manifest.projectId}-synced.json`);
+  fs.writeFileSync(syncedPath, JSON.stringify({
+    manifest,
+    niche: nicheId,
+    template: effectiveTemplateId,
+    format: effectiveFormat,
+    syncedProps,
+    totalFrames,
+  }, null, 2));
+  console.log(`  Synced props → ${syncedPath}`);
+
+  if (syncOnly) {
+    console.log('\n  Sync-only mode — skipping render.');
+    return { outputPath: '', totalFrames, syncedPropsPath: syncedPath };
+  }
+
+  const compositionId = resolveCompositionId(effectiveTemplateId, effectiveFormat);
+  const outputPath = path.join(OUTPUT_DIR, `${manifest.projectId}-${effectiveFormat}.mp4`);
+
+  const renderOk = renderVideo(compositionId, syncedProps, totalFrames, effectiveFormat, outputPath);
+  if (!renderOk) {
+    console.error('\n  Render failed!');
+    return null;
+  }
+
+  const mergeOk = mergeAudio(manifest, outputPath, outputPath);
+  if (!mergeOk) {
+    console.error('\n  Audio merge failed!');
+    return null;
+  }
+
+  const size = fs.existsSync(outputPath)
+    ? (fs.statSync(outputPath).size / 1024 / 1024).toFixed(1)
+    : '?';
+  console.log(`\n  Done! ${size} MB → ${outputPath}`);
+  console.log('\n═══════════════════════════════════════════════');
+  console.log('  RENDER COMPLETE');
+  console.log('═══════════════════════════════════════════════');
+
+  return { outputPath, totalFrames, syncedPropsPath: syncedPath };
+}
+
+// ──────────────────────────────────────────────
+// MAIN (CLI)
 // ──────────────────────────────────────────────
 
 function main() {
@@ -288,31 +404,12 @@ function main() {
     process.exit(1);
   }
 
-  const niche = niches[nicheId];
-  if (!niche) {
-    console.error(`Unknown niche: ${nicheId}`);
-    console.error(`Available: ${Object.keys(niches).join(', ')}`);
-    process.exit(1);
-  }
-
-  // Resolve template
-  const effectiveTemplateId = templateId || niche.defaultTemplateId;
-  const nicheTemplate = getNicheTemplate(nicheId, effectiveTemplateId);
-  if (!nicheTemplate) {
-    console.error(`Template '${effectiveTemplateId}' not configured for niche '${nicheId}'`);
-    console.error(`Available: ${niche.templates.map((t) => t.templateId).join(', ')}`);
-    process.exit(1);
-  }
-
-  const effectiveFormat = format || niche.defaultFormat;
-
   // Load or generate manifest
   let manifest: FrameManifest | null = null;
 
   if (manifestPath) {
     manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
   } else if (dir) {
-    // Check for existing manifest
     const existingManifest = path.join(dir, 'manifest.json');
     if (fs.existsSync(existingManifest)) {
       manifest = JSON.parse(fs.readFileSync(existingManifest, 'utf-8'));
@@ -328,88 +425,30 @@ function main() {
     process.exit(1);
   }
 
-  console.log('═══════════════════════════════════════════════');
-  console.log('  UNIVERSAL MANIFEST RENDERER');
-  console.log('═══════════════════════════════════════════════');
-  console.log(`  Project:  ${manifest.projectId}`);
-  console.log(`  Niche:    ${niche.name} (${nicheId})`);
-  console.log(`  Template: ${effectiveTemplateId}`);
-  console.log(`  Format:   ${effectiveFormat}`);
-  console.log(`  Voice:    ${niche.voiceId}`);
-  console.log(`  Segments: ${manifest.segments.length}`);
-  console.log(`  Audio:    ${manifest.totalAudioDuration.toFixed(1)}s`);
-  console.log(`  Mode:     ${syncOnly ? 'sync-only' : 'sync + render + merge'}`);
-  console.log('═══════════════════════════════════════════════\n');
-
-  // Show segments
-  for (const seg of manifest.segments) {
-    console.log(`  ${seg.key}: ${seg.audioDuration.toFixed(2)}s → ${seg.frames}f (${seg.startFrame}-${seg.endFrame})`);
-  }
-
-  // Get template default props (we import dynamically since templates self-register)
-  // For now, use an empty props base — the render will use composition defaults
-  let baseProps: Record<string, any> = {};
-
-  // Merge user props override
+  let parsedProps: Record<string, any> | undefined;
   if (propsOverride) {
     try {
-      const override = JSON.parse(propsOverride);
-      Object.assign(baseProps, override);
+      parsedProps = JSON.parse(propsOverride);
     } catch {
       console.error('Invalid --props JSON');
       process.exit(1);
     }
   }
 
-  // Apply prop mappings
-  console.log('\n  Applying prop mappings...');
-  const { props: syncedProps, totalFrames } = applyMappings(manifest, nicheTemplate, baseProps);
-
-  console.log(`  Total frames: ${totalFrames} (${(totalFrames / FPS).toFixed(1)}s video)`);
-
-  // Save synced props
-  fs.mkdirSync(OUTPUT_DIR, { recursive: true });
-  const syncedPath = path.join(OUTPUT_DIR, `${manifest.projectId}-synced.json`);
-  fs.writeFileSync(syncedPath, JSON.stringify({
+  const result = renderFromManifest({
     manifest,
-    niche: nicheId,
-    template: effectiveTemplateId,
-    format: effectiveFormat,
-    syncedProps,
-    totalFrames,
-  }, null, 2));
-  console.log(`  Synced props → ${syncedPath}`);
+    nicheId,
+    templateId: templateId || undefined,
+    format: format || undefined,
+    propsOverride: parsedProps,
+    syncOnly,
+  });
 
-  if (syncOnly) {
-    console.log('\n  Sync-only mode — skipping render.');
-    return;
-  }
-
-  // Render
-  const compositionId = resolveCompositionId(effectiveTemplateId, effectiveFormat);
-  const outputPath = path.join(OUTPUT_DIR, `${manifest.projectId}-${effectiveFormat}.mp4`);
-
-  const renderOk = renderVideo(compositionId, syncedProps, totalFrames, effectiveFormat, outputPath);
-  if (!renderOk) {
-    console.error('\n  Render failed!');
+  if (!result) {
     process.exit(1);
   }
-
-  // Merge audio
-  const mergeOk = mergeAudio(manifest, outputPath, outputPath);
-  if (mergeOk) {
-    const size = fs.existsSync(outputPath)
-      ? (fs.statSync(outputPath).size / 1024 / 1024).toFixed(1)
-      : '?';
-    console.log(`\n  Done! ${size} MB → ${outputPath}`);
-  } else {
-    console.error('\n  Audio merge failed!');
-    process.exit(1);
-  }
-
-  console.log('\n═══════════════════════════════════════════════');
-  console.log('  RENDER COMPLETE');
-  console.log('═══════════════════════════════════════════════');
 }
 
-main();
+if (require.main === module) {
+  main();
+}

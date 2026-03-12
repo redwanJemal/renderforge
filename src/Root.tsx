@@ -129,13 +129,13 @@ export const RemotionRoot: React.FC = () => {
       />
 
       {/* Premium Template: Your Last Dollar Intro */}
-      {/* Duration set to 900 (30s max) — actual length controlled via --frames flag */}
+      {/* Duration set high — actual length controlled via --frames flag */}
       <Composition
         id="yld-intro"
         component={YLDIntro}
         width={1080}
         height={1920}
-        durationInFrames={900}
+        durationInFrames={3600}
         fps={30}
         defaultProps={defaultYLDProps}
       />

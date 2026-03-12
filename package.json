@@ -10,13 +10,15 @@
     "lint": "eslint src/"
   },
   "dependencies": {
-    "remotion": "4.0.415",
+    "@aws-sdk/client-s3": "^3.1008.0",
     "@remotion/cli": "4.0.415",
     "@remotion/renderer": "4.0.415",
     "@remotion/transitions": "4.0.415",
-    "zod": "^3.22.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.3.1",
     "express": "^4.18.0",
-    "cors": "^2.8.5"
+    "remotion": "4.0.415",
+    "zod": "^3.22.0"
   },
   "overrides": {
     "remotion": "4.0.415",
@@ -39,12 +41,12 @@
     "@remotion/compositor-linux-arm64-gnu": "4.0.415"
   },
   "devDependencies": {
-    "typescript": "^5.3.0",
-    "@types/express": "^4.17.0",
     "@types/cors": "^2.8.0",
+    "@types/express": "^4.17.0",
     "@types/react": "^18.0.0",
-    "tsx": "^4.0.0",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.3.0"
   }
 }

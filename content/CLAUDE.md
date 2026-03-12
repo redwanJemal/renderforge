@@ -15,6 +15,13 @@ Audio Files → audio-ingest.ts → manifest.json → render-manifest.ts → Fin
                 (ffprobe)          (timing)        (niche config)      (audio+video)
 ```
 
+### Bucket Pipeline (end-to-end)
+```
+MinIO → storage.ts → audio-split.ts → audio-ingest.ts → render-manifest.ts → bgm-mix.ts → MinIO
+         (download)     (split WAV)      (manifest)         (render)           (optional)   (upload)
+```
+Orchestrated by `render-from-bucket.ts`.
+
 ## Scripts
 
 | Script | Purpose | Usage |
@@ -27,6 +34,10 @@ Audio Files → audio-ingest.ts → manifest.json → render-manifest.ts → Fin
 | `audio-sync.ts` | Legacy template-specific sync + render | `npx tsx content/audio-sync.ts --post day01-post1` |
 | `render.ts` | Batch render across formats | `npx tsx content/render.ts` |
 | `add-metadata.ts` | Inject title/description metadata | `npx tsx content/add-metadata.ts` |
+| `storage.ts` | MinIO/S3 client (download/upload/list) | `npx tsx content/storage.ts --list` |
+| `audio-split.ts` | Split full.wav into segments via ffmpeg | `npx tsx content/audio-split.ts --dir content/audio/motivation1` |
+| `bgm-mix.ts` | Mix background music into rendered video | `npx tsx content/bgm-mix.ts --video out.mp4 --bgm bgm.mp3` |
+| `render-from-bucket.ts` | Full pipeline: MinIO → split → render → upload | `npx tsx content/render-from-bucket.ts --key motivation1.wav --niche motivational` |
 
 ## Universal Pipeline (New)
 
