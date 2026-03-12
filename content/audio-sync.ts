@@ -395,24 +395,18 @@ function mergeAudioVideo(
   }
 
   // Merge video + audio
-  // Pre-convert to 44.1kHz stereo AAC (Qwen TTS outputs 24kHz mono
-  // which causes near-silent output with ffmpeg's native AAC encoder)
-  const audioAAC = audioPath.replace(/\.\w+$/, '-resampled.m4a');
+  // Use -map 0:v -map 1:a to explicitly select video from Remotion output
+  // and audio from our file (Remotion includes a silent audio track by default,
+  // which ffmpeg picks up without explicit mapping)
   try {
-    execSync(
-      `ffmpeg -y -i "${audioPath}" -ar 44100 -ac 2 -c:a aac -b:a 128k "${audioAAC}"`,
-      { stdio: 'pipe', timeout: 60_000 }
-    );
-
     console.log(`    Merging audio + video...`);
     execSync(
-      `ffmpeg -y -i "${videoOnly}" -i "${audioAAC}" -c:v copy -c:a copy -shortest "${outputPath}"`,
+      `ffmpeg -y -i "${videoOnly}" -i "${audioPath}" -map 0:v -map 1:a -c:v copy -c:a aac -ar 44100 -ac 2 -b:a 128k -shortest "${outputPath}"`,
       { stdio: 'pipe', timeout: 120_000 }
     );
 
-    // Clean up temp files
+    // Clean up temp video-only file
     if (fs.existsSync(videoOnly)) fs.unlinkSync(videoOnly);
-    if (fs.existsSync(audioAAC)) fs.unlinkSync(audioAAC);
 
     return true;
   } catch (err: any) {
