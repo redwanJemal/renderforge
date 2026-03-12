@@ -395,15 +395,24 @@ function mergeAudioVideo(
   }
 
   // Merge video + audio
+  // Pre-convert to 44.1kHz stereo AAC (Qwen TTS outputs 24kHz mono
+  // which causes near-silent output with ffmpeg's native AAC encoder)
+  const audioAAC = audioPath.replace(/\.\w+$/, '-resampled.m4a');
   try {
+    execSync(
+      `ffmpeg -y -i "${audioPath}" -ar 44100 -ac 2 -c:a aac -b:a 128k "${audioAAC}"`,
+      { stdio: 'pipe', timeout: 60_000 }
+    );
+
     console.log(`    Merging audio + video...`);
     execSync(
-      `ffmpeg -y -i "${videoOnly}" -i "${audioPath}" -c:v copy -c:a aac -b:a 192k -shortest "${outputPath}"`,
+      `ffmpeg -y -i "${videoOnly}" -i "${audioAAC}" -c:v copy -c:a copy -shortest "${outputPath}"`,
       { stdio: 'pipe', timeout: 120_000 }
     );
 
-    // Clean up temp video-only file
+    // Clean up temp files
     if (fs.existsSync(videoOnly)) fs.unlinkSync(videoOnly);
+    if (fs.existsSync(audioAAC)) fs.unlinkSync(audioAAC);
 
     return true;
   } catch (err: any) {
