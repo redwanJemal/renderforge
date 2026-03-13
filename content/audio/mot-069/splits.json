@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Indecision is the silent killer\nof leadership. Decide and move.",
+        "highlight": "silent killer",
+        "entrance": "slideLeft",
+        "textSize": 56
+      },
+      {
+        "text": "Leaders are paid to make decisions. Not perfect decisions. Good enough decisions made quickly. An eighty percent decision made today is better\nthan a hundred percent decision made next month. Speed matters. While you are deliberating, the opportunity is moving. Markets shift. Competition acts.",
+        "highlight": "eighty percent decision",
+        "entrance": "slam",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Train yourself to make decisions in minutes, not days. Gather the essential information. Trust your instinct. Commit. If it\nis wrong, pivot fast. The ability to decide and adapt is more valuable than the ability to analyze endlessly.",
+        "highlight": "decide and adapt",
+        "entrance": "scaleIn",
+        "textSize": 48
+      },
+      {
+        "text": "A wrong decision can\nbe corrected. Indecision cannot.",
+        "highlight": "Indecision cannot",
+        "entrance": "slideUp",
+        "textSize": 52
+      },
+      {
+        "text": "How do you make fast decisions? Share\nyour framework. Follow for decisive leadership.",
+        "entrance": "fadeIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#06b6d4",
+    "bgGradient": [
+      "#0a1e2e",
+      "#051218",
+      "#020608"
+    ]
+  }
+}

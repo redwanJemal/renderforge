@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "You have been planning for months. Maybe\nyears. When does the doing start?",
+        "highlight": "doing",
+        "entrance": "fadeIn",
+        "textSize": 56
+      },
+      {
+        "text": "Analysis paralysis has killed more dreams than failure ever will. The person who takes imperfect action will always outrun the person still\nperfecting their plan. Your brain is designed to keep you safe, not successful. It will always find a reason to wait.",
+        "highlight": "imperfect action",
+        "entrance": "slideLeft",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "The gap between where you are and where you want to be\nis not knowledge. It is action. You already know enough to start.",
+        "highlight": "action",
+        "entrance": "slam",
+        "textSize": 48
+      },
+      {
+        "text": "Progress is not made in your head.\nIt is made with your hands.",
+        "highlight": "your hands",
+        "entrance": "scaleIn",
+        "textSize": 52
+      },
+      {
+        "text": "Tag someone stuck in planning\nmode. Follow for daily motivation.",
+        "entrance": "slideUp",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#ef4444",
+    "bgGradient": [
+      "#2a0a0a",
+      "#180505",
+      "#0a0202"
+    ]
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Pain is not punishment.\nIt is preparation.",
+        "highlight": "preparation",
+        "entrance": "scaleIn",
+        "textSize": 56
+      },
+      {
+        "text": "Behind every strong person is a story of pain that made them stronger. Pain teaches you what comfort never could. It teaches you who your\nreal friends are. It shows you what you are really made of. It forces you to develop skills and strength you never knew you had.",
+        "highlight": "what you are really made of",
+        "entrance": "slideUp",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Do not numb the pain. Feel it. Process it. Learn from it. Then use it. The people who\ntransform pain into power become unstoppable. They have been through the fire and came out as steel.",
+        "highlight": "transform pain into power",
+        "entrance": "fadeIn",
+        "textSize": 48
+      },
+      {
+        "text": "Your pain is not wasted. It is\nbeing converted into power. Trust the process.",
+        "highlight": "converted into power",
+        "entrance": "slideLeft",
+        "textSize": 52
+      },
+      {
+        "text": "What pain taught you the most?\nShare below. Follow for transformation content.",
+        "entrance": "slam",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#a855f7",
+    "bgGradient": [
+      "#1a0a2e",
+      "#0f0518",
+      "#050208"
+    ]
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "The monster under the bed is never as\nscary when you turn the lights on.",
+        "highlight": "turn the lights on",
+        "entrance": "slam",
+        "textSize": 56
+      },
+      {
+        "text": "Anxiety researchers discovered something powerful. The anticipation of fear is always worse than the actual event. Always. Your brain creates horror movies about the future that\nnever play out. The speech you feared giving goes fine. The call you dreaded making leads to opportunity. The risk you avoided was never that risky.",
+        "highlight": "anticipation is always worse",
+        "entrance": "scaleIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Exposure therapy works because repeated exposure shrinks the fear response. The more you face something, the less power it\nhas over you. Fear is like a muscle in reverse. The more you exercise it, the weaker it gets.",
+        "highlight": "repeated exposure",
+        "entrance": "slideUp",
+        "textSize": 48
+      },
+      {
+        "text": "Face it until it fears you.\nThat is the only way through.",
+        "highlight": "Face it until it fears you",
+        "entrance": "fadeIn",
+        "textSize": 52
+      },
+      {
+        "text": "Name one fear you conquered this year.\nCelebrate it below. Follow for fearless living.",
+        "entrance": "slideLeft",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#D4AF37",
+    "bgGradient": [
+      "#1a1500",
+      "#0f0d00",
+      "#050400"
+    ]
+  }
+}

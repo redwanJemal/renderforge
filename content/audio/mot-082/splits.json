@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "This is not practice. This is the\nshow. You are live right now.",
+        "highlight": "live right now",
+        "entrance": "slideUp",
+        "textSize": 56
+      },
+      {
+        "text": "Most people live as if they have unlimited time. Someday I will start the business. Someday I will travel. Someday I will tell them how I feel.\nBut someday is not on the calendar. The average person lives about thirty thousand days. That number only goes down. Every day you waste is gone forever.",
+        "highlight": "thirty thousand days",
+        "entrance": "fadeIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Live with urgency. Not anxiety, urgency. There is a difference. Anxiety paralyzes.\nUrgency mobilizes. Act like your time is limited because it is.",
+        "highlight": "urgency",
+        "entrance": "slideLeft",
+        "textSize": 48
+      },
+      {
+        "text": "One life. No rehearsals. No\nsequels. Make this one count.",
+        "highlight": "Make this one count",
+        "entrance": "slam",
+        "textSize": 52
+      },
+      {
+        "text": "What would you do if you had one\nyear left? Answer honestly. Follow for wake-up calls.",
+        "entrance": "scaleIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#D4AF37",
+    "bgGradient": [
+      "#1a1500",
+      "#0f0d00",
+      "#050400"
+    ]
+  }
+}

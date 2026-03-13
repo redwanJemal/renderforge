@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Your backup plan is the reason\nyour main plan is not working.",
+        "highlight": "main plan",
+        "entrance": "fadeIn",
+        "textSize": 56
+      },
+      {
+        "text": "When you have a safety net, you do not jump as hard. You do not commit fully. Part of your brain is always calculating the exit. The\nmost successful people in history burned their boats. There was no plan B. There was only forward. That desperation, that total commitment, is what creates breakthroughs.",
+        "highlight": "burned their boats",
+        "entrance": "slideLeft",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "This does not mean be reckless. It means be fully committed. Half-hearted effort produces half-hearted\nresults. You cannot be all in if you have one foot out the door.",
+        "highlight": "fully committed",
+        "entrance": "slam",
+        "textSize": 48
+      },
+      {
+        "text": "Bet on yourself so hard that failure is\nnot an option, it is just fuel.",
+        "highlight": "Bet on yourself",
+        "entrance": "scaleIn",
+        "textSize": 52
+      },
+      {
+        "text": "Are you all in or half in?\nBe honest. Follow for commitment content.",
+        "entrance": "slideUp",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#f43f5e",
+    "bgGradient": [
+      "#2a0a14",
+      "#18050a",
+      "#0a0204"
+    ]
+  }
+}

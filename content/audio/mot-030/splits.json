@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Stop waiting to be\nenough. You already are.",
+        "highlight": "already are",
+        "entrance": "slam",
+        "textSize": 56
+      },
+      {
+        "text": "The world sells you the idea that you need more before you can be confident. More money, more followers, more success, more validation. But confidence is not\na destination. It is a decision. You decide today that you are enough, not because you have everything, but because you are willing to work for it.",
+        "highlight": "a decision",
+        "entrance": "scaleIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Comparison is the thief of confidence. The moment you stop measuring yourself against\nothers, you unlock a level of peace that no achievement can match.",
+        "highlight": "thief of confidence",
+        "entrance": "slideUp",
+        "textSize": 48
+      },
+      {
+        "text": "You do not need permission to believe in\nyourself. Give it to yourself right now.",
+        "highlight": "Give it to yourself",
+        "entrance": "fadeIn",
+        "textSize": 52
+      },
+      {
+        "text": "Remind yourself. I am enough. Type\nit below. Follow for self-belief daily.",
+        "entrance": "slideLeft",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#f43f5e",
+    "bgGradient": [
+      "#2a0a14",
+      "#18050a",
+      "#0a0204"
+    ]
+  }
+}

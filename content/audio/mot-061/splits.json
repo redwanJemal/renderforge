@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Real leaders do not eat first. They\nmake sure everyone else is fed.",
+        "highlight": "everyone else is fed",
+        "entrance": "scaleIn",
+        "textSize": 56
+      },
+      {
+        "text": "Leadership is not about power. It is about responsibility. The best leaders create environments where people feel safe to take risks, speak up, and\ngrow. When you put your team first, they will run through walls for you. Not because they have to, but because they want to.",
+        "highlight": "responsibility",
+        "entrance": "slideUp",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "The test of leadership is not what happens when things are going well. It\nis what happens when everything falls apart. That is when real leaders show up.",
+        "highlight": "when everything falls apart",
+        "entrance": "fadeIn",
+        "textSize": 48
+      },
+      {
+        "text": "A title makes you a manager.\nYour behavior makes you a leader.",
+        "highlight": "behavior",
+        "entrance": "slideLeft",
+        "textSize": 52
+      },
+      {
+        "text": "Who is the best leader you have worked\nwith? Tag them. Follow for leadership wisdom.",
+        "entrance": "slam",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#06b6d4",
+    "bgGradient": [
+      "#0a1e2e",
+      "#051218",
+      "#020608"
+    ]
+  }
+}

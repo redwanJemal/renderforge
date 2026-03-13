@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "If it takes less than two minutes,\ndo it right now. No excuses.",
+        "highlight": "right now",
+        "entrance": "slam",
+        "textSize": 56
+      },
+      {
+        "text": "Procrastination feeds on momentum. The longer you wait, the harder it gets. But here is the hack. Almost every big task can be broken into a two-minute starting\npoint. Want to work out? Just put on your shoes. Want to write? Just open the document. Want to read? Just open the book to page one.",
+        "highlight": "two-minute starting point",
+        "entrance": "scaleIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "The hardest part of any task is the first two minutes. Once you start,\nthe momentum carries you. Your brain switches from resistance mode to flow mode.",
+        "highlight": "momentum carries you",
+        "entrance": "slideUp",
+        "textSize": 48
+      },
+      {
+        "text": "You do not need to feel ready. You\njust need to start. Starting is the strategy.",
+        "highlight": "Starting is the strategy",
+        "entrance": "fadeIn",
+        "textSize": 52
+      },
+      {
+        "text": "What have you been putting off? Do the\ntwo-minute version right now. Follow for productivity hacks.",
+        "entrance": "slideLeft",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#f59e0b",
+    "bgGradient": [
+      "#2a1a0a",
+      "#180f05",
+      "#0a0602"
+    ]
+  }
+}

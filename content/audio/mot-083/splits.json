@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Passion alone is a wildfire.\nPurpose gives it direction.",
+        "highlight": "direction",
+        "entrance": "fadeIn",
+        "textSize": 56
+      },
+      {
+        "text": "Passion is energy. Purpose is the channel that focuses that energy into results. Plenty of passionate people are broke and frustrated because their passion has no direction. Purpose\ntakes raw enthusiasm and turns it into impact. You do not just need to love what you do. You need to know who you are doing it for.",
+        "highlight": "channel that focuses",
+        "entrance": "slideLeft",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Ask yourself three questions. What do I love doing? What am I good at? What does the\nworld need? Where those three answers overlap is your purpose zone. That is where magic happens.",
+        "highlight": "purpose zone",
+        "entrance": "slam",
+        "textSize": 48
+      },
+      {
+        "text": "Find where your passion meets the world\nis pain. That is your purpose.",
+        "highlight": "passion meets the world is pain",
+        "entrance": "scaleIn",
+        "textSize": 52
+      },
+      {
+        "text": "Have you found your purpose zone? Share\nwhat it looks like. Follow for meaning.",
+        "entrance": "slideUp",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#ef4444",
+    "bgGradient": [
+      "#2a0a0a",
+      "#180505",
+      "#0a0202"
+    ]
+  }
+}

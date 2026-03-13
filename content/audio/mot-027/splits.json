@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Every no you have ever received was the\nuniverse clearing the path for a better yes.",
+        "highlight": "better yes",
+        "entrance": "slideUp",
+        "textSize": 56
+      },
+      {
+        "text": "The most successful people in history were rejected constantly. Oprah was fired from her first TV job. Steve Jobs was kicked out\nof his own company. J.K. Rowling was rejected by twelve publishers. Rejection did not stop them. It redirected them to something greater.",
+        "highlight": "redirected them",
+        "entrance": "fadeIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "When someone tells you no, they are not closing a door. They are pointing\nyou toward a door you had not seen yet. Rejection is data, not destiny.",
+        "highlight": "data, not destiny",
+        "entrance": "slideLeft",
+        "textSize": 48
+      },
+      {
+        "text": "Be so confident in your vision that\nrejection fuels you instead of stopping you.",
+        "highlight": "fuels you",
+        "entrance": "slam",
+        "textSize": 52
+      },
+      {
+        "text": "Share your biggest rejection that became\na blessing. Follow for resilience content.",
+        "entrance": "scaleIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#ef4444",
+    "bgGradient": [
+      "#2a0a0a",
+      "#180505",
+      "#0a0202"
+    ]
+  }
+}

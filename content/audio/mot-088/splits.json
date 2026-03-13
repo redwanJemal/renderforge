@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "When you focus on impact,\nincome becomes a byproduct.",
+        "highlight": "byproduct",
+        "entrance": "fadeIn",
+        "textSize": 56
+      },
+      {
+        "text": "The people who make the most money are the ones who help the most people. It is not complicated. Solve a problem for one person,\nearn a little. Solve it for a million people, become a millionaire. Impact is the engine. Income is the exhaust. Stop chasing the exhaust.",
+        "highlight": "help the most people",
+        "entrance": "slideLeft",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Ask yourself every day. How many lives did I touch today? How many problems did I solve?\nHow much value did I create? When those numbers go up, your bank account follows automatically.",
+        "highlight": "How many lives",
+        "entrance": "slam",
+        "textSize": 48
+      },
+      {
+        "text": "Serve a million people.\nThe money handles itself.",
+        "highlight": "Serve a million people",
+        "entrance": "scaleIn",
+        "textSize": 52
+      },
+      {
+        "text": "Whose life did you impact today?\nShare below. Follow for impact-first living.",
+        "entrance": "slideUp",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#14b8a6",
+    "bgGradient": [
+      "#0a2e28",
+      "#071a16",
+      "#020a08"
+    ]
+  }
+}

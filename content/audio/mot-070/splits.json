@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "The moment your ego walks\nin, your leadership walks out.",
+        "highlight": "leadership walks out",
+        "entrance": "slam",
+        "textSize": 56
+      },
+      {
+        "text": "Ego-driven leaders surround themselves with yes men. They take credit for wins and deflect blame for losses. They stop learning because they believe they\nalready know everything. And slowly, surely, they destroy the very thing they built. The best leaders are humble enough to learn, listen, and adapt.",
+        "highlight": "stop learning",
+        "entrance": "scaleIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Check your ego daily. Are you making decisions for the mission or for your pride? Are you listening to feedback or dismissing\nit? The strongest leaders are the ones humble enough to say I do not know but I will figure it out.",
+        "highlight": "Check your ego",
+        "entrance": "slideUp",
+        "textSize": 48
+      },
+      {
+        "text": "Humility is not thinking less of yourself.\nIt is thinking of yourself less.",
+        "highlight": "thinking of yourself less",
+        "entrance": "fadeIn",
+        "textSize": 52
+      },
+      {
+        "text": "How do you keep your ego in check?\nShare your method. Follow for humble leadership.",
+        "entrance": "slideLeft",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#f43f5e",
+    "bgGradient": [
+      "#2a0a14",
+      "#18050a",
+      "#0a0204"
+    ]
+  }
+}

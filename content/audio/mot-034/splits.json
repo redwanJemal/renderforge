@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Ideas are worthless. Execution is everything.",
+        "highlight": "Execution",
+        "entrance": "slideLeft",
+        "textSize": 56
+      },
+      {
+        "text": "Everybody has a million-dollar idea. Most people have had dozens. The difference between a dreamer and a millionaire is not the quality of the\nidea. It is the quality of the execution. While dreamers polish their plans, executors are already on version three, learning from real feedback.",
+        "highlight": "quality of the execution",
+        "entrance": "slam",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Speed of implementation is your biggest competitive advantage. The person who ships\nfirst learns first. And the person who learns first wins first.",
+        "highlight": "ships first learns first",
+        "entrance": "scaleIn",
+        "textSize": 48
+      },
+      {
+        "text": "Done is better than perfect. Shipped is\nbetter than sitting in your notes app.",
+        "highlight": "Done is better than perfect",
+        "entrance": "slideUp",
+        "textSize": 52
+      },
+      {
+        "text": "What idea have you been sitting on? Ship\nit this week. Follow for execution mindset.",
+        "entrance": "fadeIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#D4AF37",
+    "bgGradient": [
+      "#1a1500",
+      "#0f0d00",
+      "#050400"
+    ]
+  }
+}

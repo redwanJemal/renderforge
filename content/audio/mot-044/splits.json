@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "You always ask what if it\nfails. But what if it works?",
+        "highlight": "what if it works",
+        "entrance": "slideLeft",
+        "textSize": 56
+      },
+      {
+        "text": "Your brain is wired to focus on worst-case scenarios. That is biology. But what if you trained it to focus on best-case scenarios instead? What if the business succeeds? What\nif the relationship works? What if you are actually capable of everything you dream about? The possibility of success should excite you more than the possibility of failure scares you.",
+        "highlight": "best-case scenarios",
+        "entrance": "slam",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Before you talk yourself out of something, spend equal time imagining it working\nout. Most people never give success the same mental airtime they give failure.",
+        "highlight": "equal time imagining",
+        "entrance": "scaleIn",
+        "textSize": 48
+      },
+      {
+        "text": "Fear says what if you fall.\nFaith says what if you fly.",
+        "highlight": "what if you fly",
+        "entrance": "slideUp",
+        "textSize": 52
+      },
+      {
+        "text": "What would you do if you knew you could\nnot fail? Answer below. Follow for fearless thinking.",
+        "entrance": "fadeIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#a855f7",
+    "bgGradient": [
+      "#1a0a2e",
+      "#0f0518",
+      "#050208"
+    ]
+  }
+}

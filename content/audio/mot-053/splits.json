@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "If you wait until you are\nready, you will wait forever.",
+        "highlight": "wait forever",
+        "entrance": "fadeIn",
+        "textSize": 56
+      },
+      {
+        "text": "Ready is a myth. It is a word your brain uses to keep you safe. Nobody who built something great was ready when they started. Jeff Bezos started\nAmazon in his garage. Sara Blakely started Spanx with five thousand dollars and no business experience. They started with what they had, not what they wished they had.",
+        "highlight": "ready is a myth",
+        "entrance": "slideLeft",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "You have enough right now to begin. Not to finish. Just to begin.\nAnd beginning is the only thing standing between you and everything you want.",
+        "highlight": "enough right now to begin",
+        "entrance": "slam",
+        "textSize": 48
+      },
+      {
+        "text": "Start messy. Start scared.\nStart underfunded. Just start.",
+        "highlight": "Just start",
+        "entrance": "scaleIn",
+        "textSize": 52
+      },
+      {
+        "text": "What are you starting with? Share\nyour starting point. Follow for entrepreneurship.",
+        "entrance": "slideUp",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#06b6d4",
+    "bgGradient": [
+      "#0a1e2e",
+      "#051218",
+      "#020608"
+    ]
+  }
+}

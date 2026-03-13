@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Rock bottom is not the end. It is\nthe foundation you build your empire on.",
+        "highlight": "foundation",
+        "entrance": "fadeIn",
+        "textSize": 56
+      },
+      {
+        "text": "J.K. Rowling wrote Harry Potter while broke and depressed. Oprah was born into poverty and abuse. Jay-Z grew up in the projects. Rock\nbottom gave them something privilege never could. Hunger. Clarity. An unbreakable why. When you have nothing to lose, you have everything to gain.",
+        "highlight": "Hunger. Clarity.",
+        "entrance": "slideLeft",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "If you are at your lowest right now, listen carefully. This is not your ending. This\nis your origin story. Every hero story starts with a struggle. Yours is starting right now.",
+        "highlight": "origin story",
+        "entrance": "slam",
+        "textSize": 48
+      },
+      {
+        "text": "The foundation of your greatest success is\nbeing built in your hardest season.",
+        "highlight": "hardest season",
+        "entrance": "scaleIn",
+        "textSize": 52
+      },
+      {
+        "text": "If you came from the bottom, share\nyour story. Follow for comeback content.",
+        "entrance": "slideUp",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#22c55e",
+    "bgGradient": [
+      "#0a2e1a",
+      "#071a10",
+      "#020a05"
+    ]
+  }
+}

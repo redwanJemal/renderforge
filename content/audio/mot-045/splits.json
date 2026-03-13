@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Playing it safe is the\nriskiest thing you can do.",
+        "highlight": "riskiest thing",
+        "entrance": "slam",
+        "textSize": 56
+      },
+      {
+        "text": "The biggest risk is not taking any risk. In a world that changes fast, the only strategy guaranteed to fail is not taking risks. Every\nsuccessful entrepreneur, investor, and leader took calculated risks that terrified them. They did not eliminate the fear. They calculated the odds and moved anyway.",
+        "highlight": "biggest risk is not taking any",
+        "entrance": "scaleIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Risk does not mean being reckless. It means being strategic about which fears to face.\nCalculate the downside. If you can survive it, the upside is worth the bet.",
+        "highlight": "calculated risks",
+        "entrance": "slideUp",
+        "textSize": 48
+      },
+      {
+        "text": "Fortune favors the bold. Not the\nreckless, not the timid. The bold.",
+        "highlight": "Fortune favors the bold",
+        "entrance": "fadeIn",
+        "textSize": 52
+      },
+      {
+        "text": "What risk are you taking this year?\nShare your move. Follow for bold living.",
+        "entrance": "slideLeft",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#06b6d4",
+    "bgGradient": [
+      "#0a1e2e",
+      "#051218",
+      "#020608"
+    ]
+  }
+}

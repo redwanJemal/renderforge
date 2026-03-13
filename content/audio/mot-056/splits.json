@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Let your results make the\nnoise. Stop announcing your plans.",
+        "highlight": "results make the noise",
+        "entrance": "scaleIn",
+        "textSize": 56
+      },
+      {
+        "text": "Every time you share your goals, your brain gets a premature sense of accomplishment. Psychology calls it social reality. Your mind feels like the goal\nis already achieved just because you talked about it. That is why people who announce everything accomplish nothing. The talkers talk. The doers do.",
+        "highlight": "social reality",
+        "entrance": "slideUp",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Work in silence. Let them wonder what you are up to. One day they will ask what\nhappened and you will say I just stayed consistent while everyone was watching from the sidelines.",
+        "highlight": "Work in silence",
+        "entrance": "fadeIn",
+        "textSize": 48
+      },
+      {
+        "text": "Lions do not need to announce\nthey are lions. Neither do you.",
+        "highlight": "Lions",
+        "entrance": "slideLeft",
+        "textSize": 52
+      },
+      {
+        "text": "If you move in silence, double\ntap. Follow for quiet power.",
+        "entrance": "slam",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#14b8a6",
+    "bgGradient": [
+      "#0a2e28",
+      "#071a16",
+      "#020a08"
+    ]
+  }
+}

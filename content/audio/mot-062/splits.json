@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Having a vision is not enough. You need\nto build the bridge between vision and reality.",
+        "highlight": "build the bridge",
+        "entrance": "slideUp",
+        "textSize": 56
+      },
+      {
+        "text": "Thomas Edison said vision without execution is hallucination. A leader without action is just a dreamer with a title. Your team\ndoes not need more motivational speeches. They need to see you in the trenches, building, solving, and executing alongside them.",
+        "highlight": "hallucination",
+        "entrance": "fadeIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Cast the vision. Then roll up your sleeves and show people the way. The\nbest leaders do not point from the top. They lead from the front.",
+        "highlight": "lead from the front",
+        "entrance": "slideLeft",
+        "textSize": 48
+      },
+      {
+        "text": "Dream big. Plan bigger. Execute biggest.",
+        "highlight": "Execute biggest",
+        "entrance": "slam",
+        "textSize": 52
+      },
+      {
+        "text": "What is your vision? Share it below\nand start building. Follow for leadership.",
+        "entrance": "scaleIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#f43f5e",
+    "bgGradient": [
+      "#2a0a14",
+      "#18050a",
+      "#0a0204"
+    ]
+  }
+}

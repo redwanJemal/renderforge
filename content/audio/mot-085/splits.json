@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "The fact that this dream lives in your heart\nmeans you have the capacity to achieve it.",
+        "highlight": "capacity to achieve it",
+        "entrance": "slam",
+        "textSize": 56
+      },
+      {
+        "text": "Your desires are not accidents. The dream that keeps you up at night, the vision that will not leave your mind, the pull toward something greater. That\nis not random. You were given that dream because you are capable of achieving it. The universe does not plant seeds in soil that cannot grow them.",
+        "highlight": "capable of achieving it",
+        "entrance": "scaleIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Stop questioning whether you deserve it. Stop asking if you are worthy. You were built for\nthis. Every experience in your life, good and bad, was training you for this exact moment.",
+        "highlight": "training you",
+        "entrance": "slideUp",
+        "textSize": 48
+      },
+      {
+        "text": "You are not an accident. You\nare an assignment. Act like it.",
+        "highlight": "an assignment",
+        "entrance": "fadeIn",
+        "textSize": 52
+      },
+      {
+        "text": "What dream keeps you up at night? Speak\nit into existence below. Follow for purpose.",
+        "entrance": "slideLeft",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#06b6d4",
+    "bgGradient": [
+      "#0a1e2e",
+      "#051218",
+      "#020608"
+    ]
+  }
+}

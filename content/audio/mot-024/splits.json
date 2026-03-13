@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "If you feel like an imposter,\ncongratulations. You are in the arena.",
+        "highlight": "in the arena",
+        "entrance": "slideLeft",
+        "textSize": 56
+      },
+      {
+        "text": "Seventy percent of people experience imposter syndrome. That includes CEOs, doctors, and world-class athletes. The only people who never feel like imposters are\nthose who never try anything new. Imposter syndrome is not a sign of weakness. It is a sign that you are growing.",
+        "highlight": "Seventy percent",
+        "entrance": "slam",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "The cure is not more preparation. It is more exposure. You do not overcome imposter syndrome by\nstudying. You overcome it by doing the thing until the thing becomes part of who you are.",
+        "highlight": "more exposure",
+        "entrance": "scaleIn",
+        "textSize": 48
+      },
+      {
+        "text": "You do not need to feel qualified.\nYou just need to keep showing up.",
+        "highlight": "keep showing up",
+        "entrance": "slideUp",
+        "textSize": 52
+      },
+      {
+        "text": "Have you felt like an imposter? You are\nnot alone. Follow for real confidence tips.",
+        "entrance": "fadeIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#14b8a6",
+    "bgGradient": [
+      "#0a2e28",
+      "#071a16",
+      "#020a08"
+    ]
+  }
+}

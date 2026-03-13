@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "The words you speak become the house\nyou live in. Choose them carefully.",
+        "highlight": "the house you live in",
+        "entrance": "slam",
+        "textSize": 56
+      },
+      {
+        "text": "Self-talk is not just motivational fluff. Your subconscious mind processes every word you say about yourself as a command. When you say I am terrible\nwith money, your brain makes it true. When you say I am building wealth, your brain starts looking for ways to make that true.",
+        "highlight": "a command",
+        "entrance": "scaleIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Start every morning with three I am statements. I am capable. I am worthy. I am becoming the\nperson I was meant to be. Say them until you believe them. Then watch your life change.",
+        "highlight": "I am statements",
+        "entrance": "slideUp",
+        "textSize": 48
+      },
+      {
+        "text": "Your tongue is the pen. Your life is\nthe paper. Write a story worth living.",
+        "highlight": "story worth living",
+        "entrance": "fadeIn",
+        "textSize": 52
+      },
+      {
+        "text": "Drop your I am statement in\nthe comments. Follow for daily affirmations.",
+        "entrance": "slideLeft",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#22c55e",
+    "bgGradient": [
+      "#0a2e1a",
+      "#071a10",
+      "#020a05"
+    ]
+  }
+}

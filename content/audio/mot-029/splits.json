@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Eye contact is the fastest way\nto establish dominance, trust, and connection.",
+        "highlight": "dominance, trust, and connection",
+        "entrance": "slideLeft",
+        "textSize": 56
+      },
+      {
+        "text": "Most people break eye contact within three seconds. That is a subconscious signal of submission. When you hold eye contact for five to seven\nseconds, something shifts. People perceive you as more confident, more trustworthy, and more intelligent. It is the simplest upgrade with the biggest return.",
+        "highlight": "five to seven seconds",
+        "entrance": "slam",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Practice with strangers. When you order coffee, hold eye contact and smile. When someone speaks to\nyou, look them in the eye. It will feel uncomfortable at first. That discomfort is growth.",
+        "highlight": "discomfort is growth",
+        "entrance": "scaleIn",
+        "textSize": 48
+      },
+      {
+        "text": "The eyes are the windows to\nconfidence. Let people see your fire.",
+        "highlight": "see your fire",
+        "entrance": "slideUp",
+        "textSize": 52
+      },
+      {
+        "text": "Practice this today and let me know\nhow it goes. Follow for social confidence.",
+        "entrance": "fadeIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#06b6d4",
+    "bgGradient": [
+      "#0a1e2e",
+      "#051218",
+      "#020608"
+    ]
+  }
+}

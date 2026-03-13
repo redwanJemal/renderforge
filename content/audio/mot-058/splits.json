@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "The best investment you will ever make is\nnot stocks or crypto. It is you.",
+        "highlight": "It is you",
+        "entrance": "fadeIn",
+        "textSize": 56
+      },
+      {
+        "text": "Warren Buffett says the best investment is in your own abilities. Books, courses, mentors, experiences. These are not expenses. They are investments with infinite returns. A\ntwenty-dollar book can contain an idea that makes you a million dollars. A five-thousand dollar course can save you five years of trial and error.",
+        "highlight": "infinite returns",
+        "entrance": "slideLeft",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Set aside ten percent of your income for self-education. Not savings. Not bills. Self-improvement. The more valuable\nyou become, the more valuable your time becomes. The more valuable your time, the more money follows.",
+        "highlight": "ten percent",
+        "entrance": "slam",
+        "textSize": 48
+      },
+      {
+        "text": "You are the asset. Invest accordingly.",
+        "highlight": "You are the asset",
+        "entrance": "scaleIn",
+        "textSize": 52
+      },
+      {
+        "text": "What was the best investment you made in\nyourself? Share below. Follow for growth mindset.",
+        "entrance": "slideUp",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#D4AF37",
+    "bgGradient": [
+      "#1a1500",
+      "#0f0d00",
+      "#050400"
+    ]
+  }
+}

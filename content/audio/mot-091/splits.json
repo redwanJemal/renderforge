@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Stop chasing money. Start building\nsystems that attract it.",
+        "highlight": "systems",
+        "entrance": "scaleIn",
+        "textSize": 56
+      },
+      {
+        "text": "The biggest mistake people make is treating money as the destination. Money is a vehicle. It gets you from where you are to where you want to be. The\nquestion is not how do I make more money. The question is what value can I create that people will pay for. When you focus on value, money follows.",
+        "highlight": "vehicle",
+        "entrance": "slideUp",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Every dollar you earn is a direct reflection of the value you provide. Want to\nmake more? Become more valuable. Learn more skills. Solve bigger problems. Serve more people.",
+        "highlight": "Become more valuable",
+        "entrance": "fadeIn",
+        "textSize": 48
+      },
+      {
+        "text": "Money flows to value. Become valuable\nand you will never be broke.",
+        "highlight": "Money flows to value",
+        "entrance": "slideLeft",
+        "textSize": 52
+      },
+      {
+        "text": "What value do you bring to the\nmarket? Share below. Follow for wealth building.",
+        "entrance": "slam",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#ef4444",
+    "bgGradient": [
+      "#2a0a0a",
+      "#180505",
+      "#0a0202"
+    ]
+  }
+}

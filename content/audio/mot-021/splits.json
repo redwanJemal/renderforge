@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Nobody is born confident. Confidence is\na skill you build through reps.",
+        "highlight": "skill",
+        "entrance": "scaleIn",
+        "textSize": 56
+      },
+      {
+        "text": "Every confident person you admire was once terrified. They just did the thing anyway. Over and over and over. Confidence is not the absence of\nfear. It is the evidence that you have survived fear before. Every time you push through discomfort, you add another brick to your confidence wall.",
+        "highlight": "evidence",
+        "entrance": "slideUp",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Start small. Speak up in a meeting. Start a conversation with a stranger.\nPost that video. Each small act of courage compounds into unshakeable confidence.",
+        "highlight": "compounds",
+        "entrance": "fadeIn",
+        "textSize": 48
+      },
+      {
+        "text": "Confidence is not I will not fail.\nIt is I can handle whatever happens.",
+        "highlight": "I can handle",
+        "entrance": "slideLeft",
+        "textSize": 52
+      },
+      {
+        "text": "What is one brave thing you did this\nweek? Share below. Follow for confidence building.",
+        "entrance": "slam",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#06b6d4",
+    "bgGradient": [
+      "#0a1e2e",
+      "#051218",
+      "#020608"
+    ]
+  }
+}

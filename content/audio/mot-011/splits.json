@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Stop waiting for motivation. It is\nnot coming to save you.",
+        "highlight": "not coming",
+        "entrance": "scaleIn",
+        "textSize": 56
+      },
+      {
+        "text": "Motivation is an emotion. And emotions are unreliable. You will never feel like waking up early. You will never feel like working out at\nfive AM. You will never feel like putting in extra hours. The people who win do not have more motivation. They have more discipline.",
+        "highlight": "more discipline",
+        "entrance": "slideUp",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Discipline is doing the thing when you do not feel like doing the thing.\nThat is literally the entire secret. There is no hack. There is no shortcut.",
+        "highlight": "entire secret",
+        "entrance": "fadeIn",
+        "textSize": 48
+      },
+      {
+        "text": "Discipline is choosing between what you want\nnow and what you want most.",
+        "highlight": "what you want most",
+        "entrance": "slideLeft",
+        "textSize": 52
+      },
+      {
+        "text": "If discipline is your superpower, drop a\nfire emoji. Follow for daily discipline.",
+        "entrance": "slam",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#ef4444",
+    "bgGradient": [
+      "#2a0a0a",
+      "#180505",
+      "#0a0202"
+    ]
+  }
+}

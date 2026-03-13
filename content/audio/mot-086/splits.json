@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Chase meaning and money follows.\nChase money and meaning escapes.",
+        "highlight": "money follows",
+        "entrance": "scaleIn",
+        "textSize": 56
+      },
+      {
+        "text": "The happiest billionaires are not the ones with the biggest yachts. They are the ones solving the biggest problems. When your work has meaning, you never\nwork a day in your life. When your work is just for money, every day feels like prison. Purpose-driven people outperform profit-driven people every single time.",
+        "highlight": "solving the biggest problems",
+        "entrance": "slideUp",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Find work that matters to you. Not work that pays well but leaves you empty.\nMoney without meaning is a golden cage. You can buy everything but feel nothing.",
+        "highlight": "work that matters",
+        "entrance": "fadeIn",
+        "textSize": 48
+      },
+      {
+        "text": "Rich is not a number. It is a\nfeeling. And that feeling comes from purpose.",
+        "highlight": "feeling comes from purpose",
+        "entrance": "slideLeft",
+        "textSize": 52
+      },
+      {
+        "text": "Does your work give you meaning? Real\nanswers only. Follow for purposeful wealth.",
+        "entrance": "slam",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#f43f5e",
+    "bgGradient": [
+      "#2a0a14",
+      "#18050a",
+      "#0a0204"
+    ]
+  }
+}

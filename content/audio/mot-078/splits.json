@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "No storm lasts forever. But the strength\nyou build during the storm does.",
+        "highlight": "strength you build",
+        "entrance": "fadeIn",
+        "textSize": 56
+      },
+      {
+        "text": "When you are in the middle of chaos, it feels like it will never end. But go back through your life. Every difficult period ended. Every crisis resolved.\nEvery dark night gave way to morning. This too shall pass. But the lessons, the strength, the character you build right now, those stay with you forever.",
+        "highlight": "This too shall pass",
+        "entrance": "slideLeft",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Do not just survive the storm. Study it. Find patterns. Build shelter. Prepare for the next one. The\ngoal is not to avoid storms. It is to become the person who is unshakable when they come.",
+        "highlight": "unshakable",
+        "entrance": "slam",
+        "textSize": 48
+      },
+      {
+        "text": "Tough times do not\nlast. Tough people do.",
+        "highlight": "Tough people do",
+        "entrance": "scaleIn",
+        "textSize": 52
+      },
+      {
+        "text": "What storm are you weathering right now? You\nare not alone. Follow for daily strength.",
+        "entrance": "slideUp",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#f43f5e",
+    "bgGradient": [
+      "#2a0a14",
+      "#18050a",
+      "#0a0204"
+    ]
+  }
+}

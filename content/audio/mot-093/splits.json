@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Debt does not buy you things. It\nmakes you a servant to the lender.",
+        "highlight": "servant to the lender",
+        "entrance": "fadeIn",
+        "textSize": 56
+      },
+      {
+        "text": "Consumer debt is designed to keep you working forever. That car payment. That credit card. That buy now pay later scheme. Every monthly payment is a chain that ties you\nto a job you might not love. The interest alone means you are paying two, three, sometimes four times the original price. That is not smart. That is a trap.",
+        "highlight": "keep you working forever",
+        "entrance": "slideLeft",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Attack your debt like your freedom depends on it, because it does. Use the avalanche method. Pay\nminimums on everything and throw every extra dollar at the highest interest debt. Repeat until free.",
+        "highlight": "avalanche method",
+        "entrance": "slam",
+        "textSize": 48
+      },
+      {
+        "text": "Debt-free is the new rich. Cut\nthe chains and build real wealth.",
+        "highlight": "Debt-free is the new rich",
+        "entrance": "scaleIn",
+        "textSize": 52
+      },
+      {
+        "text": "What is your debt freedom plan?\nShare below. Follow for financial literacy.",
+        "entrance": "slideUp",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#06b6d4",
+    "bgGradient": [
+      "#0a1e2e",
+      "#051218",
+      "#020608"
+    ]
+  }
+}

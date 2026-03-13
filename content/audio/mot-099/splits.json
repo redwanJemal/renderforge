@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Your earning potential is the most\nimportant financial asset you have.",
+        "highlight": "most important financial asset",
+        "entrance": "slideLeft",
+        "textSize": 56
+      },
+      {
+        "text": "Everyone talks about investing and cutting expenses. But the fastest way to build wealth is to dramatically increase your income. A penny saved is a penny earned,\nbut a dollar earned has unlimited upside. Negotiate that raise. Get that certification. Start that side business. Every dollar of additional income accelerates your wealth building exponentially.",
+        "highlight": "dramatically increase your income",
+        "entrance": "slam",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Focus eighty percent of your energy on earning more and twenty percent on spending less. You\ncan only cut so many expenses, but there is no ceiling on what you can earn.",
+        "highlight": "eighty percent",
+        "entrance": "scaleIn",
+        "textSize": 48
+      },
+      {
+        "text": "Frugality has a floor. Income has\nno ceiling. Focus on the ceiling.",
+        "highlight": "no ceiling",
+        "entrance": "slideUp",
+        "textSize": 52
+      },
+      {
+        "text": "What is your income growth plan this\nyear? Share below. Follow for wealth acceleration.",
+        "entrance": "fadeIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#ef4444",
+    "bgGradient": [
+      "#2a0a0a",
+      "#180505",
+      "#0a0202"
+    ]
+  }
+}

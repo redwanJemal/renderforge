@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Without an emergency fund, you are always\none bad month away from disaster.",
+        "highlight": "one bad month",
+        "entrance": "fadeIn",
+        "textSize": 56
+      },
+      {
+        "text": "Before you invest, before you start a business, before you do anything, build a three to six month emergency fund. This is your financial foundation. It\nis what keeps you from spiraling into debt when the car breaks down, when you lose your job, or when life happens. And life always happens.",
+        "highlight": "three to six month",
+        "entrance": "slideLeft",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Start small. Save one month of expenses first. Then two. Then three. Keep it in a high-yield savings\naccount where it is accessible but separate from your spending money. This is your peace of mind fund.",
+        "highlight": "Start small",
+        "entrance": "slam",
+        "textSize": 48
+      },
+      {
+        "text": "An emergency fund is not a luxury.\nIt is the foundation of financial sanity.",
+        "highlight": "financial sanity",
+        "entrance": "scaleIn",
+        "textSize": 52
+      },
+      {
+        "text": "How many months of expenses do you have saved?\nNo shame, just awareness. Follow for money basics.",
+        "entrance": "slideUp",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#D4AF37",
+    "bgGradient": [
+      "#1a1500",
+      "#0f0d00",
+      "#050400"
+    ]
+  }
+}

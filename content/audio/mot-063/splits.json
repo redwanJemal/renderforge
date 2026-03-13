@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "The greatest leaders never have to\ndemand respect. They earn it.",
+        "highlight": "earn it",
+        "entrance": "fadeIn",
+        "textSize": 56
+      },
+      {
+        "text": "Authority is given by position. Influence is earned by character. You can force compliance but you cannot force commitment. People follow authoritative leaders because they\nmust. People follow influential leaders because they believe. The difference shows up in the quality of the work and the loyalty of the team.",
+        "highlight": "Influence is earned",
+        "entrance": "slideLeft",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Build influence through consistency, empathy, and competence. Show up every day. Listen more than you speak. Deliver\non your promises. That is how you earn the kind of respect that no title can buy.",
+        "highlight": "consistency, empathy, and competence",
+        "entrance": "slam",
+        "textSize": 48
+      },
+      {
+        "text": "People do not follow\ntitles. They follow trust.",
+        "highlight": "follow trust",
+        "entrance": "scaleIn",
+        "textSize": 52
+      },
+      {
+        "text": "How do you earn trust with your\nteam? Share your approach. Follow for influence.",
+        "entrance": "slideUp",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#f59e0b",
+    "bgGradient": [
+      "#2a1a0a",
+      "#180f05",
+      "#0a0602"
+    ]
+  }
+}

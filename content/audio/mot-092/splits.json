@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "If you do not pay yourself first, everyone\nelse will be paid with your money.",
+        "highlight": "Pay yourself first",
+        "entrance": "slideUp",
+        "textSize": 56
+      },
+      {
+        "text": "The richest man in Babylon taught this principle thousands of years ago. Before you pay rent, before you buy food, before you pay any bill, set aside at least ten percent for yourself.\nNot to spend. To invest. This is the seed of every fortune ever built. Most people pay everyone else first and save whatever is left. The problem is nothing is ever left.",
+        "highlight": "ten percent",
+        "entrance": "fadeIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Automate it. Set up an automatic transfer the day you get paid. Make it invisible. If you never\nsee the money, you will never miss it. In one year, you will be shocked at what accumulates.",
+        "highlight": "Automate it",
+        "entrance": "slideLeft",
+        "textSize": 48
+      },
+      {
+        "text": "Save like a pessimist. Invest like\nan optimist. That is the formula.",
+        "highlight": "Save like a pessimist",
+        "entrance": "slam",
+        "textSize": 52
+      },
+      {
+        "text": "Do you pay yourself first? Start\nthis month. Follow for financial freedom.",
+        "entrance": "scaleIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#a855f7",
+    "bgGradient": [
+      "#1a0a2e",
+      "#0f0518",
+      "#050208"
+    ]
+  }
+}

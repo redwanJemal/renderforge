@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Success is not a mystery. It is\na system. And the blueprint is everywhere.",
+        "highlight": "system",
+        "entrance": "scaleIn",
+        "textSize": 56
+      },
+      {
+        "text": "Every successful person you admire followed a pattern. They studied the game. They found mentors. They failed forward. They stayed consistent\nwhen everyone else quit. Success is not about luck or talent. It is about systems, habits, and relentless execution over time.",
+        "highlight": "relentless execution",
+        "entrance": "slideUp",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Stop trying to reinvent the wheel. Find someone who has what you want. Study what they did. Model their\nbehavior. Adapt it to your life. The fastest path to success is following someone who already walked it.",
+        "highlight": "Model their behavior",
+        "entrance": "fadeIn",
+        "textSize": 48
+      },
+      {
+        "text": "Success is not about being the best.\nIt is about being the most consistent.",
+        "highlight": "most consistent",
+        "entrance": "slideLeft",
+        "textSize": 52
+      },
+      {
+        "text": "Who do you study for success?\nTag them. Follow for success strategies.",
+        "entrance": "slam",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#f59e0b",
+    "bgGradient": [
+      "#2a1a0a",
+      "#180f05",
+      "#0a0602"
+    ]
+  }
+}

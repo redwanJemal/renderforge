@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "The most dangerous thing you can do is\nchase someone else is definition of success.",
+        "highlight": "definition of success",
+        "entrance": "fadeIn",
+        "textSize": 56
+      },
+      {
+        "text": "Society says success is a mansion, a sports car, and a million followers. But what if your version of success is time freedom? What if it is being\npresent for your kids? What if it is building something meaningful that outlives you? Until you define success for yourself, you will always feel like you are losing.",
+        "highlight": "define success for yourself",
+        "entrance": "slideLeft",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Sit down and write your own definition. Not your parents version. Not Instagram is version.\nYours. When you know what winning looks like for you, the game changes completely.",
+        "highlight": "your own definition",
+        "entrance": "slam",
+        "textSize": 48
+      },
+      {
+        "text": "Success without fulfillment is\nthe ultimate failure.",
+        "highlight": "ultimate failure",
+        "entrance": "scaleIn",
+        "textSize": 52
+      },
+      {
+        "text": "What does success mean to you? Real\nanswers only. Follow for purposeful living.",
+        "entrance": "slideUp",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#22c55e",
+    "bgGradient": [
+      "#0a2e1a",
+      "#071a10",
+      "#020a05"
+    ]
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Poverty is not about your bank account. It\nis a mindset that keeps you broke.",
+        "highlight": "mindset",
+        "entrance": "scaleIn",
+        "textSize": 56
+      },
+      {
+        "text": "Rich people and poor people do not think differently because of money. They have different money because they think differently. A poverty\nmindset says I cannot afford it. A wealth mindset says how can I afford it. One closes doors. The other opens them.",
+        "highlight": "think differently",
+        "entrance": "slideUp",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "When you believe money is scarce, you hoard it. When you believe money\nis abundant, you invest it. The belief comes first. The bank account follows.",
+        "highlight": "abundant",
+        "entrance": "fadeIn",
+        "textSize": 48
+      },
+      {
+        "text": "Change your money story.\nChange your money reality.",
+        "highlight": "money story",
+        "entrance": "slideLeft",
+        "textSize": 52
+      },
+      {
+        "text": "If this shifted your perspective, share\nit. Follow for wealth mindset daily.",
+        "entrance": "slam",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#f43f5e",
+    "bgGradient": [
+      "#2a0a14",
+      "#18050a",
+      "#0a0204"
+    ]
+  }
+}

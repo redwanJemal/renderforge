@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "You are going to suffer either way.\nChoose the suffering that builds you.",
+        "highlight": "builds you",
+        "entrance": "scaleIn",
+        "textSize": 56
+      },
+      {
+        "text": "The pain of discipline weighs ounces. The pain of regret weighs tons. You can either choose the temporary discomfort of doing the hard\nthing now, or you can choose the permanent regret of never trying. Both hurt. Only one of them leads somewhere worth going.",
+        "highlight": "weighs tons",
+        "entrance": "slideUp",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Every time you skip the gym, eat the junk food, or hit snooze, you are choosing\nthe pain of regret over the pain of discipline. You are borrowing from your future self.",
+        "highlight": "borrowing from your future self",
+        "entrance": "fadeIn",
+        "textSize": 48
+      },
+      {
+        "text": "Suffer the pain of discipline or suffer\nthe pain of regret. You pick.",
+        "highlight": "You pick",
+        "entrance": "slideLeft",
+        "textSize": 52
+      },
+      {
+        "text": "Which pain are you choosing today?\nComment below. Follow for hard truths.",
+        "entrance": "slam",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#14b8a6",
+    "bgGradient": [
+      "#0a2e28",
+      "#071a16",
+      "#020a08"
+    ]
+  }
+}

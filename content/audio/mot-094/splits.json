@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "The wealth gap is not about\nincome. It is about assets.",
+        "highlight": "assets",
+        "entrance": "slideLeft",
+        "textSize": 56
+      },
+      {
+        "text": "Poor people buy liabilities they think are assets. Rich people buy assets that generate income. A car is a liability. A rental property is an asset. Designer clothes\nare liabilities. A business is an asset. The wealthy understand one simple rule. Buy things that make you money before you buy things that cost you money.",
+        "highlight": "buy assets that generate income",
+        "entrance": "slam",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Look at your last ten purchases. How many of them are making you money right now? If the answer\nis zero, you are playing the wrong game. Every dollar should be a soldier that works for you.",
+        "highlight": "every dollar should be a soldier",
+        "entrance": "scaleIn",
+        "textSize": 48
+      },
+      {
+        "text": "Assets feed you. Liabilities eat\nyou. Know the difference.",
+        "highlight": "Know the difference",
+        "entrance": "slideUp",
+        "textSize": 52
+      },
+      {
+        "text": "What was your last asset purchase?\nShare below. Follow for financial intelligence.",
+        "entrance": "fadeIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#f43f5e",
+    "bgGradient": [
+      "#2a0a14",
+      "#18050a",
+      "#0a0204"
+    ]
+  }
+}

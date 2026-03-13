@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "They did not teach you about money\nin school. That was on purpose.",
+        "highlight": "on purpose",
+        "entrance": "slideUp",
+        "textSize": 56
+      },
+      {
+        "text": "The system is designed to produce good employees, not financially free people. They teach you algebra but not how to file taxes. They teach you history but not how to\nbuild credit. They teach you to work for money but not how to make money work for you. Financial illiteracy is the most expensive problem you will ever have.",
+        "highlight": "make money work for you",
+        "entrance": "fadeIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Take your financial education into your own hands. Read one book about money every month. Learn about\ntaxes, investing, credit, and cash flow. The knowledge is free. The cost of ignorance is everything.",
+        "highlight": "one book about money",
+        "entrance": "slideLeft",
+        "textSize": 48
+      },
+      {
+        "text": "Financial literacy is not optional. It is\nthe difference between freedom and chains.",
+        "highlight": "freedom and chains",
+        "entrance": "slam",
+        "textSize": 52
+      },
+      {
+        "text": "What money book changed your life? Drop\nit below. Follow for financial education.",
+        "entrance": "scaleIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#22c55e",
+    "bgGradient": [
+      "#0a2e1a",
+      "#071a10",
+      "#020a05"
+    ]
+  }
+}

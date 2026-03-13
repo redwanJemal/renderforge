@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Successful people do not react. They\nrespond. There is a massive difference.",
+        "highlight": "respond",
+        "entrance": "slam",
+        "textSize": 56
+      },
+      {
+        "text": "Reacting is emotional. Responding is strategic. A chess player does not move the first piece they touch. They see five moves\nahead. Most people play checkers with their life. One move at a time, no strategy, just survival. Start playing chess.",
+        "highlight": "five moves ahead",
+        "entrance": "scaleIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Before you make any decision, ask yourself three questions. What happens if I do this? What\nhappens if I do not? What will I wish I had done in five years?",
+        "highlight": "three questions",
+        "entrance": "slideUp",
+        "textSize": 48
+      },
+      {
+        "text": "Think long game. Play long\ngame. Win long game.",
+        "highlight": "long game",
+        "entrance": "fadeIn",
+        "textSize": 52
+      },
+      {
+        "text": "Save this for your next big\ndecision. Follow for strategic thinking daily.",
+        "entrance": "slideLeft",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#D4AF37",
+    "bgGradient": [
+      "#1a1500",
+      "#0f0d00",
+      "#050400"
+    ]
+  }
+}

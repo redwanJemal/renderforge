@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "You cannot have a million-dollar dream\nwith a minimum-wage work ethic.",
+        "highlight": "minimum-wage work ethic",
+        "entrance": "scaleIn",
+        "textSize": 56
+      },
+      {
+        "text": "Look at your daily schedule. Where are the hours going? If you spend more time on entertainment than education, more time consuming than\ncreating, more time complaining than building, your results will reflect exactly that. Your calendar does not lie. It shows your real priorities.",
+        "highlight": "calendar does not lie",
+        "entrance": "slideUp",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Something has to go. Maybe it is Netflix. Maybe it is toxic friendships. Maybe it is the three hours of scrolling.\nWhatever it is, until you sacrifice what is good for what is great, you will stay exactly where you are.",
+        "highlight": "sacrifice what is good",
+        "entrance": "fadeIn",
+        "textSize": 48
+      },
+      {
+        "text": "Your results are a mirror of your\nsacrifices. Look in the mirror honestly.",
+        "highlight": "mirror of your sacrifices",
+        "entrance": "slideLeft",
+        "textSize": 52
+      },
+      {
+        "text": "What are you willing to sacrifice this month?\nComment your commitment. Follow for real success.",
+        "entrance": "slam",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#a855f7",
+    "bgGradient": [
+      "#1a0a2e",
+      "#0f0518",
+      "#050208"
+    ]
+  }
+}

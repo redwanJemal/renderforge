@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Every problem you face is\na business opportunity in disguise.",
+        "highlight": "business opportunity",
+        "entrance": "slideUp",
+        "textSize": 56
+      },
+      {
+        "text": "The best businesses in the world were born from frustration. Uber exists because Travis Kalanick could not get a cab. Airbnb exists because two guys could not\nafford rent. Every time you are frustrated by something, write it down. That frustration is a market signal telling you what people will pay to solve.",
+        "highlight": "born from frustration",
+        "entrance": "fadeIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Stop consuming problems and start solving them. The person who solves a problem for one million\npeople becomes a millionaire. It is that simple. Find the pain point and build the painkiller.",
+        "highlight": "build the painkiller",
+        "entrance": "slideLeft",
+        "textSize": 48
+      },
+      {
+        "text": "Entrepreneurs do not avoid\nproblems. They monetize them.",
+        "highlight": "monetize them",
+        "entrance": "slam",
+        "textSize": 52
+      },
+      {
+        "text": "What problem do you wish someone would solve? Maybe\nyou should build it. Follow for business ideas.",
+        "entrance": "scaleIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#22c55e",
+    "bgGradient": [
+      "#0a2e1a",
+      "#071a10",
+      "#020a05"
+    ]
+  }
+}

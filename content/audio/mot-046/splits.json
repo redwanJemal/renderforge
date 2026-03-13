@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "The people judging you are not living the\nlife you want. So why do you care?",
+        "highlight": "why do you care",
+        "entrance": "scaleIn",
+        "textSize": 56
+      },
+      {
+        "text": "Fear of judgment keeps more people stuck than fear of failure. You do not start the business because of what people might say. You do not post\nthe content because of what people might think. But here is the truth. People are too busy worrying about their own lives to spend time judging yours.",
+        "highlight": "too busy worrying",
+        "entrance": "slideUp",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "The opinions of people who are not where you want to be are irrelevant. Would you take financial advice from\nsomeone who is broke? Then stop taking life advice from people who are not living the life you want.",
+        "highlight": "irrelevant",
+        "entrance": "fadeIn",
+        "textSize": 48
+      },
+      {
+        "text": "What other people think of you is none\nof your business. Focus on the mission.",
+        "highlight": "none of your business",
+        "entrance": "slideLeft",
+        "textSize": 52
+      },
+      {
+        "text": "Drop a fire emoji if you have\nstopped caring about haters. Follow for freedom.",
+        "entrance": "slam",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#f43f5e",
+    "bgGradient": [
+      "#2a0a14",
+      "#18050a",
+      "#0a0204"
+    ]
+  }
+}

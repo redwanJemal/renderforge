@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "The world is divided into creators\nand consumers. Which one are you?",
+        "highlight": "Which one are you",
+        "entrance": "slam",
+        "textSize": 56
+      },
+      {
+        "text": "Consumers watch. Creators build. Consumers react. Creators initiate. Consumers spend their time making other people rich by consuming their content, buying\ntheir products, and following their dreams. Creators spend their time building their own dreams and inviting others along for the ride.",
+        "highlight": "making other people rich",
+        "entrance": "scaleIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Today, decide to create something. Write a post. Record a video. Build a product. Start a project. Even\nif it is imperfect. The act of creation activates a part of your brain that consumption never will.",
+        "highlight": "decide to create something",
+        "entrance": "slideUp",
+        "textSize": 48
+      },
+      {
+        "text": "You were born to create, not\nto spectate. Get in the game.",
+        "highlight": "born to create",
+        "entrance": "fadeIn",
+        "textSize": 52
+      },
+      {
+        "text": "What did you create today? Share\nbelow. Follow for the creator mindset.",
+        "entrance": "slideLeft",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#D4AF37",
+    "bgGradient": [
+      "#1a1500",
+      "#0f0d00",
+      "#050400"
+    ]
+  }
+}

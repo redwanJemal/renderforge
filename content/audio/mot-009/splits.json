@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Gratitude is not soft. It is the\nmost powerful weapon in your mental arsenal.",
+        "highlight": "weapon",
+        "entrance": "slideLeft",
+        "textSize": 56
+      },
+      {
+        "text": "Studies show that practicing gratitude rewires your brain for abundance. When you focus on what you have, your brain starts noticing more\nopportunities. When you focus on what you lack, your brain filters out possibilities. It is not positive thinking. It is strategic thinking.",
+        "highlight": "rewires your brain",
+        "entrance": "slam",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Write down three things you are grateful for every morning. Do\nit for thirty days. Your entire perspective on life will transform.",
+        "highlight": "thirty days",
+        "entrance": "scaleIn",
+        "textSize": 48
+      },
+      {
+        "text": "Grateful people are not grateful because life is\nperfect. Life feels perfect because they are grateful.",
+        "highlight": "Grateful people",
+        "entrance": "slideUp",
+        "textSize": 52
+      },
+      {
+        "text": "Drop three things you are grateful for\nin the comments. Follow for mindset mastery.",
+        "entrance": "fadeIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#22c55e",
+    "bgGradient": [
+      "#0a2e1a",
+      "#071a10",
+      "#020a05"
+    ]
+  }
+}

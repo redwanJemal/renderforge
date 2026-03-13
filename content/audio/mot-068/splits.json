@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Micromanagement is not leadership. It\nis insecurity disguised as diligence.",
+        "highlight": "insecurity",
+        "entrance": "fadeIn",
+        "textSize": 56
+      },
+      {
+        "text": "When you micromanage, you send a clear message. I do not trust you. That message destroys morale, kills creativity, and drives talent away. The\nbest leaders hire great people and then get out of their way. They provide direction, resources, and support. Then they trust the process.",
+        "highlight": "I do not trust you",
+        "entrance": "slideLeft",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Your job is not to control every detail. Your job is to set the vision, remove obstacles, and coach your\nteam to greatness. If you have to oversee every detail, you hired the wrong people or you are the bottleneck.",
+        "highlight": "you are the bottleneck",
+        "entrance": "slam",
+        "textSize": 48
+      },
+      {
+        "text": "Empower people to make decisions. That is\nhow you scale yourself and your impact.",
+        "highlight": "scale yourself",
+        "entrance": "scaleIn",
+        "textSize": 52
+      },
+      {
+        "text": "Are you a leader or a controller?\nBe honest. Follow for empowerment leadership.",
+        "entrance": "slideUp",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#a855f7",
+    "bgGradient": [
+      "#1a0a2e",
+      "#0f0518",
+      "#050208"
+    ]
+  }
+}

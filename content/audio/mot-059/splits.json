@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Employees trade time for money. Entrepreneurs build\nsystems that trade value for money.",
+        "highlight": "systems",
+        "entrance": "slideLeft",
+        "textSize": 56
+      },
+      {
+        "text": "An employee mindset says how can I get more hours. An entrepreneur mindset says how can I create more value. When you shift from selling your\ntime to selling solutions, everything changes. Time is limited. Value is unlimited. One YouTube video can earn money while you sleep for the next ten years.",
+        "highlight": "selling solutions",
+        "entrance": "slam",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Start thinking in assets, not paychecks. What can you build once that pays you repeatedly? A\ncourse. An app. A brand. A system. That is how you escape the time-for-money trap.",
+        "highlight": "assets, not paychecks",
+        "entrance": "scaleIn",
+        "textSize": 48
+      },
+      {
+        "text": "Build the machine that makes money while\nyou sleep. That is real wealth.",
+        "highlight": "real wealth",
+        "entrance": "slideUp",
+        "textSize": 52
+      },
+      {
+        "text": "What asset are you building? Share\nyour vision. Follow for entrepreneur content.",
+        "entrance": "fadeIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#ef4444",
+    "bgGradient": [
+      "#2a0a0a",
+      "#180505",
+      "#0a0202"
+    ]
+  }
+}

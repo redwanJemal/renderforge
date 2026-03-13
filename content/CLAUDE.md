@@ -38,6 +38,8 @@ Orchestrated by `render-from-bucket.ts`.
 | `audio-split.ts` | Split full.wav into segments via ffmpeg | `npx tsx content/audio-split.ts --dir content/audio/motivation1` |
 | `bgm-mix.ts` | Mix background music into rendered video | `npx tsx content/bgm-mix.ts --video out.mp4 --bgm bgm.mp3` |
 | `render-from-bucket.ts` | Full pipeline: MinIO → split → render → upload | `npx tsx content/render-from-bucket.ts --key motivation1.wav --niche motivational` |
+| `generate-motivational.ts` | Generate 100 motivational scripts + splits.json | `npx tsx content/generate-motivational.ts` |
+| `batch-render-motivational.ts` | Batch render all motivational posts | `npx tsx content/batch-render-motivational.ts --resume` |
 
 ## Universal Pipeline (New)
 
@@ -69,6 +71,38 @@ Maps content niches to templates, voices, and prop mappings:
 ### Voice Registry (voices.json)
 Unified voice definitions with reference audio paths, transcripts, and niche tags.
 Used by both the TypeScript pipeline and the Colab TTS notebook.
+
+## Motivational Batch Pipeline (100 TikTok Videos)
+
+```
+generate-motivational.ts → scripts-motivational.json + 100x splits.json
+     ↓ (user runs Colab TTS, uploads full.wav to MinIO)
+batch-render-motivational.ts → download → split → render → BGM → upload
+```
+
+### generate-motivational.ts
+Generates 100 motivational posts (10 themes × 10 posts) with TTS scripts and render props:
+```bash
+npx tsx content/generate-motivational.ts              # all 100
+npx tsx content/generate-motivational.ts --limit 5    # first 5
+npx tsx content/generate-motivational.ts --dry-run    # preview only
+```
+- Output: `scripts-motivational.json` (for Colab TTS) + `content/audio/mot-XXX/splits.json` (render props)
+- Themes: mindset, discipline, confidence, success, fear, hustle, leadership, resilience, purpose, money
+
+### batch-render-motivational.ts
+Batch orchestrator for rendering all posts after TTS audio is on MinIO:
+```bash
+npx tsx content/batch-render-motivational.ts                      # all
+npx tsx content/batch-render-motivational.ts --start 1 --end 50   # range
+npx tsx content/batch-render-motivational.ts --post mot-042       # single
+npx tsx content/batch-render-motivational.ts --resume              # skip done
+npx tsx content/batch-render-motivational.ts --local --skip-upload # local only
+```
+- Progress tracked in `batch-progress.json`
+- Timestamps estimated from word count if Colab doesn't provide `timestamps.json`
+- BGM rotates through 5 tracks in `content/audio/bgm/motivational/`
+- MinIO convention: upload `full.wav` to `motivational/mot-XXX/full.wav`
 
 ## Legacy Audio Sync
 

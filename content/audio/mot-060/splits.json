@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Being broke is a situation. Being\npoor is a state of mind.",
+        "highlight": "state of mind",
+        "entrance": "slam",
+        "textSize": 56
+      },
+      {
+        "text": "There is a massive difference between broke and poor. Broke means your bank account is empty right now. Poor means your mind is empty of\nideas. Broke people know they are passing through. Poor people believe they are stuck forever. One is a circumstance. The other is a belief system.",
+        "highlight": "empty of ideas",
+        "entrance": "scaleIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "If you are broke right now, good. Use that hunger. Let that empty bank account fuel your fire. Some of the\nwealthiest people in the world started with nothing. Not because they had advantages, but because they had the right mindset.",
+        "highlight": "Use that hunger",
+        "entrance": "slideUp",
+        "textSize": 48
+      },
+      {
+        "text": "Your bank account does not\ndefine you. Your mindset does.",
+        "highlight": "mindset does",
+        "entrance": "fadeIn",
+        "textSize": 52
+      },
+      {
+        "text": "If you turned broke into motivation, share\nyour story. Follow for wealth mindset.",
+        "entrance": "slideLeft",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#a855f7",
+    "bgGradient": [
+      "#1a0a2e",
+      "#0f0518",
+      "#050208"
+    ]
+  }
+}

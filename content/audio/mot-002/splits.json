@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "While the world sleeps, winners\nare already making moves.",
+        "highlight": "winners",
+        "entrance": "slideUp",
+        "textSize": 56
+      },
+      {
+        "text": "The first hour of your day determines the next twenty-three. Most people wake up in reaction mode. Checking phones, reading bad news, absorbing negativity before\ntheir feet hit the floor. Champions wake up in creation mode. They create their day before the world tries to create it for them.",
+        "highlight": "creation mode",
+        "entrance": "fadeIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "It is not about waking up early. It is about waking up intentionally. Five\nAM with no plan is just insomnia. Five AM with purpose is a weapon.",
+        "highlight": "purpose is a weapon",
+        "entrance": "slideLeft",
+        "textSize": 48
+      },
+      {
+        "text": "Own your morning. Own your life. The\ndiscipline starts before the sun rises.",
+        "highlight": "Own your morning",
+        "entrance": "slam",
+        "textSize": 52
+      },
+      {
+        "text": "Double tap if you are ready to own\nyour mornings. Follow for more mindset fuel.",
+        "entrance": "scaleIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#D4AF37",
+    "bgGradient": [
+      "#1a1500",
+      "#0f0d00",
+      "#050400"
+    ]
+  }
+}

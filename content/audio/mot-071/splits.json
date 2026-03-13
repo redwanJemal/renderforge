@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Every single bad day you have ever had,\nyou survived. Your track record is flawless.",
+        "highlight": "track record is flawless",
+        "entrance": "scaleIn",
+        "textSize": 56
+      },
+      {
+        "text": "Think about every hardship you have faced. Every heartbreak, every failure, every moment you thought you would not make it. You are still\nhere. One hundred percent survival rate. That is not luck. That is resilience. That is proof that you are tougher than you think.",
+        "highlight": "One hundred percent",
+        "entrance": "slideUp",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "When the next storm comes, and it will, remember this number. One hundred percent. You\nhave never lost a round permanently. You have been knocked down but never knocked out.",
+        "highlight": "never knocked out",
+        "entrance": "fadeIn",
+        "textSize": 48
+      },
+      {
+        "text": "You have survived every worst day of your\nlife. You will survive the next one too.",
+        "highlight": "survive the next one too",
+        "entrance": "slideLeft",
+        "textSize": 52
+      },
+      {
+        "text": "Share what you survived this year. Your\nstory might save someone. Follow for resilience.",
+        "entrance": "slam",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#f59e0b",
+    "bgGradient": [
+      "#2a1a0a",
+      "#180f05",
+      "#0a0602"
+    ]
+  }
+}

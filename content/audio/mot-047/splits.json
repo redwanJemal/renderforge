@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Courage is not the absence of fear. It\nis action in the presence of fear.",
+        "highlight": "action in the presence",
+        "entrance": "slideUp",
+        "textSize": 56
+      },
+      {
+        "text": "Brave people are not fearless. They are terrified and they do it anyway. Every hero in every story was scared. The difference is they\nmoved. They spoke. They acted. They jumped. You will never feel ready. The butterflies will never go away. Do it with the butterflies.",
+        "highlight": "terrified and they do it anyway",
+        "entrance": "fadeIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Waiting until you are not scared is like waiting until you are not hungry to eat.\nFear is part of the human experience. It goes with you, not away from you.",
+        "highlight": "Do it with the butterflies",
+        "entrance": "slideLeft",
+        "textSize": 48
+      },
+      {
+        "text": "Do it scared. Do it shaking. Do it\ncrying. Just do it. That is bravery.",
+        "highlight": "That is bravery",
+        "entrance": "slam",
+        "textSize": 52
+      },
+      {
+        "text": "What are you doing afraid this week?\nDeclare it. Follow for courage fuel.",
+        "entrance": "scaleIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#f59e0b",
+    "bgGradient": [
+      "#2a1a0a",
+      "#180f05",
+      "#0a0602"
+    ]
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "A person with a why\ncan endure almost any how.",
+        "highlight": "endure almost any how",
+        "entrance": "scaleIn",
+        "textSize": 56
+      },
+      {
+        "text": "Your why is the fuel that keeps you moving when motivation dies, when the money runs out, when people leave, and when the world\nsays quit. Without a clear why, you will crumble at the first obstacle. With a clear why, you become almost impossible to stop.",
+        "highlight": "impossible to stop",
+        "entrance": "slideUp",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Write down your why. Not what you want to achieve. Why you want to achieve it. Who are you doing\nthis for? What happens if you do not? Keep that answer somewhere you can see it every single day.",
+        "highlight": "Write down your why",
+        "entrance": "fadeIn",
+        "textSize": 48
+      },
+      {
+        "text": "Purpose is not something you find.\nIt is something you decide.",
+        "highlight": "decide",
+        "entrance": "slideLeft",
+        "textSize": 52
+      },
+      {
+        "text": "What is your why? Share it. Speaking it\nmakes it real. Follow for purposeful living.",
+        "entrance": "slam",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#22c55e",
+    "bgGradient": [
+      "#0a2e1a",
+      "#071a10",
+      "#020a05"
+    ]
+  }
+}

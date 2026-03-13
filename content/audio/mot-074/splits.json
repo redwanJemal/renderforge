@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "A tree that cannot bend will break\nin the storm. Be the bamboo.",
+        "highlight": "Be the bamboo",
+        "entrance": "slideLeft",
+        "textSize": 56
+      },
+      {
+        "text": "Rigidity kills. In business, in relationships, in life. The people who survive are not the strongest. They are the most adaptable. Plans\nwill fail. Markets will crash. People will leave. Your ability to bend, pivot, and adapt determines whether you survive or shatter.",
+        "highlight": "most adaptable",
+        "entrance": "slam",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Stop trying to control everything. Control what you can. Adapt to what you cannot. When life pushes you\nin an unexpected direction, do not fight it. Flow with it and find the opportunity in the chaos.",
+        "highlight": "find the opportunity",
+        "entrance": "scaleIn",
+        "textSize": 48
+      },
+      {
+        "text": "Flexibility is not weakness. It\nis the ultimate strength.",
+        "highlight": "ultimate strength",
+        "entrance": "slideUp",
+        "textSize": 52
+      },
+      {
+        "text": "How have you adapted to a tough\nsituation? Share your pivot. Follow for adaptability.",
+        "entrance": "fadeIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#D4AF37",
+    "bgGradient": [
+      "#1a1500",
+      "#0f0d00",
+      "#050400"
+    ]
+  }
+}

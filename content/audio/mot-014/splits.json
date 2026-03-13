@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "The average person spends four hours a day on\ntheir phone. That is sixty days a year.",
+        "highlight": "sixty days a year",
+        "entrance": "slideLeft",
+        "textSize": 56
+      },
+      {
+        "text": "Sixty days. Two entire months every year, gone. Scrolling through other people is highlight reels while your own life sits on pause. Social\nmedia companies hire the smartest engineers in the world to keep you addicted. You are not weak. You are fighting a billion-dollar machine.",
+        "highlight": "billion-dollar machine",
+        "entrance": "slam",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Set a screen time limit. Put your phone in another room when you work. Delete the apps\nthat steal your time. This is not about willpower. It is about designing your environment for success.",
+        "highlight": "designing your environment",
+        "entrance": "scaleIn",
+        "textSize": 48
+      },
+      {
+        "text": "The phone is a tool. If it is using you\nmore than you use it, that is a problem.",
+        "highlight": "tool",
+        "entrance": "slideUp",
+        "textSize": 52
+      },
+      {
+        "text": "Check your screen time right now. Share\nyour number. Follow for digital discipline.",
+        "entrance": "fadeIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#f43f5e",
+    "bgGradient": [
+      "#2a0a14",
+      "#18050a",
+      "#0a0204"
+    ]
+  }
+}

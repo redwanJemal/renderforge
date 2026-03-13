@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Lifestyle is for you. Legacy\nis for everyone after you.",
+        "highlight": "everyone after you",
+        "entrance": "slideLeft",
+        "textSize": 56
+      },
+      {
+        "text": "You can spend your life accumulating things or creating things. One dies with you. The other lives on. Martin Luther King did not dream about a bigger\nhouse. Mother Teresa did not chase followers. They built legacies that changed the world. Your legacy is the answer to one question. What did you leave behind?",
+        "highlight": "What did you leave behind",
+        "entrance": "slam",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Start thinking in generations, not months. What will your grandchildren inherit from your decisions\ntoday? Not money. Values. Impact. A better world than the one you found.",
+        "highlight": "thinking in generations",
+        "entrance": "scaleIn",
+        "textSize": 48
+      },
+      {
+        "text": "The best time to plant a tree was twenty\nyears ago. The second best time is now.",
+        "highlight": "plant a tree",
+        "entrance": "slideUp",
+        "textSize": 52
+      },
+      {
+        "text": "What legacy are you building? Real\ntalk. Follow for legacy thinking.",
+        "entrance": "fadeIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#a855f7",
+    "bgGradient": [
+      "#1a0a2e",
+      "#0f0518",
+      "#050208"
+    ]
+  }
+}

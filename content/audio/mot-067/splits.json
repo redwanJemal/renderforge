@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "A leader who cannot admit fault\nis a leader nobody trusts.",
+        "highlight": "nobody trusts",
+        "entrance": "slideUp",
+        "textSize": 56
+      },
+      {
+        "text": "Accountability starts at the top. When things go wrong, a real leader says my fault. Not my team messed up. Not the market changed. My fault.\nThis is not weakness. It is the ultimate display of strength. A leader who owns their mistakes earns more respect than one who never makes any.",
+        "highlight": "my fault",
+        "entrance": "fadeIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "After you own the mistake, own the fix. Do not just apologize. Show\nthe solution. Show the lesson learned. Show that failure made the team stronger.",
+        "highlight": "own the fix",
+        "entrance": "slideLeft",
+        "textSize": 48
+      },
+      {
+        "text": "The fastest way to lose trust is to blame others. The\nfastest way to earn it is to own your failures.",
+        "highlight": "own your failures",
+        "entrance": "slam",
+        "textSize": 52
+      },
+      {
+        "text": "Have you ever seen a leader own a mistake? How\ndid it change your respect? Follow for authentic leadership.",
+        "entrance": "scaleIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#ef4444",
+    "bgGradient": [
+      "#2a0a0a",
+      "#180505",
+      "#0a0202"
+    ]
+  }
+}

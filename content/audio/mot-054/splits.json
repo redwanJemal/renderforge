@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "If you have one source of income,\nyou are one decision away from zero.",
+        "highlight": "one decision away from zero",
+        "entrance": "slideLeft",
+        "textSize": 56
+      },
+      {
+        "text": "The average millionaire has seven streams of income. Not one. Seven. A job is a single point of failure. If it disappears tomorrow, everything\ngoes with it. Building multiple income streams is not greedy. It is survival. It is intelligence. It is how wealth is actually built.",
+        "highlight": "seven streams",
+        "entrance": "slam",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Start with one side hustle. Just one. Master it. Automate it. Then build the next one. Do\nnot try to juggle seven things at once. Stack them one at a time, like bricks.",
+        "highlight": "Stack them one at a time",
+        "entrance": "scaleIn",
+        "textSize": 48
+      },
+      {
+        "text": "Diversify your income like you diversify your\ninvestments. Never put everything in one basket.",
+        "highlight": "Never put everything in one basket",
+        "entrance": "slideUp",
+        "textSize": 52
+      },
+      {
+        "text": "How many income streams do you have?\nBe honest. Follow for wealth-building strategies.",
+        "entrance": "fadeIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#f43f5e",
+    "bgGradient": [
+      "#2a0a14",
+      "#18050a",
+      "#0a0204"
+    ]
+  }
+}

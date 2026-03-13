@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Most people think routines are\nrestrictive. The opposite is true.",
+        "highlight": "opposite is true",
+        "entrance": "fadeIn",
+        "textSize": 56
+      },
+      {
+        "text": "Decision fatigue is real. Every choice you make drains your mental energy. Steve Jobs wore the same outfit every day. Obama only wore\nblue or gray suits. Not because they lacked options, but because they understood that discipline in small things creates freedom for big things.",
+        "highlight": "Decision fatigue",
+        "entrance": "slideLeft",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Build a morning routine that runs on autopilot. When your basics are automated, your\nbrain is free to focus on what actually matters. Creating, building, and growing.",
+        "highlight": "runs on autopilot",
+        "entrance": "slam",
+        "textSize": 48
+      },
+      {
+        "text": "Routine is not a cage. It is\nthe foundation that gives you wings.",
+        "highlight": "gives you wings",
+        "entrance": "scaleIn",
+        "textSize": 52
+      },
+      {
+        "text": "Drop your morning routine in the\ncomments. Follow for productive living.",
+        "entrance": "slideUp",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#D4AF37",
+    "bgGradient": [
+      "#1a1500",
+      "#0f0d00",
+      "#050400"
+    ]
+  }
+}

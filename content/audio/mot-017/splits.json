@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "A zero day is a day where\nyou did absolutely nothing toward your goals.",
+        "highlight": "zero day",
+        "entrance": "slideUp",
+        "textSize": 56
+      },
+      {
+        "text": "The concept is simple. Never have a zero day. Even on your worst day, do something. Read one page. Do ten pushups. Write one paragraph. Send\none email. It does not matter how small. What matters is that the chain never breaks. Consistency is not about intensity. It is about never stopping.",
+        "highlight": "chain never breaks",
+        "entrance": "fadeIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "There will be days when life hits hard. When you are exhausted, heartbroken, defeated. Those are the days that matter\nmost. Not for the output, but for the identity. On those days, you prove to yourself who you really are.",
+        "highlight": "prove to yourself",
+        "entrance": "slideLeft",
+        "textSize": 48
+      },
+      {
+        "text": "Never zero. Even one percent\nis infinitely more than nothing.",
+        "highlight": "Never zero",
+        "entrance": "slam",
+        "textSize": 52
+      },
+      {
+        "text": "Promise yourself no more zero\ndays. Follow for daily accountability.",
+        "entrance": "scaleIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#22c55e",
+    "bgGradient": [
+      "#0a2e1a",
+      "#071a10",
+      "#020a05"
+    ]
+  }
+}

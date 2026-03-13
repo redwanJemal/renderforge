@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "A diamond is just a piece of\ncoal that handled pressure exceptionally well.",
+        "highlight": "handled pressure",
+        "entrance": "slideUp",
+        "textSize": 56
+      },
+      {
+        "text": "Pressure is not your enemy. It is your trainer. The situations that feel like they are crushing you are actually shaping you. Every\nrejection hardens your skin. Every failure sharpens your strategy. Every setback strengthens your resolve. You are not breaking. You are being forged.",
+        "highlight": "shaping you",
+        "entrance": "fadeIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "The next time life puts you under pressure, do not crack. Compress.\nGet denser. Get stronger. Get more brilliant. That is what diamonds do.",
+        "highlight": "Get more brilliant",
+        "entrance": "slideLeft",
+        "textSize": 48
+      },
+      {
+        "text": "Pressure is a privilege. It means you\nare doing something worth being tested for.",
+        "highlight": "privilege",
+        "entrance": "slam",
+        "textSize": 52
+      },
+      {
+        "text": "What pressure is shaping you right now?\nShare below. Follow for strength daily.",
+        "entrance": "scaleIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#14b8a6",
+    "bgGradient": [
+      "#0a2e28",
+      "#071a16",
+      "#020a08"
+    ]
+  }
+}

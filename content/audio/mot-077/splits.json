@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "People love a good comeback story.\nIt is time to write yours.",
+        "highlight": "write yours",
+        "entrance": "slideUp",
+        "textSize": 56
+      },
+      {
+        "text": "History is full of comeback stories that make the original success look small. Michael Jordan was cut, then became the greatest of all\ntime. Apple almost went bankrupt before creating the iPhone. The comeback is more powerful because it carries wisdom the first attempt never had.",
+        "highlight": "more powerful",
+        "entrance": "fadeIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "If you are in your down period right now, take notes. Study what went wrong. Build new skills. Create new\nconnections. When you come back, and you will, you will be equipped with something your competition does not have. Experience.",
+        "highlight": "Experience",
+        "entrance": "slideLeft",
+        "textSize": 48
+      },
+      {
+        "text": "Your next chapter will make people\nforget the last one. Keep writing.",
+        "highlight": "Keep writing",
+        "entrance": "slam",
+        "textSize": 52
+      },
+      {
+        "text": "What comeback are you preparing? Share\nyour vision. Follow for comeback energy.",
+        "entrance": "scaleIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#06b6d4",
+    "bgGradient": [
+      "#0a1e2e",
+      "#051218",
+      "#020608"
+    ]
+  }
+}

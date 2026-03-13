@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "In five seconds, your brain will\ntalk you out of anything.",
+        "highlight": "five seconds",
+        "entrance": "slam",
+        "textSize": 56
+      },
+      {
+        "text": "Mel Robbins discovered that the moment you have an instinct to act on a goal, you have five seconds before your brain kills it. Five,\nfour, three, two, one, move. That is the rule. Do not give your brain time to negotiate, rationalize, or make excuses. Count down and act.",
+        "highlight": "Count down and act",
+        "entrance": "scaleIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "This is not just theory. This is neuroscience. The countdown activates your prefrontal cortex, the part\nof your brain that handles decision-making and action. You are literally hacking your own brain.",
+        "highlight": "hacking your own brain",
+        "entrance": "slideUp",
+        "textSize": 48
+      },
+      {
+        "text": "Five seconds is all that separates\nyou from the life you want.",
+        "highlight": "Five seconds",
+        "entrance": "fadeIn",
+        "textSize": 52
+      },
+      {
+        "text": "Try it right now. Five, four, three,\ntwo, one, follow this page for more.",
+        "entrance": "slideLeft",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#a855f7",
+    "bgGradient": [
+      "#1a0a2e",
+      "#0f0518",
+      "#050208"
+    ]
+  }
+}

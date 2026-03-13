@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Success comes with a price. And most\npeople are not willing to pay it.",
+        "highlight": "price",
+        "entrance": "slam",
+        "textSize": 56
+      },
+      {
+        "text": "The success tax is real. It costs you friendships with people going nowhere. It costs you weekends and late nights. It costs you the comfort\nof staying the same. It costs you being misunderstood by people who have never tried. Every level of success requires a new version of you.",
+        "highlight": "success tax",
+        "entrance": "scaleIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "The question is not can you afford the success tax. The question is can you afford not to\npay it. The price of staying where you are is always higher than the price of growth.",
+        "highlight": "can you afford not to",
+        "entrance": "slideUp",
+        "textSize": 48
+      },
+      {
+        "text": "If the dream is free, the hustle\nis sold separately. Pay the price.",
+        "highlight": "Pay the price",
+        "entrance": "fadeIn",
+        "textSize": 52
+      },
+      {
+        "text": "What has success cost you? Real\nstories below. Follow for unfiltered truth.",
+        "entrance": "slideLeft",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#ef4444",
+    "bgGradient": [
+      "#2a0a0a",
+      "#180505",
+      "#0a0202"
+    ]
+  }
+}

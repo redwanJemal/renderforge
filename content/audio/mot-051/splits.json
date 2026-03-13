@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "There is no cavalry coming. No lottery win.\nNo miracle. Just you and your work ethic.",
+        "highlight": "your work ethic",
+        "entrance": "scaleIn",
+        "textSize": 56
+      },
+      {
+        "text": "The sooner you accept that nobody is coming to save you, the sooner you start saving yourself. No government program, no rich uncle, no viral\nmoment is going to change your life. The only thing that changes your life is consistent, focused, relentless effort day after day after day.",
+        "highlight": "saving yourself",
+        "entrance": "slideUp",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "This is not depressing. This is empowering. It means you are in control. Your destiny is not\nin someone else is hands. It is in yours. Every single day, you get to choose.",
+        "highlight": "you are in control",
+        "entrance": "fadeIn",
+        "textSize": 48
+      },
+      {
+        "text": "Be your own hero. Be your\nown investor. Be your own rescue.",
+        "highlight": "Be your own hero",
+        "entrance": "slideLeft",
+        "textSize": 52
+      },
+      {
+        "text": "If you believe in self-reliance, share\nthis. Follow for hustle motivation.",
+        "entrance": "slam",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#ef4444",
+    "bgGradient": [
+      "#2a0a0a",
+      "#180505",
+      "#0a0202"
+    ]
+  }
+}

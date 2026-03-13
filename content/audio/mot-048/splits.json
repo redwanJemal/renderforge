@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Starting is the hardest part.\nEverything else gets easier.",
+        "highlight": "hardest part",
+        "entrance": "fadeIn",
+        "textSize": 56
+      },
+      {
+        "text": "The gap between wanting to do something and actually doing it is called the start gap. It is where most dreams go to die. Not because\nthe task is impossible, but because the first step feels overwhelming. Your brain magnifies the difficulty of starting by ten times. Once you start, it adjusts.",
+        "highlight": "start gap",
+        "entrance": "slideLeft",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Lower the bar for starting. Your first video does not need to go viral. Your first product does not\nneed to be perfect. Your first step just needs to be taken. Start ugly. Start messy. Start now.",
+        "highlight": "Start ugly. Start messy. Start now.",
+        "entrance": "slam",
+        "textSize": 48
+      },
+      {
+        "text": "The best time to start was yesterday.\nThe second best time is right now.",
+        "highlight": "right now",
+        "entrance": "scaleIn",
+        "textSize": 52
+      },
+      {
+        "text": "What are you starting today? Put it\nin writing below. Follow for action content.",
+        "entrance": "slideUp",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#14b8a6",
+    "bgGradient": [
+      "#0a2e28",
+      "#071a16",
+      "#020a08"
+    ]
+  }
+}

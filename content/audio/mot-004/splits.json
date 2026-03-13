@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Show me your circle and I\nwill show you your future.",
+        "highlight": "your future",
+        "entrance": "slideLeft",
+        "textSize": 56
+      },
+      {
+        "text": "You are the average of the five people you spend the most time with. If everyone around you is complaining, you will complain. If everyone around you\nis building, you will build. Your environment is not just where you live. It is who you listen to, what you consume, and what you tolerate.",
+        "highlight": "the average",
+        "entrance": "slam",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "You do not rise to the level of your goals. You fall\nto the level of your environment. Change the inputs, change the output.",
+        "highlight": "Change the inputs",
+        "entrance": "scaleIn",
+        "textSize": 48
+      },
+      {
+        "text": "Protect your circle like you protect your\nbank account. Both determine your wealth.",
+        "highlight": "Protect your circle",
+        "entrance": "slideUp",
+        "textSize": 52
+      },
+      {
+        "text": "Share this with your circle.\nFollow for more truth bombs.",
+        "entrance": "fadeIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#a855f7",
+    "bgGradient": [
+      "#1a0a2e",
+      "#0f0518",
+      "#050208"
+    ]
+  }
+}

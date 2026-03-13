@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "On your tombstone, there will be two dates and\na dash. That dash is your entire life.",
+        "highlight": "your entire life",
+        "entrance": "slideLeft",
+        "textSize": 56
+      },
+      {
+        "text": "Born 1990. Died 2060. But between those two dates is a tiny dash that represents everything. Every conversation, every relationship, every project, every moment of\ncourage or cowardice. When people visit your grave, they will not care about the dates. They will care about what you did with the dash.",
+        "highlight": "what you did with the dash",
+        "entrance": "slam",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Are you filling your dash with scrolling, complaining, and waiting? Or are you filling it\nwith creating, serving, and living? The dash is short. Make every inch of it count.",
+        "highlight": "Make every inch of it count",
+        "entrance": "scaleIn",
+        "textSize": 48
+      },
+      {
+        "text": "It is not about the dates on the\nstone. It is about the dash in between.",
+        "highlight": "dash in between",
+        "entrance": "slideUp",
+        "textSize": 52
+      },
+      {
+        "text": "What are you doing with your dash?\nDeep answers only. Follow for meaningful living.",
+        "entrance": "fadeIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#22c55e",
+    "bgGradient": [
+      "#0a2e1a",
+      "#071a10",
+      "#020a05"
+    ]
+  }
+}

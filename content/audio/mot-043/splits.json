@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "If you have never failed, you\nhave never tried anything worth doing.",
+        "highlight": "never tried",
+        "entrance": "fadeIn",
+        "textSize": 56
+      },
+      {
+        "text": "Failure is not the opposite of success. It is the tuition you pay for success. Michael Jordan was cut from his high school basketball team. Walt\nDisney was fired for lacking imagination. Einstein failed his university entrance exam. The common thread is not talent. It is the willingness to fail forward.",
+        "highlight": "tuition you pay",
+        "entrance": "slideLeft",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Every failure teaches you something a book never could. It teaches you resilience,\nadaptability, and humility. The only real failure is the failure to try.",
+        "highlight": "fail forward",
+        "entrance": "slam",
+        "textSize": 48
+      },
+      {
+        "text": "Fail fast. Fail forward. Fail often.\nThat is the winning formula.",
+        "highlight": "winning formula",
+        "entrance": "scaleIn",
+        "textSize": 52
+      },
+      {
+        "text": "Share your biggest failure that taught you\nthe most. Follow for fearless living.",
+        "entrance": "slideUp",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#ef4444",
+    "bgGradient": [
+      "#2a0a0a",
+      "#180505",
+      "#0a0202"
+    ]
+  }
+}

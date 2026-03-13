@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Albert Einstein called compound interest the\neighth wonder of the world.",
+        "highlight": "eighth wonder",
+        "entrance": "slam",
+        "textSize": 56
+      },
+      {
+        "text": "If you invest just one hundred dollars a month starting at age twenty, by sixty-five you could have over one million dollars. That is the power of compound interest.\nYour money makes money, which makes more money. The catch is time. The earlier you start, the more time works for you. Every year you wait costs you exponentially.",
+        "highlight": "one million dollars",
+        "entrance": "scaleIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Stop saying I will invest when I have more money. Start with whatever you have right\nnow. Even fifty dollars a month. The amount matters less than the habit and the time.",
+        "highlight": "Start with whatever you have",
+        "entrance": "slideUp",
+        "textSize": 48
+      },
+      {
+        "text": "Time in the market beats\ntiming the market. Start today.",
+        "highlight": "Start today",
+        "entrance": "fadeIn",
+        "textSize": 52
+      },
+      {
+        "text": "When did you start investing? Or what\nis stopping you? Follow for investing wisdom.",
+        "entrance": "slideLeft",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#f59e0b",
+    "bgGradient": [
+      "#2a1a0a",
+      "#180f05",
+      "#0a0602"
+    ]
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Your scars are not something to hide. They\nare proof that you are a warrior.",
+        "highlight": "warrior",
+        "entrance": "slideLeft",
+        "textSize": 56
+      },
+      {
+        "text": "In Japan, there is an art called Kintsugi. When pottery breaks, they repair it with gold. The cracks become the most beautiful part. That is\nwhat resilience looks like. Your breakdowns are not the end. They are the gold seams of your story. Every scar tells a story of survival.",
+        "highlight": "Kintsugi",
+        "entrance": "slam",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Stop hiding your struggles. Share them. Someone needs to hear that it is\npossible to come through the other side. Your vulnerability is your greatest strength.",
+        "highlight": "vulnerability",
+        "entrance": "scaleIn",
+        "textSize": 48
+      },
+      {
+        "text": "Broken and rebuilt is stronger\nthan never broken at all.",
+        "highlight": "Broken and rebuilt",
+        "entrance": "slideUp",
+        "textSize": 52
+      },
+      {
+        "text": "Share your gold seam moment.\nFollow for beautiful resilience.",
+        "entrance": "fadeIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#f59e0b",
+    "bgGradient": [
+      "#2a1a0a",
+      "#180f05",
+      "#0a0602"
+    ]
+  }
+}

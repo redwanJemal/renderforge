@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Nobody reads your resume at your\nfuneral. They talk about your impact.",
+        "highlight": "impact",
+        "entrance": "slideUp",
+        "textSize": 56
+      },
+      {
+        "text": "A resume is a list of things you did for other people. A legacy is the mark you leave on the world. Too many people\nspend their entire lives building impressive resumes and empty legacies. They climb the corporate ladder only to realize it was leaning against the wrong wall.",
+        "highlight": "empty legacies",
+        "entrance": "fadeIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Ask yourself this question every day. If I stopped working today, what would I be remembered for?\nIf the answer scares you, it is time to redirect your energy toward something that matters.",
+        "highlight": "what would I be remembered for",
+        "entrance": "slideLeft",
+        "textSize": 48
+      },
+      {
+        "text": "Build something that outlives you. That\nis the real measure of success.",
+        "highlight": "outlives you",
+        "entrance": "slam",
+        "textSize": 52
+      },
+      {
+        "text": "What legacy are you building? Share\nbelow. Follow for purpose-driven content.",
+        "entrance": "scaleIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#06b6d4",
+    "bgGradient": [
+      "#0a1e2e",
+      "#051218",
+      "#020608"
+    ]
+  }
+}

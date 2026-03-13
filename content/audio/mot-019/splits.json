@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "You will never hold yourself accountable\nthe way someone else can.",
+        "highlight": "someone else can",
+        "entrance": "slideLeft",
+        "textSize": 56
+      },
+      {
+        "text": "A study showed that telling someone your goal increases your chance of success by sixty-five percent. Having a regular accountability partner raises\nit to ninety-five percent. You are not weak for needing accountability. You are smart for seeking it. Every champion has a coach.",
+        "highlight": "ninety-five percent",
+        "entrance": "slam",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Find someone who will not let you off the hook. Someone who asks the hard questions. Not\nwhat did you do today, but why did you not do what you said you would.",
+        "highlight": "hard questions",
+        "entrance": "scaleIn",
+        "textSize": 48
+      },
+      {
+        "text": "Your circle should challenge you,\nnot comfort you into complacency.",
+        "highlight": "challenge you",
+        "entrance": "slideUp",
+        "textSize": 52
+      },
+      {
+        "text": "Tag your accountability partner. Follow\nfor daily discipline tips.",
+        "entrance": "fadeIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#ef4444",
+    "bgGradient": [
+      "#2a0a0a",
+      "#180505",
+      "#0a0202"
+    ]
+  }
+}

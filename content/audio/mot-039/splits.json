@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "If your path to success looks like a\nstraight line, you are probably not growing.",
+        "highlight": "not growing",
+        "entrance": "slideLeft",
+        "textSize": 56
+      },
+      {
+        "text": "Real success looks like a heart monitor. Ups and downs, peaks and valleys, moments where you flatline and wonder if it is over. The dips are\nnot failures. They are part of the pattern. Every successful person will tell you the same thing. The breakthrough came right after they almost gave up.",
+        "highlight": "heart monitor",
+        "entrance": "slam",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "When you are in a valley, remember this. You are not going backward. You are loading\nthe slingshot. The further back you are pulled, the further forward you are about to launch.",
+        "highlight": "loading the slingshot",
+        "entrance": "scaleIn",
+        "textSize": 48
+      },
+      {
+        "text": "The setback is the setup for\nthe comeback. Trust the zigzag.",
+        "highlight": "Trust the zigzag",
+        "entrance": "slideUp",
+        "textSize": 52
+      },
+      {
+        "text": "Share a time when a setback became\nyour biggest breakthrough. Follow for resilience.",
+        "entrance": "fadeIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#f59e0b",
+    "bgGradient": [
+      "#2a1a0a",
+      "#180f05",
+      "#0a0602"
+    ]
+  }
+}

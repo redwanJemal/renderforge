@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Everything you want is on\nthe other side of fear.",
+        "highlight": "other side of fear",
+        "entrance": "scaleIn",
+        "textSize": 56
+      },
+      {
+        "text": "Fear is not a stop sign. It is a compass pointing you toward growth. When your palms sweat, your heart races, and your mind screams\nrun, that is your body telling you something important is about to happen. The cave you fear to enter holds the treasure you seek.",
+        "highlight": "compass pointing you toward growth",
+        "entrance": "slideUp",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Start treating fear as information, not instruction. It is telling you where the opportunity is,\nnot where the danger is. Ninety percent of what we fear never actually happens.",
+        "highlight": "information, not instruction",
+        "entrance": "fadeIn",
+        "textSize": 48
+      },
+      {
+        "text": "Feel the fear and do it\nanyway. That is the entire philosophy.",
+        "highlight": "do it anyway",
+        "entrance": "slideLeft",
+        "textSize": 52
+      },
+      {
+        "text": "What fear are you facing this week?\nShare below. Follow for courage daily.",
+        "entrance": "slam",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#22c55e",
+    "bgGradient": [
+      "#0a2e1a",
+      "#071a10",
+      "#020a05"
+    ]
+  }
+}

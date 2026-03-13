@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Every problem in business can be\ntraced back to a communication failure.",
+        "highlight": "communication failure",
+        "entrance": "scaleIn",
+        "textSize": 56
+      },
+      {
+        "text": "Eighty-six percent of workplace failures are caused by poor communication. Not lack of talent. Not lack of resources. Communication. Leaders\nwho communicate clearly, frequently, and honestly build teams that can survive anything. Silence from leadership breeds anxiety, rumors, and distrust.",
+        "highlight": "Eighty-six percent",
+        "entrance": "slideUp",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Overcommunicate the why behind every decision. People do not resist change. They resist change\nthey do not understand. When they know the reason, they join the mission.",
+        "highlight": "Overcommunicate the why",
+        "entrance": "fadeIn",
+        "textSize": 48
+      },
+      {
+        "text": "Clear communication is not a soft skill. It is\nthe hardest and most important skill of leadership.",
+        "highlight": "most important skill",
+        "entrance": "slideLeft",
+        "textSize": 52
+      },
+      {
+        "text": "What is your biggest communication lesson?\nShare below. Follow for leadership skills.",
+        "entrance": "slam",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#D4AF37",
+    "bgGradient": [
+      "#1a1500",
+      "#0f0d00",
+      "#050400"
+    ]
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "How you dress is how you\ntell the world to treat you.",
+        "highlight": "the world to treat you",
+        "entrance": "fadeIn",
+        "textSize": 56
+      },
+      {
+        "text": "Enclothed cognition is real science. Studies prove that what you wear affects how you think, feel, and perform. When you dress sharp, your brain releases chemicals that\nboost confidence. You stand taller. You speak clearer. You command more respect. Not because clothes make the man, but because clothes remind the man who he is.",
+        "highlight": "Enclothed cognition",
+        "entrance": "slideLeft",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "You do not need expensive clothes. You need clean, fitted clothes that make you\nfeel powerful. Iron your shirt. Polish your shoes. Look like you respect yourself.",
+        "highlight": "feel powerful",
+        "entrance": "slam",
+        "textSize": 48
+      },
+      {
+        "text": "Dress for the life you want,\nnot the life you have.",
+        "highlight": "Dress for the life you want",
+        "entrance": "scaleIn",
+        "textSize": 52
+      },
+      {
+        "text": "What outfit makes you feel unstoppable?\nComment below. Follow for level-up content.",
+        "entrance": "slideUp",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#a855f7",
+    "bgGradient": [
+      "#1a0a2e",
+      "#0f0518",
+      "#050208"
+    ]
+  }
+}

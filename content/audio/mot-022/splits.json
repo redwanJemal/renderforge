@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "The loudest voice in the room is the one\ninside your head. And it is lying to you.",
+        "highlight": "lying to you",
+        "entrance": "slideUp",
+        "textSize": 56
+      },
+      {
+        "text": "Your inner critic is not protecting you. It is holding you hostage. It tells you that you are not ready, not smart enough, not good enough. But\nhere is the truth. That voice is just fear wearing a disguise. It is the voice of every person who ever doubted you, playing on repeat.",
+        "highlight": "fear wearing a disguise",
+        "entrance": "fadeIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Next time that voice speaks, talk back. Say thank you for trying to\nprotect me, but I am doing this anyway. Acknowledge it. Then override it.",
+        "highlight": "override it",
+        "entrance": "slideLeft",
+        "textSize": 48
+      },
+      {
+        "text": "You are not the voice in your head. You\nare the one who hears it and acts anyway.",
+        "highlight": "acts anyway",
+        "entrance": "slam",
+        "textSize": 52
+      },
+      {
+        "text": "Save this for your next moment of\ndoubt. Follow for inner strength daily.",
+        "entrance": "scaleIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#f43f5e",
+    "bgGradient": [
+      "#2a0a14",
+      "#18050a",
+      "#0a0204"
+    ]
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "You might be the first in your family to\nbuild wealth. Let the chain start with you.",
+        "highlight": "chain start with you",
+        "entrance": "slam",
+        "textSize": 56
+      },
+      {
+        "text": "Generational wealth is not about leaving a pile of money. It is about leaving financial knowledge, habits, and systems. Teach your children about investing at age\nten. Show them how compound interest works. Let them see you budget, invest, and build. The greatest inheritance is not a check. It is a blueprint.",
+        "highlight": "financial knowledge, habits, and systems",
+        "entrance": "scaleIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Even if nobody taught you about money, you can teach the next generation. Break the\ncycle of financial illiteracy. Be the first domino that changes your family tree forever.",
+        "highlight": "Break the cycle",
+        "entrance": "slideUp",
+        "textSize": 48
+      },
+      {
+        "text": "You are not just building wealth for\nyourself. You are building a legacy.",
+        "highlight": "building a legacy",
+        "entrance": "fadeIn",
+        "textSize": 52
+      },
+      {
+        "text": "Are you the first wealth builder in your\nfamily? Share your journey. Follow for generational thinking.",
+        "entrance": "slideLeft",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#a855f7",
+    "bgGradient": [
+      "#1a0a2e",
+      "#0f0518",
+      "#050208"
+    ]
+  }
+}

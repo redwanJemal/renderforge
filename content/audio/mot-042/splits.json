@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Nothing grows in the\ncomfort zone. Absolutely nothing.",
+        "highlight": "Nothing grows",
+        "entrance": "slideUp",
+        "textSize": 56
+      },
+      {
+        "text": "Your comfort zone feels safe but it is slowly killing your potential. Every day you stay comfortable, your world gets a little smaller. Your ambitions shrink.\nYour tolerance for risk drops. And one day you wake up and realize you have been alive for years but you stopped living long ago.",
+        "highlight": "slowly killing your potential",
+        "entrance": "fadeIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Do one thing every day that scares you. Not reckless things. Growth things. Have the hard conversation.\nApply for the job. Launch the business. Ask for the raise. Discomfort is the currency of growth.",
+        "highlight": "one thing every day",
+        "entrance": "slideLeft",
+        "textSize": 48
+      },
+      {
+        "text": "Life begins at the edge of your\ncomfort zone. Step over that line today.",
+        "highlight": "Step over that line",
+        "entrance": "slam",
+        "textSize": 52
+      },
+      {
+        "text": "What is one thing outside your comfort zone\nyou will do today? Follow for daily courage.",
+        "entrance": "scaleIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#D4AF37",
+    "bgGradient": [
+      "#1a1500",
+      "#0f0d00",
+      "#050400"
+    ]
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Most people quit when they are three feet\nfrom gold. Do not be most people.",
+        "highlight": "three feet from gold",
+        "entrance": "slam",
+        "textSize": 56
+      },
+      {
+        "text": "There is a story about a gold miner who gave up after digging for weeks. He sold his equipment. The buyer hired an engineer, discovered the\ngold was just three feet away, and made millions. The lesson is brutal but true. You have no idea how close you are to your breakthrough.",
+        "highlight": "how close you are",
+        "entrance": "scaleIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "When you feel like quitting, remember why you started. Then dig three more feet. The fact\nthat it is hard means you are close. Easy things do not produce meaningful results.",
+        "highlight": "why you started",
+        "entrance": "slideUp",
+        "textSize": 48
+      },
+      {
+        "text": "The last mile is always the hardest. That\nis how you know you are almost there.",
+        "highlight": "almost there",
+        "entrance": "fadeIn",
+        "textSize": 52
+      },
+      {
+        "text": "If you are still going, drop an emoji. You\nare closer than you think. Follow for perseverance.",
+        "entrance": "slideLeft",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#14b8a6",
+    "bgGradient": [
+      "#0a2e28",
+      "#071a16",
+      "#020a08"
+    ]
+  }
+}

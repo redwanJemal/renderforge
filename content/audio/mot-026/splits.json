@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "You take up space in this\nworld. Stop apologizing for it.",
+        "highlight": "Stop apologizing",
+        "entrance": "scaleIn",
+        "textSize": 56
+      },
+      {
+        "text": "Over-apologizing is a confidence killer. Sorry for asking. Sorry to bother you. Sorry for having an opinion. Every unnecessary sorry chips\naway at your self-worth. It tells your brain and everyone around you that you do not deserve to be here.",
+        "highlight": "confidence killer",
+        "entrance": "slideUp",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Replace sorry with thank you. Instead of sorry for being late, say thank you for waiting.\nInstead of sorry for talking, say thank you for listening. The energy shift is massive.",
+        "highlight": "thank you",
+        "entrance": "fadeIn",
+        "textSize": 48
+      },
+      {
+        "text": "You have every right to take up\nspace, have opinions, and be heard.",
+        "highlight": "every right",
+        "entrance": "slideLeft",
+        "textSize": 52
+      },
+      {
+        "text": "Catch yourself apologizing today. Swap\nit. Follow for confidence hacks.",
+        "entrance": "slam",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#D4AF37",
+    "bgGradient": [
+      "#1a1500",
+      "#0f0d00",
+      "#050400"
+    ]
+  }
+}

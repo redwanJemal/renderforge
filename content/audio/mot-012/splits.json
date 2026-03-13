@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "One percent better every day.\nThat is all it takes.",
+        "highlight": "one percent",
+        "entrance": "slideUp",
+        "textSize": 56
+      },
+      {
+        "text": "If you improve one percent every day for a year, you will be thirty-seven times better. Not twice. Not ten times. Thirty-seven times. Most\npeople overestimate what they can do in a day and underestimate what they can do in a year. Tiny gains compound into massive results.",
+        "highlight": "thirty-seven times",
+        "entrance": "fadeIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "You do not need a complete life overhaul. You need one better decision today. One more\npage read. One more rep. One more minute of focus. That is how empires are built.",
+        "highlight": "one better decision",
+        "entrance": "slideLeft",
+        "textSize": 48
+      },
+      {
+        "text": "Small daily disciplines lead\nto large eventual achievements.",
+        "highlight": "Small daily disciplines",
+        "entrance": "slam",
+        "textSize": 52
+      },
+      {
+        "text": "What is your one percent today?\nComment below. Follow for compound growth.",
+        "entrance": "scaleIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#a855f7",
+    "bgGradient": [
+      "#1a0a2e",
+      "#0f0518",
+      "#050208"
+    ]
+  }
+}

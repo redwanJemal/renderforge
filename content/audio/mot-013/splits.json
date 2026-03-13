@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "The secret to extraordinary results is\ndoing ordinary things extraordinarily well.",
+        "highlight": "extraordinarily well",
+        "entrance": "fadeIn",
+        "textSize": 56
+      },
+      {
+        "text": "Nobody posts about the boring stuff on social media. The early mornings nobody sees. The meal prep on Sunday. The tenth rep when your body\nis screaming. The hour of deep work with your phone in another room. That is where success lives. In the boring, repetitive, unsexy work.",
+        "highlight": "boring, repetitive, unsexy work",
+        "entrance": "slideLeft",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Champions do not get bored with the basics. They master them. While\neveryone chases the next shiny strategy, the winners are perfecting the fundamentals.",
+        "highlight": "perfecting the fundamentals",
+        "entrance": "slam",
+        "textSize": 48
+      },
+      {
+        "text": "Fall in love with boredom. That\nis where the magic happens.",
+        "highlight": "Fall in love with boredom",
+        "entrance": "scaleIn",
+        "textSize": 52
+      },
+      {
+        "text": "Save this for when you want to quit\nthe boring work. Follow for real talk.",
+        "entrance": "slideUp",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#06b6d4",
+    "bgGradient": [
+      "#0a1e2e",
+      "#051218",
+      "#020608"
+    ]
+  }
+}

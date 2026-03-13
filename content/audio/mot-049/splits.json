@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "At the end of your life, you will not regret the things\nyou did. You will regret the things you did not do.",
+        "highlight": "did not do",
+        "entrance": "slideLeft",
+        "textSize": 56
+      },
+      {
+        "text": "Studies on deathbed regrets reveal the same pattern. People do not regret failures. They regret missed opportunities. The relationship they did not\npursue. The business they did not start. The words they never said. Rejection stings for a moment. Regret haunts for a lifetime.",
+        "highlight": "deathbed regrets",
+        "entrance": "slam",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Make a decision today to live a life with minimal regret. Say yes to more things. Take more\nchances. Tell people how you feel. The pain of action is temporary. The pain of inaction is permanent.",
+        "highlight": "minimal regret",
+        "entrance": "scaleIn",
+        "textSize": 48
+      },
+      {
+        "text": "Twenty years from now, what will you\nwish you had started today? Start it.",
+        "highlight": "Start it",
+        "entrance": "slideUp",
+        "textSize": 52
+      },
+      {
+        "text": "What do you not want to regret?\nShare your truth. Follow for no-regrets living.",
+        "entrance": "fadeIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#22c55e",
+    "bgGradient": [
+      "#0a2e1a",
+      "#071a10",
+      "#020a05"
+    ]
+  }
+}

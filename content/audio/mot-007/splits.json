@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Three words are destroying your potential. And\nyou say them every single day.",
+        "highlight": "Three words",
+        "entrance": "slideUp",
+        "textSize": 56
+      },
+      {
+        "text": "I cannot because. These three words have stopped more people than any obstacle ever could. Not because the obstacles were real, but because the belief\nmade them real. Your words program your subconscious. Every time you say I cannot, your brain files it as truth and stops looking for solutions.",
+        "highlight": "I cannot because",
+        "entrance": "fadeIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Replace I cannot because with how can I despite. Watch\nhow fast your brain starts finding answers instead of excuses.",
+        "highlight": "how can I despite",
+        "entrance": "slideLeft",
+        "textSize": 48
+      },
+      {
+        "text": "Your vocabulary is your destiny. Speak\nlike the person you are becoming.",
+        "highlight": "vocabulary is your destiny",
+        "entrance": "slam",
+        "textSize": 52
+      },
+      {
+        "text": "Comment the three words you are\ndeleting today. Follow for mindset upgrades.",
+        "entrance": "scaleIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#f59e0b",
+    "bgGradient": [
+      "#2a1a0a",
+      "#180f05",
+      "#0a0602"
+    ]
+  }
+}

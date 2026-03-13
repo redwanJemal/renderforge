@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "People decide who you are in the\nfirst seven seconds. Make them count.",
+        "highlight": "seven seconds",
+        "entrance": "fadeIn",
+        "textSize": 56
+      },
+      {
+        "text": "Before you say a single word, your body has already spoken. Your posture, your eye contact, your handshake, the way you walk into a\nroom. Studies show that standing in a power pose for two minutes increases testosterone by twenty percent and decreases cortisol by twenty-five percent.",
+        "highlight": "power pose",
+        "entrance": "slideLeft",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Stand tall. Shoulders back. Chin up. Walk like you own the room. Not arrogance.\nPresence. There is a difference between confidence and cockiness. One inspires, the other repels.",
+        "highlight": "Presence",
+        "entrance": "slam",
+        "textSize": 48
+      },
+      {
+        "text": "Your body teaches your brain how to feel.\nStand like a champion, feel like a champion.",
+        "highlight": "Stand like a champion",
+        "entrance": "scaleIn",
+        "textSize": 52
+      },
+      {
+        "text": "Try the power pose for two minutes\nright now. Follow for confidence science.",
+        "entrance": "slideUp",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#f59e0b",
+    "bgGradient": [
+      "#2a1a0a",
+      "#180f05",
+      "#0a0602"
+    ]
+  }
+}

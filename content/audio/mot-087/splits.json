@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Your story is the most powerful tool\nyou have. Stop keeping it to yourself.",
+        "highlight": "most powerful tool",
+        "entrance": "slideUp",
+        "textSize": 56
+      },
+      {
+        "text": "Every person on this planet has a unique story. And somewhere out there, someone is going through exactly what you went through. Your story could be the\nlight that guides them out of darkness. Your failures, your lessons, your triumphs. They are not just your story. They are someone else is survival guide.",
+        "highlight": "survival guide",
+        "entrance": "fadeIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Do not wait until you are successful to share. Share from the\nmiddle. Share the messy parts. Authenticity resonates more than perfection ever will.",
+        "highlight": "Share from the middle",
+        "entrance": "slideLeft",
+        "textSize": 48
+      },
+      {
+        "text": "Your mess is your message.\nYour test is your testimony.",
+        "highlight": "mess is your message",
+        "entrance": "slam",
+        "textSize": 52
+      },
+      {
+        "text": "Share a piece of your story below. You never know\nwho needs to hear it. Follow for real stories.",
+        "entrance": "scaleIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#f59e0b",
+    "bgGradient": [
+      "#2a1a0a",
+      "#180f05",
+      "#0a0602"
+    ]
+  }
+}

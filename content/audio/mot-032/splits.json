@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Everyone wants the result.\nNobody wants the process.",
+        "highlight": "the process",
+        "entrance": "slideUp",
+        "textSize": 56
+      },
+      {
+        "text": "It took Amazon nine years to become profitable. It took Colonel Sanders over a thousand rejections before KFC existed. It took Tyler Perry six years\nof homelessness before his first hit. What you see as overnight success is years of invisible work, tears, and sacrifice that nobody posted about.",
+        "highlight": "invisible work",
+        "entrance": "fadeIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "The iceberg illusion is real. People see the tip and think that is\nall there is. Underneath is a mountain of failure, persistence, and unglamorous grinding.",
+        "highlight": "iceberg illusion",
+        "entrance": "slideLeft",
+        "textSize": 48
+      },
+      {
+        "text": "Trust the process. Water the seed even\nwhen you cannot see the roots growing.",
+        "highlight": "Trust the process",
+        "entrance": "slam",
+        "textSize": 52
+      },
+      {
+        "text": "How long have you been grinding? Share\nyour journey. Follow for patience fuel.",
+        "entrance": "scaleIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#14b8a6",
+    "bgGradient": [
+      "#0a2e28",
+      "#071a16",
+      "#020a08"
+    ]
+  }
+}

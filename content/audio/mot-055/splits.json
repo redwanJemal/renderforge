@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Your nine to five makes you a\nliving. Your side hustle makes you alive.",
+        "highlight": "makes you alive",
+        "entrance": "slam",
+        "textSize": 56
+      },
+      {
+        "text": "A side hustle is not just extra money. It is freedom in training. Every dollar you earn outside your job is proof that you can create value\non your own terms. It builds skills, confidence, and a safety net that your employer cannot take away. Seventy percent of millionaires started with a side hustle.",
+        "highlight": "freedom in training",
+        "entrance": "scaleIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Start tonight. Not next week. Tonight. What can you sell? What can you teach? What problem can you solve?\nThe internet has made it possible to start a business with nothing but a phone and an idea.",
+        "highlight": "Start tonight",
+        "entrance": "slideUp",
+        "textSize": 48
+      },
+      {
+        "text": "Your side hustle today is your main\nhustle tomorrow. Plant the seed now.",
+        "highlight": "Plant the seed now",
+        "entrance": "fadeIn",
+        "textSize": 52
+      },
+      {
+        "text": "What is your side hustle? Drop it below and\nlet us support each other. Follow for hustle culture.",
+        "entrance": "slideLeft",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#f59e0b",
+    "bgGradient": [
+      "#2a1a0a",
+      "#180f05",
+      "#0a0602"
+    ]
+  }
+}

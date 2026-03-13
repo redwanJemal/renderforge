@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "It does not matter how many times you fall.\nIt matters how many times you get back up.",
+        "highlight": "get back up",
+        "entrance": "slam",
+        "textSize": 56
+      },
+      {
+        "text": "The Japanese proverb says fall seven times, stand up eight. That is the entire formula for success. Not perfection. Not avoiding failure. Just getting back\nup one more time than you fall. Every comeback starts with the decision to not stay down. That decision is always available to you.",
+        "highlight": "stand up eight",
+        "entrance": "scaleIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Nobody remembers how many times you fell. They remember that you kept standing. Your resilience\nis the most inspiring thing about you. Not your wins. Your refusal to quit.",
+        "highlight": "refusal to quit",
+        "entrance": "slideUp",
+        "textSize": 48
+      },
+      {
+        "text": "You are not defined by your falls.\nYou are defined by your rises.",
+        "highlight": "defined by your rises",
+        "entrance": "fadeIn",
+        "textSize": 52
+      },
+      {
+        "text": "What is your comeback story? Drop\nit below. Follow for never-quit energy.",
+        "entrance": "slideLeft",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#ef4444",
+    "bgGradient": [
+      "#2a0a0a",
+      "#180505",
+      "#0a0202"
+    ]
+  }
+}

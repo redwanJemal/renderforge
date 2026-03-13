@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "The best leaders are servants first.\nTheir power comes from service.",
+        "highlight": "servants first",
+        "entrance": "slam",
+        "textSize": 56
+      },
+      {
+        "text": "Servant leadership is not weakness. It is the highest form of strength. When you serve your team, you remove obstacles. You create clarity. You empower\npeople to do their best work. The leader who serves creates a culture where everyone wants to give their best because they feel valued.",
+        "highlight": "highest form of strength",
+        "entrance": "scaleIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Every day, ask yourself one question. How can I make my team is job easier today?\nThat single question transforms you from a boss into a leader people love working for.",
+        "highlight": "make my team is job easier",
+        "entrance": "slideUp",
+        "textSize": 48
+      },
+      {
+        "text": "The measure of a leader is not the number of\npeople who serve them, but the number they serve.",
+        "highlight": "number they serve",
+        "entrance": "fadeIn",
+        "textSize": 52
+      },
+      {
+        "text": "How do you serve your team? Share\nyour leadership style. Follow for servant leadership.",
+        "entrance": "slideLeft",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#22c55e",
+    "bgGradient": [
+      "#0a2e1a",
+      "#071a10",
+      "#020a05"
+    ]
+  }
+}

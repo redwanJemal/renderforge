@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "Your brain does not know the\ndifference between real and imagined.",
+        "highlight": "real and imagined",
+        "entrance": "slam",
+        "textSize": 56
+      },
+      {
+        "text": "Neuroscience proved that repeating a thought for twenty-one days creates a new neural pathway. That means every negative story you tell yourself is just\na well-worn path in your brain. The good news is you can build new ones. Visualization is not woo woo. It is brain science.",
+        "highlight": "new neural pathway",
+        "entrance": "scaleIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "Spend ten minutes every morning seeing yourself as the person you want to\nbecome. Feel it. Believe it. Your brain will start building the roadmap.",
+        "highlight": "Visualization",
+        "entrance": "slideUp",
+        "textSize": 48
+      },
+      {
+        "text": "Your thoughts are blueprints. Your brain is\nthe construction crew. Give it better plans.",
+        "highlight": "blueprints",
+        "entrance": "fadeIn",
+        "textSize": 52
+      },
+      {
+        "text": "Save this and start your twenty-one day challenge\ntoday. Follow for the science of success.",
+        "entrance": "slideLeft",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#06b6d4",
+    "bgGradient": [
+      "#0a1e2e",
+      "#051218",
+      "#020608"
+    ]
+  }
+}

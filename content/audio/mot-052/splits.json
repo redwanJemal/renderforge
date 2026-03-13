@@ -1,0 +1,71 @@
+{
+  "segments": [
+    {
+      "key": "intro",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "headline",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "subheader",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "badge",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "key": "cta",
+      "start": 0,
+      "end": 0
+    }
+  ],
+  "props": {
+    "scenes": [
+      {
+        "text": "While they party, you plan. While they sleep,\nyou grind. While they wish, you build.",
+        "highlight": "you build",
+        "entrance": "slideUp",
+        "textSize": 56
+      },
+      {
+        "text": "There are twenty-four hours in a day. Everybody gets the same amount. The difference is how you use them. Successful people did not find\nextra time. They made extra time. They woke up earlier. They stayed up later. They cut the fat and focused on what matters.",
+        "highlight": "made extra time",
+        "entrance": "fadeIn",
+        "textSize": 44,
+        "subtextSize": 24
+      },
+      {
+        "text": "You do not need to work twenty hours a day. That is not the point. The point is that\nevery hour counts. One focused hour of deep work is worth more than four hours of distracted half-effort.",
+        "highlight": "every hour counts",
+        "entrance": "slideLeft",
+        "textSize": 48
+      },
+      {
+        "text": "Outwork everyone in the room. Not\nwith hours, but with intention.",
+        "highlight": "Outwork everyone",
+        "entrance": "slam",
+        "textSize": 52
+      },
+      {
+        "text": "What time did you start today? Drop\nit below. Follow for work ethic daily.",
+        "entrance": "scaleIn",
+        "textSize": 40,
+        "subtextSize": 26
+      }
+    ],
+    "title": "YOUR LAST DOLLAR",
+    "accentColor": "#a855f7",
+    "bgGradient": [
+      "#1a0a2e",
+      "#0f0518",
+      "#050208"
+    ]
+  }
+}
