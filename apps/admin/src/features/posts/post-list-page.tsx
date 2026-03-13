@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Pencil, Trash2, ChevronLeft, ChevronRight, Film } from "lucide-react";
+import { Pencil, Trash2, ChevronLeft, ChevronRight, Film, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -256,6 +256,7 @@ export function PostListPage() {
               <TableHead>Niche</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Format</TableHead>
+              <TableHead>Renders</TableHead>
               <TableHead>Created</TableHead>
               <TableHead className="w-[100px]">Actions</TableHead>
             </TableRow>
@@ -264,7 +265,7 @@ export function PostListPage() {
             {isLoading ? (
               Array.from({ length: 5 }).map((_, i) => (
                 <TableRow key={i}>
-                  {Array.from({ length: 7 }).map((_, j) => (
+                  {Array.from({ length: 8 }).map((_, j) => (
                     <TableCell key={j}>
                       <Skeleton className="h-5 w-full" />
                     </TableCell>
@@ -294,6 +295,37 @@ export function PostListPage() {
                   </TableCell>
                   <TableCell>{post.format}</TableCell>
                   <TableCell>
+                    {post.renderCounts && post.renderCounts.total > 0 ? (
+                      <div className="flex items-center gap-1.5 text-xs">
+                        {post.renderCounts.completed > 0 && (
+                          <span className="flex items-center gap-0.5 text-green-600">
+                            <CheckCircle className="h-3 w-3" />
+                            {post.renderCounts.completed}
+                          </span>
+                        )}
+                        {post.renderCounts.rendering > 0 && (
+                          <span className="flex items-center gap-0.5 text-blue-600">
+                            <Loader2 className="h-3 w-3 animate-spin" />
+                            {post.renderCounts.rendering}
+                          </span>
+                        )}
+                        {post.renderCounts.failed > 0 && (
+                          <span className="flex items-center gap-0.5 text-red-600">
+                            <AlertCircle className="h-3 w-3" />
+                            {post.renderCounts.failed}
+                          </span>
+                        )}
+                        {post.renderCounts.queued > 0 && (
+                          <span className="text-muted-foreground">
+                            +{post.renderCounts.queued} queued
+                          </span>
+                        )}
+                      </div>
+                    ) : (
+                      <span className="text-xs text-muted-foreground">--</span>
+                    )}
+                  </TableCell>
+                  <TableCell>
                     {new Date(post.createdAt).toLocaleDateString()}
                   </TableCell>
                   <TableCell>
@@ -321,7 +353,7 @@ export function PostListPage() {
             ) : (
               <TableRow>
                 <TableCell
-                  colSpan={7}
+                  colSpan={8}
                   className="h-24 text-center text-muted-foreground"
                 >
                   No posts found.

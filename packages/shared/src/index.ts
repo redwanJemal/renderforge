@@ -19,7 +19,7 @@ export const FORMATS: Record<Format, { width: number; height: number; label: str
 export const POST_STATUS_TRANSITIONS: Record<PostStatus, PostStatus[]> = {
   draft: ["audio_pending"],
   audio_pending: ["ready", "draft"],
-  ready: ["rendering"],
+  ready: ["rendering", "rendered"],
   rendering: ["rendered", "ready"],
   rendered: ["published", "ready"],
   published: [],

@@ -1,4 +1,4 @@
-import { db, posts, scenes, eq, and, ilike, count, desc, asc, inArray } from "@renderforge/db";
+import { db, posts, scenes, renders, eq, and, ilike, count, desc, asc, inArray, sql } from "@renderforge/db";
 import type { PostStatus } from "@renderforge/shared";
 import { POST_STATUS_TRANSITIONS } from "@renderforge/shared";
 
@@ -24,6 +24,40 @@ export const postService = {
       db.select().from(posts).where(where).limit(perPage).offset(offset).orderBy(desc(posts.createdAt)),
       db.select({ total: count() }).from(posts).where(where),
     ]);
+
+    // Attach render counts per post
+    if (items.length > 0) {
+      const postIds = items.map((p) => p.id);
+      const renderRows = await db
+        .select({
+          postId: renders.postId,
+          status: renders.status,
+          cnt: count(),
+        })
+        .from(renders)
+        .where(inArray(renders.postId, postIds))
+        .groupBy(renders.postId, renders.status);
+
+      const countsMap = new Map<string, { total: number; completed: number; rendering: number; failed: number; queued: number }>();
+      for (const row of renderRows) {
+        if (!countsMap.has(row.postId)) {
+          countsMap.set(row.postId, { total: 0, completed: 0, rendering: 0, failed: 0, queued: 0 });
+        }
+        const entry = countsMap.get(row.postId)!;
+        const c = Number(row.cnt);
+        entry.total += c;
+        if (row.status === "completed") entry.completed += c;
+        else if (row.status === "rendering") entry.rendering += c;
+        else if (row.status === "failed") entry.failed += c;
+        else if (row.status === "queued") entry.queued += c;
+      }
+
+      const itemsWithCounts = items.map((p) => ({
+        ...p,
+        renderCounts: countsMap.get(p.id) ?? { total: 0, completed: 0, rendering: 0, failed: 0, queued: 0 },
+      }));
+      return { items: itemsWithCounts, total, page, totalPages: Math.ceil(total / perPage) };
+    }
 
     return { items, total, page, totalPages: Math.ceil(total / perPage) };
   },

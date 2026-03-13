@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Loader2, Send } from "lucide-react";
+import { Loader2, Send, Facebook, Youtube, Link2, MessageCircle } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -12,18 +12,29 @@ import {
 } from "@/components/ui/dialog";
 import { useSocialAccounts } from "@/hooks/use-social";
 import { usePublishRender } from "@/hooks/use-renders";
+import { useQueryClient } from "@tanstack/react-query";
+
+const PROVIDER_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
+  facebook: Facebook,
+  youtube: Youtube,
+  tiktok: MessageCircle,
+  linkedin: Link2,
+  telegram: Send,
+};
 
 type PublishDialogProps = {
   renderIds: string[];
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  postId?: string;
 };
 
-export function PublishDialog({ renderIds, open, onOpenChange }: PublishDialogProps) {
+export function PublishDialog({ renderIds, open, onOpenChange, postId }: PublishDialogProps) {
   const [selectedAccounts, setSelectedAccounts] = useState<Set<string>>(new Set());
   const { data: accounts, isLoading } = useSocialAccounts();
   const publishRender = usePublishRender();
   const [publishing, setPublishing] = useState(false);
+  const queryClient = useQueryClient();
 
   function toggleAccount(id: string) {
     setSelectedAccounts((prev) => {
@@ -48,13 +59,17 @@ export function PublishDialog({ renderIds, open, onOpenChange }: PublishDialogPr
       try {
         await publishRender.mutateAsync({ renderId, socialAccountIds: accountIds });
         successCount++;
-      } catch {
-        toast.error(`Failed to publish render ${renderId.slice(0, 8)}`);
+      } catch (err) {
+        const message = err instanceof Error ? err.message : "Unknown error";
+        toast.error(`Failed to publish render ${renderId.slice(0, 8)}: ${message}`);
       }
     }
 
     if (successCount > 0) {
       toast.success(`Published ${successCount} render(s) to ${accountIds.length} account(s)`);
+      if (postId) {
+        queryClient.invalidateQueries({ queryKey: ["publishing", postId] });
+      }
     }
 
     setPublishing(false);
@@ -75,28 +90,32 @@ export function PublishDialog({ renderIds, open, onOpenChange }: PublishDialogPr
           </div>
         ) : !accounts || accounts.length === 0 ? (
           <p className="text-sm text-muted-foreground py-4">
-            No social accounts connected. Go to Settings to connect an account.
+            No social accounts connected. Go to Social to connect an account.
           </p>
         ) : (
           <div className="space-y-3">
             <p className="text-sm text-muted-foreground">
               Select accounts to publish to:
             </p>
-            {accounts.map((account) => (
-              <label
-                key={account.id}
-                className="flex items-center gap-3 p-3 rounded-lg border cursor-pointer hover:bg-accent/50"
-              >
-                <Checkbox
-                  checked={selectedAccounts.has(account.id)}
-                  onCheckedChange={() => toggleAccount(account.id)}
-                />
-                <div>
-                  <p className="text-sm font-medium capitalize">{account.provider}</p>
-                  <p className="text-xs text-muted-foreground">{account.accountName}</p>
-                </div>
-              </label>
-            ))}
+            {accounts.map((account) => {
+              const Icon = PROVIDER_ICONS[account.provider] ?? Send;
+              return (
+                <label
+                  key={account.id}
+                  className="flex items-center gap-3 p-3 rounded-lg border cursor-pointer hover:bg-accent/50"
+                >
+                  <Checkbox
+                    checked={selectedAccounts.has(account.id)}
+                    onCheckedChange={() => toggleAccount(account.id)}
+                  />
+                  <Icon className="h-4 w-4 text-muted-foreground" />
+                  <div>
+                    <p className="text-sm font-medium capitalize">{account.provider}</p>
+                    <p className="text-xs text-muted-foreground">{account.accountName}</p>
+                  </div>
+                </label>
+              );
+            })}
           </div>
         )}
 

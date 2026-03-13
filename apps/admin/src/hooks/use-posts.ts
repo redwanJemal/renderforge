@@ -1,6 +1,14 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { api } from "@/lib/api";
 
+type RenderCounts = {
+  total: number;
+  completed: number;
+  rendering: number;
+  failed: number;
+  queued: number;
+};
+
 type Post = {
   id: string;
   nicheId: string;
@@ -12,6 +20,7 @@ type Post = {
   metadata: Record<string, unknown>;
   createdAt: string;
   scenes?: Scene[];
+  renderCounts?: RenderCounts;
 };
 
 type Scene = {
@@ -34,7 +43,7 @@ type PostsResponse = {
   totalPages: number;
 };
 
-export type { Post, Scene, PostsResponse };
+export type { Post, Scene, PostsResponse, RenderCounts };
 
 export function usePosts(
   filters: {

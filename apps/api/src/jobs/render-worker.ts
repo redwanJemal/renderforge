@@ -204,9 +204,15 @@ async function processRenderJob(job: Job<RenderJobData>) {
   mkdirSync(workDir, { recursive: true });
 
   try {
-    // Update status to rendering
+    // Update render status to rendering
     await db.update(renders).set({ status: "rendering", progress: 0 }).where(eq(renders.id, renderId));
     await publishProgress(renderId, 0, "rendering", "Starting render...");
+
+    // Auto-sync post status to "rendering" if currently "ready"
+    const [currentPost] = await db.select({ status: posts.status }).from(posts).where(eq(posts.id, postId)).limit(1);
+    if (currentPost && currentPost.status === "ready") {
+      await db.update(posts).set({ status: "rendering", updatedAt: new Date() }).where(eq(posts.id, postId));
+    }
 
     // Step 1: Fetch post + scenes from DB
     const [post] = await db.select().from(posts).where(eq(posts.id, postId)).limit(1);
@@ -530,6 +536,12 @@ async function processRenderJob(job: Job<RenderJobData>) {
 
     await publishProgress(renderId, 100, "completed", "Render complete");
     console.log(`[render-worker] Completed render ${renderId} (${(fileSizeBytes / 1024 / 1024).toFixed(1)} MB)`);
+
+    // Auto-sync post status to "rendered" if currently "ready" or "rendering"
+    const [postAfter] = await db.select({ status: posts.status }).from(posts).where(eq(posts.id, postId)).limit(1);
+    if (postAfter && (postAfter.status === "ready" || postAfter.status === "rendering")) {
+      await db.update(posts).set({ status: "rendered" as const, updatedAt: new Date() }).where(eq(posts.id, postId));
+    }
 
     // Cleanup temp files
     try {
