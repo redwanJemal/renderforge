@@ -18,7 +18,7 @@ export interface MixBGMOptions {
   videoPath: string;
   bgmPath: string;
   outputPath?: string;  // defaults to videoPath with -bgm suffix
-  bgmVolume?: number;   // 0-1 scale, default 0.06 (~-24dB)
+  bgmVolume?: number;   // 0-1 scale, default 0.35
   fadeOutDuration?: number; // seconds, default 3
 }
 
@@ -39,7 +39,7 @@ function getVideoDuration(videoPath: string): number {
  * Original video audio is preserved at full volume.
  */
 export function mixBGM(opts: MixBGMOptions): string {
-  const { videoPath, bgmPath, bgmVolume = 0.06, fadeOutDuration = 3 } = opts;
+  const { videoPath, bgmPath, bgmVolume = 0.35, fadeOutDuration = 3 } = opts;
   const outputPath = opts.outputPath || videoPath.replace(/\.mp4$/, '-bgm.mp4');
 
   if (!fs.existsSync(videoPath)) throw new Error(`Video not found: ${videoPath}`);
@@ -49,11 +49,12 @@ export function mixBGM(opts: MixBGMOptions): string {
   const fadeStart = Math.max(0, duration - fadeOutDuration);
 
   // Filter chain:
-  // 1. Loop BGM, set volume, trim to video length, fade out at end
-  // 2. Mix with original audio
+  // 1. Loop BGM via stream_loop, set volume, trim to video length, fade out
+  // 2. Mix with original audio using normalize=0 to prevent amix from
+  //    halving the narration volume (default amix divides by input count)
   const filterComplex = [
-    `[1:a]aloop=loop=-1:size=2e+09,volume=${bgmVolume},atrim=0:${duration.toFixed(2)},afade=t=out:st=${fadeStart.toFixed(2)}:d=${fadeOutDuration}[bgm]`,
-    `[0:a][bgm]amix=inputs=2:duration=first:dropout_transition=0[aout]`,
+    `[1:a]volume=${bgmVolume},atrim=0:${duration.toFixed(2)},afade=t=out:st=${fadeStart.toFixed(2)}:d=${fadeOutDuration},asetpts=PTS-STARTPTS[bgm]`,
+    `[0:a][bgm]amix=inputs=2:duration=first:dropout_transition=0:normalize=0[aout]`,
   ].join(';');
 
   const cmd = [
@@ -84,7 +85,7 @@ function main() {
   let video: string | null = null;
   let bgm: string | null = null;
   let output: string | null = null;
-  let volume = 0.06;
+  let volume = 0.35;
   let fade = 3;
 
   for (let i = 0; i < args.length; i++) {
