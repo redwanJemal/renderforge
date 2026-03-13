@@ -12,6 +12,7 @@ export const renders = pgTable(
     status: renderStatusEnum("status").default("queued").notNull(),
     progress: integer("progress").default(0).notNull(),
     outputUrl: varchar("output_url", { length: 500 }),
+    thumbnailUrl: varchar("thumbnail_url", { length: 500 }),
     durationMs: integer("duration_ms"),
     fileSize: bigint("file_size", { mode: "number" }),
     error: text("error"),

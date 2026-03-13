@@ -18,6 +18,7 @@ import { analyticsRouter } from "./routes/analytics.js";
 import { templatesRouter } from "./routes/templates.js";
 import { settingsRouter } from "./routes/settings.js";
 import { publishingRouter } from "./routes/publishing.js";
+import { storageProxy } from "./routes/storage-proxy.js";
 import { createRenderWorker } from "./jobs/render-worker.js";
 import { createPublishWorker } from "./jobs/publish-worker.js";
 import { closeRedis } from "./lib/redis.js";
@@ -46,6 +47,7 @@ app.route("/api/analytics", analyticsRouter);
 app.route("/api/templates", templatesRouter);
 app.route("/api/settings", settingsRouter);
 app.route("/api/publishing", publishingRouter);
+app.route("/api/storage", storageProxy);
 
 // Root
 app.get("/", (c) => {

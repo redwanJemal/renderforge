@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Pencil, Trash2, ChevronLeft, ChevronRight } from "lucide-react";
+import { Pencil, Trash2, ChevronLeft, ChevronRight, Film } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Table,
   TableBody,
@@ -27,6 +28,7 @@ import {
 } from "@/components/ui/dialog";
 import { Skeleton } from "@/components/ui/skeleton";
 import { usePosts, useDeletePost } from "@/hooks/use-posts";
+import { useCreateBatchRender } from "@/hooks/use-renders";
 import { useNiches } from "@/hooks/use-niches";
 import { PostCreateDialog } from "./post-create-dialog";
 import { toast } from "sonner";
@@ -40,6 +42,12 @@ const STATUSES = [
   { value: "rendered", label: "Rendered" },
   { value: "published", label: "Published" },
 ] as const;
+
+const FORMATS = [
+  { value: "story", label: "Story (9:16)" },
+  { value: "post", label: "Post (1:1)" },
+  { value: "landscape", label: "Landscape (16:9)" },
+];
 
 function statusBadgeVariant(
   status: string,
@@ -71,6 +79,10 @@ export function PostListPage() {
     id: string;
     title: string;
   } | null>(null);
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [bulkDeleteOpen, setBulkDeleteOpen] = useState(false);
+  const [renderFormatOpen, setRenderFormatOpen] = useState(false);
+  const [selectedFormat, setSelectedFormat] = useState("story");
 
   const { data: nichesData } = useNiches();
   const { data, isLoading } = usePosts({
@@ -80,10 +92,32 @@ export function PostListPage() {
     page,
   });
   const deletePost = useDeletePost();
+  const batchRender = useCreateBatchRender();
 
   const nicheLookup = new Map(
     nichesData?.items?.map((n) => [n.id, n.name]) ?? [],
   );
+
+  const items = data?.items ?? [];
+  const allSelected = items.length > 0 && items.every((p) => selectedIds.has(p.id));
+  const someSelected = selectedIds.size > 0;
+
+  function toggleSelectAll() {
+    if (allSelected) {
+      setSelectedIds(new Set());
+    } else {
+      setSelectedIds(new Set(items.map((p) => p.id)));
+    }
+  }
+
+  function toggleSelect(id: string) {
+    setSelectedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  }
 
   async function handleDelete() {
     if (!deleteTarget) return;
@@ -93,6 +127,36 @@ export function PostListPage() {
       setDeleteTarget(null);
     } catch {
       toast.error("Failed to delete post.");
+    }
+  }
+
+  async function handleBulkDelete() {
+    const ids = Array.from(selectedIds);
+    let deleted = 0;
+    for (const id of ids) {
+      try {
+        await deletePost.mutateAsync(id);
+        deleted++;
+      } catch {
+        // continue
+      }
+    }
+    toast.success(`Deleted ${deleted} post(s)`);
+    setSelectedIds(new Set());
+    setBulkDeleteOpen(false);
+  }
+
+  async function handleBulkRender() {
+    try {
+      await batchRender.mutateAsync({
+        postIds: Array.from(selectedIds),
+        formats: [selectedFormat],
+      });
+      toast.success(`Queued ${selectedIds.size} render(s)`);
+      setRenderFormatOpen(false);
+      setSelectedIds(new Set());
+    } catch {
+      toast.error("Failed to queue renders");
     }
   }
 
@@ -160,10 +224,34 @@ export function PostListPage() {
         />
       </div>
 
+      {/* Bulk Action Bar */}
+      {someSelected && (
+        <div className="flex items-center gap-3 p-3 rounded-lg border bg-muted/50">
+          <span className="text-sm font-medium">{selectedIds.size} selected</span>
+          <Button variant="outline" size="sm" onClick={() => setBulkDeleteOpen(true)}>
+            <Trash2 className="mr-2 h-4 w-4" />
+            Delete Selected
+          </Button>
+          <Button variant="outline" size="sm" onClick={() => setRenderFormatOpen(true)}>
+            <Film className="mr-2 h-4 w-4" />
+            Render Selected
+          </Button>
+          <Button variant="ghost" size="sm" onClick={() => setSelectedIds(new Set())}>
+            Clear
+          </Button>
+        </div>
+      )}
+
       <div className="rounded-md border">
         <Table>
           <TableHeader>
             <TableRow>
+              <TableHead className="w-[40px]">
+                <Checkbox
+                  checked={allSelected}
+                  onCheckedChange={toggleSelectAll}
+                />
+              </TableHead>
               <TableHead>Title</TableHead>
               <TableHead>Niche</TableHead>
               <TableHead>Status</TableHead>
@@ -176,16 +264,22 @@ export function PostListPage() {
             {isLoading ? (
               Array.from({ length: 5 }).map((_, i) => (
                 <TableRow key={i}>
-                  {Array.from({ length: 6 }).map((_, j) => (
+                  {Array.from({ length: 7 }).map((_, j) => (
                     <TableCell key={j}>
                       <Skeleton className="h-5 w-full" />
                     </TableCell>
                   ))}
                 </TableRow>
               ))
-            ) : data?.items?.length ? (
-              data.items.map((post) => (
+            ) : items.length > 0 ? (
+              items.map((post) => (
                 <TableRow key={post.id}>
+                  <TableCell>
+                    <Checkbox
+                      checked={selectedIds.has(post.id)}
+                      onCheckedChange={() => toggleSelect(post.id)}
+                    />
+                  </TableCell>
                   <TableCell className="font-medium">{post.title}</TableCell>
                   <TableCell>
                     {nicheLookup.get(post.nicheId) || post.nicheId}
@@ -227,7 +321,7 @@ export function PostListPage() {
             ) : (
               <TableRow>
                 <TableCell
-                  colSpan={6}
+                  colSpan={7}
                   className="h-24 text-center text-muted-foreground"
                 >
                   No posts found.
@@ -266,6 +360,7 @@ export function PostListPage() {
         </div>
       )}
 
+      {/* Single Delete Dialog */}
       <Dialog
         open={!!deleteTarget}
         onOpenChange={(open) => !open && setDeleteTarget(null)}
@@ -288,6 +383,59 @@ export function PostListPage() {
               disabled={deletePost.isPending}
             >
               {deletePost.isPending ? "Deleting..." : "Delete"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Bulk Delete Dialog */}
+      <Dialog open={bulkDeleteOpen} onOpenChange={setBulkDeleteOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Delete {selectedIds.size} Post(s)</DialogTitle>
+          </DialogHeader>
+          <p className="text-sm text-muted-foreground">
+            Are you sure you want to delete {selectedIds.size} selected post(s)?
+            This action cannot be undone.
+          </p>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setBulkDeleteOpen(false)}>
+              Cancel
+            </Button>
+            <Button variant="destructive" onClick={handleBulkDelete}>
+              Delete All
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Render Format Picker */}
+      <Dialog open={renderFormatOpen} onOpenChange={setRenderFormatOpen}>
+        <DialogContent className="sm:max-w-sm">
+          <DialogHeader>
+            <DialogTitle>Render {selectedIds.size} Post(s)</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-3">
+            <p className="text-sm text-muted-foreground">Select output format:</p>
+            <Select value={selectedFormat} onValueChange={setSelectedFormat}>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {FORMATS.map((f) => (
+                  <SelectItem key={f.value} value={f.value}>
+                    {f.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setRenderFormatOpen(false)}>
+              Cancel
+            </Button>
+            <Button onClick={handleBulkRender} disabled={batchRender.isPending}>
+              {batchRender.isPending ? "Queuing..." : "Start Renders"}
             </Button>
           </DialogFooter>
         </DialogContent>

@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { z } from "zod";
 import { Queue } from "bullmq";
-import { db, renders, posts, eq, count, desc, and } from "@renderforge/db";
+import { db, renders, posts, scheduledPosts, eq, count, desc, and, inArray } from "@renderforge/db";
 import { authMiddleware } from "../middleware/auth.js";
 import { getRedis } from "../lib/redis.js";
 import type { RenderJobData } from "../jobs/render-worker.js";
@@ -47,6 +47,7 @@ rendersRouter.get("/", async (c) => {
       status: renders.status,
       progress: renders.progress,
       outputUrl: renders.outputUrl,
+      thumbnailUrl: renders.thumbnailUrl,
       durationMs: renders.durationMs,
       fileSize: renders.fileSize,
       error: renders.error,
@@ -145,6 +146,64 @@ rendersRouter.delete("/:id", async (c) => {
 
   await db.delete(renders).where(eq(renders.id, id));
   return c.json({ success: true });
+});
+
+// Bulk delete renders
+rendersRouter.post("/bulk-delete", async (c) => {
+  const { ids } = z.object({ ids: z.array(z.string().uuid()) }).parse(await c.req.json());
+  if (ids.length === 0) return c.json({ deleted: 0 });
+
+  // Delete S3 files
+  for (const id of ids) {
+    try {
+      const { storage } = await import("../services/storage.js");
+      await storage.delete(`renders/${id}.mp4`);
+      await storage.delete(`thumbnails/${id}.jpg`);
+    } catch {
+      // Continue if file doesn't exist
+    }
+  }
+
+  await db.delete(renders).where(inArray(renders.id, ids));
+  return c.json({ deleted: ids.length });
+});
+
+// Publish render to social account (creates scheduled post + immediately publishes)
+rendersRouter.post("/:id/publish", async (c) => {
+  const renderId = c.req.param("id");
+  const { socialAccountIds } = z.object({
+    socialAccountIds: z.array(z.string().uuid()),
+  }).parse(await c.req.json());
+
+  const [render] = await db.select().from(renders).where(eq(renders.id, renderId)).limit(1);
+  if (!render) return c.json({ error: "Render not found" }, 404);
+  if (render.status !== "completed") return c.json({ error: "Render is not completed" }, 400);
+
+  const queue = new Queue<import("../jobs/publish-worker.js").PublishJobData>("publish", { connection: getRedis() });
+  const results = [];
+
+  for (const socialAccountId of socialAccountIds) {
+    // Create a scheduled post entry for tracking
+    const [sp] = await db.insert(scheduledPosts).values({
+      postId: render.postId,
+      renderId,
+      socialAccountId,
+      scheduledAt: new Date(),
+      status: "scheduled",
+    }).returning();
+
+    // Queue publish job
+    await queue.add("publish", {
+      scheduledPostId: sp.id,
+      postId: render.postId,
+      renderId,
+      socialAccountId,
+    });
+
+    results.push(sp);
+  }
+
+  return c.json({ published: results.length, items: results }, 201);
 });
 
 // Download render output — stream from S3 to avoid redirect issues

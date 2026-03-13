@@ -10,10 +10,13 @@ import {
   ExternalLink,
   Play,
   MoreHorizontal,
+  Send,
+  Image,
 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Progress } from "@/components/ui/progress";
 import {
   Select,
@@ -54,9 +57,10 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useRenders, useCreateRender, useDeleteRender, type Render } from "@/hooks/use-renders";
+import { useRenders, useCreateRender, useDeleteRender, useBulkDeleteRenders, type Render } from "@/hooks/use-renders";
 import { useAllRendersSSE } from "@/hooks/use-sse";
 import { NewRenderDialog } from "./new-render-dialog";
+import { PublishDialog } from "./publish-dialog";
 import { useNavigate } from "react-router-dom";
 
 async function downloadRender(renderId: string) {
@@ -160,6 +164,10 @@ export function RenderListPage() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [detailRender, setDetailRender] = useState<Render | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<Render | null>(null);
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [bulkDeleteOpen, setBulkDeleteOpen] = useState(false);
+  const [publishOpen, setPublishOpen] = useState(false);
+  const [publishIds, setPublishIds] = useState<string[]>([]);
   const navigate = useNavigate();
 
   const { data, isLoading, isError } = useRenders({
@@ -169,10 +177,34 @@ export function RenderListPage() {
 
   const retryRender = useCreateRender();
   const deleteRender = useDeleteRender();
+  const bulkDelete = useBulkDeleteRenders();
   const progressMap = useAllRendersSSE();
 
-  const renders = data?.items ?? [];
+  const renderItems = data?.items ?? [];
   const totalPages = data?.totalPages ?? 1;
+
+  const allSelected = renderItems.length > 0 && renderItems.every((r) => selectedIds.has(r.id));
+  const someSelected = selectedIds.size > 0;
+  const selectedCompleted = renderItems.filter(
+    (r) => selectedIds.has(r.id) && getStatus(r) === "completed",
+  );
+
+  function toggleSelectAll() {
+    if (allSelected) {
+      setSelectedIds(new Set());
+    } else {
+      setSelectedIds(new Set(renderItems.map((r) => r.id)));
+    }
+  }
+
+  function toggleSelect(id: string) {
+    setSelectedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  }
 
   function getProgress(render: Render) {
     const sse = progressMap[render.id];
@@ -196,6 +228,17 @@ export function RenderListPage() {
     }
   }
 
+  async function handleBulkDelete() {
+    try {
+      await bulkDelete.mutateAsync(Array.from(selectedIds));
+      toast.success(`Deleted ${selectedIds.size} render(s)`);
+      setSelectedIds(new Set());
+      setBulkDeleteOpen(false);
+    } catch {
+      toast.error("Failed to delete renders");
+    }
+  }
+
   async function handleRerender(render: Render) {
     try {
       await retryRender.mutateAsync({ postId: render.postId, format: render.format });
@@ -203,6 +246,29 @@ export function RenderListPage() {
     } catch {
       toast.error("Failed to create render");
     }
+  }
+
+  async function handleBulkDownload() {
+    for (const render of selectedCompleted) {
+      if (render.outputUrl) {
+        await downloadRender(render.id);
+      }
+    }
+  }
+
+  function handlePublishSelected() {
+    const ids = selectedCompleted.map((r) => r.id);
+    if (ids.length === 0) {
+      toast.error("No completed renders selected");
+      return;
+    }
+    setPublishIds(ids);
+    setPublishOpen(true);
+  }
+
+  function handlePublishSingle(render: Render) {
+    setPublishIds([render.id]);
+    setPublishOpen(true);
   }
 
   return (
@@ -238,10 +304,43 @@ export function RenderListPage() {
         </Select>
       </div>
 
+      {/* Bulk Action Bar */}
+      {someSelected && (
+        <div className="flex items-center gap-3 p-3 rounded-lg border bg-muted/50">
+          <span className="text-sm font-medium">{selectedIds.size} selected</span>
+          <Button variant="outline" size="sm" onClick={() => setBulkDeleteOpen(true)}>
+            <Trash2 className="mr-2 h-4 w-4" />
+            Delete Selected
+          </Button>
+          {selectedCompleted.length > 0 && (
+            <>
+              <Button variant="outline" size="sm" onClick={handleBulkDownload}>
+                <Download className="mr-2 h-4 w-4" />
+                Download ({selectedCompleted.length})
+              </Button>
+              <Button variant="outline" size="sm" onClick={handlePublishSelected}>
+                <Send className="mr-2 h-4 w-4" />
+                Publish ({selectedCompleted.length})
+              </Button>
+            </>
+          )}
+          <Button variant="ghost" size="sm" onClick={() => setSelectedIds(new Set())}>
+            Clear
+          </Button>
+        </div>
+      )}
+
       <div className="rounded-md border">
         <Table>
           <TableHeader>
             <TableRow>
+              <TableHead className="w-[40px]">
+                <Checkbox
+                  checked={allSelected}
+                  onCheckedChange={toggleSelectAll}
+                />
+              </TableHead>
+              <TableHead className="w-[50px]"></TableHead>
               <TableHead>Post</TableHead>
               <TableHead>Format</TableHead>
               <TableHead>Status</TableHead>
@@ -255,7 +354,7 @@ export function RenderListPage() {
             {isLoading ? (
               Array.from({ length: 5 }).map((_, i) => (
                 <TableRow key={i}>
-                  {Array.from({ length: 7 }).map((_, j) => (
+                  {Array.from({ length: 9 }).map((_, j) => (
                     <TableCell key={j}>
                       <Skeleton className="h-4 w-full" />
                     </TableCell>
@@ -264,23 +363,43 @@ export function RenderListPage() {
               ))
             ) : isError ? (
               <TableRow>
-                <TableCell colSpan={7} className="text-center text-muted-foreground py-8">
+                <TableCell colSpan={9} className="text-center text-muted-foreground py-8">
                   Failed to load renders. Please try again.
                 </TableCell>
               </TableRow>
-            ) : renders.length === 0 ? (
+            ) : renderItems.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={7} className="text-center text-muted-foreground py-8">
+                <TableCell colSpan={9} className="text-center text-muted-foreground py-8">
                   No renders found. Create one to get started.
                 </TableCell>
               </TableRow>
             ) : (
-              renders.map((render) => {
+              renderItems.map((render) => {
                 const status = getStatus(render);
                 const progress = getProgress(render);
 
                 return (
-                  <TableRow key={render.id}>
+                  <TableRow key={render.id} data-selected={selectedIds.has(render.id) || undefined}>
+                    <TableCell>
+                      <Checkbox
+                        checked={selectedIds.has(render.id)}
+                        onCheckedChange={() => toggleSelect(render.id)}
+                      />
+                    </TableCell>
+                    <TableCell className="p-1">
+                      {render.thumbnailUrl ? (
+                        <img
+                          src={`/api/storage/${render.thumbnailUrl}`}
+                          alt=""
+                          className="w-10 h-10 rounded object-cover"
+                          onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                        />
+                      ) : (
+                        <div className="w-10 h-10 rounded bg-muted flex items-center justify-center">
+                          <Image className="h-4 w-4 text-muted-foreground" />
+                        </div>
+                      )}
+                    </TableCell>
                     <TableCell className="font-medium max-w-[200px]">
                       <button
                         className="text-left truncate block hover:underline text-primary"
@@ -357,6 +476,10 @@ export function RenderListPage() {
                                 <Download className="mr-2 h-4 w-4" />
                                 Download
                               </DropdownMenuItem>
+                              <DropdownMenuItem onClick={() => handlePublishSingle(render)}>
+                                <Send className="mr-2 h-4 w-4" />
+                                Publish
+                              </DropdownMenuItem>
                             </>
                           )}
                           <DropdownMenuSeparator />
@@ -410,6 +533,7 @@ export function RenderListPage() {
       )}
 
       <NewRenderDialog open={dialogOpen} onOpenChange={setDialogOpen} />
+      <PublishDialog renderIds={publishIds} open={publishOpen} onOpenChange={setPublishOpen} />
 
       {/* Render Detail Dialog */}
       <Dialog open={!!detailRender} onOpenChange={(open) => !open && setDetailRender(null)}>
@@ -419,13 +543,22 @@ export function RenderListPage() {
           </DialogHeader>
           {detailRender && (
             <div className="space-y-4">
+              {detailRender.thumbnailUrl && (
+                <div className="rounded-lg overflow-hidden border">
+                  <img
+                    src={`/api/storage/${detailRender.thumbnailUrl}`}
+                    alt="Thumbnail"
+                    className="w-full object-contain max-h-[200px]"
+                  />
+                </div>
+              )}
               {detailRender.outputUrl && (
                 <div className="rounded-lg overflow-hidden border bg-black">
                   <video
                     src={detailRender.outputUrl}
                     controls
                     className="w-full max-h-[300px]"
-                    poster=""
+                    poster={detailRender.thumbnailUrl ? `/api/storage/${detailRender.thumbnailUrl}` : ""}
                   />
                 </div>
               )}
@@ -504,6 +637,12 @@ export function RenderListPage() {
                     Download
                   </Button>
                 )}
+                {getStatus(detailRender) === "completed" && (
+                  <Button variant="outline" size="sm" onClick={() => handlePublishSingle(detailRender)}>
+                    <Send className="mr-2 h-4 w-4" />
+                    Publish
+                  </Button>
+                )}
                 <Button
                   variant="outline"
                   size="sm"
@@ -534,7 +673,7 @@ export function RenderListPage() {
         </DialogContent>
       </Dialog>
 
-      {/* Delete Confirmation */}
+      {/* Delete Confirmation (single) */}
       <AlertDialog open={!!deleteTarget} onOpenChange={(open) => !open && setDeleteTarget(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
@@ -556,6 +695,32 @@ export function RenderListPage() {
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               ) : null}
               Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      {/* Bulk Delete Confirmation */}
+      <AlertDialog open={bulkDeleteOpen} onOpenChange={setBulkDeleteOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete {selectedIds.size} Render(s)</AlertDialogTitle>
+            <AlertDialogDescription>
+              Are you sure you want to delete {selectedIds.size} selected render(s)?
+              This action cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+              disabled={bulkDelete.isPending}
+              onClick={handleBulkDelete}
+            >
+              {bulkDelete.isPending ? (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              ) : null}
+              Delete All
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

@@ -9,6 +9,7 @@ type Render = {
   status: string;
   progress: number;
   outputUrl: string | null;
+  thumbnailUrl: string | null;
   durationMs: number | null;
   fileSize: number | null;
   error: string | null;
@@ -63,6 +64,23 @@ export function useDeleteRender() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (id: string) => api.delete(`/api/renders/${id}`),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["renders"] }),
+  });
+}
+
+export function useBulkDeleteRenders() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (ids: string[]) => api.post("/api/renders/bulk-delete", { ids }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["renders"] }),
+  });
+}
+
+export function usePublishRender() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (data: { renderId: string; socialAccountIds: string[] }) =>
+      api.post(`/api/renders/${data.renderId}/publish`, { socialAccountIds: data.socialAccountIds }),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["renders"] }),
   });
 }

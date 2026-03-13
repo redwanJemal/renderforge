@@ -63,9 +63,41 @@ async function bundleRemotionProject(): Promise<string> {
   return bundlePath;
 }
 
+// Premium templates registered with bare composition IDs (no format suffix)
+const PREMIUM_TEMPLATES: Record<string, { durationInFrames: number }> = {
+  "showcase": { durationInFrames: 420 },
+  "countdown": { durationInFrames: 390 },
+  "kinetic-text": { durationInFrames: 390 },
+  "split-reveal": { durationInFrames: 360 },
+  "orbit": { durationInFrames: 390 },
+  "glitch-text": { durationInFrames: 420 },
+  "neon-glow": { durationInFrames: 360 },
+  "parallax-layers": { durationInFrames: 360 },
+  "breaking-news": { durationInFrames: 360 },
+  "match-fixture": { durationInFrames: 300 },
+  "post-match": { durationInFrames: 600 },
+  "dubai-luxury": { durationInFrames: 390 },
+  "ramadan-greeting": { durationInFrames: 360 },
+  "gold-reveal": { durationInFrames: 390 },
+  "slider": { durationInFrames: 1200 },
+};
+
 // Check if template should use the premium yld-intro composition
 function isYLDTemplate(templateId: string): boolean {
   return templateId === "motivational-narration" || templateId === "yld-intro";
+}
+
+function isPremiumTemplate(templateId: string): boolean {
+  return templateId in PREMIUM_TEMPLATES;
+}
+
+function getPremiumCompositionId(templateId: string, format: string): string {
+  if (templateId === "slider") {
+    if (format === "landscape") return "slider-landscape";
+    if (format === "post") return "slider-square";
+    return "slider";
+  }
+  return templateId;
 }
 
 // Build yld-intro props from DB scenes (intro, headline, subheader, badge, cta)
@@ -194,15 +226,26 @@ async function processRenderJob(job: Job<RenderJobData>) {
     const templateId = post.templateId || "motivational-narration";
     const fps = 30;
 
-    // Determine if we should use the premium yld-intro template
+    // Determine composition ID based on template type
     const useYLDIntro = isYLDTemplate(templateId);
-    const compositionId = useYLDIntro ? "yld-intro" : `${templateId}-${format}`;
+    const usePremium = isPremiumTemplate(templateId);
+    const compositionId = useYLDIntro
+      ? "yld-intro"
+      : usePremium
+        ? getPremiumCompositionId(templateId, format)
+        : `${templateId}-${format}`;
     console.log(`[render-worker] Using composition: ${compositionId} (template: ${templateId})`);
 
     let templateProps: Record<string, unknown>;
     let totalFrames: number;
 
-    if (useYLDIntro) {
+    if (usePremium && !useYLDIntro) {
+      // Premium template — use sceneProps from metadata or empty object for defaults
+      templateProps = (metadata.sceneProps && typeof metadata.sceneProps === "object")
+        ? metadata.sceneProps as Record<string, unknown>
+        : {};
+      totalFrames = PREMIUM_TEMPLATES[templateId].durationInFrames;
+    } else if (useYLDIntro) {
       // Build yld-intro props from scenes or metadata
       if (metadata.sceneProps && typeof metadata.sceneProps === "object") {
         // If metadata already has yld-intro formatted props (logo, header, etc.), use directly
@@ -421,6 +464,34 @@ async function processRenderJob(job: Job<RenderJobData>) {
       }
     }
 
+    await publishProgress(renderId, 88, "rendering", "Generating thumbnail...");
+
+    // Step 5b: Generate thumbnail from video midpoint
+    let thumbnailS3Key: string | null = null;
+    try {
+      const thumbPath = join(workDir, `thumb-${renderId}.jpg`);
+      // Get video duration for midpoint calculation
+      const durStr = execFileSync("ffprobe", [
+        "-v", "quiet", "-show_entries", "format=duration", "-of", "csv=p=0", finalOutputPath,
+      ], { encoding: "utf-8" }).trim();
+      const midpoint = (parseFloat(durStr) / 2).toFixed(2);
+
+      execFileSync("ffmpeg", [
+        "-y", "-ss", midpoint, "-i", finalOutputPath,
+        "-frames:v", "1", "-q:v", "2", thumbPath,
+      ], { timeout: 30_000 });
+
+      if (existsSync(thumbPath)) {
+        const thumbBuffer = readFileSync(thumbPath);
+        thumbnailS3Key = `thumbnails/${renderId}.jpg`;
+        const { storage: thumbStorage } = await import("../services/storage.js");
+        await thumbStorage.upload(thumbnailS3Key, thumbBuffer, "image/jpeg");
+        console.log(`[render-worker] Thumbnail generated: ${thumbnailS3Key}`);
+      }
+    } catch (thumbErr) {
+      console.warn("[render-worker] Thumbnail generation failed:", thumbErr);
+    }
+
     await publishProgress(renderId, 90, "rendering", "Uploading to storage...");
     await job.updateProgress(90);
 
@@ -450,6 +521,7 @@ async function processRenderJob(job: Job<RenderJobData>) {
         status: "completed",
         progress: 100,
         outputUrl: s3Key,
+        thumbnailUrl: thumbnailS3Key,
         fileSize: fileSizeBytes,
         durationMs,
         updatedAt: new Date(),
