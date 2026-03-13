@@ -1,79 +1,14 @@
-#!/usr/bin/env npx tsx
 /**
- * Motivational Content Generator
+ * Motivational Content Bank
  *
- * Generates 100 motivational speech posts (10 per theme) with:
- * - scripts-motivational.json → TTS input for Colab (Qwen3 / Les Brown voice)
- * - content/audio/mot-XXX/splits.json → render props per post
- *
- * Usage:
- *   npx tsx content/generate-motivational.ts              # generate all 100
- *   npx tsx content/generate-motivational.ts --limit 5    # first 5 only
- *   npx tsx content/generate-motivational.ts --dry-run    # preview without writing
+ * Extracts content and logic from generate-motivational.ts into a ContentBank implementation.
+ * 100 posts (10 themes × 10 posts) for motivational narration videos.
  */
 
-import * as fs from 'fs';
-import * as path from 'path';
+import { ContentBank, ContentPost, AccentColor } from './types';
 
 // ──────────────────────────────────────────────
 // TYPES
-// ──────────────────────────────────────────────
-
-interface Section {
-  key: string;
-  text: string;
-  audioFile: string;
-}
-
-interface ScriptPost {
-  postId: string;
-  template: string;
-  theme: string;
-  title: string;
-  sections: Section[];
-  fullScript: string;
-  audioDir: string;
-}
-
-interface SceneProps {
-  text: string;
-  highlight?: string;
-  entrance: string;
-  textSize: number;
-  subtextSize?: number;
-  subtext?: string;
-  textAlign?: string;
-}
-
-interface SplitsJson {
-  segments: { key: string; start: number; end: number }[];
-  props: {
-    scenes: SceneProps[];
-    title: string;
-    accentColor: string;
-    bgGradient: [string, string, string];
-  };
-}
-
-// ──────────────────────────────────────────────
-// VISUAL VARIETY
-// ──────────────────────────────────────────────
-
-const ACCENT_COLORS = [
-  { name: 'emerald', color: '#22c55e', bg: ['#0a2e1a', '#071a10', '#020a05'] as [string, string, string] },
-  { name: 'gold', color: '#D4AF37', bg: ['#1a1500', '#0f0d00', '#050400'] as [string, string, string] },
-  { name: 'crimson', color: '#ef4444', bg: ['#2a0a0a', '#180505', '#0a0202'] as [string, string, string] },
-  { name: 'violet', color: '#a855f7', bg: ['#1a0a2e', '#0f0518', '#050208'] as [string, string, string] },
-  { name: 'cyan', color: '#06b6d4', bg: ['#0a1e2e', '#051218', '#020608'] as [string, string, string] },
-  { name: 'rose', color: '#f43f5e', bg: ['#2a0a14', '#18050a', '#0a0204'] as [string, string, string] },
-  { name: 'amber', color: '#f59e0b', bg: ['#2a1a0a', '#180f05', '#0a0602'] as [string, string, string] },
-  { name: 'teal', color: '#14b8a6', bg: ['#0a2e28', '#071a16', '#020a08'] as [string, string, string] },
-];
-
-const ENTRANCES = ['scaleIn', 'slideUp', 'fadeIn', 'slideLeft', 'slam'] as const;
-
-// ──────────────────────────────────────────────
-// CONTENT THEMES (10 posts each = 100 total)
 // ──────────────────────────────────────────────
 
 interface ThemeDef {
@@ -93,7 +28,28 @@ interface ThemeDef {
   }[];
 }
 
-const THEMES: ThemeDef[] = [
+// ──────────────────────────────────────────────
+// VISUAL VARIETY
+// ──────────────────────────────────────────────
+
+const ACCENT_COLORS: AccentColor[] = [
+  { name: 'emerald', color: '#22c55e', bg: ['#0a2e1a', '#071a10', '#020a05'] as [string, string, string] },
+  { name: 'gold', color: '#D4AF37', bg: ['#1a1500', '#0f0d00', '#050400'] as [string, string, string] },
+  { name: 'crimson', color: '#ef4444', bg: ['#2a0a0a', '#180505', '#0a0202'] as [string, string, string] },
+  { name: 'violet', color: '#a855f7', bg: ['#1a0a2e', '#0f0518', '#050208'] as [string, string, string] },
+  { name: 'cyan', color: '#06b6d4', bg: ['#0a1e2e', '#051218', '#020608'] as [string, string, string] },
+  { name: 'rose', color: '#f43f5e', bg: ['#2a0a14', '#18050a', '#0a0204'] as [string, string, string] },
+  { name: 'amber', color: '#f59e0b', bg: ['#2a1a0a', '#180f05', '#0a0602'] as [string, string, string] },
+  { name: 'teal', color: '#14b8a6', bg: ['#0a2e28', '#071a16', '#020a08'] as [string, string, string] },
+];
+
+const ENTRANCES = ['scaleIn', 'slideUp', 'fadeIn', 'slideLeft', 'slam'] as const;
+
+// ──────────────────────────────────────────────
+// CONTENT THEMES (10 posts each = 100 total)
+// ──────────────────────────────────────────────
+
+export const THEMES: ThemeDef[] = [
   {
     id: 'mindset',
     name: 'Mindset',
@@ -1357,7 +1313,7 @@ const THEMES: ThemeDef[] = [
 ];
 
 // ──────────────────────────────────────────────
-// GENERATION
+// HELPERS
 // ──────────────────────────────────────────────
 
 function formatTextForScene(text: string): string {
@@ -1368,176 +1324,103 @@ function formatTextForScene(text: string): string {
   return words.slice(0, mid).join(' ') + '\n' + words.slice(mid).join(' ');
 }
 
-function generatePost(themeIdx: number, postIdx: number, theme: ThemeDef): { script: ScriptPost; splits: SplitsJson } {
-  const globalIdx = themeIdx * 10 + postIdx;
-  const postNum = String(globalIdx + 1).padStart(3, '0');
-  const postId = `mot-${postNum}`;
-  const post = theme.posts[postIdx];
-
-  const accentIdx = globalIdx % ACCENT_COLORS.length;
-  const accent = ACCENT_COLORS[accentIdx];
-
-  const sections: Section[] = [
-    { key: 'intro', text: post.intro, audioFile: `${postId}/intro.wav` },
-    { key: 'headline', text: post.headline, audioFile: `${postId}/headline.wav` },
-    { key: 'subheader', text: post.subheader, audioFile: `${postId}/subheader.wav` },
-    { key: 'badge', text: post.badge, audioFile: `${postId}/badge.wav` },
-    { key: 'cta', text: post.cta, audioFile: `${postId}/cta.wav` },
-  ];
-
-  const fullScript = sections.map((s) => s.text).join(' ');
-
-  const script: ScriptPost = {
-    postId,
-    template: 'motivational-narration',
-    theme: theme.id,
-    title: post.title,
-    sections,
-    fullScript,
-    audioDir: `audio/${postId}`,
-  };
-
-  // Build scenes for motivational-narration template
-  const scenes: SceneProps[] = [
-    {
-      text: formatTextForScene(post.intro),
-      highlight: post.introHighlight,
-      entrance: ENTRANCES[0],
-      textSize: 56,
-    },
-    {
-      text: formatTextForScene(post.headline),
-      highlight: post.headlineHighlight,
-      entrance: ENTRANCES[1 % ENTRANCES.length],
-      textSize: 44,
-      subtextSize: 24,
-    },
-    {
-      text: formatTextForScene(post.subheader),
-      highlight: post.subheaderHighlight,
-      entrance: ENTRANCES[2 % ENTRANCES.length],
-      textSize: 48,
-    },
-    {
-      text: formatTextForScene(post.badge),
-      highlight: post.badgeHighlight,
-      entrance: ENTRANCES[3 % ENTRANCES.length],
-      textSize: 52,
-    },
-    {
-      text: formatTextForScene(post.cta),
-      entrance: ENTRANCES[4 % ENTRANCES.length],
-      textSize: 40,
-      subtextSize: 26,
-    },
-  ];
-
-  // Rotate entrance animations per post for variety
-  const entranceOffset = globalIdx % ENTRANCES.length;
-  for (let i = 0; i < scenes.length; i++) {
-    scenes[i].entrance = ENTRANCES[(i + entranceOffset) % ENTRANCES.length];
-  }
-
-  const splits: SplitsJson = {
-    segments: sections.map((s) => ({ key: s.key, start: 0, end: 0 })),
-    props: {
-      scenes,
-      title: 'YOUR LAST DOLLAR',
-      accentColor: accent.color,
-      bgGradient: accent.bg,
-    },
-  };
-
-  return { script, splits };
-}
-
 // ──────────────────────────────────────────────
-// MAIN
+// CONTENT BANK
 // ──────────────────────────────────────────────
 
-function main() {
-  const args = process.argv.slice(2);
-  let limit = Infinity;
-  let dryRun = false;
+export const motivationalBank: ContentBank = {
+  nicheId: 'motivational',
+  themes: THEMES.map((t) => ({ id: t.id, name: t.name })),
+  totalPosts: 100,
+  segmentKeys: ['intro', 'headline', 'subheader', 'badge', 'cta'],
+  accentColors: ACCENT_COLORS,
+  entrances: ENTRANCES,
 
-  for (let i = 0; i < args.length; i++) {
-    if (args[i] === '--limit' && args[i + 1]) limit = parseInt(args[i + 1], 10);
-    if (args[i] === '--dry-run') dryRun = true;
-  }
+  getPosts(opts?: { theme?: string; limit?: number }): ContentPost[] {
+    const posts: ContentPost[] = [];
 
-  const AUDIO_DIR = path.join(__dirname, 'audio');
-  const SCRIPTS_FILE = path.join(__dirname, 'scripts-motivational.json');
+    for (let t = 0; t < THEMES.length; t++) {
+      const theme = THEMES[t];
 
-  console.log('═══════════════════════════════════════════════');
-  console.log('  MOTIVATIONAL CONTENT GENERATOR');
-  console.log('═══════════════════════════════════════════════');
-  console.log(`  Themes:     ${THEMES.length}`);
-  console.log(`  Posts/theme: 10`);
-  console.log(`  Total:      ${THEMES.length * 10}`);
-  console.log(`  Limit:      ${limit === Infinity ? 'none' : limit}`);
-  console.log(`  Mode:       ${dryRun ? 'dry-run (preview only)' : 'generate'}`);
-  console.log('═══════════════════════════════════════════════\n');
+      // Filter by theme if requested
+      if (opts?.theme && theme.id !== opts.theme) continue;
 
-  const allScripts: ScriptPost[] = [];
-  let count = 0;
+      for (let p = 0; p < theme.posts.length; p++) {
+        if (opts?.limit && posts.length >= opts.limit) return posts;
 
-  for (let t = 0; t < THEMES.length; t++) {
-    const theme = THEMES[t];
-    console.log(`  [${theme.name}] (${theme.id})`);
+        const globalIdx = t * 10 + p;
+        const post = theme.posts[p];
 
-    for (let p = 0; p < theme.posts.length; p++) {
-      if (count >= limit) break;
+        const accentIdx = globalIdx % ACCENT_COLORS.length;
+        const accent = ACCENT_COLORS[accentIdx];
 
-      const { script, splits } = generatePost(t, p, theme);
-      allScripts.push(script);
+        // Build sections
+        const sections = [
+          { key: 'intro', text: post.intro },
+          { key: 'headline', text: post.headline },
+          { key: 'subheader', text: post.subheader },
+          { key: 'badge', text: post.badge },
+          { key: 'cta', text: post.cta },
+        ];
 
-      const wordCount = script.fullScript.split(/\s+/).length;
-      const estDuration = Math.round(wordCount / 2.5); // ~2.5 words/sec speaking pace
-      console.log(`    ${script.postId}: "${script.title}" (${wordCount} words, ~${estDuration}s)`);
+        const fullScript = sections.map((s) => s.text).join(' ');
 
-      if (dryRun) {
-        count++;
-        continue;
+        // Build scenes for motivational-narration template
+        const scenes = [
+          {
+            text: formatTextForScene(post.intro),
+            highlight: post.introHighlight,
+            entrance: ENTRANCES[0],
+            textSize: 56,
+          },
+          {
+            text: formatTextForScene(post.headline),
+            highlight: post.headlineHighlight,
+            entrance: ENTRANCES[1 % ENTRANCES.length],
+            textSize: 44,
+            subtextSize: 24,
+          },
+          {
+            text: formatTextForScene(post.subheader),
+            highlight: post.subheaderHighlight,
+            entrance: ENTRANCES[2 % ENTRANCES.length],
+            textSize: 48,
+          },
+          {
+            text: formatTextForScene(post.badge),
+            highlight: post.badgeHighlight,
+            entrance: ENTRANCES[3 % ENTRANCES.length],
+            textSize: 52,
+          },
+          {
+            text: formatTextForScene(post.cta),
+            entrance: ENTRANCES[4 % ENTRANCES.length],
+            textSize: 40,
+            subtextSize: 26,
+          },
+        ];
+
+        // Rotate entrance animations per post for variety
+        const entranceOffset = globalIdx % ENTRANCES.length;
+        for (let i = 0; i < scenes.length; i++) {
+          scenes[i].entrance = ENTRANCES[(i + entranceOffset) % ENTRANCES.length];
+        }
+
+        posts.push({
+          title: post.title,
+          theme: theme.id,
+          sections,
+          fullScript,
+          sceneProps: {
+            scenes,
+            title: 'YOUR LAST DOLLAR',
+            accentColor: accent.color,
+            bgGradient: accent.bg,
+          },
+        });
       }
-
-      // Write splits.json for this post
-      const postAudioDir = path.join(AUDIO_DIR, script.postId);
-      fs.mkdirSync(postAudioDir, { recursive: true });
-      fs.writeFileSync(
-        path.join(postAudioDir, 'splits.json'),
-        JSON.stringify(splits, null, 2),
-      );
-
-      count++;
     }
 
-    if (count >= limit) break;
-  }
-
-  if (!dryRun) {
-    // Write scripts file for Colab TTS
-    fs.writeFileSync(SCRIPTS_FILE, JSON.stringify(allScripts, null, 2));
-    console.log(`\n  Scripts:     ${SCRIPTS_FILE}`);
-    console.log(`  Audio dirs:  ${AUDIO_DIR}/mot-XXX/splits.json`);
-  }
-
-  const totalWords = allScripts.reduce((sum, s) => sum + s.fullScript.split(/\s+/).length, 0);
-  const estTotalMin = Math.round(totalWords / 2.5 / 60);
-
-  console.log('\n═══════════════════════════════════════════════');
-  console.log('  GENERATION COMPLETE');
-  console.log('═══════════════════════════════════════════════');
-  console.log(`  Posts generated:  ${count}`);
-  console.log(`  Total words:      ${totalWords.toLocaleString()}`);
-  console.log(`  Est. audio:       ~${estTotalMin} minutes`);
-  if (!dryRun) {
-    console.log('\n  Next steps:');
-    console.log('  1. Upload scripts-motivational.json to Google Colab');
-    console.log('  2. Generate TTS audio (Qwen3, Les Brown voice)');
-    console.log('  3. Upload full.wav files to MinIO: motivational/mot-XXX/full.wav');
-    console.log('  4. Run: npx tsx content/batch-render-motivational.ts --resume');
-  }
-  console.log('═══════════════════════════════════════════════');
-}
-
-main();
+    return posts;
+  },
+};

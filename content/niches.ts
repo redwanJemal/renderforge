@@ -52,6 +52,14 @@ export interface NicheDefinition {
   voiceId: string;
   /** Segment naming pattern */
   segmentPattern: SegmentPattern;
+  /** Supported languages (ISO 639-1). Qwen3 TTS: en, zh, ja, ko, de, fr, ru, pt, es, it */
+  languages: string[];
+  /** Default language */
+  defaultLanguage: string;
+  /** MinIO prefix for audio files (e.g. 'audio' → audio/mot-001.wav) */
+  storagePrefix: string;
+  /** Post ID prefix (e.g. 'mot' → mot-001) */
+  postIdPrefix: string;
 }
 
 // ──────────────────────────────────────────────
@@ -148,6 +156,10 @@ export const niches: Record<string, NicheDefinition> = {
     defaultTemplateId: 'kids-alphabet-adventure',
     defaultFormat: 'landscape',
     voiceId: 'kids-cheerful',
+    languages: ['en'],
+    defaultLanguage: 'en',
+    storagePrefix: 'audio',
+    postIdPrefix: 'kids',
     segmentPattern: {
       intro: true,
       outro: true,
@@ -195,6 +207,10 @@ export const niches: Record<string, NicheDefinition> = {
     defaultTemplateId: 'kids-bedtime-story',
     defaultFormat: 'landscape',
     voiceId: 'gentle-storyteller',
+    languages: ['en'],
+    defaultLanguage: 'en',
+    storagePrefix: 'audio',
+    postIdPrefix: 'bed',
     segmentPattern: {
       intro: true,
       outro: true,
@@ -222,6 +238,10 @@ export const niches: Record<string, NicheDefinition> = {
     defaultTemplateId: 'motivational-narration',
     defaultFormat: 'story',
     voiceId: 'les-brown',
+    languages: ['en', 'es', 'pt', 'fr', 'de'],
+    defaultLanguage: 'en',
+    storagePrefix: 'audio',
+    postIdPrefix: 'mot',
     segmentPattern: {
       intro: true,
       outro: false,
@@ -273,6 +293,10 @@ export const niches: Record<string, NicheDefinition> = {
     defaultTemplateId: 'breaking-news',
     defaultFormat: 'story',
     voiceId: 'morgan-freeman',
+    languages: ['en', 'es', 'pt', 'fr', 'de', 'it'],
+    defaultLanguage: 'en',
+    storagePrefix: 'audio',
+    postIdPrefix: 'news',
     segmentPattern: {
       intro: true,
       outro: true,
@@ -310,6 +334,10 @@ export const niches: Record<string, NicheDefinition> = {
     defaultTemplateId: 'slider',
     defaultFormat: 'landscape',
     voiceId: 'mel-robbins',
+    languages: ['en', 'es', 'de', 'fr'],
+    defaultLanguage: 'en',
+    storagePrefix: 'audio',
+    postIdPrefix: 'howto',
     segmentPattern: {
       intro: true,
       outro: true,
@@ -347,6 +375,10 @@ export const niches: Record<string, NicheDefinition> = {
     defaultTemplateId: 'dubai-luxury',
     defaultFormat: 'story',
     voiceId: 'denzel-washington',
+    languages: ['en', 'es', 'fr', 'it', 'pt'],
+    defaultLanguage: 'en',
+    storagePrefix: 'audio',
+    postIdPrefix: 'lux',
     segmentPattern: {
       intro: true,
       outro: true,
@@ -394,6 +426,10 @@ export const niches: Record<string, NicheDefinition> = {
     defaultTemplateId: 'match-fixture',
     defaultFormat: 'story',
     voiceId: 'eric-thomas',
+    languages: ['en', 'es', 'pt', 'fr'],
+    defaultLanguage: 'en',
+    storagePrefix: 'audio',
+    postIdPrefix: 'sport',
     segmentPattern: {
       intro: true,
       outro: true,
@@ -419,6 +455,72 @@ export const niches: Record<string, NicheDefinition> = {
           { segmentPattern: 'intro', durationOnlyPath: 'introDurationFrames' },
           { segmentPattern: 'section*', startFramePath: 'sections[i].startFrame', durationFramesPath: 'sections[i].durationFrames' },
           { segmentPattern: 'outro', durationOnlyPath: 'outroDurationFrames' },
+        ],
+      },
+    ],
+  },
+
+  'jokes': {
+    id: 'jokes',
+    name: 'Jokes / Comedy',
+    description: 'Short-form comedy, one-liners, observational humor',
+    defaultTemplateId: 'motivational-narration',
+    defaultFormat: 'story',
+    voiceId: 'les-brown',
+    languages: ['en', 'es', 'pt', 'fr', 'de', 'it', 'ja', 'ko', 'ru', 'zh'],
+    defaultLanguage: 'en',
+    storagePrefix: 'audio',
+    postIdPrefix: 'joke',
+    segmentPattern: {
+      intro: true,
+      outro: false,
+      contentPrefix: 'section',
+      contentCountRange: [3, 5],
+    },
+    templates: [
+      {
+        templateId: 'motivational-narration',
+        totalFramesStrategy: 'sum-sequential',
+        trailingHoldFrames: 30,
+        mappings: [
+          { segmentPattern: 'intro', customTransform: 'narration-scene' },
+          { segmentPattern: 'setup', customTransform: 'narration-scene' },
+          { segmentPattern: 'punchline', customTransform: 'narration-scene' },
+          { segmentPattern: 'callback', customTransform: 'narration-scene' },
+          { segmentPattern: 'cta', customTransform: 'narration-scene' },
+        ],
+      },
+    ],
+  },
+
+  'finance': {
+    id: 'finance',
+    name: 'Finance / Crypto',
+    description: 'Financial tips, crypto updates, wealth building',
+    defaultTemplateId: 'motivational-narration',
+    defaultFormat: 'story',
+    voiceId: 'les-brown',
+    languages: ['en', 'es', 'pt', 'fr', 'de'],
+    defaultLanguage: 'en',
+    storagePrefix: 'audio',
+    postIdPrefix: 'fin',
+    segmentPattern: {
+      intro: true,
+      outro: false,
+      contentPrefix: 'section',
+      contentCountRange: [3, 5],
+    },
+    templates: [
+      {
+        templateId: 'motivational-narration',
+        totalFramesStrategy: 'sum-sequential',
+        trailingHoldFrames: 30,
+        mappings: [
+          { segmentPattern: 'intro', customTransform: 'narration-scene' },
+          { segmentPattern: 'headline', customTransform: 'narration-scene' },
+          { segmentPattern: 'subheader', customTransform: 'narration-scene' },
+          { segmentPattern: 'badge', customTransform: 'narration-scene' },
+          { segmentPattern: 'cta', customTransform: 'narration-scene' },
         ],
       },
     ],

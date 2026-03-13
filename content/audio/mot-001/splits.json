@@ -3,27 +3,27 @@
     {
       "key": "intro",
       "start": 0,
-      "end": 0
+      "end": 4.6272
     },
     {
       "key": "headline",
-      "start": 0,
-      "end": 0
+      "start": 4.6272,
+      "end": 19.12576
     },
     {
       "key": "subheader",
-      "start": 0,
-      "end": 0
+      "start": 19.12576,
+      "end": 27.7632
     },
     {
       "key": "badge",
-      "start": 0,
-      "end": 0
+      "start": 27.7632,
+      "end": 32.3904
     },
     {
       "key": "cta",
-      "start": 0,
-      "end": 0
+      "start": 32.3904,
+      "end": 38.56
     }
   ],
   "props": {

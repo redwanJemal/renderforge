@@ -1,0 +1,17 @@
+{
+  "mot-001": {
+    "status": "done",
+    "outputPath": "/home/redman/renderforge/output/rendered/mot-001-story-bgm.mp4",
+    "timestamp": "2026-03-13T01:37:21.573Z"
+  },
+  "mot-002": {
+    "status": "done",
+    "outputPath": "/home/redman/renderforge/output/rendered/mot-002-story-bgm.mp4",
+    "timestamp": "2026-03-13T01:41:03.540Z"
+  },
+  "mot-003": {
+    "status": "done",
+    "outputPath": "/home/redman/renderforge/output/rendered/mot-003-story-bgm.mp4",
+    "timestamp": "2026-03-13T01:44:38.431Z"
+  }
+}
