@@ -11,5 +11,7 @@ content/audio/**/*.wav
 content/audio/**/*.mp3
 content/audio/**/*.ogg
 content/audio/**/*.m4a
+# Exception: BGM library is curated, keep in repo
+!content/audio/bgm/**/*.mp3
 inputaudio/*.wav
 inputaudio/*.mp3
