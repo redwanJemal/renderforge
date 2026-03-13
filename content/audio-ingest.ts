@@ -124,14 +124,34 @@ export function generateManifest(
     return null;
   }
 
-  // Extract keys and sort
+  // Extract keys
   const fileMap = new Map<string, string>();
   for (const f of files) {
     const key = path.basename(f, path.extname(f));
     fileMap.set(key, path.resolve(audioDir, f));
   }
 
-  const sortedKeys = Array.from(fileMap.keys()).sort(sortSegmentKeys);
+  // Use splits.json order if available, fall back to alphabetical sort
+  let sortedKeys: string[];
+  const splitsPath = path.join(audioDir, 'splits.json');
+  if (fs.existsSync(splitsPath)) {
+    try {
+      const splits = JSON.parse(fs.readFileSync(splitsPath, 'utf-8'));
+      if (Array.isArray(splits.segments)) {
+        const splitsOrder = splits.segments.map((s: { key: string }) => s.key);
+        // Use splits order for keys that exist, append any extras alphabetically
+        sortedKeys = splitsOrder.filter((k: string) => fileMap.has(k));
+        const extras = Array.from(fileMap.keys()).filter((k) => !splitsOrder.includes(k)).sort(sortSegmentKeys);
+        sortedKeys.push(...extras);
+      } else {
+        sortedKeys = Array.from(fileMap.keys()).sort(sortSegmentKeys);
+      }
+    } catch {
+      sortedKeys = Array.from(fileMap.keys()).sort(sortSegmentKeys);
+    }
+  } else {
+    sortedKeys = Array.from(fileMap.keys()).sort(sortSegmentKeys);
+  }
 
   // Build segments with timing
   const segments: ManifestSegment[] = [];

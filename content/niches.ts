@@ -103,6 +103,37 @@ export const customTransforms: Record<
       props.rounds[index].revealFrame = Math.floor(frames * 0.6);
     }
   },
+  'narration-scene': (start, frames, props) => {
+    // Build/merge scenes array from audio segments.
+    // If splits.json provides scenes with text content, merge timing into them.
+    // Otherwise create placeholder scenes.
+    if (!props.scenes) props.scenes = [];
+    if (!props._sceneIndex) props._sceneIndex = 0;
+    const i = props._sceneIndex++;
+    const entrances = ['scaleIn', 'slideUp', 'fadeIn', 'slideLeft', 'slam'] as const;
+
+    if (i < props.scenes.length) {
+      // Merge timing into existing scene (text content from splits.json)
+      props.scenes[i].startFrame = start;
+      props.scenes[i].durationFrames = frames;
+      // Fill defaults for missing fields
+      if (!props.scenes[i].entrance) props.scenes[i].entrance = entrances[i % entrances.length];
+      if (!props.scenes[i].textSize) props.scenes[i].textSize = 52;
+      if (!props.scenes[i].subtextSize) props.scenes[i].subtextSize = 28;
+      if (!props.scenes[i].textAlign) props.scenes[i].textAlign = 'center';
+    } else {
+      // No content provided — create placeholder
+      props.scenes.push({
+        text: `Scene ${i + 1}`,
+        startFrame: start,
+        durationFrames: frames,
+        entrance: entrances[i % entrances.length],
+        textSize: 52,
+        subtextSize: 28,
+        textAlign: 'center',
+      });
+    }
+  },
 };
 
 // ──────────────────────────────────────────────
@@ -188,7 +219,7 @@ export const niches: Record<string, NicheDefinition> = {
     id: 'motivational',
     name: 'Motivational / Finance',
     description: 'YLD-style motivational and financial literacy content',
-    defaultTemplateId: 'yld-intro',
+    defaultTemplateId: 'motivational-narration',
     defaultFormat: 'story',
     voiceId: 'les-brown',
     segmentPattern: {
@@ -198,6 +229,18 @@ export const niches: Record<string, NicheDefinition> = {
       contentCountRange: [2, 5],
     },
     templates: [
+      {
+        templateId: 'motivational-narration',
+        totalFramesStrategy: 'sum-sequential',
+        trailingHoldFrames: 30,
+        mappings: [
+          { segmentPattern: 'intro', customTransform: 'narration-scene' },
+          { segmentPattern: 'headline', customTransform: 'narration-scene' },
+          { segmentPattern: 'subheader', customTransform: 'narration-scene' },
+          { segmentPattern: 'badge', customTransform: 'narration-scene' },
+          { segmentPattern: 'cta', customTransform: 'narration-scene' },
+        ],
+      },
       {
         templateId: 'yld-intro',
         totalFramesStrategy: 'sum-sequential',

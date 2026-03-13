@@ -37,6 +37,9 @@ import './templates/kids-counting-fun';
 import './templates/kids-icon-quiz';
 import './templates/kids-bedtime-story';
 
+// Motivational narration (scene-based, audio-sync)
+import './templates/motivational-narration';
+
 export const RemotionRoot: React.FC = () => {
   const allTemplates = registry.getAll();
 

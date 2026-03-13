@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "projectId": "motivation1",
+  "sourceDir": "/home/redman/renderforge/content/audio/motivation1",
+  "createdAt": "2026-03-13T00:01:25.747Z",
+  "fps": 30,
+  "padding": {
+    "before": 15,
+    "after": 20,
+    "transition": 10
+  },
+  "segments": [
+    {
+      "key": "intro",
+      "file": "/home/redman/renderforge/content/audio/motivation1/intro.wav",
+      "audioDuration": 4.010667,
+      "frames": 156,
+      "startFrame": 0,
+      "endFrame": 156
+    },
+    {
+      "key": "headline",
+      "file": "/home/redman/renderforge/content/audio/motivation1/headline.wav",
+      "audioDuration": 10.069333,
+      "frames": 338,
+      "startFrame": 166,
+      "endFrame": 504
+    },
+    {
+      "key": "subheader",
+      "file": "/home/redman/renderforge/content/audio/motivation1/subheader.wav",
+      "audioDuration": 5.973333,
+      "frames": 215,
+      "startFrame": 514,
+      "endFrame": 729
+    },
+    {
+      "key": "badge",
+      "file": "/home/redman/renderforge/content/audio/motivation1/badge.wav",
+      "audioDuration": 4.949333,
+      "frames": 184,
+      "startFrame": 739,
+      "endFrame": 923
+    },
+    {
+      "key": "cta",
+      "file": "/home/redman/renderforge/content/audio/motivation1/cta.wav",
+      "audioDuration": 5.237333,
+      "frames": 193,
+      "startFrame": 933,
+      "endFrame": 1126
+    }
+  ],
+  "totalAudioDuration": 30.239999,
+  "totalFrames": 1166
+}
