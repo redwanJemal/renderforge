@@ -64,7 +64,23 @@ rendersRouter.get("/", async (c) => {
     db.select({ total: count() }).from(renders).where(where),
   ]);
 
-  return c.json({ items, total, page, totalPages: Math.ceil(total / perPage) });
+  // Resolve S3 keys to presigned URLs for thumbnails and output videos
+  const { storage } = await import("../services/storage.js");
+  const resolvedItems = await Promise.all(
+    items.map(async (item) => {
+      let thumbnailUrl = item.thumbnailUrl;
+      let outputUrl = item.outputUrl;
+      try {
+        if (thumbnailUrl) thumbnailUrl = await storage.getPresignedUrl(thumbnailUrl, 3600);
+      } catch { thumbnailUrl = null; }
+      try {
+        if (outputUrl) outputUrl = await storage.getPresignedUrl(outputUrl, 3600);
+      } catch { /* keep original */ }
+      return { ...item, thumbnailUrl, outputUrl };
+    }),
+  );
+
+  return c.json({ items: resolvedItems, total, page, totalPages: Math.ceil(total / perPage) });
 });
 
 rendersRouter.get("/:id", async (c) => {

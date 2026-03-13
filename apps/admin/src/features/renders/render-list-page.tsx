@@ -389,7 +389,7 @@ export function RenderListPage() {
                     <TableCell className="p-1">
                       {render.thumbnailUrl ? (
                         <img
-                          src={`/api/storage/${render.thumbnailUrl}`}
+                          src={render.thumbnailUrl}
                           alt=""
                           className="w-10 h-10 rounded object-cover"
                           onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
@@ -546,7 +546,7 @@ export function RenderListPage() {
               {detailRender.thumbnailUrl && (
                 <div className="rounded-lg overflow-hidden border">
                   <img
-                    src={`/api/storage/${detailRender.thumbnailUrl}`}
+                    src={detailRender.thumbnailUrl}
                     alt="Thumbnail"
                     className="w-full object-contain max-h-[200px]"
                   />
@@ -558,7 +558,7 @@ export function RenderListPage() {
                     src={detailRender.outputUrl}
                     controls
                     className="w-full max-h-[300px]"
-                    poster={detailRender.thumbnailUrl ? `/api/storage/${detailRender.thumbnailUrl}` : ""}
+                    poster={detailRender.thumbnailUrl ?? ""}
                   />
                 </div>
               )}
