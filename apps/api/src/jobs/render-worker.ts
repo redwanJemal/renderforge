@@ -63,8 +63,109 @@ async function bundleRemotionProject(): Promise<string> {
   return bundlePath;
 }
 
+// Check if template should use the premium yld-intro composition
+function isYLDTemplate(templateId: string): boolean {
+  return templateId === "motivational-narration" || templateId === "yld-intro";
+}
+
+// Build yld-intro props from DB scenes (intro, headline, subheader, badge, cta)
+function buildYLDIntroProps(
+  postScenes: Array<{ displayText: string | null; extraProps: unknown }>,
+  metadata: Record<string, unknown>,
+): Record<string, unknown> {
+  // Map scenes by key (sortOrder: 0=intro, 1=headline, 2=subheader, 3=badge, 4=cta)
+  const sceneMap: Record<string, { text: string; highlight?: string }> = {};
+  const keys = ["intro", "headline", "subheader", "badge", "cta"];
+  for (let i = 0; i < postScenes.length && i < keys.length; i++) {
+    const s = postScenes[i];
+    const extra = (s.extraProps ?? {}) as Record<string, unknown>;
+    sceneMap[keys[i]] = {
+      text: s.displayText || "",
+      highlight: extra.highlight as string | undefined,
+    };
+  }
+
+  // Pick accent color from metadata or default
+  const accentColor = (metadata.accentColor as string) ?? "#22c55e";
+  const bgGradient = (metadata.bgGradient as [string, string, string]) ?? ["#0a2e1a", "#071a10", "#020a05"];
+
+  // Split intro text into two lines for header
+  const introText = sceneMap.intro?.text ?? "";
+  const headlineText = sceneMap.headline?.text ?? "";
+
+  // Use intro as line1 (shorter), headline as line2 (big bold)
+  // Truncate for visual fit — line1 max ~40 chars, line2 max ~30 chars
+  const line1 = introText.length > 60 ? introText.slice(0, 57) + "..." : introText;
+  const line2 = headlineText.length > 80
+    ? headlineText.split(".")[0] || headlineText.slice(0, 77) + "..."
+    : headlineText;
+
+  // Subheader — use the subheader scene text, truncate if very long
+  const subText = sceneMap.subheader?.text ?? "";
+  const subheaderText = subText.length > 120 ? subText.slice(0, 117) + "..." : subText;
+
+  return {
+    logo: {
+      file: "yld-logo-white.png",
+      size: 480,
+      glowEnabled: true,
+      finalScale: 0.6,
+      moveUpPx: 160,
+      marginBottom: 15,
+    },
+    header: {
+      line1,
+      line1Size: 38,
+      line1Animation: "charReveal",
+      line2,
+      line2Size: 52,
+      line2Animation: "slideUp",
+      highlight: sceneMap.headline?.highlight ?? sceneMap.intro?.highlight ?? "",
+      marginBottom: 25,
+    },
+    subheader: {
+      text: subheaderText,
+      size: 28,
+      animation: "typewriter",
+      marginBottom: 45,
+    },
+    badge: {
+      text: sceneMap.badge?.text ?? "The Journey Continues",
+      enabled: true,
+      marginBottom: 0,
+    },
+    cta: {
+      text: sceneMap.cta?.text ?? "FOLLOW THE JOURNEY →",
+      enabled: true,
+      bottomOffset: 150,
+    },
+    divider: {
+      enabled: true,
+      marginBottom: 30,
+    },
+    theme: {
+      accentColor,
+      bgGradient,
+      particlesEnabled: true,
+      scanLineEnabled: true,
+      gridEnabled: true,
+      vignetteEnabled: true,
+    },
+    timing: {
+      logoAppear: 20,
+      logoMoveUp: 130,
+      dividerAppear: 155,
+      headerAppear: 165,
+      subheaderAppear: 230,
+      badgeAppear: 290,
+      ctaAppear: 330,
+    },
+  };
+}
+
 async function processRenderJob(job: Job<RenderJobData>) {
-  const { renderId, postId, format, bgmTrackId } = job.data;
+  const { renderId, postId, format } = job.data;
+  let { bgmTrackId } = job.data;
   console.log(`[render-worker] Starting render ${renderId} for post ${postId} (${format})`);
 
   const workDir = join(tmpdir(), `render-${renderId}`);
@@ -91,68 +192,97 @@ async function processRenderJob(job: Job<RenderJobData>) {
     // Step 2: Build template props from post metadata + scenes
     const metadata = (post.metadata ?? {}) as Record<string, unknown>;
     const templateId = post.templateId || "motivational-narration";
-    const compositionId = `${templateId}-${format}`;
-
-    // Build scene props for the template
-    const ENTRANCES = ["scaleIn", "slideUp", "fadeIn", "slideLeft", "slam"] as const;
-    const SCENE_KEYS = ["intro", "headline", "subheader", "badge", "cta"];
     const fps = 30;
 
-    // If metadata has sceneProps, use those directly (from content bank seeding)
+    // Determine if we should use the premium yld-intro template
+    const useYLDIntro = isYLDTemplate(templateId);
+    const compositionId = useYLDIntro ? "yld-intro" : `${templateId}-${format}`;
+    console.log(`[render-worker] Using composition: ${compositionId} (template: ${templateId})`);
+
     let templateProps: Record<string, unknown>;
-    if (metadata.sceneProps && typeof metadata.sceneProps === "object") {
-      templateProps = metadata.sceneProps as Record<string, unknown>;
-      // Ensure logo is always set
-      if (!templateProps.logo) {
-        templateProps.logo = "yld-logo-white.png";
-        templateProps.logoSize = 120;
+    let totalFrames: number;
+
+    if (useYLDIntro) {
+      // Build yld-intro props from scenes or metadata
+      if (metadata.sceneProps && typeof metadata.sceneProps === "object") {
+        // If metadata already has yld-intro formatted props (logo, header, etc.), use directly
+        const sp = metadata.sceneProps as Record<string, unknown>;
+        if (sp.logo && sp.header && sp.theme) {
+          templateProps = sp;
+        } else {
+          // sceneProps is in motivational-narration format, build from scenes instead
+          templateProps = buildYLDIntroProps(postScenes, metadata);
+        }
+      } else {
+        templateProps = buildYLDIntroProps(postScenes, metadata);
       }
+      // yld-intro has a fixed animation timeline, ~12 seconds is ideal
+      totalFrames = 400; // ~13.3s at 30fps — enough for all animations + fade out
     } else {
-      // Build from DB scenes — calculate frame timing
-      const introHoldFrames = 45;
-      const transitionFrames = 15;
-      let currentFrame = introHoldFrames;
+      // Original motivational-narration or other template logic
+      const ENTRANCES = ["scaleIn", "slideUp", "fadeIn", "slideLeft", "slam"] as const;
+      const SCENE_KEYS = ["intro", "headline", "subheader", "badge", "cta"];
 
-      const sceneProps = postScenes.map((s, i) => {
-        const durationSec = s.durationSeconds ? parseFloat(String(s.durationSeconds)) : 4;
-        const durationFrames = Math.round(durationSec * fps);
-        const startFrame = currentFrame;
-        currentFrame += durationFrames;
+      if (metadata.sceneProps && typeof metadata.sceneProps === "object") {
+        templateProps = metadata.sceneProps as Record<string, unknown>;
+        if (!templateProps.logo) {
+          templateProps.logo = "yld-logo-white.png";
+          templateProps.logoSize = 120;
+        }
+      } else {
+        const introHoldFrames = 45;
+        const transitionFrames = 15;
+        let currentFrame = introHoldFrames;
 
-        const extraProps = (s.extraProps ?? {}) as Record<string, unknown>;
+        const sceneProps = postScenes.map((s, i) => {
+          const durationSec = s.durationSeconds ? parseFloat(String(s.durationSeconds)) : 4;
+          const durationFrames = Math.round(durationSec * fps);
+          const startFrame = currentFrame;
+          currentFrame += durationFrames;
 
-        return {
-          text: s.displayText || "",
-          subtext: extraProps.subtext as string | undefined,
-          highlight: extraProps.highlight as string | undefined,
-          entrance: s.entrance || ENTRANCES[i % ENTRANCES.length],
-          textSize: extraProps.textSize ?? (i === 0 ? 52 : i === SCENE_KEYS.length - 1 ? 48 : 46),
-          subtextSize: extraProps.subtextSize ?? 28,
-          textAlign: (extraProps.textAlign as string) ?? "center",
-          startFrame,
-          durationFrames,
+          const extraProps = (s.extraProps ?? {}) as Record<string, unknown>;
+
+          return {
+            text: s.displayText || "",
+            subtext: extraProps.subtext as string | undefined,
+            highlight: extraProps.highlight as string | undefined,
+            entrance: s.entrance || ENTRANCES[i % ENTRANCES.length],
+            textSize: extraProps.textSize ?? (i === 0 ? 52 : i === SCENE_KEYS.length - 1 ? 48 : 46),
+            subtextSize: extraProps.subtextSize ?? 28,
+            textAlign: (extraProps.textAlign as string) ?? "center",
+            startFrame,
+            durationFrames,
+          };
+        });
+
+        templateProps = {
+          scenes: sceneProps,
+          title: metadata.title as string | undefined,
+          logo: metadata.logo as string | undefined ?? "yld-logo-white.png",
+          logoSize: metadata.logoSize as number | undefined ?? 120,
+          accentColor: metadata.accentColor ?? "#f59e0b",
+          bgGradient: metadata.bgGradient ?? ["#0f0f0f", "#1a1a2e", "#0f0f0f"],
+          particlesEnabled: true,
+          transitionFrames,
+          introHoldFrames,
         };
-      });
+      }
 
-      templateProps = {
-        scenes: sceneProps,
-        title: metadata.title as string | undefined,
-        logo: metadata.logo as string | undefined ?? "yld-logo-white.png",
-        logoSize: metadata.logoSize as number | undefined ?? 120,
-        accentColor: metadata.accentColor ?? "#f59e0b",
-        bgGradient: metadata.bgGradient ?? ["#0f0f0f", "#1a1a2e", "#0f0f0f"],
-        particlesEnabled: true,
-        transitionFrames,
-        introHoldFrames,
-      };
+      const sceneArray = templateProps.scenes as Array<{ startFrame: number; durationFrames: number }>;
+      const lastScene = sceneArray?.[sceneArray.length - 1];
+      totalFrames = lastScene
+        ? lastScene.startFrame + lastScene.durationFrames + 30
+        : 300;
     }
 
-    // Calculate total duration in frames
-    const sceneArray = templateProps.scenes as Array<{ startFrame: number; durationFrames: number }>;
-    const lastScene = sceneArray[sceneArray.length - 1];
-    const totalFrames = lastScene
-      ? lastScene.startFrame + lastScene.durationFrames + 30 // 1s padding at end
-      : 300; // 10s fallback
+    // Auto-select BGM if none specified — pick the first available track
+    if (!bgmTrackId) {
+      const availableBgm = await db.select().from(bgmTracks).limit(1);
+      if (availableBgm.length > 0) {
+        bgmTrackId = availableBgm[0].id;
+        console.log(`[render-worker] Auto-selected BGM: ${availableBgm[0].name} (${bgmTrackId})`);
+      }
+    }
 
     await publishProgress(renderId, 10, "rendering", "Building template props...");
     await job.updateProgress(10);
@@ -237,22 +367,50 @@ async function processRenderJob(job: Job<RenderJobData>) {
           const fadeOutDuration = 3;
           const fadeStart = Math.max(0, duration - fadeOutDuration);
 
-          // Mix BGM using ffmpeg
-          const bgmOutputPath = join(workDir, `render-${renderId}-bgm.mp4`);
-          const filterComplex = [
-            `[1:a]volume=0.35,atrim=0:${duration.toFixed(2)},afade=t=out:st=${fadeStart.toFixed(2)}:d=${fadeOutDuration},asetpts=PTS-STARTPTS[bgm]`,
-            `[0:a][bgm]amix=inputs=2:duration=first:dropout_transition=0:normalize=0[aout]`,
-          ].join(";");
+          // Check if video has an audio stream
+          let hasAudio = false;
+          try {
+            const audioCheck = execFileSync("ffprobe", [
+              "-v", "quiet", "-select_streams", "a", "-show_entries", "stream=index", "-of", "csv=p=0", outputPath,
+            ], { encoding: "utf-8" }).trim();
+            hasAudio = audioCheck.length > 0;
+          } catch {
+            hasAudio = false;
+          }
 
-          execFileSync("ffmpeg", [
-            "-y",
-            "-i", outputPath,
-            "-stream_loop", "-1", "-i", bgmLocalPath,
-            "-filter_complex", filterComplex,
-            "-map", "0:v", "-map", "[aout]",
-            "-c:v", "copy", "-c:a", "aac", "-ar", "44100", "-ac", "2", "-b:a", "128k",
-            bgmOutputPath,
-          ], { timeout: 120_000 });
+          const bgmOutputPath = join(workDir, `render-${renderId}-bgm.mp4`);
+
+          if (hasAudio) {
+            // Mix BGM with existing audio
+            const filterComplex = [
+              `[1:a]volume=0.35,atrim=0:${duration.toFixed(2)},afade=t=out:st=${fadeStart.toFixed(2)}:d=${fadeOutDuration},asetpts=PTS-STARTPTS[bgm]`,
+              `[0:a][bgm]amix=inputs=2:duration=first:dropout_transition=0:normalize=0[aout]`,
+            ].join(";");
+
+            execFileSync("ffmpeg", [
+              "-y",
+              "-i", outputPath,
+              "-stream_loop", "-1", "-i", bgmLocalPath,
+              "-filter_complex", filterComplex,
+              "-map", "0:v", "-map", "[aout]",
+              "-c:v", "copy", "-c:a", "aac", "-ar", "44100", "-ac", "2", "-b:a", "128k",
+              bgmOutputPath,
+            ], { timeout: 120_000 });
+          } else {
+            // Video-only: add BGM as the sole audio track (input 1 = bgm file)
+            const filterComplex =
+              `[1:a]volume=0.35,atrim=0:${duration.toFixed(2)},afade=t=out:st=${fadeStart.toFixed(2)}:d=${fadeOutDuration},asetpts=PTS-STARTPTS[bgm]`;
+
+            execFileSync("ffmpeg", [
+              "-y",
+              "-i", outputPath,
+              "-stream_loop", "-1", "-i", bgmLocalPath,
+              "-filter_complex", filterComplex,
+              "-map", "0:v", "-map", "[bgm]",
+              "-c:v", "copy", "-c:a", "aac", "-ar", "44100", "-ac", "2", "-b:a", "128k",
+              bgmOutputPath,
+            ], { timeout: 120_000 });
+          }
 
           finalOutputPath = bgmOutputPath;
           console.log("[render-worker] BGM mixed successfully");
