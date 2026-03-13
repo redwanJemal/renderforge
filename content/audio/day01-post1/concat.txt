@@ -1,0 +1,5 @@
+file '/home/redman/renderforge/content/audio/day01-post1/intro.wav'
+file '/home/redman/renderforge/content/audio/day01-post1/headline.wav'
+file '/home/redman/renderforge/content/audio/day01-post1/subheader.wav'
+file '/home/redman/renderforge/content/audio/day01-post1/badge.wav'
+file '/home/redman/renderforge/content/audio/day01-post1/cta.wav'

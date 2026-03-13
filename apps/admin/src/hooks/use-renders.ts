@@ -1,0 +1,68 @@
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { api } from "@/lib/api";
+
+type Render = {
+  id: string;
+  postId: string;
+  postTitle: string | null;
+  format: string;
+  status: string;
+  progress: number;
+  outputUrl: string | null;
+  durationMs: number | null;
+  fileSize: number | null;
+  error: string | null;
+  jobId: string | null;
+  bgmTrackId: string | null;
+  createdAt: string;
+};
+
+type RendersResponse = {
+  items: Render[];
+  total: number;
+  page: number;
+  totalPages: number;
+};
+
+export type { Render, RendersResponse };
+
+export function useRenders(
+  filters: { postId?: string; status?: string; page?: number } = {},
+) {
+  const params = new URLSearchParams();
+  if (filters.postId) params.set("postId", filters.postId);
+  if (filters.status) params.set("status", filters.status);
+  if (filters.page) params.set("page", String(filters.page));
+
+  return useQuery({
+    queryKey: ["renders", filters],
+    queryFn: () => api.get<RendersResponse>(`/api/renders?${params}`),
+    refetchInterval: 5000,
+  });
+}
+
+export function useCreateRender() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (data: { postId: string; format: string; bgmTrackId?: string }) =>
+      api.post<Render>("/api/renders", data),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["renders"] }),
+  });
+}
+
+export function useCreateBatchRender() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (data: { postIds: string[]; formats: string[]; bgmTrackId?: string }) =>
+      api.post("/api/renders/batch", data),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["renders"] }),
+  });
+}
+
+export function useDeleteRender() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => api.delete(`/api/renders/${id}`),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["renders"] }),
+  });
+}

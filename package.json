@@ -1,13 +1,24 @@
 {
   "name": "renderforge",
   "version": "0.1.0",
-  "description": "Dynamic video template engine powered by Remotion",
+  "private": true,
+  "description": "RenderForge Studio — Content Automation Platform",
   "scripts": {
-    "dev": "npx remotion studio",
-    "build": "npx remotion bundle",
+    "dev:api": "pnpm --filter @renderforge/api dev",
+    "dev:admin": "pnpm --filter @renderforge/admin dev",
+    "dev:renderer": "pnpm --filter @renderforge/renderer dev",
+    "build:api": "pnpm --filter @renderforge/api build",
+    "build:admin": "pnpm --filter @renderforge/admin build",
+    "build:renderer": "pnpm --filter @renderforge/renderer build",
+    "build": "pnpm -r build",
+    "db:generate": "pnpm --filter @renderforge/db generate",
+    "db:migrate": "pnpm --filter @renderforge/db migrate",
+    "db:push": "pnpm --filter @renderforge/db push",
+    "db:seed": "pnpm --filter @renderforge/db seed",
+    "db:studio": "pnpm --filter @renderforge/db studio",
     "render": "tsx scripts/render-cli.ts",
-    "api": "tsx src/api/server.ts",
-    "lint": "eslint src/"
+    "lint": "eslint src/",
+    "typecheck": "pnpm -r typecheck"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1008.0",

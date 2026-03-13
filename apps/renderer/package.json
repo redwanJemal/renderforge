@@ -1,0 +1,45 @@
+{
+  "name": "@renderforge/renderer",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Remotion video render engine",
+  "scripts": {
+    "dev": "npx remotion studio",
+    "build": "npx remotion bundle",
+    "render": "tsx scripts/render-cli.ts"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.415",
+    "@remotion/renderer": "4.0.415",
+    "@remotion/transitions": "4.0.415",
+    "remotion": "4.0.415",
+    "zod": "^3.22.0"
+  },
+  "overrides": {
+    "remotion": "4.0.415",
+    "@remotion/bundler": "4.0.415",
+    "@remotion/renderer": "4.0.415",
+    "@remotion/player": "4.0.415",
+    "@remotion/media-utils": "4.0.415",
+    "@remotion/streaming": "4.0.415",
+    "@remotion/studio-server": "4.0.415",
+    "@remotion/studio-shared": "4.0.415",
+    "@remotion/studio": "4.0.415",
+    "@remotion/paths": "4.0.415",
+    "@remotion/shapes": "4.0.415",
+    "@remotion/transitions": "4.0.415",
+    "@remotion/licensing": "4.0.415",
+    "@remotion/media-parser": "4.0.415",
+    "@remotion/zod-types": "4.0.415",
+    "@remotion/webcodecs": "4.0.415",
+    "@remotion/web-renderer": "4.0.415",
+    "@remotion/compositor-linux-arm64-gnu": "4.0.415"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.3.0"
+  }
+}

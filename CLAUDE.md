@@ -1,49 +1,97 @@
-# RenderForge
+# RenderForge Studio
 
-Dynamic video template engine powered by Remotion for programmatic social media video generation.
+Content automation platform powered by Remotion for programmatic social media video generation.
 
 ## Quick Reference
 
 ```bash
-npm run dev          # Remotion Studio → http://localhost:3000
-npm run api          # Express API → http://localhost:3100
-npm run render       # CLI render (tsx scripts/render-cli.ts)
-cd dashboard && npm run dev  # Dashboard → http://localhost:5173
+# Development
+pnpm dev:api          # Hono API → http://localhost:3100
+pnpm dev:admin        # Admin dashboard → http://localhost:5173
+pnpm dev:renderer     # Remotion Studio → http://localhost:3000
+
+# Database
+pnpm db:push          # Push schema to database
+pnpm db:generate      # Generate migrations
+pnpm db:migrate       # Run migrations
+pnpm db:seed          # Seed admin user + niches
+pnpm db:studio        # Drizzle Studio
+
+# Infrastructure
+docker compose up -d postgres redis   # Start PostgreSQL + Redis
+pnpm render           # CLI render (tsx scripts/render-cli.ts)
+
+# Task Runner
+./scripts/task-runner.sh --status     # Show task progress
+./scripts/task-runner.sh --task 03    # Run specific task
+./scripts/task-runner.sh --all        # Run all pending tasks
 ```
 
 ## Architecture
 
-- **Rendering**: Remotion 4.0.415 (React → Chromium frames → ffmpeg → MP4)
-- **API**: Express.js on port 3100 (render jobs, preview, template listing)
-- **Dashboard**: React + Vite SPA served by Express in production
-- **Audio Pipeline**: ffprobe for timing → Remotion render → ffmpeg audio merge
+- **API**: Hono on port 3100 (auth, posts, renders, social, SSE)
+- **Database**: PostgreSQL 16 + Drizzle ORM (10 tables)
+- **Queue**: BullMQ + Redis (background renders, scheduled publishing)
+- **Admin**: React 19 + Vite + shadcn/ui + Tailwind CSS 4
+- **Renderer**: Remotion 4.0.415 (React → Chromium → ffmpeg → MP4)
+- **Storage**: MinIO S3 (audio, rendered videos)
+- **Auth**: JWT (bcryptjs + jose)
 
-## Project Structure
+## Monorepo Structure (pnpm workspaces)
 
 ```
-src/
-  core/          # Registry, schemas (Zod), fonts, format configs
-  types.ts       # Theme, TemplateMeta, Format, RenderJob
-  components/    # AnimatedText, AnimatedImage, Background, CTA, Logo, Overlay
-  templates/     # 23 templates (each: index.tsx with component + registry.register())
-  themes/        # default, dark, vibrant, minimal
-  api/           # Express server + routes (health, templates, render, preview)
-  Root.tsx       # Remotion composition entry (registers all template×format combos)
-scripts/
-  render-cli.ts  # CLI interface for rendering
-content/
-  audio-sync.ts  # Audio-synced render pipeline (ffprobe + frame timing)
-  generate-plan.ts    # 60-day content calendar generator
-  generate-scripts.ts # Extract audio scripts from content plan
-  render.ts           # Batch render pipeline
-  renderforge-tts.ipynb  # Colab notebook for Qwen3 TTS
-dashboard/       # React Vite SPA (template gallery, preview, config, render)
+renderforge/
+├── apps/
+│   ├── api/              # Hono API server (port 3100)
+│   │   └── src/
+│   │       ├── server.ts
+│   │       ├── config.ts       # Zod-validated env
+│   │       ├── routes/         # auth, posts, renders, niches, uploads, social, sse, dashboard
+│   │       ├── services/       # Business logic layer
+│   │       ├── jobs/           # BullMQ workers (render, publish, analytics)
+│   │       ├── social/         # ISocialProvider + platform providers
+│   │       ├── middleware/     # auth, error-handler, logger
+│   │       └── lib/            # redis, crypto
+│   ├── admin/            # React admin dashboard (port 5173)
+│   │   └── src/
+│   │       ├── components/     # layout/, ui/ (shadcn)
+│   │       ├── features/       # dashboard, posts, renders, social, niches, calendar, analytics, settings
+│   │       ├── stores/         # auth-store (Zustand)
+│   │       ├── hooks/          # TanStack Query hooks
+│   │       └── lib/            # api-client, utils
+│   └── renderer/         # Remotion render engine
+│       ├── templates/    # 27 video templates
+│       ├── components/   # AnimatedText, Background, etc.
+│       ├── core/         # Registry, schemas, fonts
+│       └── Root.tsx
+├── packages/
+│   ├── db/               # Drizzle schema + migrations
+│   │   └── src/schema/   # users, niches, posts, scenes, renders, social_accounts, etc.
+│   └── shared/           # Shared types, constants
+├── content/              # Content pipeline (CLI, preserved for batch ops)
+├── scripts/
+│   └── task-runner.sh    # Task orchestrator
+├── docs/tasks/           # 28 task specs + progress.json + coding-standards.md
+├── docker-compose.yml    # PostgreSQL + Redis + API
+└── pnpm-workspace.yaml
 ```
+
+## Database Schema (10 tables)
+
+- **users** — admin auth (email, password_hash, role)
+- **niches** — content categories (slug, template, voice, languages, config)
+- **posts** — content items (title, status workflow, niche, template, format)
+- **scenes** — per-post scenes (display_text, narration_text, audio_url, duration_seconds)
+- **bgm_tracks** — background music library
+- **renders** — render jobs (status, progress, output_url)
+- **social_accounts** — OAuth2 connections (encrypted tokens)
+- **scheduled_posts** — publishing schedule
+- **analytics** — engagement metrics per published post
 
 ## Key Patterns
 
 ### Template Registration
-Every template in `src/templates/{name}/index.tsx` follows:
+Every template in `apps/renderer/templates/{name}/index.tsx`:
 ```typescript
 registry.register({
   meta: { id, name, description, category, tags, supportedFormats, durationInFrames, fps },
@@ -53,35 +101,48 @@ registry.register({
 });
 ```
 
-### Output Formats
-- **story**: 1080×1920 (9:16 portrait)
-- **post**: 1080×1080 (1:1 square)
-- **landscape**: 1920×1080 (16:9 widescreen)
+### Post Status Workflow
+`draft → audio_pending → ready → rendering → rendered → published`
 
-### Themes
-All templates accept `theme: Theme` with colors (primary, secondary, accent, background, text, muted) and fonts (heading, body).
+### Output Formats
+- **story**: 1080×1920 (9:16), **post**: 1080×1080 (1:1), **landscape**: 1920×1080 (16:9)
 
 ## Conventions
 
-- TypeScript strict mode, React 18 with JSX transform
-- Zod for all prop validation schemas
-- Animations use Remotion's `interpolate()` and `spring()` — frame-based, not time-based
-- Font loading via `src/core/fonts.ts` (Google Fonts + local Noto Sans Ethiopic)
-- Multi-language support: English, Amharic (Ethiopic), Arabic
-- Output goes to `output/` directory (gitignored except samples in `out/`)
-- Docker build uses Node 22 + Chromium + ffmpeg
+- pnpm for package management (monorepo workspaces)
+- TypeScript strict mode, no `any`, no `@ts-ignore`
+- Zod for all validation (API input, env config, template props)
+- Animations: Remotion `interpolate()` / `spring()` (frame-based)
+- Database queries through service layer, never in routes
+- Git commits: `{type}(task-NN): description`
+- See `docs/tasks/coding-standards.md` for full conventions
 
-## System Dependencies (for rendering)
+## Environment Variables
 
-- Node.js 22+
-- Chromium (headless, for Remotion frame capture)
-- ffmpeg + ffprobe (video encoding, audio analysis)
+```
+DATABASE_URL=postgresql://renderforge:renderforge@localhost:5432/renderforge
+REDIS_URL=redis://localhost:6379
+JWT_SECRET=change-me-in-production
+S3_ENDPOINT=https://storage.endlessmaker.com
+S3_ACCESS_KEY=...
+S3_SECRET_KEY=...
+S3_BUCKET=forgebase
+PORT=3100
+NODE_ENV=development
+```
 
-## Content Pipeline (YLD Channel)
+## System Dependencies
 
-1. `generate-plan.ts` → 60-day content calendar (`content-plan.json`)
-2. `generate-scripts.ts` → audio scripts per post
-3. Colab notebook → Qwen3 TTS audio generation
-4. `audio-sync.ts` → frame-synced video with narration
-5. `render.ts` → batch render all formats
-6. `add-metadata.ts` → inject video metadata
+- Node.js 22+ with pnpm
+- PostgreSQL 16 + Redis 7 (via Docker)
+- Chromium (headless, for Remotion)
+- ffmpeg + ffprobe (video/audio processing)
+
+## Content Pipeline (CLI)
+
+1. `generate-plan.ts` → content calendar
+2. `generate-scripts.ts` → audio scripts
+3. Colab notebook → Qwen3 TTS
+4. `audio-sync.ts` → frame-synced video
+5. `render.ts` → batch render
+6. `add-metadata.ts` → inject metadata

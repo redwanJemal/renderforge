@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "projectId": "inputaudio",
+  "sourceDir": "/home/redman/renderforge/inputaudio",
+  "createdAt": "2026-03-12T10:38:11.627Z",
+  "fps": 30,
+  "padding": {
+    "before": 15,
+    "after": 20,
+    "transition": 10
+  },
+  "segments": [
+    {
+      "key": "gentle_storyteller",
+      "file": "/home/redman/renderforge/inputaudio/gentle_storyteller.wav",
+      "audioDuration": 14.48,
+      "frames": 470,
+      "startFrame": 0,
+      "endFrame": 470
+    },
+    {
+      "key": "kids",
+      "file": "/home/redman/renderforge/inputaudio/kids.wav",
+      "audioDuration": 8.08,
+      "frames": 278,
+      "startFrame": 480,
+      "endFrame": 758
+    },
+    {
+      "key": "whimsical_fairy",
+      "file": "/home/redman/renderforge/inputaudio/whimsical_fairy.wav",
+      "audioDuration": 12.88,
+      "frames": 422,
+      "startFrame": 768,
+      "endFrame": 1190
+    }
+  ],
+  "totalAudioDuration": 35.440000000000005,
+  "totalFrames": 1230
+}

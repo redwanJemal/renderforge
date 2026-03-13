@@ -29,34 +29,35 @@
   "props": {
     "scenes": [
       {
-        "text": "You have been planning for months. Maybe\nyears. When does the doing start?",
-        "highlight": "doing",
+        "text": "DOING",
+        "subtext": "You have been planning for months",
         "entrance": "fadeIn",
-        "textSize": 56
+        "textSize": 64
       },
       {
-        "text": "Analysis paralysis has killed more dreams than failure ever will. The person who takes imperfect action will always outrun the person still\nperfecting their plan. Your brain is designed to keep you safe, not successful. It will always find a reason to wait.",
-        "highlight": "imperfect action",
+        "text": "IMPERFECT ACTION",
+        "subtext": "Analysis paralysis has killed more dreams than failure ever will",
         "entrance": "slideLeft",
-        "textSize": 44,
+        "textSize": 56,
         "subtextSize": 24
       },
       {
-        "text": "The gap between where you are and where you want to be\nis not knowledge. It is action. You already know enough to start.",
-        "highlight": "action",
+        "text": "ACTION",
+        "subtext": "The gap between where you are and where you want to be...",
         "entrance": "slam",
-        "textSize": 48
+        "textSize": 56
       },
       {
-        "text": "Progress is not made in your head.\nIt is made with your hands.",
-        "highlight": "your hands",
+        "text": "YOUR HANDS",
+        "subtext": "Progress is not made in your head",
         "entrance": "scaleIn",
-        "textSize": 52
+        "textSize": 60
       },
       {
-        "text": "Tag someone stuck in planning\nmode. Follow for daily motivation.",
+        "text": "TAG SOMEONE STUCK IN PLANNING MODE",
+        "subtext": "Tag someone stuck in planning mode",
         "entrance": "slideUp",
-        "textSize": 40,
+        "textSize": 48,
         "subtextSize": 26
       }
     ],

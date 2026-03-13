@@ -1,0 +1,302 @@
+[
+  {
+    "postId": "day03-post1",
+    "template": "yld-intro",
+    "theme": "hustle",
+    "title": "Your First Business Will Probably Fail \u274c",
+    "sections": [
+      {
+        "key": "intro",
+        "text": "Your First Business Will Probably Fail",
+        "audioFile": "day03-post1/intro.wav"
+      },
+      {
+        "key": "headline",
+        "text": "Ship it now. Perfect it later",
+        "audioFile": "day03-post1/headline.wav"
+      },
+      {
+        "key": "subheader",
+        "text": "Done is better than perfect. Revenue beats perfection.",
+        "audioFile": "day03-post1/subheader.wav"
+      },
+      {
+        "key": "badge",
+        "text": "Ship Fast",
+        "audioFile": "day03-post1/badge.wav"
+      },
+      {
+        "key": "cta",
+        "text": "LAUNCH TODAY. Follow Your Last Dollar for more.",
+        "audioFile": "day03-post1/cta.wav"
+      }
+    ],
+    "fullScript": "Your First Business Will Probably Fail Ship it now. Perfect it later Done is better than perfect. Revenue beats perfection. Ship Fast LAUNCH TODAY. Follow Your Last Dollar for more.",
+    "audioDir": "audio/day03-post1"
+  },
+  {
+    "postId": "day03-post2",
+    "template": "slider",
+    "theme": "hustle",
+    "title": "4 Signs Your Business Idea Is Worth Pursuing",
+    "sections": [
+      {
+        "key": "intro",
+        "text": "Solo Empire",
+        "audioFile": "day03-post2/intro.wav"
+      },
+      {
+        "key": "slide1",
+        "text": ". ",
+        "audioFile": "day03-post2/slide1.wav"
+      },
+      {
+        "key": "slide2",
+        "text": ". ",
+        "audioFile": "day03-post2/slide2.wav"
+      },
+      {
+        "key": "slide3",
+        "text": ". ",
+        "audioFile": "day03-post2/slide3.wav"
+      },
+      {
+        "key": "slide4",
+        "text": ". ",
+        "audioFile": "day03-post2/slide4.wav"
+      },
+      {
+        "key": "outro",
+        "text": "One Person. Unlimited Income.",
+        "audioFile": "day03-post2/outro.wav"
+      }
+    ],
+    "fullScript": "Solo Empire .  .  .  .  One Person. Unlimited Income.",
+    "audioDir": "audio/day03-post2"
+  },
+  {
+    "postId": "day03-post3",
+    "template": "yld-intro",
+    "theme": "hustle",
+    "title": "Dream Every Day, Not Just Weekends \ud83c\udf1f",
+    "sections": [
+      {
+        "key": "intro",
+        "text": "Dream Every Day, Not Just Weekends",
+        "audioFile": "day03-post3/intro.wav"
+      },
+      {
+        "key": "headline",
+        "text": "Your first business. will probably fail",
+        "audioFile": "day03-post3/headline.wav"
+      },
+      {
+        "key": "subheader",
+        "text": "And that's completely okay. Failure is your tuition.",
+        "audioFile": "day03-post3/subheader.wav"
+      },
+      {
+        "key": "badge",
+        "text": "Real Talk",
+        "audioFile": "day03-post3/badge.wav"
+      },
+      {
+        "key": "cta",
+        "text": "TRY AGAIN. Follow Your Last Dollar for more.",
+        "audioFile": "day03-post3/cta.wav"
+      }
+    ],
+    "fullScript": "Dream Every Day, Not Just Weekends Your first business. will probably fail And that's completely okay. Failure is your tuition. Real Talk TRY AGAIN. Follow Your Last Dollar for more.",
+    "audioDir": "audio/day03-post3"
+  },
+  {
+    "postId": "day03-post4",
+    "template": "slider",
+    "theme": "hustle",
+    "title": "4 Things To Do BEFORE Quitting Your Job",
+    "sections": [
+      {
+        "key": "intro",
+        "text": "Idea Checklist",
+        "audioFile": "day03-post4/intro.wav"
+      },
+      {
+        "key": "slide1",
+        "text": ". ",
+        "audioFile": "day03-post4/slide1.wav"
+      },
+      {
+        "key": "slide2",
+        "text": ". ",
+        "audioFile": "day03-post4/slide2.wav"
+      },
+      {
+        "key": "slide3",
+        "text": ". ",
+        "audioFile": "day03-post4/slide3.wav"
+      },
+      {
+        "key": "slide4",
+        "text": ". ",
+        "audioFile": "day03-post4/slide4.wav"
+      },
+      {
+        "key": "outro",
+        "text": "Got All 4? Build It.",
+        "audioFile": "day03-post4/outro.wav"
+      }
+    ],
+    "fullScript": "Idea Checklist .  .  .  .  Got All 4? Build It.",
+    "audioDir": "audio/day03-post4"
+  },
+  {
+    "postId": "day04-post1",
+    "template": "yld-intro",
+    "theme": "hustle",
+    "title": "Nobody Is Coming To Save You \u26a1",
+    "sections": [
+      {
+        "key": "intro",
+        "text": "Nobody Is Coming To Save You",
+        "audioFile": "day04-post1/intro.wav"
+      },
+      {
+        "key": "headline",
+        "text": "Dream every day. not just weekends",
+        "audioFile": "day04-post1/headline.wav"
+      },
+      {
+        "key": "subheader",
+        "text": "When your work is your passion, Monday feels like Saturday.",
+        "audioFile": "day04-post1/subheader.wav"
+      },
+      {
+        "key": "badge",
+        "text": "Mindset Shift",
+        "audioFile": "day04-post1/badge.wav"
+      },
+      {
+        "key": "cta",
+        "text": "START DREAMING. Follow Your Last Dollar for more.",
+        "audioFile": "day04-post1/cta.wav"
+      }
+    ],
+    "fullScript": "Nobody Is Coming To Save You Dream every day. not just weekends When your work is your passion, Monday feels like Saturday. Mindset Shift START DREAMING. Follow Your Last Dollar for more.",
+    "audioDir": "audio/day04-post1"
+  },
+  {
+    "postId": "day04-post2",
+    "template": "slider",
+    "theme": "money",
+    "title": "4 Types of Businesses Ranked By Difficulty",
+    "sections": [
+      {
+        "key": "intro",
+        "text": "Money Rules",
+        "audioFile": "day04-post2/intro.wav"
+      },
+      {
+        "key": "slide1",
+        "text": ". ",
+        "audioFile": "day04-post2/slide1.wav"
+      },
+      {
+        "key": "slide2",
+        "text": ". ",
+        "audioFile": "day04-post2/slide2.wav"
+      },
+      {
+        "key": "slide3",
+        "text": ". ",
+        "audioFile": "day04-post2/slide3.wav"
+      },
+      {
+        "key": "slide4",
+        "text": ". ",
+        "audioFile": "day04-post2/slide4.wav"
+      },
+      {
+        "key": "outro",
+        "text": "Master Money. Master Life.",
+        "audioFile": "day04-post2/outro.wav"
+      }
+    ],
+    "fullScript": "Money Rules .  .  .  .  Master Money. Master Life.",
+    "audioDir": "audio/day04-post2"
+  },
+  {
+    "postId": "day04-post3",
+    "template": "yld-intro",
+    "theme": "hustle",
+    "title": "Build Something That Makes You Proud \ud83c\udfc6",
+    "sections": [
+      {
+        "key": "intro",
+        "text": "Build Something That Makes You Proud",
+        "audioFile": "day04-post3/intro.wav"
+      },
+      {
+        "key": "headline",
+        "text": "Nobody is coming. to save you",
+        "audioFile": "day04-post3/headline.wav"
+      },
+      {
+        "key": "subheader",
+        "text": "And once you realize that, you become unstoppable.",
+        "audioFile": "day04-post3/subheader.wav"
+      },
+      {
+        "key": "badge",
+        "text": "Self Made",
+        "audioFile": "day04-post3/badge.wav"
+      },
+      {
+        "key": "cta",
+        "text": "SAVE YOURSELF. Follow Your Last Dollar for more.",
+        "audioFile": "day04-post3/cta.wav"
+      }
+    ],
+    "fullScript": "Build Something That Makes You Proud Nobody is coming. to save you And once you realize that, you become unstoppable. Self Made SAVE YOURSELF. Follow Your Last Dollar for more.",
+    "audioDir": "audio/day04-post3"
+  },
+  {
+    "postId": "day04-post4",
+    "template": "slider",
+    "theme": "money",
+    "title": "4 Money Rules They Don't Teach In School",
+    "sections": [
+      {
+        "key": "intro",
+        "text": "Income Streams",
+        "audioFile": "day04-post4/intro.wav"
+      },
+      {
+        "key": "slide1",
+        "text": ". ",
+        "audioFile": "day04-post4/slide1.wav"
+      },
+      {
+        "key": "slide2",
+        "text": ". ",
+        "audioFile": "day04-post4/slide2.wav"
+      },
+      {
+        "key": "slide3",
+        "text": ". ",
+        "audioFile": "day04-post4/slide3.wav"
+      },
+      {
+        "key": "slide4",
+        "text": ". ",
+        "audioFile": "day04-post4/slide4.wav"
+      },
+      {
+        "key": "outro",
+        "text": "Stack Your Streams",
+        "audioFile": "day04-post4/outro.wav"
+      }
+    ],
+    "fullScript": "Income Streams .  .  .  .  Stack Your Streams",
+    "audioDir": "audio/day04-post4"
+  }
+]

@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "projectId": "day01-post1",
+  "sourceDir": "/home/redman/renderforge/content/audio/day01-post1",
+  "createdAt": "2026-03-12T10:37:19.856Z",
+  "fps": 30,
+  "padding": {
+    "before": 15,
+    "after": 20,
+    "transition": 10
+  },
+  "segments": [
+    {
+      "key": "intro",
+      "file": "/home/redman/renderforge/content/audio/day01-post1/intro.wav",
+      "audioDuration": 1.5,
+      "frames": 80,
+      "startFrame": 0,
+      "endFrame": 80
+    },
+    {
+      "key": "badge",
+      "file": "/home/redman/renderforge/content/audio/day01-post1/badge.wav",
+      "audioDuration": 1.8,
+      "frames": 89,
+      "startFrame": 90,
+      "endFrame": 179
+    },
+    {
+      "key": "cta",
+      "file": "/home/redman/renderforge/content/audio/day01-post1/cta.wav",
+      "audioDuration": 2,
+      "frames": 95,
+      "startFrame": 189,
+      "endFrame": 284
+    },
+    {
+      "key": "headline",
+      "file": "/home/redman/renderforge/content/audio/day01-post1/headline.wav",
+      "audioDuration": 2.8,
+      "frames": 119,
+      "startFrame": 294,
+      "endFrame": 413
+    },
+    {
+      "key": "subheader",
+      "file": "/home/redman/renderforge/content/audio/day01-post1/subheader.wav",
+      "audioDuration": 3.5,
+      "frames": 140,
+      "startFrame": 423,
+      "endFrame": 563
+    }
+  ],
+  "totalAudioDuration": 11.6,
+  "totalFrames": 603
+}

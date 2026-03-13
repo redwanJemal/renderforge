@@ -1,10 +1,12 @@
 node_modules/
-dashboard/node_modules/
 .env
 .env.*
+!.env.example
 
 # Rendered output
 output/
+out/
+dist/
 
 # Audio files (downloaded/generated — keep config files like splits.json)
 content/audio/**/*.wav
@@ -15,3 +17,15 @@ content/audio/**/*.m4a
 !content/audio/bgm/**/*.mp3
 inputaudio/*.wav
 inputaudio/*.mp3
+
+# Logs
+logs/
+
+# pnpm
+.pnpm-store/
+
+# E2E
+e2e/.auth/
+e2e/test-results/
+e2e/playwright-report/
+e2e/node_modules/

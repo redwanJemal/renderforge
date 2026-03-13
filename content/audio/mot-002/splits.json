@@ -29,34 +29,35 @@
   "props": {
     "scenes": [
       {
-        "text": "While the world sleeps, winners\nare already making moves.",
-        "highlight": "winners",
+        "text": "WINNERS",
+        "subtext": "While the world sleeps, winners are already making moves",
         "entrance": "slideUp",
-        "textSize": 56
+        "textSize": 64
       },
       {
-        "text": "The first hour of your day determines the next twenty-three. Most people wake up in reaction mode. Checking phones, reading bad news, absorbing negativity before\ntheir feet hit the floor. Champions wake up in creation mode. They create their day before the world tries to create it for them.",
-        "highlight": "creation mode",
+        "text": "CREATION MODE",
+        "subtext": "The first hour of your day determines the next twenty-three",
         "entrance": "fadeIn",
-        "textSize": 44,
+        "textSize": 56,
         "subtextSize": 24
       },
       {
-        "text": "It is not about waking up early. It is about waking up intentionally. Five\nAM with no plan is just insomnia. Five AM with purpose is a weapon.",
-        "highlight": "purpose is a weapon",
+        "text": "PURPOSE IS A WEAPON",
+        "subtext": "It is not about waking up early",
         "entrance": "slideLeft",
-        "textSize": 48
+        "textSize": 56
       },
       {
-        "text": "Own your morning. Own your life. The\ndiscipline starts before the sun rises.",
-        "highlight": "Own your morning",
+        "text": "OWN YOUR MORNING",
+        "subtext": "Own your morning",
         "entrance": "slam",
-        "textSize": 52
+        "textSize": 60
       },
       {
-        "text": "Double tap if you are ready to own\nyour mornings. Follow for more mindset fuel.",
+        "text": "DOUBLE TAP IF YOU ARE READY",
+        "subtext": "Double tap if you are ready to own your mornings",
         "entrance": "scaleIn",
-        "textSize": 40,
+        "textSize": 48,
         "subtextSize": 26
       }
     ],

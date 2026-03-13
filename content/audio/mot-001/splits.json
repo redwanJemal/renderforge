@@ -29,34 +29,35 @@
   "props": {
     "scenes": [
       {
-        "text": "Your mind is a control room. And right\nnow, someone else is pressing the buttons.",
-        "highlight": "control room",
+        "text": "CONTROL ROOM",
+        "subtext": "Your mind is a control room",
         "entrance": "scaleIn",
-        "textSize": 56
+        "textSize": 64
       },
       {
-        "text": "Every single day, thousands of thoughts pass through your head. Most of them are not even yours. They come from social media, from people\nwho gave up on their dreams, from a world that profits when you stay small. The question is, who is running your mind?",
-        "highlight": "who is running your mind",
+        "text": "WHO IS RUNNING YOUR MIND",
+        "subtext": "Every single day, thousands of thoughts pass through your head",
         "entrance": "slideUp",
-        "textSize": 44,
+        "textSize": 56,
         "subtextSize": 24
       },
       {
-        "text": "Imagine inside your head there are two operators. One runs fear. The other runs\nfaith. Whichever one you feed the most gets to sit in the big chair.",
-        "highlight": "faith",
+        "text": "FAITH",
+        "subtext": "Imagine inside your head there are two operators",
         "entrance": "fadeIn",
-        "textSize": 48
+        "textSize": 56
       },
       {
-        "text": "You are not your thoughts. You are the\none who chooses which thoughts to believe.",
-        "highlight": "chooses",
+        "text": "CHOOSES",
+        "subtext": "You are not your thoughts",
         "entrance": "slideLeft",
-        "textSize": 52
+        "textSize": 60
       },
       {
-        "text": "If this hit different, save it. Share it with someone\nwho needs to hear it. Follow for daily mindset shifts.",
+        "text": "IF THIS HIT DIFFERENT, SAVE IT",
+        "subtext": "If this hit different, save it",
         "entrance": "slam",
-        "textSize": 40,
+        "textSize": 48,
         "subtextSize": 26
       }
     ],

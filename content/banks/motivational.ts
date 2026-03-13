@@ -1316,12 +1316,30 @@ export const THEMES: ThemeDef[] = [
 // HELPERS
 // ──────────────────────────────────────────────
 
-function formatTextForScene(text: string): string {
-  // Break long text into 2-3 lines for visual readability on screen
-  const words = text.split(/\s+/);
-  if (words.length <= 6) return text;
-  const mid = Math.ceil(words.length / 2);
-  return words.slice(0, mid).join(' ') + '\n' + words.slice(mid).join(' ');
+/**
+ * Extract short display text for on-screen rendering.
+ * The full narration is spoken via TTS — on screen we only show
+ * a punchy phrase (the highlight, first sentence, or first N words).
+ */
+function extractDisplayText(fullText: string, highlight?: string, maxWords = 10): string {
+  // Use highlight phrase if available (human-curated, already short)
+  if (highlight) return highlight.toUpperCase();
+  // Fallback: first sentence, capped at maxWords
+  const firstSentence = fullText.split(/[.!?]/)[0].trim();
+  const words = firstSentence.split(/\s+/);
+  if (words.length <= maxWords) return firstSentence.toUpperCase();
+  return words.slice(0, maxWords).join(' ').toUpperCase();
+}
+
+/**
+ * Extract a short supporting line to show below the main display text.
+ * Uses the first sentence of the narration (excluding the highlight if it matches).
+ */
+function extractSubtext(fullText: string, maxWords = 12): string {
+  const firstSentence = fullText.split(/[.!?]/)[0].trim();
+  const words = firstSentence.split(/\s+/);
+  if (words.length <= maxWords) return firstSentence;
+  return words.slice(0, maxWords).join(' ') + '...';
 }
 
 // ──────────────────────────────────────────────
@@ -1366,36 +1384,39 @@ export const motivationalBank: ContentBank = {
         const fullScript = sections.map((s) => s.text).join(' ');
 
         // Build scenes for motivational-narration template
+        // Display text = short punchy phrase (highlight or first sentence)
+        // Full narration stays in sections[].text for TTS
         const scenes = [
           {
-            text: formatTextForScene(post.intro),
-            highlight: post.introHighlight,
+            text: extractDisplayText(post.intro, post.introHighlight),
+            subtext: extractSubtext(post.intro),
             entrance: ENTRANCES[0],
-            textSize: 56,
+            textSize: 64,
           },
           {
-            text: formatTextForScene(post.headline),
-            highlight: post.headlineHighlight,
+            text: extractDisplayText(post.headline, post.headlineHighlight),
+            subtext: extractSubtext(post.headline),
             entrance: ENTRANCES[1 % ENTRANCES.length],
-            textSize: 44,
+            textSize: 56,
             subtextSize: 24,
           },
           {
-            text: formatTextForScene(post.subheader),
-            highlight: post.subheaderHighlight,
+            text: extractDisplayText(post.subheader, post.subheaderHighlight),
+            subtext: extractSubtext(post.subheader),
             entrance: ENTRANCES[2 % ENTRANCES.length],
-            textSize: 48,
+            textSize: 56,
           },
           {
-            text: formatTextForScene(post.badge),
-            highlight: post.badgeHighlight,
+            text: extractDisplayText(post.badge, post.badgeHighlight),
+            subtext: extractSubtext(post.badge),
             entrance: ENTRANCES[3 % ENTRANCES.length],
-            textSize: 52,
+            textSize: 60,
           },
           {
-            text: formatTextForScene(post.cta),
+            text: extractDisplayText(post.cta, undefined, 6),
+            subtext: extractSubtext(post.cta),
             entrance: ENTRANCES[4 % ENTRANCES.length],
-            textSize: 40,
+            textSize: 48,
             subtextSize: 26,
           },
         ];
