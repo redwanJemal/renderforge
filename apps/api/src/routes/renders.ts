@@ -147,17 +147,34 @@ rendersRouter.delete("/:id", async (c) => {
   return c.json({ success: true });
 });
 
-// Download render output (redirects to S3 presigned URL)
+// Download render output — stream from S3 to avoid redirect issues
 rendersRouter.get("/:id/download", async (c) => {
-  const [render] = await db.select().from(renders).where(eq(renders.id, c.req.param("id"))).limit(1);
+  const [render] = await db
+    .select({ id: renders.id, outputUrl: renders.outputUrl, postId: renders.postId })
+    .from(renders)
+    .where(eq(renders.id, c.req.param("id")))
+    .limit(1);
   if (!render) return c.json({ error: "Not found" }, 404);
   if (!render.outputUrl) return c.json({ error: "No output file available" }, 404);
 
   try {
     const { storage } = await import("../services/storage.js");
-    const key = `renders/${render.id}.mp4`;
-    const url = await storage.getPresignedUrl(key, 3600);
-    return c.redirect(url);
+    const key = render.outputUrl.startsWith("renders/") ? render.outputUrl : `renders/${render.id}.mp4`;
+
+    // Get post title for filename
+    const [post] = await db.select({ title: posts.title }).from(posts).where(eq(posts.id, render.postId)).limit(1);
+    const safeTitle = (post?.title ?? "render").replace(/[^a-zA-Z0-9_-]/g, "_").substring(0, 50);
+    const filename = `${safeTitle}-${render.id.slice(0, 8)}.mp4`;
+
+    const buffer = await storage.download(key);
+    return new Response(buffer, {
+      status: 200,
+      headers: {
+        "Content-Type": "video/mp4",
+        "Content-Disposition": `attachment; filename="${filename}"`,
+        "Content-Length": String(buffer.length),
+      },
+    });
   } catch {
     return c.json({ error: "File not found in storage" }, 404);
   }

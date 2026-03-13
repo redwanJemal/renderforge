@@ -64,7 +64,11 @@ export const telegramProvider: ISocialProvider = {
   async publish(videoPath: string, metadata: SocialVideoMetadata, accessToken: string): Promise<PublishResult> {
     const { botToken, channelId } = parseStoredToken(accessToken);
 
-    const videoBuffer = await (await fetch(videoPath)).arrayBuffer();
+    console.log(`[telegram] Downloading video from: ${videoPath.substring(0, 100)}...`);
+    const videoRes = await fetch(videoPath);
+    if (!videoRes.ok) throw new Error(`Failed to download video: HTTP ${videoRes.status}`);
+    const videoBuffer = await videoRes.arrayBuffer();
+    console.log(`[telegram] Video downloaded: ${(videoBuffer.byteLength / 1024 / 1024).toFixed(1)} MB`);
     const formData = new FormData();
     formData.append("chat_id", channelId);
     formData.append("video", new Blob([videoBuffer]), "video.mp4");
@@ -85,8 +89,8 @@ export const telegramProvider: ISocialProvider = {
       body: formData,
     });
 
-    const data = (await res.json()) as { ok: boolean; result?: { message_id: number } };
-    if (!data.ok) throw new Error("Failed to send video to Telegram");
+    const data = (await res.json()) as { ok: boolean; result?: { message_id: number }; description?: string; error_code?: number };
+    if (!data.ok) throw new Error(`Telegram API error: ${data.description ?? "Unknown error"} (code: ${data.error_code ?? "?"})`);
 
     const messageId = data.result?.message_id ?? 0;
 

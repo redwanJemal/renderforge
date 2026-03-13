@@ -1,7 +1,10 @@
 import { Hono } from "hono";
 import { z } from "zod";
+import { Queue } from "bullmq";
 import { db, scheduledPosts, socialAccounts, renders, posts, eq, and, desc, count } from "@renderforge/db";
 import { authMiddleware } from "../middleware/auth.js";
+import { getRedis } from "../lib/redis.js";
+import type { PublishJobData } from "../jobs/publish-worker.js";
 
 const publishingRouter = new Hono();
 
@@ -77,7 +80,11 @@ publishingRouter.get("/", async (c) => {
   return c.json({ items, total, page, totalPages: Math.ceil(total / perPage) });
 });
 
-// Schedule a post to one or more platforms
+function getPublishQueue() {
+  return new Queue<PublishJobData>("publish", { connection: getRedis() });
+}
+
+// Schedule a post to one or more platforms (and publish immediately if no scheduledAt)
 publishingRouter.post("/", async (c) => {
   const schema = z.object({
     postId: z.string().uuid(),
@@ -88,8 +95,11 @@ publishingRouter.post("/", async (c) => {
 
   const body = schema.parse(await c.req.json());
   const scheduledAt = body.scheduledAt ? new Date(body.scheduledAt) : new Date();
+  const publishNow = !body.scheduledAt || new Date(body.scheduledAt) <= new Date();
 
+  const queue = getPublishQueue();
   const created = [];
+
   for (const socialAccountId of body.socialAccountIds) {
     const [item] = await db.insert(scheduledPosts).values({
       postId: body.postId,
@@ -99,9 +109,46 @@ publishingRouter.post("/", async (c) => {
       status: "scheduled",
     }).returning();
     created.push(item);
+
+    // Immediately enqueue publish job if publishing now
+    if (publishNow) {
+      await queue.add("publish", {
+        scheduledPostId: item.id,
+        postId: body.postId,
+        renderId: body.renderId,
+        socialAccountId,
+      });
+    }
   }
 
   return c.json({ items: created, count: created.length }, 201);
+});
+
+// Publish a specific scheduled post now (retry or manual trigger)
+publishingRouter.post("/:id/publish", async (c) => {
+  const id = c.req.param("id");
+
+  const [item] = await db
+    .select()
+    .from(scheduledPosts)
+    .where(eq(scheduledPosts.id, id))
+    .limit(1);
+
+  if (!item) return c.json({ error: "Not found" }, 404);
+  if (item.status === "published") return c.json({ error: "Already published" }, 400);
+
+  // Reset status to scheduled
+  await db.update(scheduledPosts).set({ status: "scheduled", error: null }).where(eq(scheduledPosts.id, id));
+
+  const queue = getPublishQueue();
+  await queue.add("publish", {
+    scheduledPostId: item.id,
+    postId: item.postId,
+    renderId: item.renderId,
+    socialAccountId: item.socialAccountId,
+  });
+
+  return c.json({ success: true, message: "Publish job enqueued" });
 });
 
 // Cancel a scheduled post (remove from a platform)

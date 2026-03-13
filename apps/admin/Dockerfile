@@ -29,6 +29,7 @@ RUN echo 'server { \
     location / { \
         try_files $uri $uri/ /index.html; \
     } \
+    client_max_body_size 200M; \
     location /api { \
         proxy_pass http://api:3100; \
         proxy_http_version 1.1; \
@@ -41,6 +42,7 @@ RUN echo 'server { \
         proxy_buffering off; \
         proxy_cache off; \
         proxy_read_timeout 86400s; \
+        proxy_max_temp_file_size 200m; \
     } \
     location /health { \
         proxy_pass http://api:3100; \

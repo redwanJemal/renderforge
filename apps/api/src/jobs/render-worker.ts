@@ -48,9 +48,11 @@ async function bundleRemotionProject(): Promise<string> {
   // The renderer entry point is relative to the monorepo root
   const entryPoint = join(process.cwd(), "apps/renderer/index.ts");
 
-  console.log("[render-worker] Bundling Remotion project...");
+  const publicDir = join(process.cwd(), "public");
+  console.log(`[render-worker] Bundling Remotion project... (publicDir: ${publicDir})`);
   const bundlePath = await bundle({
     entryPoint,
+    publicDir,
     onProgress: (progress: number) => {
       if (progress % 25 === 0) console.log(`[render-worker] Bundle progress: ${progress}%`);
     },
@@ -100,6 +102,11 @@ async function processRenderJob(job: Job<RenderJobData>) {
     let templateProps: Record<string, unknown>;
     if (metadata.sceneProps && typeof metadata.sceneProps === "object") {
       templateProps = metadata.sceneProps as Record<string, unknown>;
+      // Ensure logo is always set
+      if (!templateProps.logo) {
+        templateProps.logo = "yld-logo-white.png";
+        templateProps.logoSize = 120;
+      }
     } else {
       // Build from DB scenes — calculate frame timing
       const introHoldFrames = 45;
@@ -130,6 +137,8 @@ async function processRenderJob(job: Job<RenderJobData>) {
       templateProps = {
         scenes: sceneProps,
         title: metadata.title as string | undefined,
+        logo: metadata.logo as string | undefined ?? "yld-logo-white.png",
+        logoSize: metadata.logoSize as number | undefined ?? 120,
         accentColor: metadata.accentColor ?? "#f59e0b",
         bgGradient: metadata.bgGradient ?? ["#0f0f0f", "#1a1a2e", "#0f0f0f"],
         particlesEnabled: true,

@@ -1,16 +1,20 @@
 import { test, expect, type Page } from '@playwright/test';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 /**
  * E2E: Seed YLD Content + Create Render
  *
  * Seeds a YLD motivational post via API, then creates a render
  * and waits for it to complete. Verifies the output is in S3.
- *
- * This test works entirely through the deployed web app + API
- * (no direct DB access needed).
+ * Takes screenshots at every step.
  */
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const API_URL = process.env.API_URL || 'https://renderforge.endlessmaker.com';
+const SCREENSHOTS_DIR = path.join(__dirname, '..', 'screenshots');
 
 async function getToken(page: Page): Promise<string> {
   return await page.evaluate(() => localStorage.getItem('rf_token') || '');
@@ -32,6 +36,11 @@ async function apiCall(page: Page, method: string, path: string, body?: unknown)
     },
     { url: `${API_URL}${path}`, method, body, token },
   );
+}
+
+async function screenshot(page: Page, name: string) {
+  await page.screenshot({ path: path.join(SCREENSHOTS_DIR, `${name}.png`), fullPage: true });
+  console.log(`  Screenshot saved: ${name}.png`);
 }
 
 // YLD Post content — "Your Mind Is A Control Room"
@@ -165,6 +174,7 @@ test.describe('Seed & Render YLD Content', () => {
   test('Step 1: Clean all existing renders', async ({ page }) => {
     await page.goto('/renders');
     await page.waitForTimeout(2_000);
+    await screenshot(page, '01-renders-before-clean');
 
     const result = await apiCall(page, 'GET', '/api/renders?perPage=100');
     const renders = result.data?.items ?? [];
@@ -181,14 +191,19 @@ test.describe('Seed & Render YLD Content', () => {
     for (const post of posts) {
       if (post.status === 'rendering') {
         await apiCall(page, 'PATCH', `/api/posts/${post.id}/status`, { status: 'draft' });
-        console.log(`  Reset stuck post: ${post.title} → draft`);
+        console.log(`  Reset stuck post: ${post.title} -> draft`);
       }
     }
+
+    await page.reload();
+    await page.waitForTimeout(2_000);
+    await screenshot(page, '01-renders-after-clean');
   });
 
   test('Step 2: Find motivational niche', async ({ page }) => {
     await page.goto('/');
-    await page.waitForTimeout(1_000);
+    await page.waitForTimeout(2_000);
+    await screenshot(page, '02-dashboard');
 
     const result = await apiCall(page, 'GET', '/api/niches');
     const niches = result.data?.items ?? result.data ?? [];
@@ -203,7 +218,8 @@ test.describe('Seed & Render YLD Content', () => {
 
   test('Step 3: Create YLD post with scenes', async ({ page }) => {
     await page.goto('/content');
-    await page.waitForTimeout(1_000);
+    await page.waitForTimeout(2_000);
+    await screenshot(page, '03-content-before');
 
     const result = await apiCall(page, 'POST', '/api/posts', {
       nicheId,
@@ -219,7 +235,9 @@ test.describe('Seed & Render YLD Content', () => {
 
     // Verify post appears in UI
     await page.reload();
-    await page.waitForTimeout(2_000);
+    await page.waitForTimeout(3_000);
+    await screenshot(page, '03-content-after-create');
+
     await expect(
       page.getByText(YLD_POST.title).first(),
     ).toBeVisible({ timeout: 10_000 });
@@ -227,22 +245,27 @@ test.describe('Seed & Render YLD Content', () => {
 
   test('Step 4: Create render via API', async ({ page }) => {
     await page.goto('/renders');
-    await page.waitForTimeout(1_000);
+    await page.waitForTimeout(2_000);
+    await screenshot(page, '04-renders-before');
 
     const result = await apiCall(page, 'POST', '/api/renders', {
       postId,
       format: 'story',
     });
 
-    console.log(`Create render response: ${result.status}`);
+    console.log(`Create render response: ${result.status}`, JSON.stringify(result.data));
     expect(result.status).toBe(201);
 
     renderId = result.data.id;
     console.log(`Created render: ${renderId}`);
+
+    await page.reload();
+    await page.waitForTimeout(2_000);
+    await screenshot(page, '04-render-created');
   });
 
   test('Step 5: Wait for render to complete', async ({ page }) => {
-    test.setTimeout(6 * 60_000); // 6 min timeout for this test
+    test.setTimeout(8 * 60_000); // 8 min timeout
 
     await page.goto('/renders');
     await page.waitForTimeout(2_000);
@@ -260,9 +283,10 @@ test.describe('Seed & Render YLD Content', () => {
       }
     }
 
-    const maxWait = 5 * 60_000;
-    const pollInterval = 5_000;
+    const maxWait = 7 * 60_000;
+    const pollInterval = 10_000;
     const startTime = Date.now();
+    let screenshotCount = 0;
 
     let lastStatus = '';
     let lastProgress = 0;
@@ -281,22 +305,37 @@ test.describe('Seed & Render YLD Content', () => {
 
       if (status !== lastStatus || progress !== lastProgress) {
         const elapsed = Math.round((Date.now() - startTime) / 1000);
-        console.log(`[${elapsed}s] Render ${renderId}: ${status} ${progress}%${outputUrl ? ` → ${outputUrl}` : ''}`);
+        console.log(`[${elapsed}s] Render ${renderId}: ${status} ${progress}%${outputUrl ? ` -> ${outputUrl}` : ''}`);
         lastStatus = status;
         lastProgress = progress;
+
+        // Take screenshot on significant status changes
+        if (status !== lastStatus || screenshotCount === 0 || progress % 25 === 0) {
+          await page.reload();
+          await page.waitForTimeout(1_500);
+          await screenshot(page, `05-render-progress-${screenshotCount++}-${status}-${progress}pct`);
+        }
       }
 
       if (status === 'completed') {
         console.log(`\nRender completed!`);
         console.log(`  Output URL: ${outputUrl}`);
         console.log(`  File size: ${fileSize ? (fileSize / 1024 / 1024).toFixed(1) + ' MB' : 'N/A'}`);
+
+        await page.reload();
+        await page.waitForTimeout(2_000);
+        await screenshot(page, '05-render-completed');
+
         expect(outputUrl).toBeTruthy();
         return;
       }
 
       if (status === 'failed') {
         console.error(`\nRender FAILED: ${error}`);
-        // Don't fail test immediately — log the error for debugging
+        await page.reload();
+        await page.waitForTimeout(2_000);
+        await screenshot(page, '05-render-FAILED');
+
         expect.soft(status, `Render failed: ${error}`).not.toBe('failed');
         return;
       }
@@ -307,12 +346,13 @@ test.describe('Seed & Render YLD Content', () => {
     // If we get here, render didn't complete in time
     const finalResult = await apiCall(page, 'GET', `/api/renders/${renderId}`);
     console.log(`Render timed out. Final state:`, JSON.stringify(finalResult.data, null, 2));
+    await screenshot(page, '05-render-TIMEOUT');
     expect.soft(false, `Render did not complete within ${maxWait / 60_000} minutes`).toBeTruthy();
   });
 
   test('Step 6: Verify render output downloadable', async ({ page }) => {
     await page.goto('/renders');
-    await page.waitForTimeout(1_000);
+    await page.waitForTimeout(2_000);
 
     // Find renderId if not set
     if (!renderId) {
@@ -324,41 +364,37 @@ test.describe('Seed & Render YLD Content', () => {
     const result = await apiCall(page, 'GET', `/api/renders/${renderId}`);
     const render = result.data;
 
-    // Skip if render didn't complete (previous test may have soft-failed)
+    // Skip if render didn't complete
     if (render?.status !== 'completed' || !render?.outputUrl) {
       console.log(`Skipping download check — render status: ${render?.status}, outputUrl: ${render?.outputUrl}`);
+      await screenshot(page, '06-render-not-completed');
       test.skip();
       return;
     }
 
-    // Verify download endpoint works
+    await screenshot(page, '06-renders-completed-list');
+
+    // Verify download endpoint works (follow redirects — manual mode returns opaque status 0 in browser)
     const token = await getToken(page);
     const downloadCheck = await page.evaluate(
       async ({ url, token }) => {
         const res = await fetch(url, {
           headers: { Authorization: `Bearer ${token}` },
-          redirect: 'manual',
+          redirect: 'follow',
         });
         return {
           status: res.status,
-          location: res.headers.get('location'),
+          contentType: res.headers.get('content-type'),
+          size: Number(res.headers.get('content-length') || 0),
+          ok: res.ok,
         };
       },
       { url: `${API_URL}/api/renders/${renderId}/download`, token },
     );
 
-    console.log(`Download endpoint: status=${downloadCheck.status}`);
+    console.log(`Download endpoint: status=${downloadCheck.status}, type=${downloadCheck.contentType}, size=${downloadCheck.size}`);
+    expect(downloadCheck.ok).toBeTruthy();
 
-    // Should redirect (302) to S3 presigned URL
-    if (downloadCheck.status === 302 || downloadCheck.status === 301) {
-      console.log(`  Redirect to: ${downloadCheck.location?.substring(0, 80)}...`);
-      expect(downloadCheck.location).toContain('storage.endlessmaker.com');
-    } else {
-      // Some setups follow redirects, check for 200
-      expect([200, 301, 302]).toContain(downloadCheck.status);
-    }
-
-    // Also verify the file metadata
     expect(render.fileSize).toBeGreaterThan(0);
     expect(render.durationMs).toBeGreaterThan(0);
     console.log(`  File size: ${(render.fileSize / 1024 / 1024).toFixed(1)} MB`);
@@ -388,7 +424,6 @@ test.describe('Seed & Render YLD Content', () => {
     const s3Key = render.outputUrl;
     console.log(`S3 key: ${s3Key}`);
 
-    // Get presigned URL through the download endpoint and verify the file exists
     const token = await getToken(page);
     const fileCheck = await page.evaluate(
       async ({ url, token }) => {
@@ -409,6 +444,8 @@ test.describe('Seed & Render YLD Content', () => {
     console.log(`S3 file check: status=${fileCheck.status}, type=${fileCheck.contentType}, size=${fileCheck.size}`);
 
     expect(fileCheck.ok).toBeTruthy();
+
+    await screenshot(page, '07-final-dashboard');
     console.log('\nE2E PASS: YLD content seeded, rendered, and output verified in MinIO/S3');
   });
 });

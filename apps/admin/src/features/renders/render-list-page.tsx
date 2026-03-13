@@ -59,6 +59,27 @@ import { useAllRendersSSE } from "@/hooks/use-sse";
 import { NewRenderDialog } from "./new-render-dialog";
 import { useNavigate } from "react-router-dom";
 
+async function downloadRender(renderId: string) {
+  const token = localStorage.getItem("rf_token");
+  const res = await fetch(`/api/renders/${renderId}/download`, {
+    headers: token ? { Authorization: `Bearer ${token}` } : {},
+  });
+  if (!res.ok) {
+    toast.error("Download failed");
+    return;
+  }
+  const blob = await res.blob();
+  const disposition = res.headers.get("content-disposition");
+  const match = disposition?.match(/filename="?([^"]+)"?/);
+  const filename = match?.[1] || `render-${renderId}.mp4`;
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
 const STATUS_OPTIONS = [
   { value: "all", label: "All Statuses" },
   { value: "queued", label: "Queued" },
@@ -332,11 +353,9 @@ export function RenderListPage() {
                                   Preview Video
                                 </a>
                               </DropdownMenuItem>
-                              <DropdownMenuItem asChild>
-                                <a href={`/api/renders/${render.id}/download`} download>
-                                  <Download className="mr-2 h-4 w-4" />
-                                  Download
-                                </a>
+                              <DropdownMenuItem onClick={() => downloadRender(render.id)}>
+                                <Download className="mr-2 h-4 w-4" />
+                                Download
                               </DropdownMenuItem>
                             </>
                           )}
@@ -480,11 +499,9 @@ export function RenderListPage() {
               </div>
               <div className="flex gap-2 pt-2">
                 {detailRender.outputUrl && (
-                  <Button variant="outline" size="sm" asChild>
-                    <a href={`/api/renders/${detailRender.id}/download`} download>
-                      <Download className="mr-2 h-4 w-4" />
-                      Download
-                    </a>
+                  <Button variant="outline" size="sm" onClick={() => downloadRender(detailRender.id)}>
+                    <Download className="mr-2 h-4 w-4" />
+                    Download
                   </Button>
                 )}
                 <Button
