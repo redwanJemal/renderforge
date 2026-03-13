@@ -1,11 +1,8 @@
 import { Hono } from "hono";
-import { authMiddleware } from "../middleware/auth.js";
 
 const storageProxy = new Hono();
 
-storageProxy.use("*", authMiddleware);
-
-// Proxy S3 objects (thumbnails, etc.) to avoid CORS/presigned URL complexity
+// No auth — these are public assets served via <img>/<video> tags
 storageProxy.get("/*", async (c) => {
   const key = c.req.path.replace(/^\//, "");
   if (!key) return c.json({ error: "No key" }, 400);
