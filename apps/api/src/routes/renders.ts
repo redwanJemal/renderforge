@@ -84,9 +84,40 @@ rendersRouter.get("/", async (c) => {
 });
 
 rendersRouter.get("/:id", async (c) => {
-  const [render] = await db.select().from(renders).where(eq(renders.id, c.req.param("id"))).limit(1);
+  const [render] = await db
+    .select({
+      id: renders.id,
+      postId: renders.postId,
+      postTitle: posts.title,
+      format: renders.format,
+      status: renders.status,
+      progress: renders.progress,
+      outputUrl: renders.outputUrl,
+      thumbnailUrl: renders.thumbnailUrl,
+      durationMs: renders.durationMs,
+      fileSize: renders.fileSize,
+      error: renders.error,
+      jobId: renders.jobId,
+      bgmTrackId: renders.bgmTrackId,
+      createdAt: renders.createdAt,
+    })
+    .from(renders)
+    .leftJoin(posts, eq(renders.postId, posts.id))
+    .where(eq(renders.id, c.req.param("id")))
+    .limit(1);
   if (!render) return c.json({ error: "Not found" }, 404);
-  return c.json(render);
+
+  const { storage } = await import("../services/storage.js");
+  let thumbnailUrl = render.thumbnailUrl;
+  let outputUrl = render.outputUrl;
+  try {
+    if (thumbnailUrl) thumbnailUrl = await storage.getPresignedUrl(thumbnailUrl, 3600);
+  } catch { thumbnailUrl = null; }
+  try {
+    if (outputUrl) outputUrl = await storage.getPresignedUrl(outputUrl, 3600);
+  } catch { /* keep original */ }
+
+  return c.json({ ...render, thumbnailUrl, outputUrl });
 });
 
 rendersRouter.post("/", async (c) => {

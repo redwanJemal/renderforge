@@ -41,12 +41,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
@@ -162,7 +156,6 @@ export function RenderListPage() {
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [page, setPage] = useState(1);
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [detailRender, setDetailRender] = useState<Render | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<Render | null>(null);
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [bulkDeleteOpen, setBulkDeleteOpen] = useState(false);
@@ -455,7 +448,7 @@ export function RenderListPage() {
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
-                          <DropdownMenuItem onClick={() => setDetailRender(render)}>
+                          <DropdownMenuItem onClick={() => navigate(`/renders/${render.id}`)}>
                             <Eye className="mr-2 h-4 w-4" />
                             View Details
                           </DropdownMenuItem>
@@ -534,144 +527,6 @@ export function RenderListPage() {
 
       <NewRenderDialog open={dialogOpen} onOpenChange={setDialogOpen} />
       <PublishDialog renderIds={publishIds} open={publishOpen} onOpenChange={setPublishOpen} />
-
-      {/* Render Detail Dialog */}
-      <Dialog open={!!detailRender} onOpenChange={(open) => !open && setDetailRender(null)}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle>Render Details</DialogTitle>
-          </DialogHeader>
-          {detailRender && (
-            <div className="space-y-4">
-              {detailRender.thumbnailUrl && (
-                <div className="rounded-lg overflow-hidden border">
-                  <img
-                    src={detailRender.thumbnailUrl}
-                    alt="Thumbnail"
-                    className="w-full object-contain max-h-[200px]"
-                  />
-                </div>
-              )}
-              {detailRender.outputUrl && (
-                <div className="rounded-lg overflow-hidden border bg-black">
-                  <video
-                    src={detailRender.outputUrl}
-                    controls
-                    className="w-full max-h-[300px]"
-                    poster={detailRender.thumbnailUrl ?? ""}
-                  />
-                </div>
-              )}
-              {!detailRender.outputUrl && getStatus(detailRender) === "completed" && (
-                <div className="rounded-lg border bg-muted/50 p-6 text-center">
-                  <Film className="h-10 w-10 mx-auto mb-2 text-muted-foreground" />
-                  <p className="text-sm text-muted-foreground">
-                    Render completed but no output file was generated.
-                  </p>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    This happens when the Remotion renderer is not configured.
-                  </p>
-                </div>
-              )}
-              <div className="grid grid-cols-2 gap-3 text-sm">
-                <div>
-                  <p className="text-muted-foreground">Post</p>
-                  <button
-                    className="font-medium hover:underline text-primary"
-                    onClick={() => {
-                      setDetailRender(null);
-                      navigate(`/content/${detailRender.postId}`);
-                    }}
-                  >
-                    {detailRender.postTitle || detailRender.postId.slice(0, 12) + "..."}
-                  </button>
-                </div>
-                <div>
-                  <p className="text-muted-foreground">Format</p>
-                  <p className="font-medium capitalize">{detailRender.format} ({formatLabel(detailRender.format)})</p>
-                </div>
-                <div>
-                  <p className="text-muted-foreground">Status</p>
-                  <Badge
-                    variant={statusBadgeVariant(getStatus(detailRender))}
-                    className={statusBadgeClass(getStatus(detailRender))}
-                  >
-                    {getStatus(detailRender)}
-                  </Badge>
-                </div>
-                <div>
-                  <p className="text-muted-foreground">Progress</p>
-                  <p className="font-medium">{Math.round(getProgress(detailRender))}%</p>
-                </div>
-                <div>
-                  <p className="text-muted-foreground">File Size</p>
-                  <p className="font-medium">{formatSize(detailRender.fileSize)}</p>
-                </div>
-                <div>
-                  <p className="text-muted-foreground">Duration</p>
-                  <p className="font-medium">{formatDuration(detailRender.durationMs)}</p>
-                </div>
-                <div>
-                  <p className="text-muted-foreground">Job ID</p>
-                  <p className="font-medium font-mono text-xs">{detailRender.jobId ?? "--"}</p>
-                </div>
-                <div>
-                  <p className="text-muted-foreground">Created</p>
-                  <p className="font-medium">{formatDate(detailRender.createdAt)}</p>
-                </div>
-                <div className="col-span-2">
-                  <p className="text-muted-foreground">Render ID</p>
-                  <p className="font-medium font-mono text-xs">{detailRender.id}</p>
-                </div>
-                {detailRender.error && (
-                  <div className="col-span-2">
-                    <p className="text-muted-foreground">Error</p>
-                    <p className="font-medium text-destructive text-xs">{detailRender.error}</p>
-                  </div>
-                )}
-              </div>
-              <div className="flex gap-2 pt-2">
-                {detailRender.outputUrl && (
-                  <Button variant="outline" size="sm" onClick={() => downloadRender(detailRender.id)}>
-                    <Download className="mr-2 h-4 w-4" />
-                    Download
-                  </Button>
-                )}
-                {getStatus(detailRender) === "completed" && (
-                  <Button variant="outline" size="sm" onClick={() => handlePublishSingle(detailRender)}>
-                    <Send className="mr-2 h-4 w-4" />
-                    Publish
-                  </Button>
-                )}
-                <Button
-                  variant="outline"
-                  size="sm"
-                  disabled={retryRender.isPending}
-                  onClick={() => {
-                    handleRerender(detailRender);
-                    setDetailRender(null);
-                  }}
-                >
-                  <RefreshCw className="mr-2 h-4 w-4" />
-                  Re-render
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="text-destructive hover:text-destructive"
-                  onClick={() => {
-                    setDetailRender(null);
-                    setDeleteTarget(detailRender);
-                  }}
-                >
-                  <Trash2 className="mr-2 h-4 w-4" />
-                  Delete
-                </Button>
-              </div>
-            </div>
-          )}
-        </DialogContent>
-      </Dialog>
 
       {/* Delete Confirmation (single) */}
       <AlertDialog open={!!deleteTarget} onOpenChange={(open) => !open && setDeleteTarget(null)}>

@@ -23,7 +23,8 @@ export const motivationalNarrationSchema = z.object({
   bgGradient: z.array(z.string()).default(['#0f0f0f', '#1a1a2e', '#0f0f0f']),
   particlesEnabled: z.boolean().default(true),
   transitionFrames: z.number().default(15), // enter/exit duration per scene
-  introHoldFrames: z.number().default(45),  // frames before first scene (logo reveal)
+  introHoldFrames: z.number().default(60),  // frames before first scene (2s logo intro)
+  outroHoldFrames: z.number().default(60),  // frames after last scene (2s logo outro)
 });
 
 export type MotivationalNarrationProps = z.infer<typeof motivationalNarrationSchema>;
@@ -87,6 +88,7 @@ export const defaultProps: MotivationalNarrationProps = {
   bgGradient: ['#0f0f0f', '#1a1a2e', '#0f0f0f'],
   particlesEnabled: true,
   transitionFrames: 15,
-  introHoldFrames: 45,
+  introHoldFrames: 60,
+  outroHoldFrames: 60,
   logoSize: 120,
 };

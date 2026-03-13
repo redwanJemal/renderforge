@@ -16,9 +16,23 @@ import {
   RefreshCw,
   Image,
   ChevronDown,
+  Pencil,
+  Save,
+  X,
+  Plus,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -39,8 +53,10 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { usePost, useDeletePost } from "@/hooks/use-posts";
+import { usePost, useDeletePost, useUpdatePost, useUpsertScenes } from "@/hooks/use-posts";
+import type { Scene } from "@/hooks/use-posts";
 import { useRenders, useCreateRender, useDeleteRender, type Render } from "@/hooks/use-renders";
+import { useTemplates } from "@/hooks/use-templates";
 import { useAllRendersSSE } from "@/hooks/use-sse";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "@/lib/api";
@@ -61,6 +77,18 @@ const FORMATS = [
   { value: "post", label: "Post (1:1)" },
   { value: "landscape", label: "Landscape (16:9)" },
 ];
+
+const THEMES = ["default", "dark", "vibrant", "minimal"] as const;
+const ENTRANCES = ["fade", "slide", "scale", "fadeIn", "slideUp", "slideLeft", "scaleIn", "slam"] as const;
+
+type SceneEdit = {
+  id?: string;
+  key: string;
+  displayText: string;
+  narrationText: string;
+  entrance: string;
+  sortOrder: number;
+};
 
 function getAuthHeaders(): Record<string, string> {
   const token = localStorage.getItem("rf_token");
@@ -116,6 +144,14 @@ export function PostDetailPage() {
   const [deleteRenderId, setDeleteRenderId] = useState<string | null>(null);
   const [retryingIds, setRetryingIds] = useState<Set<string>>(new Set());
 
+  // Editing state
+  const [editing, setEditing] = useState(false);
+  const [editTitle, setEditTitle] = useState("");
+  const [editTemplateId, setEditTemplateId] = useState("");
+  const [editFormat, setEditFormat] = useState("");
+  const [editTheme, setEditTheme] = useState("");
+  const [editScenes, setEditScenes] = useState<SceneEdit[]>([]);
+
   const { data: rendersData, refetch: refetchRenders } = useRenders({ postId: id });
   const renderItems = rendersData?.items ?? [];
   const completedRenders = renderItems.filter((r) => r.status === "completed");
@@ -124,6 +160,9 @@ export function PostDetailPage() {
   const createRender = useCreateRender();
   const deleteRender = useDeleteRender();
   const deletePost = useDeletePost();
+  const updatePost = useUpdatePost();
+  const upsertScenes = useUpsertScenes();
+  const { data: templatesData } = useTemplates();
 
   const { data: publishingItems, refetch: refetchPublishing } = useQuery({
     queryKey: ["publishing", id],
@@ -225,6 +264,81 @@ export function PostDetailPage() {
     }
   }
 
+  function startEditing() {
+    if (!post) return;
+    setEditTitle(post.title);
+    setEditTemplateId(post.templateId);
+    setEditFormat(post.format);
+    setEditTheme(post.theme || "default");
+    setEditScenes(
+      (post.scenes ?? []).map((s) => ({
+        id: s.id,
+        key: s.key,
+        displayText: s.displayText,
+        narrationText: s.narrationText,
+        entrance: s.entrance,
+        sortOrder: s.sortOrder,
+      })),
+    );
+    setEditing(true);
+  }
+
+  function cancelEditing() {
+    setEditing(false);
+  }
+
+  async function handleSaveEdit() {
+    if (!id || !post) return;
+    try {
+      await updatePost.mutateAsync({
+        id,
+        title: editTitle,
+        templateId: editTemplateId,
+        format: editFormat,
+        theme: editTheme,
+      });
+      await upsertScenes.mutateAsync({
+        postId: id,
+        scenes: editScenes.map((s, i) => ({
+          id: s.id,
+          key: s.key,
+          displayText: s.displayText,
+          narrationText: s.narrationText,
+          entrance: s.entrance,
+          sortOrder: i,
+        })),
+      });
+      toast.success("Post updated");
+      setEditing(false);
+      refetch();
+    } catch {
+      toast.error("Failed to update post");
+    }
+  }
+
+  function updateScene(index: number, field: keyof SceneEdit, value: string) {
+    setEditScenes((prev) =>
+      prev.map((s, i) => (i === index ? { ...s, [field]: value } : s)),
+    );
+  }
+
+  function addScene() {
+    setEditScenes((prev) => [
+      ...prev,
+      {
+        key: `scene-${prev.length + 1}`,
+        displayText: "",
+        narrationText: "",
+        entrance: "fade",
+        sortOrder: prev.length,
+      },
+    ]);
+  }
+
+  function removeScene(index: number) {
+    setEditScenes((prev) => prev.filter((_, i) => i !== index));
+  }
+
   async function handleRemoveFromPlatform(publishingId: string) {
     try {
       await api.delete(`/api/publishing/${publishingId}`);
@@ -268,7 +382,15 @@ export function PostDetailPage() {
           <ArrowLeft className="h-4 w-4" />
         </Button>
         <div className="flex-1">
-          <h1 className="text-2xl font-bold tracking-tight">{post.title}</h1>
+          {editing ? (
+            <Input
+              value={editTitle}
+              onChange={(e) => setEditTitle(e.target.value)}
+              className="text-2xl font-bold h-auto py-1"
+            />
+          ) : (
+            <h1 className="text-2xl font-bold tracking-tight">{post.title}</h1>
+          )}
           <div className="mt-1 flex items-center gap-3 text-sm text-muted-foreground">
             <span>Template: {post.templateId}</span>
             <span>Format: {post.format}</span>
@@ -286,33 +408,113 @@ export function PostDetailPage() {
           {post.status.replace("_", " ")}
         </Badge>
 
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button disabled={createRender.isPending}>
-              <Film className="mr-2 h-4 w-4" />
-              Render
-              <ChevronDown className="ml-1 h-3 w-3" />
+        {editing ? (
+          <>
+            <Button onClick={handleSaveEdit} disabled={updatePost.isPending || upsertScenes.isPending}>
+              <Save className="mr-2 h-4 w-4" />
+              {updatePost.isPending ? "Saving..." : "Save"}
             </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {FORMATS.map((f) => (
-              <DropdownMenuItem key={f.value} onClick={() => handleQueueRender(f.value)}>
-                {f.label}
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
+            <Button variant="outline" onClick={cancelEditing}>
+              <X className="mr-2 h-4 w-4" />
+              Cancel
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button variant="outline" onClick={startEditing}>
+              <Pencil className="mr-2 h-4 w-4" />
+              Edit
+            </Button>
 
-        <Button
-          variant="destructive"
-          size="icon"
-          onClick={() => setDeleteDialogOpen(true)}
-        >
-          <Trash2 className="h-4 w-4" />
-        </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button disabled={createRender.isPending}>
+                  <Film className="mr-2 h-4 w-4" />
+                  Render
+                  <ChevronDown className="ml-1 h-3 w-3" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                {FORMATS.map((f) => (
+                  <DropdownMenuItem key={f.value} onClick={() => handleQueueRender(f.value)}>
+                    {f.label}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            <Button
+              variant="destructive"
+              size="icon"
+              onClick={() => setDeleteDialogOpen(true)}
+            >
+              <Trash2 className="h-4 w-4" />
+            </Button>
+          </>
+        )}
       </div>
 
       <Separator />
+
+      {/* Edit Settings (template, format, theme) */}
+      {editing && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">Settings</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-3 gap-4">
+              <div className="space-y-2">
+                <Label>Template</Label>
+                <Select value={editTemplateId} onValueChange={setEditTemplateId}>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {templatesData?.items?.map((t) => (
+                      <SelectItem key={t.id} value={t.id}>
+                        {t.name}
+                      </SelectItem>
+                    ))}
+                    <SelectItem value="motivational-narration">Motivational Narration</SelectItem>
+                    <SelectItem value="yld-intro">YLD Intro</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label>Format</Label>
+                <Select value={editFormat} onValueChange={setEditFormat}>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {FORMATS.map((f) => (
+                      <SelectItem key={f.value} value={f.value}>
+                        {f.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label>Theme</Label>
+                <Select value={editTheme} onValueChange={setEditTheme}>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {THEMES.map((t) => (
+                      <SelectItem key={t} value={t}>
+                        {t.charAt(0).toUpperCase() + t.slice(1)}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Renders Section */}
       <Card>
@@ -575,18 +777,92 @@ export function PostDetailPage() {
       <Card>
         <CardHeader>
           <div className="flex items-center justify-between">
-            <CardTitle className="text-lg">Scenes ({scenes.length})</CardTitle>
-            {scenes.length > 0 && (
+            <CardTitle className="text-lg">
+              Scenes ({editing ? editScenes.length : scenes.length})
+            </CardTitle>
+            {!editing && scenes.length > 0 && (
               <Badge variant={allHaveAudio ? "default" : "outline"}>
                 {allHaveAudio
                   ? "All scenes have audio"
                   : `${scenes.filter((s) => s.audioUrl).length}/${scenes.length} with audio`}
               </Badge>
             )}
+            {editing && (
+              <Button variant="outline" size="sm" onClick={addScene}>
+                <Plus className="mr-1 h-3 w-3" />
+                Add Scene
+              </Button>
+            )}
           </div>
         </CardHeader>
         <CardContent>
-          {scenes.length === 0 ? (
+          {editing ? (
+            <div className="space-y-4">
+              {editScenes.map((scene, index) => (
+                <div key={index} className="rounded-lg border p-4 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="font-medium text-sm text-muted-foreground">
+                        Scene {index + 1}
+                      </span>
+                    </div>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-7 w-7 text-destructive hover:text-destructive"
+                      onClick={() => removeScene(index)}
+                    >
+                      <Trash2 className="h-3 w-3" />
+                    </Button>
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="space-y-1">
+                      <Label className="text-xs">Key</Label>
+                      <Input
+                        value={scene.key}
+                        onChange={(e) => updateScene(index, "key", e.target.value)}
+                        placeholder="e.g. intro, headline"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <Label className="text-xs">Entrance</Label>
+                      <Select
+                        value={scene.entrance}
+                        onValueChange={(v) => updateScene(index, "entrance", v)}
+                      >
+                        <SelectTrigger>
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {ENTRANCES.map((e) => (
+                            <SelectItem key={e} value={e}>
+                              {e}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                  <div className="space-y-1">
+                    <Label className="text-xs">Display Text</Label>
+                    <Textarea
+                      value={scene.displayText}
+                      onChange={(e) => updateScene(index, "displayText", e.target.value)}
+                      rows={2}
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <Label className="text-xs">Narration Text</Label>
+                    <Textarea
+                      value={scene.narrationText}
+                      onChange={(e) => updateScene(index, "narrationText", e.target.value)}
+                      rows={2}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : scenes.length === 0 ? (
             <p className="text-sm text-muted-foreground">No scenes added yet.</p>
           ) : (
             <div className="space-y-4">

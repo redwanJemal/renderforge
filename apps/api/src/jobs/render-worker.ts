@@ -84,7 +84,7 @@ const PREMIUM_TEMPLATES: Record<string, { durationInFrames: number }> = {
 
 // Check if template should use the premium yld-intro composition
 function isYLDTemplate(templateId: string): boolean {
-  return templateId === "motivational-narration" || templateId === "yld-intro";
+  return templateId === "yld-intro";
 }
 
 function isPremiumTemplate(templateId: string): boolean {
@@ -279,15 +279,17 @@ async function processRenderJob(job: Job<RenderJobData>) {
           templateProps.logoSize = 120;
         }
       } else {
-        const introHoldFrames = 45;
+        const introHoldFrames = 60; // 2s logo intro
+        const outroHoldFrames = 60; // 2s logo outro
         const transitionFrames = 15;
+        const sceneGapFrames = 8; // brief black gap between scenes for page feel
         let currentFrame = introHoldFrames;
 
         const sceneProps = postScenes.map((s, i) => {
           const durationSec = s.durationSeconds ? parseFloat(String(s.durationSeconds)) : 4;
           const durationFrames = Math.round(durationSec * fps);
           const startFrame = currentFrame;
-          currentFrame += durationFrames;
+          currentFrame += durationFrames + sceneGapFrames;
 
           const extraProps = (s.extraProps ?? {}) as Record<string, unknown>;
 
@@ -314,13 +316,15 @@ async function processRenderJob(job: Job<RenderJobData>) {
           particlesEnabled: true,
           transitionFrames,
           introHoldFrames,
+          outroHoldFrames,
         };
       }
 
       const sceneArray = templateProps.scenes as Array<{ startFrame: number; durationFrames: number }>;
       const lastScene = sceneArray?.[sceneArray.length - 1];
+      const outroFrames = (templateProps.outroHoldFrames as number) ?? 60;
       totalFrames = lastScene
-        ? lastScene.startFrame + lastScene.durationFrames + 30
+        ? lastScene.startFrame + lastScene.durationFrames + 8 + outroFrames + 20 // gap + outro + fade
         : 300;
     }
 
@@ -386,8 +390,68 @@ async function processRenderJob(job: Job<RenderJobData>) {
     await publishProgress(renderId, 85, "rendering", "Video rendered, processing...");
     await job.updateProgress(85);
 
+    // Step 4b: Mix scene narration audio into video
+    let audioMixedPath = outputPath;
+    const sceneAudioUrls = postScenes
+      .filter((s) => s.audioUrl)
+      .sort((a, b) => a.sortOrder - b.sortOrder)
+      .map((s) => s.audioUrl!);
+
+    // Calculate narration delay — audio starts after intro, not at time 0
+    const introDelaySec = ((templateProps.introHoldFrames as number) ?? 60) / fps;
+
+    if (sceneAudioUrls.length > 0) {
+      try {
+        await publishProgress(renderId, 86, "rendering", "Mixing narration audio...");
+        const { storage: audioStorage } = await import("../services/storage.js");
+        const { writeFileSync } = await import("node:fs");
+
+        // Download all scene audio files
+        const audioLocalPaths: string[] = [];
+        for (let i = 0; i < sceneAudioUrls.length; i++) {
+          const audioBuffer = await audioStorage.download(sceneAudioUrls[i]);
+          const ext = sceneAudioUrls[i].split(".").pop() || "mp3";
+          const localPath = join(workDir, `scene-audio-${i}.${ext}`);
+          writeFileSync(localPath, audioBuffer);
+          audioLocalPaths.push(localPath);
+        }
+
+        // Concatenate scene audio files using ffmpeg concat demuxer
+        const concatListPath = join(workDir, "audio-concat.txt");
+        const concatContent = audioLocalPaths.map((p) => `file '${p}'`).join("\n");
+        writeFileSync(concatListPath, concatContent);
+
+        const concatenatedAudioPath = join(workDir, "narration.mp3");
+        execFileSync("ffmpeg", [
+          "-y", "-f", "concat", "-safe", "0", "-i", concatListPath,
+          "-c:a", "libmp3lame", "-ar", "44100", "-ac", "2", "-b:a", "128k",
+          concatenatedAudioPath,
+        ], { timeout: 60_000 });
+
+        // Merge narration audio with video — delay audio to start after intro
+        const narrationOutputPath = join(workDir, `render-${renderId}-narration.mp4`);
+        const delayMs = Math.round(introDelaySec * 1000);
+        execFileSync("ffmpeg", [
+          "-y",
+          "-i", outputPath,
+          "-i", concatenatedAudioPath,
+          "-filter_complex", `[1:a]adelay=${delayMs}|${delayMs},apad[narr]`,
+          "-map", "0:v", "-map", "[narr]",
+          "-c:v", "copy", "-c:a", "aac", "-ar", "44100", "-ac", "2", "-b:a", "128k",
+          "-shortest",
+          narrationOutputPath,
+        ], { timeout: 120_000 });
+
+        audioMixedPath = narrationOutputPath;
+        console.log(`[render-worker] Narration audio mixed (${sceneAudioUrls.length} scenes, ${introDelaySec.toFixed(1)}s delay)`);
+      } catch (narrationErr) {
+        console.warn("[render-worker] Narration audio mixing failed, continuing without narration:", narrationErr);
+        // Continue with video-only
+      }
+    }
+
     // Step 5: Optional BGM mixing
-    let finalOutputPath = outputPath;
+    let finalOutputPath = audioMixedPath;
 
     if (bgmTrackId) {
       await publishProgress(renderId, 87, "rendering", "Mixing background music...");
@@ -410,17 +474,17 @@ async function processRenderJob(job: Job<RenderJobData>) {
 
           // Get video duration
           const durationResult = execFileSync("ffprobe", [
-            "-v", "quiet", "-show_entries", "format=duration", "-of", "csv=p=0", outputPath,
+            "-v", "quiet", "-show_entries", "format=duration", "-of", "csv=p=0", audioMixedPath,
           ], { encoding: "utf-8" }).trim();
           const duration = parseFloat(durationResult);
           const fadeOutDuration = 3;
           const fadeStart = Math.max(0, duration - fadeOutDuration);
 
-          // Check if video has an audio stream
+          // Check if video has an audio stream (it will if narration was mixed)
           let hasAudio = false;
           try {
             const audioCheck = execFileSync("ffprobe", [
-              "-v", "quiet", "-select_streams", "a", "-show_entries", "stream=index", "-of", "csv=p=0", outputPath,
+              "-v", "quiet", "-select_streams", "a", "-show_entries", "stream=index", "-of", "csv=p=0", audioMixedPath,
             ], { encoding: "utf-8" }).trim();
             hasAudio = audioCheck.length > 0;
           } catch {
@@ -430,7 +494,7 @@ async function processRenderJob(job: Job<RenderJobData>) {
           const bgmOutputPath = join(workDir, `render-${renderId}-bgm.mp4`);
 
           if (hasAudio) {
-            // Mix BGM with existing audio
+            // Mix BGM with existing audio (narration)
             const filterComplex = [
               `[1:a]volume=0.35,atrim=0:${duration.toFixed(2)},afade=t=out:st=${fadeStart.toFixed(2)}:d=${fadeOutDuration},asetpts=PTS-STARTPTS[bgm]`,
               `[0:a][bgm]amix=inputs=2:duration=first:dropout_transition=0:normalize=0[aout]`,
@@ -438,7 +502,7 @@ async function processRenderJob(job: Job<RenderJobData>) {
 
             execFileSync("ffmpeg", [
               "-y",
-              "-i", outputPath,
+              "-i", audioMixedPath,
               "-stream_loop", "-1", "-i", bgmLocalPath,
               "-filter_complex", filterComplex,
               "-map", "0:v", "-map", "[aout]",
@@ -446,13 +510,13 @@ async function processRenderJob(job: Job<RenderJobData>) {
               bgmOutputPath,
             ], { timeout: 120_000 });
           } else {
-            // Video-only: add BGM as the sole audio track (input 1 = bgm file)
+            // Video-only: add BGM as the sole audio track
             const filterComplex =
               `[1:a]volume=0.35,atrim=0:${duration.toFixed(2)},afade=t=out:st=${fadeStart.toFixed(2)}:d=${fadeOutDuration},asetpts=PTS-STARTPTS[bgm]`;
 
             execFileSync("ffmpeg", [
               "-y",
-              "-i", outputPath,
+              "-i", audioMixedPath,
               "-stream_loop", "-1", "-i", bgmLocalPath,
               "-filter_complex", filterComplex,
               "-map", "0:v", "-map", "[bgm]",
@@ -472,18 +536,20 @@ async function processRenderJob(job: Job<RenderJobData>) {
 
     await publishProgress(renderId, 88, "rendering", "Generating thumbnail...");
 
-    // Step 5b: Generate thumbnail from video midpoint
+    // Step 5b: Generate thumbnail from first scene peak (when text is fully visible)
     let thumbnailS3Key: string | null = null;
     try {
       const thumbPath = join(workDir, `thumb-${renderId}.jpg`);
-      // Get video duration for midpoint calculation
-      const durStr = execFileSync("ffprobe", [
-        "-v", "quiet", "-show_entries", "format=duration", "-of", "csv=p=0", finalOutputPath,
-      ], { encoding: "utf-8" }).trim();
-      const midpoint = (parseFloat(durStr) / 2).toFixed(2);
+      // Capture at first scene midpoint — after intro, text fully visible
+      const firstScene = (templateProps.scenes as Array<{ startFrame: number; durationFrames: number }>)?.[0];
+      const introFrames = (templateProps.introHoldFrames as number) ?? 60;
+      const thumbFrame = firstScene
+        ? firstScene.startFrame + Math.round(firstScene.durationFrames * 0.4) // 40% into first scene
+        : introFrames + 30;
+      const thumbTimestamp = (thumbFrame / fps).toFixed(2);
 
       execFileSync("ffmpeg", [
-        "-y", "-ss", midpoint, "-i", finalOutputPath,
+        "-y", "-ss", thumbTimestamp, "-i", finalOutputPath,
         "-frames:v", "1", "-q:v", "2", thumbPath,
       ], { timeout: 30_000 });
 

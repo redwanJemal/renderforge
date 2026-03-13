@@ -79,22 +79,29 @@ const SceneView: React.FC<{
   localFrame: number;
   transitionFrames: number;
   isLast: boolean;
+  isFirst: boolean;
   theme: Theme;
   format: Format;
   accentColor: string;
-}> = ({ scene, localFrame, transitionFrames, isLast, theme, format, accentColor }) => {
+  sceneIndex: number;
+  totalScenes: number;
+}> = ({ scene, localFrame, transitionFrames, isLast, isFirst, theme, format, accentColor, sceneIndex, totalScenes }) => {
   const { fps } = useVideoConfig();
 
-  // Enter animation (0 → transitionFrames)
+  // Distinct page transition: fade through black
+  const enterDuration = transitionFrames + 5;
+  const exitDuration = transitionFrames + 5;
+
+  // Enter: fade in from black (0 → enterDuration)
   const enterProgress = interpolate(
     localFrame,
-    [0, transitionFrames],
+    [0, enterDuration],
     [0, 1],
     { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' },
   );
 
-  // Exit animation (durationFrames - transitionFrames → durationFrames)
-  const exitStart = scene.durationFrames - transitionFrames;
+  // Exit: fade out to black (durationFrames - exitDuration → durationFrames)
+  const exitStart = scene.durationFrames - exitDuration;
   const exitProgress = isLast
     ? 1
     : interpolate(
@@ -142,7 +149,7 @@ const SceneView: React.FC<{
   }
 
   // Subtext staggered entrance
-  const subtextDelay = Math.min(20, transitionFrames);
+  const subtextDelay = Math.min(20, enterDuration + 5);
   const subtextOpacity = interpolate(
     localFrame,
     [subtextDelay, subtextDelay + 15],
@@ -167,67 +174,100 @@ const SceneView: React.FC<{
     );
   };
 
+  // Scene counter for page feel
+  const counterOpacity = interpolate(localFrame, [enterDuration, enterDuration + 10], [0, 0.4], {
+    extrapolateLeft: 'clamp', extrapolateRight: 'clamp',
+  }) * exitProgress;
+
   return (
-    <AbsoluteFill
-      style={{
-        opacity: visibility,
-        transform: `translate(${translateX}px, ${translateY}px) scale(${scale})`,
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: scene.textAlign === 'left' ? 'flex-start' : 'center',
-        padding: padding * 1.5,
-      }}
-    >
-      {/* Main text */}
-      <div
+    <AbsoluteFill style={{ opacity: visibility }}>
+      {/* Scene-specific background overlay for page distinction */}
+      <AbsoluteFill
         style={{
-          fontSize: textSize,
-          fontWeight: 800,
-          fontFamily: theme.fonts.heading,
-          color: '#ffffff',
-          textAlign: scene.textAlign,
-          lineHeight: 1.3,
-          whiteSpace: 'pre-line',
-          textShadow: '0 4px 20px rgba(0,0,0,0.5)',
-          maxWidth: '90%',
-        }}
-      >
-        {renderHighlightedText(scene.text, scene.highlight)}
-      </div>
-
-      {/* Subtext */}
-      {scene.subtext && (
-        <div
-          style={{
-            fontSize: subtextSize,
-            fontWeight: 400,
-            fontFamily: theme.fonts.body,
-            color: 'rgba(255,255,255,0.75)',
-            textAlign: scene.textAlign,
-            lineHeight: 1.5,
-            marginTop: 20,
-            opacity: subtextOpacity,
-            whiteSpace: 'pre-line',
-            maxWidth: '85%',
-          }}
-        >
-          {scene.subtext}
-        </div>
-      )}
-
-      {/* Accent underline */}
-      <div
-        style={{
-          width: interpolate(enterProgress, [0, 1], [0, 120]),
-          height: 3,
-          background: accentColor,
-          marginTop: 24,
-          borderRadius: 2,
-          alignSelf: scene.textAlign === 'left' ? 'flex-start' : 'center',
-          opacity: visibility,
+          background: `radial-gradient(ellipse at ${50 + sceneIndex * 5}% ${40 + sceneIndex * 3}%, rgba(255,255,255,0.02) 0%, transparent 70%)`,
         }}
       />
+
+      {/* Content */}
+      <AbsoluteFill
+        style={{
+          transform: `translate(${translateX}px, ${translateY}px) scale(${scale})`,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: scene.textAlign === 'left' ? 'flex-start' : 'center',
+          padding: padding * 1.5,
+        }}
+      >
+        {/* Scene counter */}
+        {totalScenes > 1 && (
+          <div
+            style={{
+              position: 'absolute',
+              top: format === 'landscape' ? 40 : 80,
+              right: format === 'landscape' ? 40 : 60,
+              fontSize: 16,
+              fontWeight: 600,
+              fontFamily: theme.fonts.body,
+              color: accentColor,
+              opacity: counterOpacity,
+              letterSpacing: 2,
+            }}
+          >
+            {sceneIndex + 1} / {totalScenes}
+          </div>
+        )}
+
+        {/* Main text */}
+        <div
+          style={{
+            fontSize: textSize,
+            fontWeight: 800,
+            fontFamily: theme.fonts.heading,
+            color: '#ffffff',
+            textAlign: scene.textAlign,
+            lineHeight: 1.3,
+            whiteSpace: 'pre-line',
+            textShadow: '0 4px 20px rgba(0,0,0,0.5)',
+            maxWidth: '90%',
+          }}
+        >
+          {renderHighlightedText(scene.text, scene.highlight)}
+        </div>
+
+        {/* Subtext */}
+        {scene.subtext && (
+          <div
+            style={{
+              fontSize: subtextSize,
+              fontWeight: 400,
+              fontFamily: theme.fonts.body,
+              color: 'rgba(255,255,255,0.75)',
+              textAlign: scene.textAlign,
+              lineHeight: 1.5,
+              marginTop: 20,
+              opacity: subtextOpacity,
+              whiteSpace: 'pre-line',
+              maxWidth: '85%',
+            }}
+          >
+            {scene.subtext}
+          </div>
+        )}
+
+        {/* Accent underline */}
+        <div
+          style={{
+            width: interpolate(enterProgress, [0, 1], [0, 120]),
+            height: 3,
+            background: accentColor,
+            marginTop: 24,
+            borderRadius: 2,
+            alignSelf: scene.textAlign === 'left' ? 'flex-start' : 'center',
+            opacity: visibility,
+          }}
+        />
+      </AbsoluteFill>
     </AbsoluteFill>
   );
 };
@@ -252,39 +292,61 @@ const MotivationalNarration: React.FC<
   }
 
   // Global fade in/out
-  const globalFadeIn = interpolate(frame, [0, 20], [0, 1], {
+  const globalFadeIn = interpolate(frame, [0, 15], [0, 1], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
   const globalFadeOut = interpolate(
     frame,
-    [durationInFrames - 25, durationInFrames],
+    [durationInFrames - 15, durationInFrames],
     [1, 0],
     { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' },
   );
   const globalOpacity = Math.min(globalFadeIn, globalFadeOut);
 
-  // Intro logo animation
-  const logoScale = spring({
+  // ── INTRO (2s): logo + channel name, scale in, hold, fade out ──
+  const introEnd = p.introHoldFrames;
+  const introLogoScale = spring({
     frame,
     fps,
     config: { damping: 14, stiffness: 80, mass: 0.6 },
   });
-  const logoOpacity = interpolate(frame, [0, 15], [0, 1], {
+  const introLogoOpacity = interpolate(frame, [0, 15], [0, 1], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
-  // Fade logo out when first scene starts
-  const firstSceneStart = p.scenes.length > 0 ? p.scenes[0].startFrame : p.introHoldFrames;
-  const logoFadeOut = interpolate(
+  const introFadeOut = interpolate(
     frame,
-    [firstSceneStart - 10, firstSceneStart + 5],
+    [introEnd - 12, introEnd],
+    [1, 0],
+    { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' },
+  );
+  const introGlow = Math.sin(frame * 0.08) * 0.3 + 0.7;
+
+  // ── OUTRO (2s): logo + channel name fade back in after last scene ──
+  const lastScene = p.scenes[p.scenes.length - 1];
+  const outroHoldFrames = p.outroHoldFrames ?? 60;
+  const scenesEnd = lastScene ? lastScene.startFrame + lastScene.durationFrames : introEnd;
+  const outroStart = scenesEnd + 8; // small gap after last scene
+  const outroLogoScale = spring({
+    frame: Math.max(0, frame - outroStart),
+    fps,
+    config: { damping: 14, stiffness: 80, mass: 0.6 },
+  });
+  const outroOpacity = interpolate(
+    frame,
+    [outroStart, outroStart + 15],
+    [0, 1],
+    { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' },
+  );
+  const outroFadeOut = interpolate(
+    frame,
+    [durationInFrames - 20, durationInFrames],
     [1, 0],
     { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' },
   );
 
   // Overall progress for accent bar
-  const lastScene = p.scenes[p.scenes.length - 1];
   const totalEnd = lastScene ? lastScene.startFrame + lastScene.durationFrames : durationInFrames;
   const overallProgress = interpolate(frame, [0, totalEnd], [0, 1], {
     extrapolateLeft: 'clamp',
@@ -336,50 +398,65 @@ const MotivationalNarration: React.FC<
         }}
       />
 
-      {/* Intro: Logo + title */}
-      {(p.logo || p.title) && (
+      {/* ── INTRO: Logo + channel name (2s) ── */}
+      {(p.logo || p.title) && frame < introEnd + 5 && (
         <AbsoluteFill
           style={{
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
-            opacity: logoOpacity * logoFadeOut,
-            transform: `scale(${logoScale})`,
+            opacity: introLogoOpacity * introFadeOut,
+            transform: `scale(${introLogoScale})`,
           }}
         >
           {p.logo && (
             <Img
               src={staticFile(p.logo)}
               style={{
-                width: p.logoSize,
-                height: p.logoSize,
+                width: p.logoSize * 1.8,
+                height: p.logoSize * 1.8,
                 objectFit: 'contain',
-                marginBottom: 16,
+                marginBottom: 20,
+                filter: `drop-shadow(0 0 ${40 * introGlow}px ${p.accentColor}80) drop-shadow(0 0 ${80 * introGlow}px ${p.accentColor}33)`,
               }}
             />
           )}
           {p.title && (
             <div
               style={{
-                fontSize: responsiveFontSize(24, props.format, 'caption'),
+                fontSize: responsiveFontSize(28, props.format, 'caption'),
                 fontWeight: 600,
                 fontFamily: props.theme.fonts.heading,
                 color: 'rgba(255,255,255,0.6)',
-                letterSpacing: 3,
+                letterSpacing: 4,
                 textTransform: 'uppercase',
+                marginTop: 8,
               }}
             >
               {p.title}
             </div>
           )}
+          {/* Accent divider under logo */}
+          <div
+            style={{
+              width: interpolate(frame, [10, 30], [0, 100], {
+                extrapolateLeft: 'clamp',
+                extrapolateRight: 'clamp',
+              }),
+              height: 2,
+              background: `linear-gradient(90deg, transparent, ${p.accentColor}, transparent)`,
+              marginTop: 16,
+              opacity: introLogoOpacity,
+            }}
+          />
         </AbsoluteFill>
       )}
 
-      {/* Scenes */}
+      {/* Scenes — each scene fades through black for distinct page feel */}
       {p.scenes.map((scene, i) => {
         const localFrame = frame - scene.startFrame;
-        // Only render if within range (with some buffer for transitions)
+        // Only render if within range (with buffer for transitions)
         if (localFrame < -5 || localFrame > scene.durationFrames + 5) return null;
         const clampedLocal = Math.max(0, localFrame);
         return (
@@ -389,12 +466,69 @@ const MotivationalNarration: React.FC<
             localFrame={clampedLocal}
             transitionFrames={p.transitionFrames}
             isLast={i === p.scenes.length - 1}
+            isFirst={i === 0}
             theme={props.theme}
             format={props.format}
             accentColor={p.accentColor}
+            sceneIndex={i}
+            totalScenes={p.scenes.length}
           />
         );
       })}
+
+      {/* ── OUTRO: Logo + channel name (2s) ── */}
+      {(p.logo || p.title) && frame > outroStart - 5 && (
+        <AbsoluteFill
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            opacity: outroOpacity * outroFadeOut,
+            transform: `scale(${outroLogoScale})`,
+          }}
+        >
+          {p.logo && (
+            <Img
+              src={staticFile(p.logo)}
+              style={{
+                width: p.logoSize * 1.8,
+                height: p.logoSize * 1.8,
+                objectFit: 'contain',
+                marginBottom: 20,
+                filter: `drop-shadow(0 0 30px ${p.accentColor}80)`,
+              }}
+            />
+          )}
+          {p.title && (
+            <div
+              style={{
+                fontSize: responsiveFontSize(28, props.format, 'caption'),
+                fontWeight: 600,
+                fontFamily: props.theme.fonts.heading,
+                color: 'rgba(255,255,255,0.6)',
+                letterSpacing: 4,
+                textTransform: 'uppercase',
+                marginTop: 8,
+              }}
+            >
+              {p.title}
+            </div>
+          )}
+          {/* Accent divider */}
+          <div
+            style={{
+              width: interpolate(frame - outroStart, [5, 20], [0, 100], {
+                extrapolateLeft: 'clamp',
+                extrapolateRight: 'clamp',
+              }),
+              height: 2,
+              background: `linear-gradient(90deg, transparent, ${p.accentColor}, transparent)`,
+              marginTop: 16,
+            }}
+          />
+        </AbsoluteFill>
+      )}
 
       {/* Vignette */}
       <AbsoluteFill

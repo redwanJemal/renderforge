@@ -9,6 +9,7 @@ import { DashboardPage } from "@/features/dashboard/dashboard-page";
 import { PostListPage } from "@/features/posts/post-list-page";
 import { PostDetailPage } from "@/features/posts/post-detail-page";
 import { RenderListPage } from "@/features/renders/render-list-page";
+import { RenderDetailPage } from "@/features/renders/render-detail-page";
 import { NicheListPage } from "@/features/niches/niche-list-page";
 import { AnalyticsPage } from "@/features/analytics/analytics-page";
 import { SettingsPage } from "@/features/settings/settings-page";
@@ -38,6 +39,7 @@ export function App() {
                 <Route path="content" element={<PostListPage />} />
                 <Route path="content/:id" element={<PostDetailPage />} />
                 <Route path="renders" element={<RenderListPage />} />
+                <Route path="renders/:id" element={<RenderDetailPage />} />
                 <Route path="social" element={<SocialPage />} />
                 <Route path="calendar" element={<CalendarPage />} />
                 <Route path="niches" element={<NicheListPage />} />

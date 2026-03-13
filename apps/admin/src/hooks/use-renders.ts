@@ -42,6 +42,19 @@ export function useRenders(
   });
 }
 
+export function useRender(id: string) {
+  return useQuery({
+    queryKey: ["renders", id],
+    queryFn: () => api.get<Render>(`/api/renders/${id}`),
+    enabled: !!id,
+    refetchInterval: (query) => {
+      const data = query.state.data;
+      if (data && (data.status === "rendering" || data.status === "queued")) return 3000;
+      return false;
+    },
+  });
+}
+
 export function useCreateRender() {
   const queryClient = useQueryClient();
   return useMutation({
