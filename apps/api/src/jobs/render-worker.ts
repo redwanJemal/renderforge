@@ -82,6 +82,13 @@ const PREMIUM_TEMPLATES: Record<string, { durationInFrames: number }> = {
   "slider": { durationInFrames: 1200 },
 };
 
+// Kids templates — props come from metadata.sceneProps directly, not scene-to-text mapping
+const KIDS_TEMPLATES = ['kids-counting-fun', 'kids-alphabet-adventure', 'kids-icon-quiz', 'kids-bedtime-story'];
+
+function isKidsTemplate(templateId: string): boolean {
+  return KIDS_TEMPLATES.includes(templateId);
+}
+
 // Check if template should use the premium yld-intro composition
 function isYLDTemplate(templateId: string): boolean {
   return templateId === "yld-intro";
@@ -235,6 +242,7 @@ async function processRenderJob(job: Job<RenderJobData>) {
     // Determine composition ID based on template type
     const useYLDIntro = isYLDTemplate(templateId);
     const usePremium = isPremiumTemplate(templateId);
+    const useKids = isKidsTemplate(templateId);
     const compositionId = useYLDIntro
       ? "yld-intro"
       : usePremium
@@ -245,7 +253,37 @@ async function processRenderJob(job: Job<RenderJobData>) {
     let templateProps: Record<string, unknown>;
     let totalFrames: number;
 
-    if (usePremium && !useYLDIntro) {
+    if (useKids) {
+      // Kids template — use sceneProps from metadata directly (template has its own defaultProps)
+      templateProps = (metadata.sceneProps && typeof metadata.sceneProps === "object")
+        ? metadata.sceneProps as Record<string, unknown>
+        : {};
+
+      // Calculate total frames from kids template timing props
+      const kidsProps = templateProps as Record<string, unknown>;
+      const introDuration = (kidsProps.introDurationFrames as number) ?? 120;
+      const numReveal = (kidsProps.numberRevealFrames as number) ?? 25;
+      const objStagger = (kidsProps.objectStaggerFrames as number) ?? 18;
+      const holdAfter = (kidsProps.holdAfterCountFrames as number) ?? 45;
+      const tranFrames = (kidsProps.transitionFrames as number) ?? 20;
+      const outroDuration = (kidsProps.outroDurationFrames as number) ?? 120;
+      const sections = (kidsProps.sections as Array<{ number: number; startFrame?: number; durationFrames?: number }>) ?? [];
+
+      let cursor = introDuration;
+      for (const section of sections) {
+        const start = section.startFrame ?? cursor;
+        const duration = section.durationFrames ?? (numReveal + section.number * objStagger + holdAfter + 30);
+        cursor = start + duration + tranFrames;
+      }
+      totalFrames = cursor + outroDuration;
+
+      // If no sections in sceneProps, use a sensible default (5 sections)
+      if (sections.length === 0) {
+        totalFrames = introDuration + 5 * (numReveal + 3 * objStagger + holdAfter + 30 + tranFrames) + outroDuration;
+      }
+
+      console.log(`[render-worker] Kids template: ${templateId}, totalFrames: ${totalFrames}, sections: ${sections.length}`);
+    } else if (usePremium && !useYLDIntro) {
       // Premium template — use sceneProps from metadata or empty object for defaults
       templateProps = (metadata.sceneProps && typeof metadata.sceneProps === "object")
         ? metadata.sceneProps as Record<string, unknown>
@@ -398,7 +436,9 @@ async function processRenderJob(job: Job<RenderJobData>) {
       .map((s) => s.audioUrl!);
 
     // Calculate narration delay — audio starts after intro, not at time 0
-    const introDelaySec = ((templateProps.introHoldFrames as number) ?? 60) / fps;
+    const introDelaySec = useKids
+      ? ((templateProps.introDurationFrames as number) ?? 120) / fps
+      : ((templateProps.introHoldFrames as number) ?? 60) / fps;
 
     if (sceneAudioUrls.length > 0) {
       try {
@@ -541,11 +581,18 @@ async function processRenderJob(job: Job<RenderJobData>) {
     try {
       const thumbPath = join(workDir, `thumb-${renderId}.jpg`);
       // Capture at first scene midpoint — after intro, text fully visible
-      const firstScene = (templateProps.scenes as Array<{ startFrame: number; durationFrames: number }>)?.[0];
-      const introFrames = (templateProps.introHoldFrames as number) ?? 60;
-      const thumbFrame = firstScene
-        ? firstScene.startFrame + Math.round(firstScene.durationFrames * 0.4) // 40% into first scene
-        : introFrames + 30;
+      let thumbFrame: number;
+      if (useKids) {
+        // Kids: capture at introDurationFrames + 40 (first section with objects visible)
+        const kidsIntro = (templateProps.introDurationFrames as number) ?? 120;
+        thumbFrame = kidsIntro + 40;
+      } else {
+        const firstScene = (templateProps.scenes as Array<{ startFrame: number; durationFrames: number }>)?.[0];
+        const introFrames = (templateProps.introHoldFrames as number) ?? 60;
+        thumbFrame = firstScene
+          ? firstScene.startFrame + Math.round(firstScene.durationFrames * 0.4) // 40% into first scene
+          : introFrames + 30;
+      }
       const thumbTimestamp = (thumbFrame / fps).toFixed(2);
 
       execFileSync("ffmpeg", [

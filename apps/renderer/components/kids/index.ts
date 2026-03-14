@@ -1,6 +1,8 @@
 export { BounceIn } from './BounceIn';
-export { ShapeWipe, IrisTransition } from './ShapeWipe';
+export { ShapeWipe, IrisTransition, SlideTransition } from './ShapeWipe';
 export { Confetti, StarBurst } from './Confetti';
+export { Character } from './Character';
+export { DustPuff } from './DustPuff';
 export {
   // Animals
   IconCat, IconDog, IconFish, IconBird, IconButterfly, IconLion, IconElephant,

@@ -117,3 +117,38 @@ export const IrisTransition: React.FC<{
     />
   );
 };
+
+/**
+ * Slide transition — current scene slides left, next scene color slides in from right.
+ * Classic horizontal wipe for variety alongside IrisTransition.
+ */
+export const SlideTransition: React.FC<{
+  startFrame: number;
+  durationFrames?: number;
+  color?: string;
+}> = ({ startFrame, durationFrames = 20, color = '#000000' }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  if (frame < startFrame || frame > startFrame + durationFrames) return null;
+
+  const adj = Math.max(0, frame - startFrame);
+  const progress = spring({
+    frame: adj,
+    fps,
+    config: { damping: 14, stiffness: 80, mass: 0.6 },
+  });
+
+  // Slide from right to left: starts at 100% off-screen, ends at 0%
+  const translateX = interpolate(progress, [0, 1], [100, 0]);
+
+  return (
+    <AbsoluteFill
+      style={{
+        backgroundColor: color,
+        transform: `translateX(${translateX}%)`,
+        zIndex: 10,
+      }}
+    />
+  );
+};
