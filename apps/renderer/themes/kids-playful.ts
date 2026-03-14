@@ -13,8 +13,8 @@ export const kidsPlayfulTheme: Theme = {
     textSecondary: '#6B7280',
   },
   fonts: {
-    heading: 'Fredoka, Nunito, -apple-system, sans-serif',
-    body: 'Nunito, -apple-system, sans-serif',
+    heading: 'Baloo 2, Fredoka, -apple-system, sans-serif',
+    body: 'Quicksand, Nunito, -apple-system, sans-serif',
   },
   borderRadius: 24,
   shadow: '0 8px 32px rgba(77, 150, 255, 0.15)',

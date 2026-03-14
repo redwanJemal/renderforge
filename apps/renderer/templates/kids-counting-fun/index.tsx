@@ -23,6 +23,8 @@ import {
   NumberIcon,
   Character,
   DustPuff,
+  KidsImage,
+  hasKidsPng,
 } from '../../components/kids';
 import { KIDS_ICONS } from '../../components/kids/KidsIcons';
 
@@ -230,7 +232,8 @@ const NumberScene: React.FC<{
   const portrait = isPortrait(format);
 
   const bgColor = section.bgColor || SECTION_COLORS[index % SECTION_COLORS.length];
-  const IconComponent = KIDS_ICONS[section.icon];
+  const hasPng = hasKidsPng(section.icon);
+  const IconComponent = !hasPng ? KIDS_ICONS[section.icon] : undefined;
   const iconSize = portrait ? 120 : 100;
   const positions = getObjectPositions(section.number, portrait);
 
@@ -336,7 +339,9 @@ const NumberScene: React.FC<{
                 filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.2))',
               }}
             >
-              {IconComponent ? (
+              {hasPng ? (
+                <KidsImage icon={section.icon} size={iconSize} />
+              ) : IconComponent ? (
                 <IconComponent size={iconSize} color={section.iconColor || 'white'} />
               ) : (
                 <div style={{ fontSize: iconSize * 0.8, lineHeight: 1 }}>⭐</div>
@@ -473,8 +478,8 @@ const KidsCountingFun: React.FC<
     theme, format,
   } = rawProps;
 
-  loadGoogleFont('Fredoka', [400, 600, 700]);
-  loadGoogleFont('Nunito', [400, 600, 700, 800]);
+  loadGoogleFont('Baloo 2', [400, 600, 700, 800]);
+  loadGoogleFont('Quicksand', [400, 600, 700]);
 
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();

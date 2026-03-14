@@ -3,6 +3,7 @@ export { ShapeWipe, IrisTransition, SlideTransition } from './ShapeWipe';
 export { Confetti, StarBurst } from './Confetti';
 export { Character } from './Character';
 export { DustPuff } from './DustPuff';
+export { KidsImage, hasKidsPng, KIDS_PNG_KEYS } from './KidsImages';
 export {
   // Animals
   IconCat, IconDog, IconFish, IconBird, IconButterfly, IconLion, IconElephant,
