@@ -6,15 +6,11 @@ import { DashboardLayout } from "@/components/layout/dashboard-layout";
 import { ProtectedRoute } from "@/components/layout/protected-route";
 import { LoginPage } from "@/features/auth/login-page";
 import { DashboardPage } from "@/features/dashboard/dashboard-page";
-import { PostListPage } from "@/features/posts/post-list-page";
 import { PostDetailPage } from "@/features/posts/post-detail-page";
-import { RenderListPage } from "@/features/renders/render-list-page";
 import { RenderDetailPage } from "@/features/renders/render-detail-page";
 import { NicheListPage } from "@/features/niches/niche-list-page";
 import { AnalyticsPage } from "@/features/analytics/analytics-page";
 import { SettingsPage } from "@/features/settings/settings-page";
-import { SocialPage } from "@/features/social/social-page";
-import { CalendarPage } from "@/features/calendar/calendar-page";
 import { ImageLibraryPage } from "@/features/images/image-library-page";
 import { ProjectListPage } from "@/features/projects/project-list-page";
 import { ProjectDetailPage } from "@/features/projects/project-detail-page";
@@ -41,16 +37,18 @@ export function App() {
 
                 <Route path="projects" element={<ProjectListPage />} />
                 <Route path="projects/:id" element={<ProjectDetailPage />} />
-                <Route path="content" element={<PostListPage />} />
                 <Route path="content/:id" element={<PostDetailPage />} />
-                <Route path="renders" element={<RenderListPage />} />
                 <Route path="renders/:id" element={<RenderDetailPage />} />
-                <Route path="social" element={<SocialPage />} />
-                <Route path="calendar" element={<CalendarPage />} />
                 <Route path="images" element={<ImageLibraryPage />} />
                 <Route path="niches" element={<NicheListPage />} />
                 <Route path="analytics" element={<AnalyticsPage />} />
                 <Route path="settings" element={<SettingsPage />} />
+
+                {/* Redirects for old routes */}
+                <Route path="content" element={<Navigate to="/projects" replace />} />
+                <Route path="renders" element={<Navigate to="/projects" replace />} />
+                <Route path="social" element={<Navigate to="/projects" replace />} />
+                <Route path="calendar" element={<Navigate to="/projects" replace />} />
               </Route>
             </Route>
             <Route path="*" element={<Navigate to="/" replace />} />

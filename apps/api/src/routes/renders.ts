@@ -30,38 +30,44 @@ rendersRouter.get("/", async (c) => {
   const page = Number(c.req.query("page") ?? 1);
   const perPage = Number(c.req.query("perPage") ?? 20);
   const postId = c.req.query("postId");
+  const projectId = c.req.query("projectId");
   const status = c.req.query("status");
   const offset = (page - 1) * perPage;
 
   const conditions = [];
   if (postId) conditions.push(eq(renders.postId, postId));
+  if (projectId) conditions.push(eq(posts.projectId, projectId));
   if (status) conditions.push(eq(renders.status, status as typeof renders.status.enumValues[number]));
   const where = conditions.length > 0 ? and(...conditions) : undefined;
 
+  // Always join posts (needed for projectId filter and postTitle)
+  const baseQuery = db.select({
+    id: renders.id,
+    postId: renders.postId,
+    postTitle: posts.title,
+    format: renders.format,
+    status: renders.status,
+    progress: renders.progress,
+    outputUrl: renders.outputUrl,
+    thumbnailUrl: renders.thumbnailUrl,
+    durationMs: renders.durationMs,
+    fileSize: renders.fileSize,
+    error: renders.error,
+    jobId: renders.jobId,
+    bgmTrackId: renders.bgmTrackId,
+    createdAt: renders.createdAt,
+  })
+    .from(renders)
+    .leftJoin(posts, eq(renders.postId, posts.id));
+
+  // For count query with projectId, we also need the join
+  const countQuery = projectId
+    ? db.select({ total: count() }).from(renders).leftJoin(posts, eq(renders.postId, posts.id))
+    : db.select({ total: count() }).from(renders);
+
   const [items, [{ total }]] = await Promise.all([
-    db.select({
-      id: renders.id,
-      postId: renders.postId,
-      postTitle: posts.title,
-      format: renders.format,
-      status: renders.status,
-      progress: renders.progress,
-      outputUrl: renders.outputUrl,
-      thumbnailUrl: renders.thumbnailUrl,
-      durationMs: renders.durationMs,
-      fileSize: renders.fileSize,
-      error: renders.error,
-      jobId: renders.jobId,
-      bgmTrackId: renders.bgmTrackId,
-      createdAt: renders.createdAt,
-    })
-      .from(renders)
-      .leftJoin(posts, eq(renders.postId, posts.id))
-      .where(where)
-      .limit(perPage)
-      .offset(offset)
-      .orderBy(desc(renders.createdAt)),
-    db.select({ total: count() }).from(renders).where(where),
+    baseQuery.where(where).limit(perPage).offset(offset).orderBy(desc(renders.createdAt)),
+    countQuery.where(where),
   ]);
 
   // Resolve S3 keys to presigned URLs for thumbnails and output videos

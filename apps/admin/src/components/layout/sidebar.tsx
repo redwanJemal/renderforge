@@ -3,11 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import {
   LayoutDashboard,
   FolderKanban,
-  FileText,
-  Film,
   ImageIcon,
-  Share2,
-  Calendar,
   BarChart3,
   Settings,
   ChevronsLeft,
@@ -25,11 +21,7 @@ import {
 const navItems = [
   { href: "/", label: "Dashboard", icon: LayoutDashboard },
   { href: "/projects", label: "Projects", icon: FolderKanban },
-  { href: "/content", label: "Content", icon: FileText },
-  { href: "/renders", label: "Renders", icon: Film },
   { href: "/images", label: "Images", icon: ImageIcon },
-  { href: "/social", label: "Social", icon: Share2 },
-  { href: "/calendar", label: "Calendar", icon: Calendar },
   { href: "/analytics", label: "Analytics", icon: BarChart3 },
   { href: "/settings", label: "Settings", icon: Settings },
 ];

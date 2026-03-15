@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useSearchParams } from "react-router-dom";
 import { ArrowLeft, Save } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,26 +8,20 @@ import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
+  Card, CardContent, CardHeader, CardTitle,
 } from "@/components/ui/card";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
+  Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
 import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
+  Tabs, TabsContent, TabsList, TabsTrigger,
 } from "@/components/ui/tabs";
 import { useProject, useUpdateProject } from "@/hooks/use-projects";
 import { ScheduleEditor } from "./schedule-editor";
+import { ProjectContentTab } from "./tabs/project-content-tab";
+import { ProjectRendersTab } from "./tabs/project-renders-tab";
+import { ProjectCalendarTab } from "./tabs/project-calendar-tab";
+import { ProjectAccountsTab } from "./tabs/project-accounts-tab";
 import { toast } from "sonner";
 
 const SOCIAL_PLATFORMS = ["tiktok", "youtube", "instagram", "facebook", "linkedin", "telegram"] as const;
@@ -35,6 +29,9 @@ const SOCIAL_PLATFORMS = ["tiktok", "youtube", "instagram", "facebook", "linkedi
 export function ProjectDetailPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const activeTab = searchParams.get("tab") || "overview";
+
   const { data: project, isLoading } = useProject(id!);
   const updateProject = useUpdateProject();
 
@@ -48,7 +45,6 @@ export function ProjectDetailPage() {
   const [editPalette, setEditPalette] = useState<Record<string, string>>({});
   const [initialized, setInitialized] = useState(false);
 
-  // Initialize form when project loads
   if (project && !initialized) {
     setEditName(project.name);
     setEditSlug(project.slug);
@@ -59,6 +55,10 @@ export function ProjectDetailPage() {
     setEditHandles(project.socialHandles ?? {});
     setEditPalette(project.colorPalette ?? {});
     setInitialized(true);
+  }
+
+  function setTab(tab: string) {
+    setSearchParams({ tab });
   }
 
   async function handleSave() {
@@ -91,16 +91,18 @@ export function ProjectDetailPage() {
   if (isLoading) {
     return (
       <div className="space-y-6">
-        <Skeleton className="h-8 w-48" />
+        <div className="flex items-center gap-3">
+          <Skeleton className="h-8 w-8 rounded" />
+          <Skeleton className="h-8 w-48" />
+        </div>
+        <Skeleton className="h-10 w-full" />
         <Skeleton className="h-64 w-full" />
       </div>
     );
   }
 
   if (!project) {
-    return (
-      <div className="text-center py-12 text-muted-foreground">Project not found.</div>
-    );
+    return <div className="text-center py-12 text-muted-foreground">Project not found.</div>;
   }
 
   return (
@@ -118,20 +120,21 @@ export function ProjectDetailPage() {
         </Badge>
       </div>
 
-      <Tabs defaultValue="overview">
-        <TabsList>
+      <Tabs value={activeTab} onValueChange={setTab}>
+        <TabsList className="flex-wrap h-auto gap-1">
           <TabsTrigger value="overview">Overview</TabsTrigger>
+          <TabsTrigger value="content">Content ({project.postCount ?? 0})</TabsTrigger>
+          <TabsTrigger value="renders">Renders</TabsTrigger>
+          <TabsTrigger value="calendar">Calendar</TabsTrigger>
+          <TabsTrigger value="schedules">Schedules ({project.schedules.length})</TabsTrigger>
           <TabsTrigger value="social">Social Handles</TabsTrigger>
           <TabsTrigger value="branding">Branding</TabsTrigger>
-          <TabsTrigger value="schedules">Schedules ({project.schedules.length})</TabsTrigger>
-          <TabsTrigger value="accounts">Linked Accounts ({project.linkedSocialAccounts.length})</TabsTrigger>
+          <TabsTrigger value="accounts">Accounts ({project.linkedSocialAccounts.length})</TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview" className="space-y-4">
           <Card>
-            <CardHeader>
-              <CardTitle className="text-base">General</CardTitle>
-            </CardHeader>
+            <CardHeader><CardTitle className="text-base">General</CardTitle></CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
@@ -178,92 +181,31 @@ export function ProjectDetailPage() {
           </Card>
 
           <div className="grid grid-cols-3 gap-4">
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm text-muted-foreground">Posts</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{project.postCount ?? 0}</div>
-              </CardContent>
+            <Card className="cursor-pointer hover:border-primary/50" onClick={() => setTab("content")}>
+              <CardHeader className="pb-2"><CardTitle className="text-sm text-muted-foreground">Posts</CardTitle></CardHeader>
+              <CardContent><div className="text-2xl font-bold">{project.postCount ?? 0}</div></CardContent>
+            </Card>
+            <Card className="cursor-pointer hover:border-primary/50" onClick={() => setTab("schedules")}>
+              <CardHeader className="pb-2"><CardTitle className="text-sm text-muted-foreground">Schedules</CardTitle></CardHeader>
+              <CardContent><div className="text-2xl font-bold">{project.schedules.length}</div></CardContent>
             </Card>
             <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm text-muted-foreground">Niches</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{project.nicheCount}</div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm text-muted-foreground">Schedules</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{project.schedules.length}</div>
-              </CardContent>
+              <CardHeader className="pb-2"><CardTitle className="text-sm text-muted-foreground">Niches</CardTitle></CardHeader>
+              <CardContent><div className="text-2xl font-bold">{project.nicheCount}</div></CardContent>
             </Card>
           </div>
         </TabsContent>
 
-        <TabsContent value="social">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-base">Social Handles</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {SOCIAL_PLATFORMS.map((platform) => (
-                <div key={platform} className="flex items-center gap-3">
-                  <Label className="w-24 capitalize">{platform}</Label>
-                  <Input
-                    value={editHandles[platform] ?? ""}
-                    onChange={(e) => setHandle(platform, e.target.value)}
-                    placeholder={`@${platform}_handle`}
-                  />
-                </div>
-              ))}
-              <div className="flex justify-end">
-                <Button onClick={handleSave} disabled={updateProject.isPending}>
-                  <Save className="mr-2 h-4 w-4" />
-                  Save
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+        <TabsContent value="content">
+          <ProjectContentTab projectId={id!} />
         </TabsContent>
 
-        <TabsContent value="branding">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-base">Color Palette</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {["primary", "secondary", "accent", "background"].map((key) => (
-                <div key={key} className="flex items-center gap-3">
-                  <Label className="w-24 capitalize">{key}</Label>
-                  <div className="flex items-center gap-2 flex-1">
-                    <input
-                      type="color"
-                      value={editPalette[key] ?? "#000000"}
-                      onChange={(e) => setPaletteColor(key, e.target.value)}
-                      className="w-10 h-10 rounded border cursor-pointer"
-                    />
-                    <Input
-                      value={editPalette[key] ?? ""}
-                      onChange={(e) => setPaletteColor(key, e.target.value)}
-                      placeholder="#000000"
-                      className="flex-1"
-                    />
-                  </div>
-                </div>
-              ))}
-              <div className="flex justify-end">
-                <Button onClick={handleSave} disabled={updateProject.isPending}>
-                  <Save className="mr-2 h-4 w-4" />
-                  Save
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+        <TabsContent value="renders">
+          <ProjectRendersTab projectId={id!} />
+        </TabsContent>
+
+        <TabsContent value="calendar">
+          <ProjectCalendarTab projectId={id!} />
         </TabsContent>
 
         <TabsContent value="schedules">
@@ -274,30 +216,49 @@ export function ProjectDetailPage() {
           </Card>
         </TabsContent>
 
-        <TabsContent value="accounts">
+        <TabsContent value="social">
           <Card>
-            <CardHeader>
-              <CardTitle className="text-base">Linked Social Accounts</CardTitle>
-            </CardHeader>
-            <CardContent>
-              {project.linkedSocialAccounts.length === 0 ? (
-                <p className="text-sm text-muted-foreground text-center py-6">
-                  No social accounts linked. Go to Social page to connect accounts first.
-                </p>
-              ) : (
-                <div className="space-y-2">
-                  {project.linkedSocialAccounts.map((link) => (
-                    <div key={link.id} className="flex items-center justify-between p-3 rounded-lg border">
-                      <div className="flex items-center gap-3">
-                        <Badge variant="outline" className="capitalize">{link.provider}</Badge>
-                        <span className="text-sm">{link.accountName ?? "Unknown"}</span>
-                      </div>
-                    </div>
-                  ))}
+            <CardHeader><CardTitle className="text-base">Social Handles</CardTitle></CardHeader>
+            <CardContent className="space-y-4">
+              {SOCIAL_PLATFORMS.map((platform) => (
+                <div key={platform} className="flex items-center gap-3">
+                  <Label className="w-24 capitalize">{platform}</Label>
+                  <Input value={editHandles[platform] ?? ""} onChange={(e) => setHandle(platform, e.target.value)} placeholder={`@${platform}_handle`} />
                 </div>
-              )}
+              ))}
+              <div className="flex justify-end">
+                <Button onClick={handleSave} disabled={updateProject.isPending}>
+                  <Save className="mr-2 h-4 w-4" />Save
+                </Button>
+              </div>
             </CardContent>
           </Card>
+        </TabsContent>
+
+        <TabsContent value="branding">
+          <Card>
+            <CardHeader><CardTitle className="text-base">Color Palette</CardTitle></CardHeader>
+            <CardContent className="space-y-4">
+              {["primary", "secondary", "accent", "background"].map((key) => (
+                <div key={key} className="flex items-center gap-3">
+                  <Label className="w-24 capitalize">{key}</Label>
+                  <div className="flex items-center gap-2 flex-1">
+                    <input type="color" value={editPalette[key] ?? "#000000"} onChange={(e) => setPaletteColor(key, e.target.value)} className="w-10 h-10 rounded border cursor-pointer" />
+                    <Input value={editPalette[key] ?? ""} onChange={(e) => setPaletteColor(key, e.target.value)} placeholder="#000000" className="flex-1" />
+                  </div>
+                </div>
+              ))}
+              <div className="flex justify-end">
+                <Button onClick={handleSave} disabled={updateProject.isPending}>
+                  <Save className="mr-2 h-4 w-4" />Save
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="accounts">
+          <ProjectAccountsTab projectId={id!} linkedAccounts={project.linkedSocialAccounts} />
         </TabsContent>
       </Tabs>
     </div>

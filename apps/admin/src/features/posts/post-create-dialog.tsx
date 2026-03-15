@@ -42,10 +42,10 @@ function emptyScene(): SceneForm {
   return { key: "", displayText: "", narrationText: "", entrance: "fade" };
 }
 
-export function PostCreateDialog() {
+export function PostCreateDialog({ defaultProjectId }: { defaultProjectId?: string } = {}) {
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");
-  const [projectId, setProjectId] = useState("");
+  const [projectId, setProjectId] = useState(defaultProjectId ?? "");
   const [nicheId, setNicheId] = useState("");
   const [templateId, setTemplateId] = useState("");
   const [format, setFormat] = useState<string>("story");

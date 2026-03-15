@@ -21,3 +21,17 @@ export function useTemplates() {
     queryFn: () => api.get<TemplatesResponse>("/api/templates"),
   });
 }
+
+type Theme = {
+  id: string;
+  name: string;
+};
+
+export type { Theme };
+
+export function useThemes() {
+  return useQuery({
+    queryKey: ["themes"],
+    queryFn: () => api.get<{ items: Theme[]; total: number }>("/api/templates/themes"),
+  });
+}

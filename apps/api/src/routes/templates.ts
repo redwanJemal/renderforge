@@ -40,6 +40,19 @@ templatesRouter.get("/", (c) => {
   return c.json({ items: TEMPLATES, total: TEMPLATES.length });
 });
 
+const THEMES = [
+  { id: "default", name: "Default" },
+  { id: "dark", name: "Dark" },
+  { id: "vibrant", name: "Vibrant" },
+  { id: "minimal", name: "Minimal" },
+  { id: "kids-playful", name: "Kids Playful" },
+  { id: "kids-pastel", name: "Kids Pastel" },
+];
+
+templatesRouter.get("/themes", (c) => {
+  return c.json({ items: THEMES, total: THEMES.length });
+});
+
 templatesRouter.get("/:id", (c) => {
   const template = TEMPLATES.find((t) => t.id === c.req.param("id"));
   if (!template) return c.json({ error: "Not found" }, 404);

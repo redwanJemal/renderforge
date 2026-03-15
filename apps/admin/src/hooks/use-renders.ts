@@ -28,12 +28,14 @@ type RendersResponse = {
 export type { Render, RendersResponse };
 
 export function useRenders(
-  filters: { postId?: string; status?: string; page?: number } = {},
+  filters: { postId?: string; projectId?: string; status?: string; page?: number; perPage?: number } = {},
 ) {
   const params = new URLSearchParams();
   if (filters.postId) params.set("postId", filters.postId);
+  if (filters.projectId) params.set("projectId", filters.projectId);
   if (filters.status) params.set("status", filters.status);
   if (filters.page) params.set("page", String(filters.page));
+  if (filters.perPage) params.set("perPage", String(filters.perPage));
 
   return useQuery({
     queryKey: ["renders", filters],
