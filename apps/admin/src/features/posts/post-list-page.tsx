@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Pencil, Trash2, ChevronLeft, ChevronRight, Film, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
+import { Pencil, Trash2, Film, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -27,9 +27,11 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Skeleton } from "@/components/ui/skeleton";
+import { TablePagination } from "@/components/ui/table-pagination";
 import { usePosts, useDeletePost } from "@/hooks/use-posts";
 import { useCreateBatchRender } from "@/hooks/use-renders";
 import { useNiches } from "@/hooks/use-niches";
+import { useProjects } from "@/hooks/use-projects";
 import { PostCreateDialog } from "./post-create-dialog";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
@@ -71,10 +73,12 @@ function statusBadgeClass(status: string): string {
 
 export function PostListPage() {
   const navigate = useNavigate();
+  const [projectFilter, setProjectFilter] = useState<string>("");
   const [nicheFilter, setNicheFilter] = useState<string>("");
   const [statusFilter, setStatusFilter] = useState<string>("");
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
+  const [perPage, setPerPage] = useState(20);
   const [deleteTarget, setDeleteTarget] = useState<{
     id: string;
     title: string;
@@ -84,12 +88,15 @@ export function PostListPage() {
   const [renderFormatOpen, setRenderFormatOpen] = useState(false);
   const [selectedFormat, setSelectedFormat] = useState("story");
 
+  const { data: projectsData } = useProjects();
   const { data: nichesData } = useNiches();
   const { data, isLoading } = usePosts({
+    projectId: projectFilter || undefined,
     nicheId: nicheFilter || undefined,
     status: statusFilter || undefined,
     search: search || undefined,
     page,
+    perPage,
   });
   const deletePost = useDeletePost();
   const batchRender = useCreateBatchRender();
@@ -173,6 +180,26 @@ export function PostListPage() {
       </div>
 
       <div className="flex flex-wrap items-center gap-3">
+        <Select
+          value={projectFilter}
+          onValueChange={(v) => {
+            setProjectFilter(v === "all" ? "" : v);
+            setPage(1);
+          }}
+        >
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="All Projects" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All Projects</SelectItem>
+            {projectsData?.items?.map((p) => (
+              <SelectItem key={p.id} value={p.id}>
+                {p.name}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+
         <Select
           value={nicheFilter}
           onValueChange={(v) => {
@@ -364,32 +391,15 @@ export function PostListPage() {
         </Table>
       </div>
 
-      {data && data.totalPages > 1 && (
-        <div className="flex items-center justify-between">
-          <p className="text-sm text-muted-foreground">
-            Page {data.page} of {data.totalPages} ({data.total} total)
-          </p>
-          <div className="flex items-center gap-2">
-            <Button
-              variant="outline"
-              size="sm"
-              disabled={page <= 1}
-              onClick={() => setPage((p) => p - 1)}
-            >
-              <ChevronLeft className="mr-1 h-4 w-4" />
-              Previous
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              disabled={page >= data.totalPages}
-              onClick={() => setPage((p) => p + 1)}
-            >
-              Next
-              <ChevronRight className="ml-1 h-4 w-4" />
-            </Button>
-          </div>
-        </div>
+      {data && (
+        <TablePagination
+          page={data.page}
+          totalPages={data.totalPages}
+          total={data.total}
+          perPage={perPage}
+          onPageChange={setPage}
+          onPerPageChange={(v) => { setPerPage(v); setPage(1); }}
+        />
       )}
 
       {/* Single Delete Dialog */}

@@ -15,6 +15,8 @@
     "db:migrate": "pnpm --filter @renderforge/db migrate",
     "db:push": "pnpm --filter @renderforge/db push",
     "db:seed": "pnpm --filter @renderforge/db seed",
+    "db:seed-all": "pnpm --filter @renderforge/db seed-all",
+    "db:seed-yld-100": "pnpm --filter @renderforge/db seed-yld-100",
     "db:studio": "pnpm --filter @renderforge/db studio",
     "render": "tsx scripts/render-cli.ts",
     "lint": "eslint src/",

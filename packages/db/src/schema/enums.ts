@@ -28,6 +28,12 @@ export const socialProviderEnum = pgEnum("social_provider", [
   "telegram",
 ]);
 
+export const projectStatusEnum = pgEnum("project_status", [
+  "active",
+  "paused",
+  "archived",
+]);
+
 export const scheduledPostStatusEnum = pgEnum("scheduled_post_status", [
   "scheduled",
   "publishing",

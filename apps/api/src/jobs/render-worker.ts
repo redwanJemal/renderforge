@@ -111,6 +111,7 @@ function getPremiumCompositionId(templateId: string, format: string): string {
 function buildYLDIntroProps(
   postScenes: Array<{ displayText: string | null; extraProps: unknown }>,
   metadata: Record<string, unknown>,
+  projectDefaults?: { logoUrl?: string; accentColor?: string; bgGradient?: string[]; socialHandles?: Record<string, string> },
 ): Record<string, unknown> {
   // Map scenes by key (sortOrder: 0=intro, 1=headline, 2=subheader, 3=badge, 4=cta)
   const sceneMap: Record<string, { text: string; highlight?: string }> = {};
@@ -124,9 +125,11 @@ function buildYLDIntroProps(
     };
   }
 
-  // Pick accent color from metadata or default
-  const accentColor = (metadata.accentColor as string) ?? "#22c55e";
-  const bgGradient = (metadata.bgGradient as [string, string, string]) ?? ["#0a2e1a", "#071a10", "#020a05"];
+  // Pick accent color from metadata, project defaults, or default
+  const accentColor = (metadata.accentColor as string) ?? projectDefaults?.accentColor ?? "#22c55e";
+  const bgGradient = (metadata.bgGradient as [string, string, string])
+    ?? (projectDefaults?.bgGradient?.length === 3 ? projectDefaults.bgGradient as [string, string, string] : undefined)
+    ?? ["#0a2e1a", "#071a10", "#020a05"];
 
   // Split intro text into two lines for header
   const introText = sceneMap.intro?.text ?? "";
@@ -143,9 +146,18 @@ function buildYLDIntroProps(
   const subText = sceneMap.subheader?.text ?? "";
   const subheaderText = subText.length > 120 ? subText.slice(0, 117) + "..." : subText;
 
+  // Use project logo if available
+  const logoFile = projectDefaults?.logoUrl ?? "yld-logo-white.png";
+
+  // Build social handle text for CTA if available
+  const socialHandle = projectDefaults?.socialHandles?.tiktok
+    ?? projectDefaults?.socialHandles?.youtube
+    ?? projectDefaults?.socialHandles?.instagram
+    ?? undefined;
+
   return {
     logo: {
-      file: "yld-logo-white.png",
+      file: logoFile,
       size: 480,
       glowEnabled: true,
       finalScale: 0.6,
@@ -174,7 +186,7 @@ function buildYLDIntroProps(
       marginBottom: 0,
     },
     cta: {
-      text: sceneMap.cta?.text ?? "FOLLOW THE JOURNEY →",
+      text: sceneMap.cta?.text ?? (socialHandle ? `${socialHandle} | FOLLOW THE JOURNEY →` : "FOLLOW THE JOURNEY →"),
       enabled: true,
       bottomOffset: 150,
     },
@@ -234,6 +246,42 @@ async function processRenderJob(job: Job<RenderJobData>) {
     await publishProgress(renderId, 5, "rendering", "Fetched post data...");
     await job.updateProgress(5);
 
+    // Step 1b: Fetch project config if post belongs to a project
+    let projectDefaults: {
+      logoUrl?: string;
+      accentColor?: string;
+      bgGradient?: string[];
+      socialHandles?: Record<string, string>;
+    } = {};
+
+    if (post.projectId) {
+      try {
+        const { projectService } = await import("../services/project.js");
+        const config = await projectService.getProjectConfig(post.projectId);
+        if (config) {
+          // Resolve logo S3 key to presigned URL
+          let resolvedLogoUrl: string | undefined;
+          if (config.logoUrl) {
+            const { storage: logoStorage } = await import("../services/storage.js");
+            resolvedLogoUrl = await logoStorage.getPresignedUrl(config.logoUrl);
+          }
+
+          const palette = (config.colorPalette ?? {}) as Record<string, string>;
+          const handles = (config.socialHandles ?? {}) as Record<string, string>;
+
+          projectDefaults = {
+            logoUrl: resolvedLogoUrl,
+            accentColor: palette.accent,
+            bgGradient: [palette.primary, palette.secondary, palette.background].filter(Boolean) as string[],
+            socialHandles: handles,
+          };
+          console.log(`[render-worker] Project config loaded for ${post.projectId}`);
+        }
+      } catch (err) {
+        console.warn("[render-worker] Failed to load project config:", err);
+      }
+    }
+
     // Step 2: Build template props from post metadata + scenes
     const metadata = (post.metadata ?? {}) as Record<string, unknown>;
     const templateId = post.templateId || "motivational-narration";
@@ -262,27 +310,57 @@ async function processRenderJob(job: Job<RenderJobData>) {
       // Calculate total frames from kids template timing props
       const kidsProps = templateProps as Record<string, unknown>;
       const introDuration = (kidsProps.introDurationFrames as number) ?? 120;
-      const numReveal = (kidsProps.numberRevealFrames as number) ?? 25;
-      const objStagger = (kidsProps.objectStaggerFrames as number) ?? 18;
-      const holdAfter = (kidsProps.holdAfterCountFrames as number) ?? 45;
       const tranFrames = (kidsProps.transitionFrames as number) ?? 20;
       const outroDuration = (kidsProps.outroDurationFrames as number) ?? 120;
-      const sections = (kidsProps.sections as Array<{ number: number; startFrame?: number; durationFrames?: number }>) ?? [];
 
-      let cursor = introDuration;
-      for (const section of sections) {
-        const start = section.startFrame ?? cursor;
-        const duration = section.durationFrames ?? (numReveal + section.number * objStagger + holdAfter + 30);
-        cursor = start + duration + tranFrames;
+      if (templateId === 'kids-bedtime-story') {
+        // Bedtime story uses pages with pageDurationFrames
+        const pages = (kidsProps.pages as Array<{ startFrame?: number; durationFrames?: number }>) ?? [];
+        const pageDuration = (kidsProps.pageDurationFrames as number) ?? 300;
+        const pageTransition = (kidsProps.pageTransitionFrames as number) ?? 30;
+
+        let cursor = introDuration;
+        for (const page of pages) {
+          const start = page.startFrame ?? cursor;
+          const duration = page.durationFrames ?? pageDuration;
+          cursor = start + duration + pageTransition;
+        }
+        totalFrames = cursor + outroDuration;
+
+        if (pages.length === 0) {
+          totalFrames = introDuration + 9 * (pageDuration + pageTransition) + outroDuration;
+        }
+
+        // Resolve image S3 keys to presigned URLs
+        const { storage: imgStorage } = await import("../services/storage.js");
+        for (const page of pages as Array<{ imageS3Key?: string; imageUrl?: string; startFrame?: number; durationFrames?: number }>) {
+          if (page.imageS3Key && !page.imageUrl) {
+            page.imageUrl = await imgStorage.getPresignedUrl(page.imageS3Key);
+          }
+        }
+
+        console.log(`[render-worker] Bedtime story: totalFrames: ${totalFrames}, pages: ${pages.length}`);
+      } else {
+        // Counting-fun, alphabet, quiz — use sections
+        const numReveal = (kidsProps.numberRevealFrames as number) ?? 25;
+        const objStagger = (kidsProps.objectStaggerFrames as number) ?? 18;
+        const holdAfter = (kidsProps.holdAfterCountFrames as number) ?? 45;
+        const sections = (kidsProps.sections as Array<{ number: number; startFrame?: number; durationFrames?: number }>) ?? [];
+
+        let cursor = introDuration;
+        for (const section of sections) {
+          const start = section.startFrame ?? cursor;
+          const duration = section.durationFrames ?? (numReveal + section.number * objStagger + holdAfter + 30);
+          cursor = start + duration + tranFrames;
+        }
+        totalFrames = cursor + outroDuration;
+
+        if (sections.length === 0) {
+          totalFrames = introDuration + 5 * (numReveal + 3 * objStagger + holdAfter + 30 + tranFrames) + outroDuration;
+        }
+
+        console.log(`[render-worker] Kids template: ${templateId}, totalFrames: ${totalFrames}, sections: ${sections.length}`);
       }
-      totalFrames = cursor + outroDuration;
-
-      // If no sections in sceneProps, use a sensible default (5 sections)
-      if (sections.length === 0) {
-        totalFrames = introDuration + 5 * (numReveal + 3 * objStagger + holdAfter + 30 + tranFrames) + outroDuration;
-      }
-
-      console.log(`[render-worker] Kids template: ${templateId}, totalFrames: ${totalFrames}, sections: ${sections.length}`);
     } else if (usePremium && !useYLDIntro) {
       // Premium template — use sceneProps from metadata or empty object for defaults
       templateProps = (metadata.sceneProps && typeof metadata.sceneProps === "object")
@@ -298,10 +376,10 @@ async function processRenderJob(job: Job<RenderJobData>) {
           templateProps = sp;
         } else {
           // sceneProps is in motivational-narration format, build from scenes instead
-          templateProps = buildYLDIntroProps(postScenes, metadata);
+          templateProps = buildYLDIntroProps(postScenes, metadata, projectDefaults);
         }
       } else {
-        templateProps = buildYLDIntroProps(postScenes, metadata);
+        templateProps = buildYLDIntroProps(postScenes, metadata, projectDefaults);
       }
       // yld-intro has a fixed animation timeline, ~12 seconds is ideal
       totalFrames = 400; // ~13.3s at 30fps — enough for all animations + fade out
@@ -313,7 +391,7 @@ async function processRenderJob(job: Job<RenderJobData>) {
       if (metadata.sceneProps && typeof metadata.sceneProps === "object") {
         templateProps = metadata.sceneProps as Record<string, unknown>;
         if (!templateProps.logo) {
-          templateProps.logo = "yld-logo-white.png";
+          templateProps.logo = projectDefaults.logoUrl ?? "yld-logo-white.png";
           templateProps.logoSize = 120;
         }
       } else {
@@ -347,10 +425,12 @@ async function processRenderJob(job: Job<RenderJobData>) {
         templateProps = {
           scenes: sceneProps,
           title: metadata.title as string | undefined,
-          logo: metadata.logo as string | undefined ?? "yld-logo-white.png",
+          logo: metadata.logo as string | undefined ?? projectDefaults.logoUrl ?? "yld-logo-white.png",
           logoSize: metadata.logoSize as number | undefined ?? 120,
-          accentColor: metadata.accentColor ?? "#f59e0b",
-          bgGradient: metadata.bgGradient ?? ["#0f0f0f", "#1a1a2e", "#0f0f0f"],
+          accentColor: metadata.accentColor ?? projectDefaults.accentColor ?? "#f59e0b",
+          bgGradient: metadata.bgGradient
+            ?? (projectDefaults.bgGradient?.length === 3 ? projectDefaults.bgGradient : undefined)
+            ?? ["#0f0f0f", "#1a1a2e", "#0f0f0f"],
           particlesEnabled: true,
           transitionFrames,
           introHoldFrames,

@@ -53,9 +53,12 @@ COPY --from=builder /app ./
 
 RUN mkdir -p output
 
+COPY apps/api/entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
+
 EXPOSE 3100
 
 ENV NODE_ENV=production
 ENV PORT=3100
 
-CMD ["npx", "tsx", "apps/api/src/server.ts"]
+CMD ["/app/entrypoint.sh"]

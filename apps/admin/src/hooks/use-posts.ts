@@ -12,6 +12,7 @@ type RenderCounts = {
 type Post = {
   id: string;
   nicheId: string;
+  projectId?: string | null;
   title: string;
   status: string;
   theme: string;
@@ -47,17 +48,21 @@ export type { Post, Scene, PostsResponse, RenderCounts };
 
 export function usePosts(
   filters: {
+    projectId?: string;
     nicheId?: string;
     status?: string;
     search?: string;
     page?: number;
+    perPage?: number;
   } = {},
 ) {
   const params = new URLSearchParams();
+  if (filters.projectId) params.set("projectId", filters.projectId);
   if (filters.nicheId) params.set("nicheId", filters.nicheId);
   if (filters.status) params.set("status", filters.status);
   if (filters.search) params.set("search", filters.search);
   if (filters.page) params.set("page", String(filters.page));
+  if (filters.perPage) params.set("perPage", String(filters.perPage));
 
   return useQuery({
     queryKey: ["posts", filters],

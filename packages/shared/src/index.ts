@@ -10,6 +10,24 @@ export type SocialProvider = "facebook" | "instagram" | "youtube" | "tiktok" | "
 
 export type UserRole = "admin" | "editor";
 
+export type ProjectStatus = "active" | "paused" | "archived";
+
+export type SocialHandles = {
+  tiktok?: string;
+  youtube?: string;
+  instagram?: string;
+  facebook?: string;
+  linkedin?: string;
+  telegram?: string;
+};
+
+export type ColorPalette = {
+  primary?: string;
+  secondary?: string;
+  accent?: string;
+  background?: string;
+};
+
 export const FORMATS: Record<Format, { width: number; height: number; label: string }> = {
   story: { width: 1080, height: 1920, label: "Story (9:16)" },
   post: { width: 1080, height: 1080, label: "Post (1:1)" },

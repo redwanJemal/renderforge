@@ -10,6 +10,7 @@ postsRouter.use("*", authMiddleware);
 
 const createSchema = z.object({
   nicheId: z.string().uuid(),
+  projectId: z.string().uuid().optional(),
   title: z.string().min(1),
   theme: z.string().optional(),
   templateId: z.string().optional(),
@@ -42,6 +43,7 @@ const scenesSchema = z.array(z.object({
 postsRouter.get("/", async (c) => {
   const result = await postService.list({
     nicheId: c.req.query("nicheId"),
+    projectId: c.req.query("projectId"),
     status: c.req.query("status"),
     search: c.req.query("search"),
     page: Number(c.req.query("page") ?? 1),

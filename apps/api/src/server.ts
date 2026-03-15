@@ -19,8 +19,11 @@ import { templatesRouter } from "./routes/templates.js";
 import { settingsRouter } from "./routes/settings.js";
 import { publishingRouter } from "./routes/publishing.js";
 import { storageProxy } from "./routes/storage-proxy.js";
+import { imagesRouter } from "./routes/images.js";
+import { projectsRouter } from "./routes/projects.js";
 import { createRenderWorker } from "./jobs/render-worker.js";
 import { createPublishWorker } from "./jobs/publish-worker.js";
+import { createScheduleWorker } from "./jobs/schedule-worker.js";
 import { closeRedis } from "./lib/redis.js";
 
 const app = new Hono();
@@ -47,6 +50,8 @@ app.route("/api/analytics", analyticsRouter);
 app.route("/api/templates", templatesRouter);
 app.route("/api/settings", settingsRouter);
 app.route("/api/publishing", publishingRouter);
+app.route("/api/images", imagesRouter);
+app.route("/api/projects", projectsRouter);
 app.route("/api/storage", storageProxy);
 
 // Root
@@ -57,12 +62,14 @@ app.get("/", (c) => {
 // Start workers
 const renderWorker = createRenderWorker();
 const publishWorker = createPublishWorker();
+const scheduleWorker = createScheduleWorker();
 
 // Graceful shutdown
 async function shutdown() {
   console.log("Shutting down...");
   await renderWorker.close();
   await publishWorker.close();
+  await scheduleWorker.close();
   await closeRedis();
   process.exit(0);
 }

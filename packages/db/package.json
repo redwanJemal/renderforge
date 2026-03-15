@@ -10,7 +10,9 @@
     "migrate": "drizzle-kit migrate",
     "push": "drizzle-kit push",
     "studio": "drizzle-kit studio",
-    "seed": "tsx src/seed.ts"
+    "seed": "tsx src/seed.ts",
+    "seed-all": "tsx ../../scripts/seed-all.ts",
+    "seed-yld-100": "tsx ../../scripts/seed-yld-100.ts"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

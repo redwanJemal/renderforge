@@ -15,6 +15,9 @@ import { AnalyticsPage } from "@/features/analytics/analytics-page";
 import { SettingsPage } from "@/features/settings/settings-page";
 import { SocialPage } from "@/features/social/social-page";
 import { CalendarPage } from "@/features/calendar/calendar-page";
+import { ImageLibraryPage } from "@/features/images/image-library-page";
+import { ProjectListPage } from "@/features/projects/project-list-page";
+import { ProjectDetailPage } from "@/features/projects/project-detail-page";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -36,12 +39,15 @@ export function App() {
               <Route element={<DashboardLayout />}>
                 <Route index element={<DashboardPage />} />
 
+                <Route path="projects" element={<ProjectListPage />} />
+                <Route path="projects/:id" element={<ProjectDetailPage />} />
                 <Route path="content" element={<PostListPage />} />
                 <Route path="content/:id" element={<PostDetailPage />} />
                 <Route path="renders" element={<RenderListPage />} />
                 <Route path="renders/:id" element={<RenderDetailPage />} />
                 <Route path="social" element={<SocialPage />} />
                 <Route path="calendar" element={<CalendarPage />} />
+                <Route path="images" element={<ImageLibraryPage />} />
                 <Route path="niches" element={<NicheListPage />} />
                 <Route path="analytics" element={<AnalyticsPage />} />
                 <Route path="settings" element={<SettingsPage />} />

@@ -8,18 +8,40 @@ import { renders } from "./renders";
 import { socialAccounts } from "./social-accounts";
 import { scheduledPosts } from "./scheduled-posts";
 import { analytics } from "./analytics";
+import { imageLibrary } from "./image-library";
+import { projects } from "./projects";
+import { projectSchedules } from "./project-schedules";
+import { projectSocialAccounts } from "./project-social-accounts";
 
 export const usersRelations = relations(users, ({ many }) => ({
   socialAccounts: many(socialAccounts),
 }));
 
-export const nichesRelations = relations(niches, ({ many }) => ({
+export const projectsRelations = relations(projects, ({ many }) => ({
+  posts: many(posts),
+  niches: many(niches),
+  schedules: many(projectSchedules),
+  socialAccountLinks: many(projectSocialAccounts),
+}));
+
+export const projectSchedulesRelations = relations(projectSchedules, ({ one }) => ({
+  project: one(projects, { fields: [projectSchedules.projectId], references: [projects.id] }),
+}));
+
+export const projectSocialAccountsRelations = relations(projectSocialAccounts, ({ one }) => ({
+  project: one(projects, { fields: [projectSocialAccounts.projectId], references: [projects.id] }),
+  socialAccount: one(socialAccounts, { fields: [projectSocialAccounts.socialAccountId], references: [socialAccounts.id] }),
+}));
+
+export const nichesRelations = relations(niches, ({ one, many }) => ({
+  project: one(projects, { fields: [niches.projectId], references: [projects.id] }),
   posts: many(posts),
   bgmTracks: many(bgmTracks),
 }));
 
 export const postsRelations = relations(posts, ({ one, many }) => ({
   niche: one(niches, { fields: [posts.nicheId], references: [niches.id] }),
+  project: one(projects, { fields: [posts.projectId], references: [projects.id] }),
   scenes: many(scenes),
   renders: many(renders),
   scheduledPosts: many(scheduledPosts),
@@ -42,6 +64,7 @@ export const rendersRelations = relations(renders, ({ one, many }) => ({
 export const socialAccountsRelations = relations(socialAccounts, ({ one, many }) => ({
   user: one(users, { fields: [socialAccounts.userId], references: [users.id] }),
   scheduledPosts: many(scheduledPosts),
+  projectLinks: many(projectSocialAccounts),
 }));
 
 export const scheduledPostsRelations = relations(scheduledPosts, ({ one, many }) => ({
@@ -54,3 +77,5 @@ export const scheduledPostsRelations = relations(scheduledPosts, ({ one, many })
 export const analyticsRelations = relations(analytics, ({ one }) => ({
   scheduledPost: one(scheduledPosts, { fields: [analytics.scheduledPostId], references: [scheduledPosts.id] }),
 }));
+
+export const imageLibraryRelations = relations(imageLibrary, () => ({}));

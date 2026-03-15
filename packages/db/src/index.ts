@@ -11,6 +11,10 @@ import * as renders from "./schema/renders";
 import * as socialAccounts from "./schema/social-accounts";
 import * as scheduledPosts from "./schema/scheduled-posts";
 import * as analytics from "./schema/analytics";
+import * as imageLibrary from "./schema/image-library";
+import * as projectsSchema from "./schema/projects";
+import * as projectSchedulesSchema from "./schema/project-schedules";
+import * as projectSocialAccountsSchema from "./schema/project-social-accounts";
 import * as enums from "./schema/enums";
 import * as relations from "./schema/relations";
 
@@ -24,6 +28,10 @@ export const schema = {
   ...socialAccounts,
   ...scheduledPosts,
   ...analytics,
+  ...imageLibrary,
+  ...projectsSchema,
+  ...projectSchedulesSchema,
+  ...projectSocialAccountsSchema,
   ...enums,
   ...relations,
 };
@@ -50,4 +58,8 @@ export * from "./schema/renders";
 export * from "./schema/social-accounts";
 export * from "./schema/scheduled-posts";
 export * from "./schema/analytics";
+export * from "./schema/image-library";
+export * from "./schema/projects";
+export * from "./schema/project-schedules";
+export * from "./schema/project-social-accounts";
 export * from "./schema/relations";

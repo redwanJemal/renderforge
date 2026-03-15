@@ -22,6 +22,7 @@ import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useNiches } from "@/hooks/use-niches";
 import { useTemplates } from "@/hooks/use-templates";
+import { useProjects } from "@/hooks/use-projects";
 import { useCreatePost } from "@/hooks/use-posts";
 import type { Scene } from "@/hooks/use-posts";
 import { toast } from "sonner";
@@ -44,18 +45,21 @@ function emptyScene(): SceneForm {
 export function PostCreateDialog() {
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");
+  const [projectId, setProjectId] = useState("");
   const [nicheId, setNicheId] = useState("");
   const [templateId, setTemplateId] = useState("");
   const [format, setFormat] = useState<string>("story");
   const [theme, setTheme] = useState<string>("default");
   const [scenes, setScenes] = useState<SceneForm[]>([emptyScene()]);
 
+  const { data: projectsData } = useProjects();
   const { data: nichesData } = useNiches();
   const { data: templatesData } = useTemplates();
   const createPost = useCreatePost();
 
   function resetForm() {
     setTitle("");
+    setProjectId("");
     setNicheId("");
     setTemplateId("");
     setFormat("story");
@@ -98,6 +102,7 @@ export function PostCreateDialog() {
       await createPost.mutateAsync({
         title,
         nicheId,
+        projectId: projectId || undefined,
         templateId,
         format,
         theme,
@@ -134,6 +139,23 @@ export function PostCreateDialog() {
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="Enter post title"
                 />
+              </div>
+
+              <div className="space-y-2">
+                <Label>Project (optional)</Label>
+                <Select value={projectId} onValueChange={(v) => setProjectId(v === "none" ? "" : v)}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="No project" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="none">No project</SelectItem>
+                    {projectsData?.items?.map((p) => (
+                      <SelectItem key={p.id} value={p.id}>
+                        {p.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
 
               <div className="grid grid-cols-2 gap-4">

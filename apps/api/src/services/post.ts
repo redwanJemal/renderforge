@@ -5,16 +5,18 @@ import { POST_STATUS_TRANSITIONS } from "@renderforge/shared";
 export const postService = {
   async list(filters: {
     nicheId?: string;
+    projectId?: string;
     status?: string;
     search?: string;
     page?: number;
     perPage?: number;
   } = {}) {
-    const { nicheId, status, search, page = 1, perPage = 20 } = filters;
+    const { nicheId, projectId, status, search, page = 1, perPage = 20 } = filters;
     const offset = (page - 1) * perPage;
 
     const conditions = [];
     if (nicheId) conditions.push(eq(posts.nicheId, nicheId));
+    if (projectId) conditions.push(eq(posts.projectId, projectId));
     if (status) conditions.push(eq(posts.status, status as PostStatus));
     if (search) conditions.push(ilike(posts.title, `%${search}%`));
 
@@ -77,6 +79,7 @@ export const postService = {
 
   async create(data: {
     nicheId: string;
+    projectId?: string;
     title: string;
     theme?: string;
     templateId?: string;
