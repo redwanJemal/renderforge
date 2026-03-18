@@ -101,15 +101,14 @@ const SceneView: React.FC<{
   );
 
   // Exit: fade out to black (durationFrames - exitDuration → durationFrames)
+  // Last scene also fades out so it doesn't overlap with the outro
   const exitStart = scene.durationFrames - exitDuration;
-  const exitProgress = isLast
-    ? 1
-    : interpolate(
-        localFrame,
-        [exitStart, scene.durationFrames],
-        [1, 0],
-        { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' },
-      );
+  const exitProgress = interpolate(
+    localFrame,
+    [exitStart, scene.durationFrames],
+    [1, 0],
+    { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' },
+  );
 
   const visibility = Math.min(enterProgress, exitProgress);
 

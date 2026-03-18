@@ -16,6 +16,7 @@ import {
 import {
   Tabs, TabsContent, TabsList, TabsTrigger,
 } from "@/components/ui/tabs";
+import { Switch } from "@/components/ui/switch";
 import { useProject, useUpdateProject } from "@/hooks/use-projects";
 import { ScheduleEditor } from "./schedule-editor";
 import { ProjectContentTab } from "./tabs/project-content-tab";
@@ -41,6 +42,8 @@ export function ProjectDetailPage() {
   const [editLogoUrl, setEditLogoUrl] = useState("");
   const [editStatus, setEditStatus] = useState<"active" | "paused" | "archived">("active");
   const [editVoiceId, setEditVoiceId] = useState("");
+  const [editEnableIntro, setEditEnableIntro] = useState(true);
+  const [editEnableOutro, setEditEnableOutro] = useState(true);
   const [editHandles, setEditHandles] = useState<Record<string, string>>({});
   const [editPalette, setEditPalette] = useState<Record<string, string>>({});
   const [initialized, setInitialized] = useState(false);
@@ -52,6 +55,8 @@ export function ProjectDetailPage() {
     setEditLogoUrl(project.logoUrl ?? "");
     setEditStatus(project.status);
     setEditVoiceId(project.defaultVoiceId ?? "");
+    setEditEnableIntro(project.enableIntro ?? true);
+    setEditEnableOutro(project.enableOutro ?? true);
     setEditHandles(project.socialHandles ?? {});
     setEditPalette(project.colorPalette ?? {});
     setInitialized(true);
@@ -71,6 +76,8 @@ export function ProjectDetailPage() {
         logoUrl: editLogoUrl || null,
         status: editStatus,
         defaultVoiceId: editVoiceId || null,
+        enableIntro: editEnableIntro,
+        enableOutro: editEnableOutro,
         socialHandles: editHandles,
         colorPalette: editPalette,
       });
@@ -170,6 +177,22 @@ export function ProjectDetailPage() {
               <div className="space-y-2">
                 <Label>Logo URL (S3 key)</Label>
                 <Input value={editLogoUrl} onChange={(e) => setEditLogoUrl(e.target.value)} placeholder="logos/my-project.png" />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="flex items-center justify-between rounded-lg border p-3">
+                  <div className="space-y-0.5">
+                    <Label>Enable Intro</Label>
+                    <p className="text-xs text-muted-foreground">Show branded intro screen before content</p>
+                  </div>
+                  <Switch checked={editEnableIntro} onCheckedChange={setEditEnableIntro} />
+                </div>
+                <div className="flex items-center justify-between rounded-lg border p-3">
+                  <div className="space-y-0.5">
+                    <Label>Enable Outro</Label>
+                    <p className="text-xs text-muted-foreground">Show branded outro screen after content</p>
+                  </div>
+                  <Switch checked={editEnableOutro} onCheckedChange={setEditEnableOutro} />
+                </div>
               </div>
               <div className="flex justify-end">
                 <Button onClick={handleSave} disabled={updateProject.isPending}>

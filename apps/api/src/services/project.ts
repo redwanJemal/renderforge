@@ -88,6 +88,8 @@ export const projectService = {
     socialHandles?: Record<string, string>;
     colorPalette?: Record<string, string>;
     defaultVoiceId?: string;
+    enableIntro?: boolean;
+    enableOutro?: boolean;
     status?: ProjectStatus;
   }) {
     const [project] = await db.insert(projects).values(data).returning();
@@ -102,6 +104,8 @@ export const projectService = {
     socialHandles: Record<string, string>;
     colorPalette: Record<string, string>;
     defaultVoiceId: string | null;
+    enableIntro: boolean;
+    enableOutro: boolean;
     status: ProjectStatus;
   }>) {
     const [project] = await db
@@ -189,6 +193,8 @@ export const projectService = {
         socialHandles: projects.socialHandles,
         colorPalette: projects.colorPalette,
         defaultVoiceId: projects.defaultVoiceId,
+        enableIntro: projects.enableIntro,
+        enableOutro: projects.enableOutro,
       })
       .from(projects)
       .where(eq(projects.id, projectId))

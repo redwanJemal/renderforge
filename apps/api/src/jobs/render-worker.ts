@@ -85,8 +85,18 @@ const PREMIUM_TEMPLATES: Record<string, { durationInFrames: number }> = {
 // Kids templates — props come from metadata.sceneProps directly, not scene-to-text mapping
 const KIDS_TEMPLATES = ['kids-counting-fun', 'kids-alphabet-adventure', 'kids-icon-quiz', 'kids-bedtime-story'];
 
+// Registry-based templates that use sceneProps directly from metadata (composition ID: {id}-{format})
+const REGISTRY_DIRECT_TEMPLATES: Record<string, { durationInFrames: number }> = {
+  "vocab-card": { durationInFrames: 450 },
+  "quran-ayah": { durationInFrames: 900 },
+};
+
 function isKidsTemplate(templateId: string): boolean {
   return KIDS_TEMPLATES.includes(templateId);
+}
+
+function isRegistryDirectTemplate(templateId: string): boolean {
+  return templateId in REGISTRY_DIRECT_TEMPLATES;
 }
 
 // Check if template should use the premium yld-intro composition
@@ -252,6 +262,8 @@ async function processRenderJob(job: Job<RenderJobData>) {
       accentColor?: string;
       bgGradient?: string[];
       socialHandles?: Record<string, string>;
+      enableIntro?: boolean;
+      enableOutro?: boolean;
     } = {};
 
     if (post.projectId) {
@@ -274,6 +286,8 @@ async function processRenderJob(job: Job<RenderJobData>) {
             accentColor: palette.accent,
             bgGradient: [palette.primary, palette.secondary, palette.background].filter(Boolean) as string[],
             socialHandles: handles,
+            enableIntro: config.enableIntro ?? true,
+            enableOutro: config.enableOutro ?? true,
           };
           console.log(`[render-worker] Project config loaded for ${post.projectId}`);
         }
@@ -301,11 +315,51 @@ async function processRenderJob(job: Job<RenderJobData>) {
     let templateProps: Record<string, unknown>;
     let totalFrames: number;
 
-    if (useKids) {
+    if (isRegistryDirectTemplate(templateId)) {
+      // Registry-based direct templates (e.g. vocab-card, quran-ayah) — use sceneProps from metadata,
+      // composition ID is {templateId}-{format}
+      templateProps = (metadata.sceneProps && typeof metadata.sceneProps === "object")
+        ? metadata.sceneProps as Record<string, unknown>
+        : {};
+
+      // Apply project-level intro/outro toggle
+      if (projectDefaults.enableIntro === false) {
+        templateProps.introHoldFrames = 0;
+      }
+      if (projectDefaults.enableOutro === false) {
+        templateProps.outroHoldFrames = 0;
+      }
+
+      // For quran-ayah, calculate duration from scene timings + intro/outro
+      if (templateId === "quran-ayah" && Array.isArray(templateProps.scenes)) {
+        const scenes = templateProps.scenes as Array<{ endMs?: number }>;
+        const lastScene = scenes[scenes.length - 1];
+        const audioDurationMs = lastScene?.endMs ?? 0;
+        const introFrames = (templateProps.introHoldFrames as number) ?? 75;
+        const outroFrames = (templateProps.outroHoldFrames as number) ?? 90;
+        // intro + audio + gap + outro + fade
+        totalFrames = introFrames + Math.ceil((audioDurationMs / 1000) * fps) + 10 + outroFrames + 20;
+      } else {
+        // For vocab-card and similar, add intro + base content + outro
+        const baseFrames = REGISTRY_DIRECT_TEMPLATES[templateId].durationInFrames;
+        const introFrames = (templateProps.introHoldFrames as number) ?? 60;
+        const outroFrames = (templateProps.outroHoldFrames as number) ?? 60;
+        totalFrames = introFrames + baseFrames + outroFrames;
+      }
+      console.log(`[render-worker] Registry direct template: ${templateId}, totalFrames: ${totalFrames}`);
+    } else if (useKids) {
       // Kids template — use sceneProps from metadata directly (template has its own defaultProps)
       templateProps = (metadata.sceneProps && typeof metadata.sceneProps === "object")
         ? metadata.sceneProps as Record<string, unknown>
         : {};
+
+      // Apply project-level intro/outro toggle
+      if (projectDefaults.enableIntro === false) {
+        templateProps.introDurationFrames = 0;
+      }
+      if (projectDefaults.enableOutro === false) {
+        templateProps.outroDurationFrames = 0;
+      }
 
       // Calculate total frames from kids template timing props
       const kidsProps = templateProps as Record<string, unknown>;
@@ -394,9 +448,16 @@ async function processRenderJob(job: Job<RenderJobData>) {
           templateProps.logo = projectDefaults.logoUrl ?? "yld-logo-white.png";
           templateProps.logoSize = 120;
         }
+        // Apply project-level intro/outro toggle
+        if (projectDefaults.enableIntro === false) {
+          templateProps.introHoldFrames = 0;
+        }
+        if (projectDefaults.enableOutro === false) {
+          templateProps.outroHoldFrames = 0;
+        }
       } else {
-        const introHoldFrames = 60; // 2s logo intro
-        const outroHoldFrames = 60; // 2s logo outro
+        const introHoldFrames = projectDefaults.enableIntro === false ? 0 : 60;
+        const outroHoldFrames = projectDefaults.enableOutro === false ? 0 : 60;
         const transitionFrames = 15;
         const sceneGapFrames = 8; // brief black gap between scenes for page feel
         let currentFrame = introHoldFrames;

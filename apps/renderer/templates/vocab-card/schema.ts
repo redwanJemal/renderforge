@@ -23,6 +23,12 @@ export const vocabCardSchema = z.object({
   secondaryAccent: z.string().default('#EC4899'),
   bgGradient: z.array(z.string()).default(['#0F0A1A', '#1A1035', '#0D0B14']),
   audioUrl: z.string().optional(),
+  // Intro/Outro
+  introHoldFrames: z.number().default(60), // 2s logo intro
+  outroHoldFrames: z.number().default(60), // 2s logo outro
+  logoUrl: z.string().optional(),
+  socialHandle: z.string().optional(),
+  ctaText: z.string().default('Follow for daily vocabulary'),
 });
 
 export type VocabCardProps = z.infer<typeof vocabCardSchema>;

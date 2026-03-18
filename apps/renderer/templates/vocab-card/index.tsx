@@ -6,7 +6,9 @@ import {
   interpolate,
   spring,
   Audio,
+  Img,
   staticFile,
+  Sequence,
 } from 'remotion';
 import type { Theme, Format } from '../../types';
 import { responsiveFontSize, responsivePadding, isPortrait } from '../../core/formats';
@@ -303,20 +305,23 @@ const VocabCard: React.FC<VocabCardProps & { theme: Theme; format: Format }> = (
     secondaryAccent,
     bgGradient,
     audioUrl,
+    introHoldFrames,
+    outroHoldFrames,
+    logoUrl,
+    socialHandle,
+    ctaText,
     format,
   } = props;
 
   const pad = responsivePadding(50, format);
   const portrait = isPortrait(format);
 
-  // ── Timeline (at 30fps, 450 frames = 15s) ──
-  // 0-30:    Fade in + word entrance
-  // 30-60:   Phonetic + part of speech
-  // 60-90:   Definition
-  // 90-200:  Examples (staggered)
-  // 200-300: Synonyms / Antonyms
-  // 300-420: Hold
-  // 420-450: Fade out
+  // Content starts after intro
+  const contentFrame = Math.max(0, frame - introHoldFrames);
+
+  // Outro start: content ends before outro
+  const contentEnd = durationInFrames - outroHoldFrames;
+  const outroStartFrame = contentEnd;
 
   // Global fade
   const fadeIn = interpolate(frame, [0, 15], [0, 1], {
@@ -329,40 +334,60 @@ const VocabCard: React.FC<VocabCardProps & { theme: Theme; format: Format }> = (
   });
   const globalOpacity = Math.min(fadeIn, fadeOut);
 
-  // Word entrance — scale + slam
+  // ── INTRO ──
+  const introFadeIn = interpolate(frame, [0, 15], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+  const introFadeOut = interpolate(frame, [introHoldFrames - 12, introHoldFrames], [1, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+  const introOpacity = introHoldFrames > 0 ? Math.min(introFadeIn, introFadeOut) : 0;
+  const introLogoScale = spring({ frame, fps, config: { damping: 14, stiffness: 80, mass: 0.6 } });
+  const introGlow = Math.sin(frame * 0.08) * 0.3 + 0.7;
+
+  // ── OUTRO ──
+  const outroLocalFrame = frame - outroStartFrame;
+  const outroFadeIn = interpolate(outroLocalFrame, [0, 15], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+  const outroFadeOut = interpolate(frame, [durationInFrames - 20, durationInFrames], [1, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+  const outroOpacity = outroHoldFrames > 0 && outroLocalFrame >= 0 ? Math.min(outroFadeIn, outroFadeOut) : 0;
+  const outroLogoScale = spring({ frame: Math.max(0, outroLocalFrame), fps, config: { damping: 14, stiffness: 80, mass: 0.6 } });
+
+  // Content visibility: only show between intro and outro
+  const contentVisible = frame >= introHoldFrames && frame < outroStartFrame ? 1 : 0;
+  const contentFadeIn = interpolate(frame, [introHoldFrames, introHoldFrames + 15], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+  const contentFadeOut = interpolate(frame, [outroStartFrame - 15, outroStartFrame], [1, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+  const contentOpacity = Math.min(contentFadeIn, contentFadeOut);
+
+  // Word entrance — scale + slam (relative to content start)
   const wordScale = spring({
-    frame,
+    frame: contentFrame,
     fps,
     config: { damping: 10, stiffness: 150, mass: 1 },
   });
 
   // Word glow pulse
-  const glowPulse = Math.sin(frame * 0.06) * 0.4 + 0.6;
+  const glowPulse = Math.sin(contentFrame * 0.06) * 0.4 + 0.6;
 
   // Phonetic entrance
-  const phoneticOpacity = interpolate(frame, [25, 40], [0, 1], {
+  const phoneticOpacity = interpolate(contentFrame, [25, 40], [0, 1], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
   const phoneticSlide = spring({
-    frame: Math.max(0, frame - 25),
+    frame: Math.max(0, contentFrame - 25),
     fps,
     config: { damping: 18, stiffness: 100, mass: 0.6 },
   });
 
   // Definition entrance
-  const defOpacity = interpolate(frame, [55, 70], [0, 1], {
+  const defOpacity = interpolate(contentFrame, [55, 70], [0, 1], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
   const defSlide = spring({
-    frame: Math.max(0, frame - 55),
+    frame: Math.max(0, contentFrame - 55),
     fps,
     config: { damping: 16, stiffness: 100, mass: 0.7 },
   });
 
   // Synonyms/antonyms section entrance
-  const tagsOpacity = interpolate(frame, [200, 215], [0, 1], {
+  const tagsOpacity = interpolate(contentFrame, [200, 215], [0, 1], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
@@ -397,8 +422,44 @@ const VocabCard: React.FC<VocabCardProps & { theme: Theme; format: Format }> = (
         ))}
       </AbsoluteFill>
 
-      {/* Audio (if provided) */}
-      {audioUrl && <Audio src={audioUrl.startsWith('http') ? audioUrl : staticFile(audioUrl)} />}
+      {/* Audio — delayed to start after intro */}
+      {audioUrl && introHoldFrames > 0 && (
+        <Sequence from={introHoldFrames}>
+          <Audio src={audioUrl.startsWith('http') ? audioUrl : staticFile(audioUrl)} />
+        </Sequence>
+      )}
+      {audioUrl && introHoldFrames === 0 && (
+        <Audio src={audioUrl.startsWith('http') ? audioUrl : staticFile(audioUrl)} />
+      )}
+
+      {/* ── INTRO ── */}
+      {introHoldFrames > 0 && introOpacity > 0 && (
+        <AbsoluteFill style={{
+          opacity: introOpacity, display: 'flex', flexDirection: 'column',
+          justifyContent: 'center', alignItems: 'center', gap: portrait ? 20 : 14,
+        }}>
+          {logoUrl && (
+            <div style={{ transform: `scale(${introLogoScale})`, marginBottom: 10 }}>
+              <Img src={logoUrl.startsWith('http') ? logoUrl : staticFile(logoUrl)} style={{
+                width: portrait ? 120 : 90, height: portrait ? 120 : 90, objectFit: 'contain',
+                filter: `drop-shadow(0 0 ${30 * introGlow}px ${accentColor}60)`,
+              }} />
+            </div>
+          )}
+          <div style={{
+            opacity: interpolate(frame, [10, 25], [0, 0.6], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }),
+            fontSize: responsiveFontSize(13, format, 'caption'),
+            fontFamily: 'Inter, sans-serif', color: `${accentColor}90`,
+            letterSpacing: 3, textTransform: 'uppercase',
+          }}>
+            {brandName}
+          </div>
+          <div style={{
+            width: interpolate(frame, [15, 35], [0, portrait ? 160 : 220], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }),
+            height: 1, background: `linear-gradient(90deg, transparent, ${accentColor}, transparent)`,
+          }} />
+        </AbsoluteFill>
+      )}
 
       {/* ── Content Layout ── */}
       <AbsoluteFill
@@ -407,9 +468,10 @@ const VocabCard: React.FC<VocabCardProps & { theme: Theme; format: Format }> = (
           flexDirection: 'column',
           justifyContent: portrait ? 'center' : 'center',
           padding: portrait ? `${pad * 1.8}px ${pad}px` : `${pad}px ${pad * 1.5}px`,
+          opacity: contentOpacity,
         }}
       >
-        {/* Top bar: Brand + Level + Day */}
+        {/* Top bar: Level + Day */}
         <div
           style={{
             position: 'absolute',
@@ -417,62 +479,28 @@ const VocabCard: React.FC<VocabCardProps & { theme: Theme; format: Format }> = (
             left: pad,
             right: pad,
             display: 'flex',
-            justifyContent: 'space-between',
+            justifyContent: 'flex-end',
             alignItems: 'center',
+            gap: 12,
           }}
         >
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 8,
-              opacity: interpolate(frame, [0, 20], [0, 0.6], {
-                extrapolateLeft: 'clamp',
-                extrapolateRight: 'clamp',
-              }),
-            }}
-          >
-            <div
-              style={{
-                width: 24,
-                height: 24,
-                borderRadius: 6,
-                background: `linear-gradient(135deg, ${accentColor}, ${secondaryAccent})`,
-              }}
-            />
+          {dayNumber && (
             <span
               style={{
-                fontSize: responsiveFontSize(14, format, 'caption'),
-                fontWeight: 600,
-                color: 'rgba(255,255,255,0.5)',
+                fontSize: responsiveFontSize(13, format, 'caption'),
+                fontWeight: 500,
+                color: 'rgba(255,255,255,0.35)',
                 fontFamily: 'Inter, sans-serif',
-                letterSpacing: 1.5,
-                textTransform: 'uppercase',
+                opacity: interpolate(contentFrame, [0, 20], [0, 1], {
+                  extrapolateLeft: 'clamp',
+                  extrapolateRight: 'clamp',
+                }),
               }}
             >
-              {brandName}
+              Day {dayNumber}
             </span>
-          </div>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            {dayNumber && (
-              <span
-                style={{
-                  fontSize: responsiveFontSize(13, format, 'caption'),
-                  fontWeight: 500,
-                  color: 'rgba(255,255,255,0.35)',
-                  fontFamily: 'Inter, sans-serif',
-                  opacity: interpolate(frame, [0, 20], [0, 1], {
-                    extrapolateLeft: 'clamp',
-                    extrapolateRight: 'clamp',
-                  }),
-                }}
-              >
-                Day {dayNumber}
-              </span>
-            )}
-            <LevelBadge level={level} accentColor={accentColor} frame={frame} fps={fps} format={format} />
-          </div>
+          )}
+          <LevelBadge level={level} accentColor={accentColor} frame={frame} fps={fps} format={format} />
         </div>
 
         {/* ── WORD (Hero) ── */}
@@ -503,7 +531,7 @@ const VocabCard: React.FC<VocabCardProps & { theme: Theme; format: Format }> = (
           {/* Accent underline under word */}
           <div
             style={{
-              width: interpolate(frame, [8, 25], [0, portrait ? 100 : 80], {
+              width: interpolate(contentFrame, [8, 25], [0, portrait ? 100 : 80], {
                 extrapolateLeft: 'clamp',
                 extrapolateRight: 'clamp',
               }),
@@ -701,6 +729,52 @@ const VocabCard: React.FC<VocabCardProps & { theme: Theme; format: Format }> = (
           )}
         </div>
       </AbsoluteFill>
+
+      {/* ── OUTRO ── */}
+      {outroHoldFrames > 0 && outroOpacity > 0 && (
+        <AbsoluteFill style={{
+          opacity: outroOpacity, display: 'flex', flexDirection: 'column',
+          justifyContent: 'center', alignItems: 'center', gap: portrait ? 18 : 12,
+        }}>
+          {logoUrl && (
+            <div style={{ transform: `scale(${outroLogoScale})`, marginBottom: 8 }}>
+              <Img src={logoUrl.startsWith('http') ? logoUrl : staticFile(logoUrl)} style={{
+                width: portrait ? 100 : 80, height: portrait ? 100 : 80, objectFit: 'contain',
+                filter: `drop-shadow(0 0 25px ${accentColor}60)`,
+              }} />
+            </div>
+          )}
+          <div style={{
+            width: interpolate(outroLocalFrame, [5, 25], [0, portrait ? 160 : 220], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }),
+            height: 1, background: `linear-gradient(90deg, transparent, ${accentColor}, transparent)`,
+          }} />
+          {ctaText && (
+            <div style={{
+              opacity: interpolate(outroLocalFrame, [15, 30], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }),
+              fontSize: responsiveFontSize(18, format, 'body'),
+              fontFamily: 'Inter, sans-serif', color: 'rgba(255,255,255,0.7)',
+              fontWeight: 400, textAlign: 'center',
+            }}>
+              {ctaText}
+            </div>
+          )}
+          {socialHandle && (
+            <div style={{
+              opacity: interpolate(outroLocalFrame, [20, 35], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }),
+              padding: '8px 24px', borderRadius: 20,
+              background: `${accentColor}15`, border: `1px solid ${accentColor}30`,
+            }}>
+              <span style={{
+                fontSize: responsiveFontSize(16, format, 'body'),
+                fontFamily: 'Inter, sans-serif', color: accentColor,
+                fontWeight: 600, letterSpacing: 1,
+              }}>
+                {socialHandle}
+              </span>
+            </div>
+          )}
+        </AbsoluteFill>
+      )}
 
       {/* Progress bar */}
       <div

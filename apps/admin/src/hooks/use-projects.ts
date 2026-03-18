@@ -10,6 +10,8 @@ export type Project = {
   socialHandles: Record<string, string>;
   colorPalette: Record<string, string>;
   defaultVoiceId: string | null;
+  enableIntro: boolean;
+  enableOutro: boolean;
   status: "active" | "paused" | "archived";
   createdAt: string;
   updatedAt: string;
