@@ -493,6 +493,36 @@ export const niches: Record<string, NicheDefinition> = {
     ],
   },
 
+  'vocab-english': {
+    id: 'vocab-english',
+    name: 'English Vocabulary',
+    description: 'Daily vocabulary flashcards with pronunciation, examples, and synonyms',
+    defaultTemplateId: 'vocab-card',
+    defaultFormat: 'story',
+    voiceId: 'les-brown',
+    languages: ['en'],
+    defaultLanguage: 'en',
+    storagePrefix: 'audio',
+    postIdPrefix: 'vocab',
+    segmentPattern: {
+      intro: false,
+      outro: false,
+      contentPrefix: 'word',
+      contentCountRange: [1, 1],
+    },
+    templates: [
+      {
+        templateId: 'vocab-card',
+        totalFramesStrategy: 'sum-sequential',
+        trailingHoldFrames: 0,
+        mappings: [],
+        propOverrides: {
+          brandName: 'LinguaForge',
+        },
+      },
+    ],
+  },
+
   'finance': {
     id: 'finance',
     name: 'Finance / Crypto',

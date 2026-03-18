@@ -1,0 +1,4761 @@
+[
+  {
+    "postId": "vocab-001",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Grateful",
+      "phonetic": "/ˈɡreɪt.fəl/",
+      "partOfSpeech": "adjective",
+      "definition": "Feeling or showing thanks for something good",
+      "examples": [
+        {
+          "sentence": "I am grateful for your help during the project.",
+          "highlight": "grateful"
+        },
+        {
+          "sentence": "She felt grateful to have such supportive friends.",
+          "highlight": "grateful"
+        }
+      ],
+      "synonyms": [
+        "thankful",
+        "appreciative",
+        "obliged"
+      ],
+      "antonyms": [
+        "ungrateful",
+        "thankless"
+      ],
+      "level": "A2",
+      "dayNumber": 1,
+      "accentColor": "#6366F1",
+      "secondaryAccent": "#06B6D4",
+      "bgGradient": [
+        "#0F0A1A",
+        "#1A1035",
+        "#0D0B14"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-002",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Journey",
+      "phonetic": "/ˈdʒɜːr.ni/",
+      "partOfSpeech": "noun",
+      "definition": "An act of traveling from one place to another",
+      "examples": [
+        {
+          "sentence": "The journey from London to Paris takes about two hours by train.",
+          "highlight": "journey"
+        },
+        {
+          "sentence": "Life is a journey, not a destination.",
+          "highlight": "journey"
+        }
+      ],
+      "synonyms": [
+        "trip",
+        "voyage",
+        "expedition"
+      ],
+      "antonyms": [
+        "stay",
+        "standstill"
+      ],
+      "level": "A2",
+      "dayNumber": 2,
+      "accentColor": "#F43F5E",
+      "secondaryAccent": "#F43F5E",
+      "bgGradient": [
+        "#1A0A10",
+        "#2D1520",
+        "#140810"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-003",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Struggle",
+      "phonetic": "/ˈstrʌɡ.əl/",
+      "partOfSpeech": "verb",
+      "definition": "To try very hard to do something difficult",
+      "examples": [
+        {
+          "sentence": "Many students struggle with mathematics at first.",
+          "highlight": "struggle"
+        },
+        {
+          "sentence": "She struggled to find the right words.",
+          "highlight": "struggled"
+        }
+      ],
+      "synonyms": [
+        "strive",
+        "fight",
+        "battle"
+      ],
+      "antonyms": [
+        "surrender",
+        "yield",
+        "give up"
+      ],
+      "level": "A2",
+      "dayNumber": 3,
+      "accentColor": "#10B981",
+      "secondaryAccent": "#10B981",
+      "bgGradient": [
+        "#0A1A14",
+        "#0F2D20",
+        "#081410"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-004",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Curious",
+      "phonetic": "/ˈkjʊr.i.əs/",
+      "partOfSpeech": "adjective",
+      "definition": "Having a strong desire to know or learn something",
+      "examples": [
+        {
+          "sentence": "Children are naturally curious about the world around them.",
+          "highlight": "curious"
+        },
+        {
+          "sentence": "I was curious to know what happened next.",
+          "highlight": "curious"
+        }
+      ],
+      "synonyms": [
+        "inquisitive",
+        "interested",
+        "eager"
+      ],
+      "antonyms": [
+        "indifferent",
+        "uninterested",
+        "apathetic"
+      ],
+      "level": "A2",
+      "dayNumber": 4,
+      "accentColor": "#F59E0B",
+      "secondaryAccent": "#F97316",
+      "bgGradient": [
+        "#1A150A",
+        "#2D2210",
+        "#141008"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-005",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Accomplish",
+      "phonetic": "/əˈkɒm.plɪʃ/",
+      "partOfSpeech": "verb",
+      "definition": "To succeed in doing or completing something",
+      "examples": [
+        {
+          "sentence": "She accomplished her goal of running a marathon.",
+          "highlight": "accomplished"
+        },
+        {
+          "sentence": "What do you hope to accomplish this year?",
+          "highlight": "accomplish"
+        }
+      ],
+      "synonyms": [
+        "achieve",
+        "complete",
+        "fulfill"
+      ],
+      "antonyms": [
+        "fail",
+        "abandon",
+        "neglect"
+      ],
+      "level": "B1",
+      "dayNumber": 5,
+      "accentColor": "#06B6D4",
+      "secondaryAccent": "#8B5CF6",
+      "bgGradient": [
+        "#0A1518",
+        "#0F2A30",
+        "#081215"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-006",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Genuine",
+      "phonetic": "/ˈdʒen.ju.ɪn/",
+      "partOfSpeech": "adjective",
+      "definition": "Truly what something is said to be; authentic and real",
+      "examples": [
+        {
+          "sentence": "His apology seemed genuine and heartfelt.",
+          "highlight": "genuine"
+        },
+        {
+          "sentence": "She has a genuine interest in helping others.",
+          "highlight": "genuine"
+        }
+      ],
+      "synonyms": [
+        "authentic",
+        "real",
+        "sincere"
+      ],
+      "antonyms": [
+        "fake",
+        "artificial",
+        "insincere"
+      ],
+      "level": "B1",
+      "dayNumber": 6,
+      "accentColor": "#8B5CF6",
+      "secondaryAccent": "#14B8A6",
+      "bgGradient": [
+        "#120A1A",
+        "#1F1035",
+        "#0E0B14"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-007",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Hesitate",
+      "phonetic": "/ˈhez.ɪ.teɪt/",
+      "partOfSpeech": "verb",
+      "definition": "To pause before saying or doing something, often due to uncertainty",
+      "examples": [
+        {
+          "sentence": "Don't hesitate to ask if you need any help.",
+          "highlight": "hesitate"
+        },
+        {
+          "sentence": "He hesitated for a moment before answering.",
+          "highlight": "hesitated"
+        }
+      ],
+      "synonyms": [
+        "pause",
+        "waver",
+        "falter"
+      ],
+      "antonyms": [
+        "decide",
+        "proceed",
+        "rush"
+      ],
+      "level": "B1",
+      "dayNumber": 7,
+      "accentColor": "#EC4899",
+      "secondaryAccent": "#0EA5E9",
+      "bgGradient": [
+        "#1A0A14",
+        "#2D1525",
+        "#140810"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-008",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Remarkable",
+      "phonetic": "/rɪˈmɑːr.kə.bəl/",
+      "partOfSpeech": "adjective",
+      "definition": "Worthy of attention; striking or extraordinary",
+      "examples": [
+        {
+          "sentence": "She made remarkable progress in just six months.",
+          "highlight": "remarkable"
+        },
+        {
+          "sentence": "The view from the mountain top was truly remarkable.",
+          "highlight": "remarkable"
+        }
+      ],
+      "synonyms": [
+        "extraordinary",
+        "impressive",
+        "notable"
+      ],
+      "antonyms": [
+        "ordinary",
+        "unremarkable",
+        "mediocre"
+      ],
+      "level": "B1",
+      "dayNumber": 8,
+      "accentColor": "#14B8A6",
+      "secondaryAccent": "#EC4899",
+      "bgGradient": [
+        "#0A1A18",
+        "#0F2D28",
+        "#081415"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-009",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Abandon",
+      "phonetic": "/əˈbæn.dən/",
+      "partOfSpeech": "verb",
+      "definition": "To give up completely; to leave behind and never return to",
+      "examples": [
+        {
+          "sentence": "They had to abandon the ship when it started sinking.",
+          "highlight": "abandon"
+        },
+        {
+          "sentence": "Never abandon your dreams, no matter how hard it gets.",
+          "highlight": "abandon"
+        }
+      ],
+      "synonyms": [
+        "desert",
+        "forsake",
+        "leave"
+      ],
+      "antonyms": [
+        "keep",
+        "maintain",
+        "continue"
+      ],
+      "level": "B1",
+      "dayNumber": 9,
+      "accentColor": "#F97316",
+      "secondaryAccent": "#6366F1",
+      "bgGradient": [
+        "#1A100A",
+        "#2D1A0F",
+        "#140E08"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-010",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Thrive",
+      "phonetic": "/θraɪv/",
+      "partOfSpeech": "verb",
+      "definition": "To grow, develop, or be successful",
+      "examples": [
+        {
+          "sentence": "Plants thrive in warm and sunny conditions.",
+          "highlight": "thrive"
+        },
+        {
+          "sentence": "Some people thrive under pressure.",
+          "highlight": "thrive"
+        }
+      ],
+      "synonyms": [
+        "flourish",
+        "prosper",
+        "bloom"
+      ],
+      "antonyms": [
+        "decline",
+        "wither",
+        "struggle"
+      ],
+      "level": "B2",
+      "dayNumber": 10,
+      "accentColor": "#0EA5E9",
+      "secondaryAccent": "#F59E0B",
+      "bgGradient": [
+        "#0A121A",
+        "#0F2035",
+        "#080D14"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-011",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Negotiate",
+      "phonetic": "/nɪˈɡoʊ.ʃi.eɪt/",
+      "partOfSpeech": "verb",
+      "definition": "To discuss something in order to reach an agreement",
+      "examples": [
+        {
+          "sentence": "We need to negotiate the terms of the contract.",
+          "highlight": "negotiate"
+        },
+        {
+          "sentence": "She negotiated a higher salary for the new position.",
+          "highlight": "negotiated"
+        }
+      ],
+      "synonyms": [
+        "bargain",
+        "discuss",
+        "mediate"
+      ],
+      "antonyms": [
+        "dictate",
+        "demand",
+        "refuse"
+      ],
+      "level": "B1",
+      "dayNumber": 11,
+      "accentColor": "#6366F1",
+      "secondaryAccent": "#06B6D4",
+      "bgGradient": [
+        "#0F0A1A",
+        "#1A1035",
+        "#0D0B14"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-012",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Deadline",
+      "phonetic": "/ˈded.laɪn/",
+      "partOfSpeech": "noun",
+      "definition": "The latest time by which something must be completed",
+      "examples": [
+        {
+          "sentence": "The deadline for submitting the report is Friday.",
+          "highlight": "deadline"
+        },
+        {
+          "sentence": "We need to meet the deadline or we will lose the client.",
+          "highlight": "deadline"
+        }
+      ],
+      "synonyms": [
+        "time limit",
+        "due date",
+        "cutoff"
+      ],
+      "antonyms": [
+        "extension",
+        "open-ended"
+      ],
+      "level": "B1",
+      "dayNumber": 12,
+      "accentColor": "#F43F5E",
+      "secondaryAccent": "#F43F5E",
+      "bgGradient": [
+        "#1A0A10",
+        "#2D1520",
+        "#140810"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-013",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Collaborate",
+      "phonetic": "/kəˈlæb.ə.reɪt/",
+      "partOfSpeech": "verb",
+      "definition": "To work jointly with others on an activity or project",
+      "examples": [
+        {
+          "sentence": "The two companies will collaborate on developing new technology.",
+          "highlight": "collaborate"
+        },
+        {
+          "sentence": "Scientists from different countries collaborated on the research.",
+          "highlight": "collaborated"
+        }
+      ],
+      "synonyms": [
+        "cooperate",
+        "partner",
+        "team up"
+      ],
+      "antonyms": [
+        "compete",
+        "oppose",
+        "conflict"
+      ],
+      "level": "B2",
+      "dayNumber": 13,
+      "accentColor": "#10B981",
+      "secondaryAccent": "#10B981",
+      "bgGradient": [
+        "#0A1A14",
+        "#0F2D20",
+        "#081410"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-014",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Ambitious",
+      "phonetic": "/æmˈbɪʃ.əs/",
+      "partOfSpeech": "adjective",
+      "definition": "Having a strong desire and determination to succeed",
+      "examples": [
+        {
+          "sentence": "She is an ambitious young lawyer with plans to become a judge.",
+          "highlight": "ambitious"
+        },
+        {
+          "sentence": "The company announced an ambitious expansion plan.",
+          "highlight": "ambitious"
+        }
+      ],
+      "synonyms": [
+        "driven",
+        "determined",
+        "aspiring"
+      ],
+      "antonyms": [
+        "lazy",
+        "unmotivated",
+        "complacent"
+      ],
+      "level": "B1",
+      "dayNumber": 14,
+      "accentColor": "#F59E0B",
+      "secondaryAccent": "#F97316",
+      "bgGradient": [
+        "#1A150A",
+        "#2D2210",
+        "#141008"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-015",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Delegate",
+      "phonetic": "/ˈdel.ɪ.ɡeɪt/",
+      "partOfSpeech": "verb",
+      "definition": "To give a task or responsibility to another person",
+      "examples": [
+        {
+          "sentence": "A good manager knows when to delegate tasks to the team.",
+          "highlight": "delegate"
+        },
+        {
+          "sentence": "She delegated the research work to her assistant.",
+          "highlight": "delegated"
+        }
+      ],
+      "synonyms": [
+        "assign",
+        "entrust",
+        "hand over"
+      ],
+      "antonyms": [
+        "retain",
+        "hoard",
+        "micromanage"
+      ],
+      "level": "B2",
+      "dayNumber": 15,
+      "accentColor": "#06B6D4",
+      "secondaryAccent": "#8B5CF6",
+      "bgGradient": [
+        "#0A1518",
+        "#0F2A30",
+        "#081215"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-016",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Mentor",
+      "phonetic": "/ˈmen.tɔːr/",
+      "partOfSpeech": "noun",
+      "definition": "An experienced person who advises and helps someone less experienced",
+      "examples": [
+        {
+          "sentence": "She found a mentor who guided her through her first year at work.",
+          "highlight": "mentor"
+        },
+        {
+          "sentence": "A good mentor can change the direction of your career.",
+          "highlight": "mentor"
+        }
+      ],
+      "synonyms": [
+        "guide",
+        "advisor",
+        "coach"
+      ],
+      "antonyms": [
+        "student",
+        "novice",
+        "apprentice"
+      ],
+      "level": "B1",
+      "dayNumber": 16,
+      "accentColor": "#8B5CF6",
+      "secondaryAccent": "#14B8A6",
+      "bgGradient": [
+        "#120A1A",
+        "#1F1035",
+        "#0E0B14"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-017",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Innovative",
+      "phonetic": "/ˈɪn.ə.veɪ.tɪv/",
+      "partOfSpeech": "adjective",
+      "definition": "Introducing new ideas or methods; creative and original",
+      "examples": [
+        {
+          "sentence": "The company is known for its innovative approach to design.",
+          "highlight": "innovative"
+        },
+        {
+          "sentence": "We need innovative solutions to tackle climate change.",
+          "highlight": "innovative"
+        }
+      ],
+      "synonyms": [
+        "creative",
+        "inventive",
+        "original"
+      ],
+      "antonyms": [
+        "conventional",
+        "traditional",
+        "unimaginative"
+      ],
+      "level": "B2",
+      "dayNumber": 17,
+      "accentColor": "#EC4899",
+      "secondaryAccent": "#0EA5E9",
+      "bgGradient": [
+        "#1A0A14",
+        "#2D1525",
+        "#140810"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-018",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Resilient",
+      "phonetic": "/rɪˈzɪl.i.ənt/",
+      "partOfSpeech": "adjective",
+      "definition": "Able to recover quickly from difficult conditions",
+      "examples": [
+        {
+          "sentence": "The economy proved to be more resilient than expected.",
+          "highlight": "resilient"
+        },
+        {
+          "sentence": "Resilient people see failure as a learning opportunity.",
+          "highlight": "Resilient"
+        }
+      ],
+      "synonyms": [
+        "tough",
+        "adaptable",
+        "strong"
+      ],
+      "antonyms": [
+        "fragile",
+        "weak",
+        "vulnerable"
+      ],
+      "level": "B2",
+      "dayNumber": 18,
+      "accentColor": "#14B8A6",
+      "secondaryAccent": "#EC4899",
+      "bgGradient": [
+        "#0A1A18",
+        "#0F2D28",
+        "#081415"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-019",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Leverage",
+      "phonetic": "/ˈlev.ər.ɪdʒ/",
+      "partOfSpeech": "verb",
+      "definition": "To use something to maximum advantage",
+      "examples": [
+        {
+          "sentence": "You should leverage your network to find new opportunities.",
+          "highlight": "leverage"
+        },
+        {
+          "sentence": "The startup leveraged social media to grow its customer base.",
+          "highlight": "leveraged"
+        }
+      ],
+      "synonyms": [
+        "utilize",
+        "exploit",
+        "capitalize on"
+      ],
+      "antonyms": [
+        "waste",
+        "squander",
+        "ignore"
+      ],
+      "level": "B2",
+      "dayNumber": 19,
+      "accentColor": "#F97316",
+      "secondaryAccent": "#6366F1",
+      "bgGradient": [
+        "#1A100A",
+        "#2D1A0F",
+        "#140E08"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-020",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Feasible",
+      "phonetic": "/ˈfiː.zə.bəl/",
+      "partOfSpeech": "adjective",
+      "definition": "Possible and practical to do easily or conveniently",
+      "examples": [
+        {
+          "sentence": "Is it feasible to finish the project by next month?",
+          "highlight": "feasible"
+        },
+        {
+          "sentence": "The plan sounds great, but is it financially feasible?",
+          "highlight": "feasible"
+        }
+      ],
+      "synonyms": [
+        "possible",
+        "achievable",
+        "viable"
+      ],
+      "antonyms": [
+        "impossible",
+        "impractical",
+        "unfeasible"
+      ],
+      "level": "B2",
+      "dayNumber": 20,
+      "accentColor": "#0EA5E9",
+      "secondaryAccent": "#F59E0B",
+      "bgGradient": [
+        "#0A121A",
+        "#0F2035",
+        "#080D14"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-021",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Overwhelmed",
+      "phonetic": "/ˌoʊ.vərˈwelmd/",
+      "partOfSpeech": "adjective",
+      "definition": "Feeling that something is too much to deal with",
+      "examples": [
+        {
+          "sentence": "She felt overwhelmed by the amount of homework.",
+          "highlight": "overwhelmed"
+        },
+        {
+          "sentence": "He was overwhelmed with gratitude after the surprise party.",
+          "highlight": "overwhelmed"
+        }
+      ],
+      "synonyms": [
+        "swamped",
+        "inundated",
+        "overcome"
+      ],
+      "antonyms": [
+        "calm",
+        "composed",
+        "unfazed"
+      ],
+      "level": "B1",
+      "dayNumber": 21,
+      "accentColor": "#6366F1",
+      "secondaryAccent": "#06B6D4",
+      "bgGradient": [
+        "#0F0A1A",
+        "#1A1035",
+        "#0D0B14"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-022",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Anxious",
+      "phonetic": "/ˈæŋk.ʃəs/",
+      "partOfSpeech": "adjective",
+      "definition": "Feeling worried or nervous about something with an uncertain outcome",
+      "examples": [
+        {
+          "sentence": "She was anxious about the job interview tomorrow.",
+          "highlight": "anxious"
+        },
+        {
+          "sentence": "The anxious wait for exam results can be stressful.",
+          "highlight": "anxious"
+        }
+      ],
+      "synonyms": [
+        "worried",
+        "nervous",
+        "uneasy"
+      ],
+      "antonyms": [
+        "calm",
+        "relaxed",
+        "confident"
+      ],
+      "level": "A2",
+      "dayNumber": 22,
+      "accentColor": "#F43F5E",
+      "secondaryAccent": "#F43F5E",
+      "bgGradient": [
+        "#1A0A10",
+        "#2D1520",
+        "#140810"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-023",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Empathy",
+      "phonetic": "/ˈem.pə.θi/",
+      "partOfSpeech": "noun",
+      "definition": "The ability to understand and share the feelings of another",
+      "examples": [
+        {
+          "sentence": "A good leader shows empathy toward their team members.",
+          "highlight": "empathy"
+        },
+        {
+          "sentence": "Empathy is the foundation of meaningful relationships.",
+          "highlight": "Empathy"
+        }
+      ],
+      "synonyms": [
+        "compassion",
+        "understanding",
+        "sensitivity"
+      ],
+      "antonyms": [
+        "indifference",
+        "apathy",
+        "coldness"
+      ],
+      "level": "B2",
+      "dayNumber": 23,
+      "accentColor": "#10B981",
+      "secondaryAccent": "#10B981",
+      "bgGradient": [
+        "#0A1A14",
+        "#0F2D20",
+        "#081410"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-024",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Nostalgic",
+      "phonetic": "/nɒˈstæl.dʒɪk/",
+      "partOfSpeech": "adjective",
+      "definition": "Feeling a sentimental longing for the past",
+      "examples": [
+        {
+          "sentence": "The old photograph made her feel nostalgic for her childhood.",
+          "highlight": "nostalgic"
+        },
+        {
+          "sentence": "He gets nostalgic whenever he hears that song.",
+          "highlight": "nostalgic"
+        }
+      ],
+      "synonyms": [
+        "sentimental",
+        "wistful",
+        "longing"
+      ],
+      "antonyms": [
+        "forward-looking",
+        "indifferent"
+      ],
+      "level": "B2",
+      "dayNumber": 24,
+      "accentColor": "#F59E0B",
+      "secondaryAccent": "#F97316",
+      "bgGradient": [
+        "#1A150A",
+        "#2D2210",
+        "#141008"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-025",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Frustrated",
+      "phonetic": "/ˈfrʌs.treɪ.tɪd/",
+      "partOfSpeech": "adjective",
+      "definition": "Feeling upset or annoyed because of inability to change or achieve something",
+      "examples": [
+        {
+          "sentence": "He was frustrated with the slow internet connection.",
+          "highlight": "frustrated"
+        },
+        {
+          "sentence": "Students often feel frustrated when they cannot understand a concept.",
+          "highlight": "frustrated"
+        }
+      ],
+      "synonyms": [
+        "annoyed",
+        "exasperated",
+        "irritated"
+      ],
+      "antonyms": [
+        "satisfied",
+        "content",
+        "pleased"
+      ],
+      "level": "A2",
+      "dayNumber": 25,
+      "accentColor": "#06B6D4",
+      "secondaryAccent": "#8B5CF6",
+      "bgGradient": [
+        "#0A1518",
+        "#0F2A30",
+        "#081215"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-026",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Euphoric",
+      "phonetic": "/juːˈfɒr.ɪk/",
+      "partOfSpeech": "adjective",
+      "definition": "Feeling intense excitement and happiness",
+      "examples": [
+        {
+          "sentence": "The crowd was euphoric after the team won the championship.",
+          "highlight": "euphoric"
+        },
+        {
+          "sentence": "She felt euphoric when she received the acceptance letter.",
+          "highlight": "euphoric"
+        }
+      ],
+      "synonyms": [
+        "ecstatic",
+        "elated",
+        "overjoyed"
+      ],
+      "antonyms": [
+        "depressed",
+        "miserable",
+        "despondent"
+      ],
+      "level": "C1",
+      "dayNumber": 26,
+      "accentColor": "#8B5CF6",
+      "secondaryAccent": "#14B8A6",
+      "bgGradient": [
+        "#120A1A",
+        "#1F1035",
+        "#0E0B14"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-027",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Melancholy",
+      "phonetic": "/ˈmel.ən.kɒl.i/",
+      "partOfSpeech": "noun",
+      "definition": "A deep, persistent sadness or gloom",
+      "examples": [
+        {
+          "sentence": "A sense of melancholy filled the room after the farewell.",
+          "highlight": "melancholy"
+        },
+        {
+          "sentence": "The rainy weather added to his feeling of melancholy.",
+          "highlight": "melancholy"
+        }
+      ],
+      "synonyms": [
+        "sadness",
+        "sorrow",
+        "gloom"
+      ],
+      "antonyms": [
+        "happiness",
+        "joy",
+        "cheerfulness"
+      ],
+      "level": "C1",
+      "dayNumber": 27,
+      "accentColor": "#EC4899",
+      "secondaryAccent": "#0EA5E9",
+      "bgGradient": [
+        "#1A0A14",
+        "#2D1525",
+        "#140810"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-028",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Contempt",
+      "phonetic": "/kənˈtempt/",
+      "partOfSpeech": "noun",
+      "definition": "The feeling that a person or thing is beneath consideration; worthless",
+      "examples": [
+        {
+          "sentence": "She looked at the broken promise with contempt.",
+          "highlight": "contempt"
+        },
+        {
+          "sentence": "His voice was full of contempt when he spoke about the decision.",
+          "highlight": "contempt"
+        }
+      ],
+      "synonyms": [
+        "scorn",
+        "disdain",
+        "disrespect"
+      ],
+      "antonyms": [
+        "respect",
+        "admiration",
+        "esteem"
+      ],
+      "level": "C1",
+      "dayNumber": 28,
+      "accentColor": "#14B8A6",
+      "secondaryAccent": "#EC4899",
+      "bgGradient": [
+        "#0A1A18",
+        "#0F2D28",
+        "#081415"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-029",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Serenity",
+      "phonetic": "/sɪˈren.ɪ.ti/",
+      "partOfSpeech": "noun",
+      "definition": "The state of being calm, peaceful, and untroubled",
+      "examples": [
+        {
+          "sentence": "The lake at sunrise offered a moment of perfect serenity.",
+          "highlight": "serenity"
+        },
+        {
+          "sentence": "Meditation helps her find inner serenity.",
+          "highlight": "serenity"
+        }
+      ],
+      "synonyms": [
+        "peace",
+        "tranquility",
+        "calm"
+      ],
+      "antonyms": [
+        "turmoil",
+        "chaos",
+        "anxiety"
+      ],
+      "level": "B2",
+      "dayNumber": 29,
+      "accentColor": "#F97316",
+      "secondaryAccent": "#6366F1",
+      "bgGradient": [
+        "#1A100A",
+        "#2D1A0F",
+        "#140E08"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-030",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Resentment",
+      "phonetic": "/rɪˈzent.mənt/",
+      "partOfSpeech": "noun",
+      "definition": "Bitter indignation at having been treated unfairly",
+      "examples": [
+        {
+          "sentence": "Years of resentment had built up between the two brothers.",
+          "highlight": "resentment"
+        },
+        {
+          "sentence": "Holding onto resentment only hurts yourself.",
+          "highlight": "resentment"
+        }
+      ],
+      "synonyms": [
+        "bitterness",
+        "grudge",
+        "animosity"
+      ],
+      "antonyms": [
+        "forgiveness",
+        "goodwill",
+        "acceptance"
+      ],
+      "level": "B2",
+      "dayNumber": 30,
+      "accentColor": "#0EA5E9",
+      "secondaryAccent": "#F59E0B",
+      "bgGradient": [
+        "#0A121A",
+        "#0F2035",
+        "#080D14"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-031",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Hypothesis",
+      "phonetic": "/haɪˈpɒθ.ə.sɪs/",
+      "partOfSpeech": "noun",
+      "definition": "A proposed explanation made on the basis of limited evidence as a starting point",
+      "examples": [
+        {
+          "sentence": "The scientist tested her hypothesis through a series of experiments.",
+          "highlight": "hypothesis"
+        },
+        {
+          "sentence": "Our hypothesis was proven correct by the data.",
+          "highlight": "hypothesis"
+        }
+      ],
+      "synonyms": [
+        "theory",
+        "assumption",
+        "proposition"
+      ],
+      "antonyms": [
+        "fact",
+        "certainty",
+        "proof"
+      ],
+      "level": "B2",
+      "dayNumber": 31,
+      "accentColor": "#6366F1",
+      "secondaryAccent": "#06B6D4",
+      "bgGradient": [
+        "#0F0A1A",
+        "#1A1035",
+        "#0D0B14"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-032",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Analyze",
+      "phonetic": "/ˈæn.əl.aɪz/",
+      "partOfSpeech": "verb",
+      "definition": "To examine something in detail to understand it or explain it",
+      "examples": [
+        {
+          "sentence": "We need to analyze the data before making any conclusions.",
+          "highlight": "analyze"
+        },
+        {
+          "sentence": "The detective analyzed the evidence carefully.",
+          "highlight": "analyzed"
+        }
+      ],
+      "synonyms": [
+        "examine",
+        "investigate",
+        "study"
+      ],
+      "antonyms": [
+        "ignore",
+        "overlook",
+        "neglect"
+      ],
+      "level": "B1",
+      "dayNumber": 32,
+      "accentColor": "#F43F5E",
+      "secondaryAccent": "#F43F5E",
+      "bgGradient": [
+        "#1A0A10",
+        "#2D1520",
+        "#140810"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-033",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Profound",
+      "phonetic": "/prəˈfaʊnd/",
+      "partOfSpeech": "adjective",
+      "definition": "Very great or intense; having deep insight or understanding",
+      "examples": [
+        {
+          "sentence": "The book had a profound impact on how I see the world.",
+          "highlight": "profound"
+        },
+        {
+          "sentence": "She shared a profound observation about human nature.",
+          "highlight": "profound"
+        }
+      ],
+      "synonyms": [
+        "deep",
+        "intense",
+        "significant"
+      ],
+      "antonyms": [
+        "shallow",
+        "superficial",
+        "trivial"
+      ],
+      "level": "C1",
+      "dayNumber": 33,
+      "accentColor": "#10B981",
+      "secondaryAccent": "#10B981",
+      "bgGradient": [
+        "#0A1A14",
+        "#0F2D20",
+        "#081410"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-034",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Coherent",
+      "phonetic": "/koʊˈhɪr.ənt/",
+      "partOfSpeech": "adjective",
+      "definition": "Logical and consistent; easy to understand",
+      "examples": [
+        {
+          "sentence": "Please present your argument in a coherent manner.",
+          "highlight": "coherent"
+        },
+        {
+          "sentence": "Despite being tired, she gave a coherent explanation.",
+          "highlight": "coherent"
+        }
+      ],
+      "synonyms": [
+        "logical",
+        "clear",
+        "consistent"
+      ],
+      "antonyms": [
+        "incoherent",
+        "confused",
+        "disjointed"
+      ],
+      "level": "C1",
+      "dayNumber": 34,
+      "accentColor": "#F59E0B",
+      "secondaryAccent": "#F97316",
+      "bgGradient": [
+        "#1A150A",
+        "#2D2210",
+        "#141008"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-035",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Paradox",
+      "phonetic": "/ˈpær.ə.dɒks/",
+      "partOfSpeech": "noun",
+      "definition": "A statement that contradicts itself but might still be true",
+      "examples": [
+        {
+          "sentence": "It is a paradox that the busiest people often find the most time.",
+          "highlight": "paradox"
+        },
+        {
+          "sentence": "The grandfather paradox is a famous thought experiment in physics.",
+          "highlight": "paradox"
+        }
+      ],
+      "synonyms": [
+        "contradiction",
+        "anomaly",
+        "enigma"
+      ],
+      "antonyms": [
+        "consistency",
+        "certainty",
+        "norm"
+      ],
+      "level": "C1",
+      "dayNumber": 35,
+      "accentColor": "#06B6D4",
+      "secondaryAccent": "#8B5CF6",
+      "bgGradient": [
+        "#0A1518",
+        "#0F2A30",
+        "#081215"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-036",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Elaborate",
+      "phonetic": "/ɪˈlæb.ər.eɪt/",
+      "partOfSpeech": "verb",
+      "definition": "To develop or present something in detail",
+      "examples": [
+        {
+          "sentence": "Could you elaborate on your point about climate change?",
+          "highlight": "elaborate"
+        },
+        {
+          "sentence": "The teacher asked him to elaborate on his answer.",
+          "highlight": "elaborate"
+        }
+      ],
+      "synonyms": [
+        "expand",
+        "explain",
+        "detail"
+      ],
+      "antonyms": [
+        "simplify",
+        "summarize",
+        "condense"
+      ],
+      "level": "B2",
+      "dayNumber": 36,
+      "accentColor": "#8B5CF6",
+      "secondaryAccent": "#14B8A6",
+      "bgGradient": [
+        "#120A1A",
+        "#1F1035",
+        "#0E0B14"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-037",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Paradigm",
+      "phonetic": "/ˈpær.ə.daɪm/",
+      "partOfSpeech": "noun",
+      "definition": "A typical example or pattern of something; a model",
+      "examples": [
+        {
+          "sentence": "The internet created a paradigm shift in how we communicate.",
+          "highlight": "paradigm"
+        },
+        {
+          "sentence": "This discovery challenges the existing paradigm in biology.",
+          "highlight": "paradigm"
+        }
+      ],
+      "synonyms": [
+        "model",
+        "framework",
+        "pattern"
+      ],
+      "antonyms": [
+        "anomaly",
+        "exception"
+      ],
+      "level": "C1",
+      "dayNumber": 37,
+      "accentColor": "#EC4899",
+      "secondaryAccent": "#0EA5E9",
+      "bgGradient": [
+        "#1A0A14",
+        "#2D1525",
+        "#140810"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-038",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Empirical",
+      "phonetic": "/ɪmˈpɪr.ɪ.kəl/",
+      "partOfSpeech": "adjective",
+      "definition": "Based on observation or experience rather than theory",
+      "examples": [
+        {
+          "sentence": "The study provides empirical evidence for the new treatment.",
+          "highlight": "empirical"
+        },
+        {
+          "sentence": "We need empirical data to support our claims.",
+          "highlight": "empirical"
+        }
+      ],
+      "synonyms": [
+        "experimental",
+        "observed",
+        "practical"
+      ],
+      "antonyms": [
+        "theoretical",
+        "hypothetical",
+        "abstract"
+      ],
+      "level": "C1",
+      "dayNumber": 38,
+      "accentColor": "#14B8A6",
+      "secondaryAccent": "#EC4899",
+      "bgGradient": [
+        "#0A1A18",
+        "#0F2D28",
+        "#081415"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-039",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Synthesize",
+      "phonetic": "/ˈsɪn.θə.saɪz/",
+      "partOfSpeech": "verb",
+      "definition": "To combine different ideas or things to form a coherent whole",
+      "examples": [
+        {
+          "sentence": "The essay requires you to synthesize information from multiple sources.",
+          "highlight": "synthesize"
+        },
+        {
+          "sentence": "Scientists synthesized the compound in the laboratory.",
+          "highlight": "synthesized"
+        }
+      ],
+      "synonyms": [
+        "combine",
+        "integrate",
+        "merge"
+      ],
+      "antonyms": [
+        "separate",
+        "divide",
+        "analyze"
+      ],
+      "level": "C1",
+      "dayNumber": 39,
+      "accentColor": "#F97316",
+      "secondaryAccent": "#6366F1",
+      "bgGradient": [
+        "#1A100A",
+        "#2D1A0F",
+        "#140E08"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-040",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Ambiguous",
+      "phonetic": "/æmˈbɪɡ.ju.əs/",
+      "partOfSpeech": "adjective",
+      "definition": "Open to more than one interpretation; not clear",
+      "examples": [
+        {
+          "sentence": "The instructions were ambiguous and confused everyone.",
+          "highlight": "ambiguous"
+        },
+        {
+          "sentence": "Her ambiguous response left us unsure of her intentions.",
+          "highlight": "ambiguous"
+        }
+      ],
+      "synonyms": [
+        "vague",
+        "unclear",
+        "equivocal"
+      ],
+      "antonyms": [
+        "clear",
+        "unambiguous",
+        "explicit"
+      ],
+      "level": "C1",
+      "dayNumber": 40,
+      "accentColor": "#0EA5E9",
+      "secondaryAccent": "#F59E0B",
+      "bgGradient": [
+        "#0A121A",
+        "#0F2035",
+        "#080D14"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-041",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Wander",
+      "phonetic": "/ˈwɒn.dər/",
+      "partOfSpeech": "verb",
+      "definition": "To walk or move in a leisurely or aimless way",
+      "examples": [
+        {
+          "sentence": "We wandered through the streets of the old city.",
+          "highlight": "wandered"
+        },
+        {
+          "sentence": "Not all those who wander are lost.",
+          "highlight": "wander"
+        }
+      ],
+      "synonyms": [
+        "roam",
+        "stroll",
+        "drift"
+      ],
+      "antonyms": [
+        "rush",
+        "hurry",
+        "stay"
+      ],
+      "level": "A2",
+      "dayNumber": 41,
+      "accentColor": "#6366F1",
+      "secondaryAccent": "#06B6D4",
+      "bgGradient": [
+        "#0F0A1A",
+        "#1A1035",
+        "#0D0B14"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-042",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Breathtaking",
+      "phonetic": "/ˈbreθˌteɪ.kɪŋ/",
+      "partOfSpeech": "adjective",
+      "definition": "Astonishing or awe-inspiring in quality",
+      "examples": [
+        {
+          "sentence": "The sunset over the ocean was absolutely breathtaking.",
+          "highlight": "breathtaking"
+        },
+        {
+          "sentence": "The mountain scenery was breathtaking at every turn.",
+          "highlight": "breathtaking"
+        }
+      ],
+      "synonyms": [
+        "stunning",
+        "magnificent",
+        "spectacular"
+      ],
+      "antonyms": [
+        "ordinary",
+        "dull",
+        "unremarkable"
+      ],
+      "level": "B1",
+      "dayNumber": 42,
+      "accentColor": "#F43F5E",
+      "secondaryAccent": "#F43F5E",
+      "bgGradient": [
+        "#1A0A10",
+        "#2D1520",
+        "#140810"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-043",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Immerse",
+      "phonetic": "/ɪˈmɜːrs/",
+      "partOfSpeech": "verb",
+      "definition": "To involve oneself deeply in a particular activity or experience",
+      "examples": [
+        {
+          "sentence": "The best way to learn a language is to immerse yourself in the culture.",
+          "highlight": "immerse"
+        },
+        {
+          "sentence": "She immersed herself in the local traditions during her trip.",
+          "highlight": "immersed"
+        }
+      ],
+      "synonyms": [
+        "absorb",
+        "engage",
+        "submerge"
+      ],
+      "antonyms": [
+        "withdraw",
+        "detach",
+        "disengage"
+      ],
+      "level": "B2",
+      "dayNumber": 43,
+      "accentColor": "#10B981",
+      "secondaryAccent": "#10B981",
+      "bgGradient": [
+        "#0A1A14",
+        "#0F2D20",
+        "#081410"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-044",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Exotic",
+      "phonetic": "/ɪɡˈzɒt.ɪk/",
+      "partOfSpeech": "adjective",
+      "definition": "Originating in or characteristic of a distant foreign country; strikingly unusual",
+      "examples": [
+        {
+          "sentence": "The market was filled with exotic spices and colorful fabrics.",
+          "highlight": "exotic"
+        },
+        {
+          "sentence": "They visited exotic islands in Southeast Asia.",
+          "highlight": "exotic"
+        }
+      ],
+      "synonyms": [
+        "foreign",
+        "unusual",
+        "striking"
+      ],
+      "antonyms": [
+        "familiar",
+        "ordinary",
+        "domestic"
+      ],
+      "level": "B1",
+      "dayNumber": 44,
+      "accentColor": "#F59E0B",
+      "secondaryAccent": "#F97316",
+      "bgGradient": [
+        "#1A150A",
+        "#2D2210",
+        "#141008"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-045",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Heritage",
+      "phonetic": "/ˈher.ɪ.tɪdʒ/",
+      "partOfSpeech": "noun",
+      "definition": "Valued objects and traditions passed down through generations",
+      "examples": [
+        {
+          "sentence": "The city is proud of its rich cultural heritage.",
+          "highlight": "heritage"
+        },
+        {
+          "sentence": "These ancient ruins are part of our shared heritage.",
+          "highlight": "heritage"
+        }
+      ],
+      "synonyms": [
+        "legacy",
+        "tradition",
+        "inheritance"
+      ],
+      "antonyms": [
+        "modernity",
+        "innovation"
+      ],
+      "level": "B2",
+      "dayNumber": 45,
+      "accentColor": "#06B6D4",
+      "secondaryAccent": "#8B5CF6",
+      "bgGradient": [
+        "#0A1518",
+        "#0F2A30",
+        "#081215"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-046",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Itinerary",
+      "phonetic": "/aɪˈtɪn.ər.ər.i/",
+      "partOfSpeech": "noun",
+      "definition": "A planned route or journey; a detailed travel schedule",
+      "examples": [
+        {
+          "sentence": "Our itinerary includes visits to three countries in two weeks.",
+          "highlight": "itinerary"
+        },
+        {
+          "sentence": "Check the itinerary for the departure time.",
+          "highlight": "itinerary"
+        }
+      ],
+      "synonyms": [
+        "schedule",
+        "plan",
+        "route"
+      ],
+      "antonyms": [
+        "spontaneity",
+        "improvisation"
+      ],
+      "level": "B2",
+      "dayNumber": 46,
+      "accentColor": "#8B5CF6",
+      "secondaryAccent": "#14B8A6",
+      "bgGradient": [
+        "#120A1A",
+        "#1F1035",
+        "#0E0B14"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-047",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Souvenir",
+      "phonetic": "/ˌsuː.vəˈnɪr/",
+      "partOfSpeech": "noun",
+      "definition": "A thing that is kept as a reminder of a person, place, or event",
+      "examples": [
+        {
+          "sentence": "She bought a souvenir magnet from every country she visited.",
+          "highlight": "souvenir"
+        },
+        {
+          "sentence": "This photo is the best souvenir from our vacation.",
+          "highlight": "souvenir"
+        }
+      ],
+      "synonyms": [
+        "memento",
+        "keepsake",
+        "token"
+      ],
+      "antonyms": [],
+      "level": "A2",
+      "dayNumber": 47,
+      "accentColor": "#EC4899",
+      "secondaryAccent": "#0EA5E9",
+      "bgGradient": [
+        "#1A0A14",
+        "#2D1525",
+        "#140810"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-048",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Picturesque",
+      "phonetic": "/ˌpɪk.tʃərˈesk/",
+      "partOfSpeech": "adjective",
+      "definition": "Visually attractive, especially in a quaint or charming way",
+      "examples": [
+        {
+          "sentence": "The picturesque village looked like something from a fairy tale.",
+          "highlight": "picturesque"
+        },
+        {
+          "sentence": "We drove through picturesque countryside on our way to the coast.",
+          "highlight": "picturesque"
+        }
+      ],
+      "synonyms": [
+        "scenic",
+        "charming",
+        "beautiful"
+      ],
+      "antonyms": [
+        "ugly",
+        "unattractive",
+        "dull"
+      ],
+      "level": "B2",
+      "dayNumber": 48,
+      "accentColor": "#14B8A6",
+      "secondaryAccent": "#EC4899",
+      "bgGradient": [
+        "#0A1A18",
+        "#0F2D28",
+        "#081415"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-049",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Expedition",
+      "phonetic": "/ˌek.spɪˈdɪʃ.ən/",
+      "partOfSpeech": "noun",
+      "definition": "A journey undertaken by a group for a particular purpose, especially exploration",
+      "examples": [
+        {
+          "sentence": "The expedition to the South Pole lasted three months.",
+          "highlight": "expedition"
+        },
+        {
+          "sentence": "They organized an expedition to study the rainforest.",
+          "highlight": "expedition"
+        }
+      ],
+      "synonyms": [
+        "journey",
+        "voyage",
+        "mission"
+      ],
+      "antonyms": [
+        "retreat",
+        "return"
+      ],
+      "level": "B2",
+      "dayNumber": 49,
+      "accentColor": "#F97316",
+      "secondaryAccent": "#6366F1",
+      "bgGradient": [
+        "#1A100A",
+        "#2D1A0F",
+        "#140E08"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-050",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Hospitality",
+      "phonetic": "/ˌhɒs.pɪˈtæl.ɪ.ti/",
+      "partOfSpeech": "noun",
+      "definition": "The friendly and generous reception and entertainment of guests",
+      "examples": [
+        {
+          "sentence": "The hospitality of the local people made our trip unforgettable.",
+          "highlight": "hospitality"
+        },
+        {
+          "sentence": "Japanese hospitality is known worldwide for its attention to detail.",
+          "highlight": "hospitality"
+        }
+      ],
+      "synonyms": [
+        "welcome",
+        "warmth",
+        "generosity"
+      ],
+      "antonyms": [
+        "hostility",
+        "coldness",
+        "rudeness"
+      ],
+      "level": "B2",
+      "dayNumber": 50,
+      "accentColor": "#0EA5E9",
+      "secondaryAccent": "#F59E0B",
+      "bgGradient": [
+        "#0A121A",
+        "#0F2035",
+        "#080D14"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-051",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Algorithm",
+      "phonetic": "/ˈæl.ɡə.rɪð.əm/",
+      "partOfSpeech": "noun",
+      "definition": "A set of rules or steps used to solve a problem or perform a task",
+      "examples": [
+        {
+          "sentence": "Social media platforms use algorithms to decide what content you see.",
+          "highlight": "algorithms"
+        },
+        {
+          "sentence": "The search algorithm was optimized for speed.",
+          "highlight": "algorithm"
+        }
+      ],
+      "synonyms": [
+        "procedure",
+        "process",
+        "formula"
+      ],
+      "antonyms": [
+        "randomness",
+        "chaos"
+      ],
+      "level": "B2",
+      "dayNumber": 51,
+      "accentColor": "#6366F1",
+      "secondaryAccent": "#06B6D4",
+      "bgGradient": [
+        "#0F0A1A",
+        "#1A1035",
+        "#0D0B14"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-052",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Obsolete",
+      "phonetic": "/ˈɒb.sə.liːt/",
+      "partOfSpeech": "adjective",
+      "definition": "No longer produced or used; out of date",
+      "examples": [
+        {
+          "sentence": "Floppy disks have become completely obsolete.",
+          "highlight": "obsolete"
+        },
+        {
+          "sentence": "New technology made the old system obsolete overnight.",
+          "highlight": "obsolete"
+        }
+      ],
+      "synonyms": [
+        "outdated",
+        "defunct",
+        "antiquated"
+      ],
+      "antonyms": [
+        "modern",
+        "current",
+        "cutting-edge"
+      ],
+      "level": "B2",
+      "dayNumber": 52,
+      "accentColor": "#F43F5E",
+      "secondaryAccent": "#F43F5E",
+      "bgGradient": [
+        "#1A0A10",
+        "#2D1520",
+        "#140810"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-053",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Encryption",
+      "phonetic": "/ɪnˈkrɪp.ʃən/",
+      "partOfSpeech": "noun",
+      "definition": "The process of converting information into a code to prevent unauthorized access",
+      "examples": [
+        {
+          "sentence": "End-to-end encryption keeps your messages private.",
+          "highlight": "encryption"
+        },
+        {
+          "sentence": "The file was protected with strong encryption.",
+          "highlight": "encryption"
+        }
+      ],
+      "synonyms": [
+        "encoding",
+        "ciphering",
+        "scrambling"
+      ],
+      "antonyms": [
+        "decryption",
+        "decoding"
+      ],
+      "level": "B2",
+      "dayNumber": 53,
+      "accentColor": "#10B981",
+      "secondaryAccent": "#10B981",
+      "bgGradient": [
+        "#0A1A14",
+        "#0F2D20",
+        "#081410"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-054",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Seamless",
+      "phonetic": "/ˈsiːm.ləs/",
+      "partOfSpeech": "adjective",
+      "definition": "Smooth and continuous, with no apparent gaps or spaces",
+      "examples": [
+        {
+          "sentence": "The app provides a seamless user experience across all devices.",
+          "highlight": "seamless"
+        },
+        {
+          "sentence": "The transition between scenes was seamless.",
+          "highlight": "seamless"
+        }
+      ],
+      "synonyms": [
+        "smooth",
+        "flawless",
+        "uninterrupted"
+      ],
+      "antonyms": [
+        "choppy",
+        "disjointed",
+        "awkward"
+      ],
+      "level": "B2",
+      "dayNumber": 54,
+      "accentColor": "#F59E0B",
+      "secondaryAccent": "#F97316",
+      "bgGradient": [
+        "#1A150A",
+        "#2D2210",
+        "#141008"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-055",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Autonomous",
+      "phonetic": "/ɔːˈtɒn.ə.məs/",
+      "partOfSpeech": "adjective",
+      "definition": "Acting independently or having the freedom to do so",
+      "examples": [
+        {
+          "sentence": "Autonomous vehicles can drive without human input.",
+          "highlight": "Autonomous"
+        },
+        {
+          "sentence": "The robot makes autonomous decisions based on sensor data.",
+          "highlight": "autonomous"
+        }
+      ],
+      "synonyms": [
+        "self-governing",
+        "independent",
+        "self-directed"
+      ],
+      "antonyms": [
+        "dependent",
+        "controlled",
+        "manual"
+      ],
+      "level": "C1",
+      "dayNumber": 55,
+      "accentColor": "#06B6D4",
+      "secondaryAccent": "#8B5CF6",
+      "bgGradient": [
+        "#0A1518",
+        "#0F2A30",
+        "#081215"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-056",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Bandwidth",
+      "phonetic": "/ˈbænd.wɪdθ/",
+      "partOfSpeech": "noun",
+      "definition": "The capacity for data transfer; also used informally to mean available time or energy",
+      "examples": [
+        {
+          "sentence": "We need more bandwidth to stream high-quality video.",
+          "highlight": "bandwidth"
+        },
+        {
+          "sentence": "I don't have the bandwidth to take on another project right now.",
+          "highlight": "bandwidth"
+        }
+      ],
+      "synonyms": [
+        "capacity",
+        "throughput",
+        "range"
+      ],
+      "antonyms": [
+        "limitation",
+        "restriction"
+      ],
+      "level": "B2",
+      "dayNumber": 56,
+      "accentColor": "#8B5CF6",
+      "secondaryAccent": "#14B8A6",
+      "bgGradient": [
+        "#120A1A",
+        "#1F1035",
+        "#0E0B14"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-057",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Disruptive",
+      "phonetic": "/dɪsˈrʌp.tɪv/",
+      "partOfSpeech": "adjective",
+      "definition": "Causing or tending to cause a major change or break in an existing system",
+      "examples": [
+        {
+          "sentence": "Streaming services were disruptive to the traditional TV industry.",
+          "highlight": "disruptive"
+        },
+        {
+          "sentence": "The company is known for its disruptive approach to innovation.",
+          "highlight": "disruptive"
+        }
+      ],
+      "synonyms": [
+        "revolutionary",
+        "groundbreaking",
+        "transformative"
+      ],
+      "antonyms": [
+        "conventional",
+        "traditional",
+        "conforming"
+      ],
+      "level": "B2",
+      "dayNumber": 57,
+      "accentColor": "#EC4899",
+      "secondaryAccent": "#0EA5E9",
+      "bgGradient": [
+        "#1A0A14",
+        "#2D1525",
+        "#140810"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-058",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Scalable",
+      "phonetic": "/ˈskeɪ.lə.bəl/",
+      "partOfSpeech": "adjective",
+      "definition": "Able to be changed in size or scale; able to grow without breaking",
+      "examples": [
+        {
+          "sentence": "We need a scalable solution that works for 100 or 100,000 users.",
+          "highlight": "scalable"
+        },
+        {
+          "sentence": "Cloud computing makes it easy to build scalable applications.",
+          "highlight": "scalable"
+        }
+      ],
+      "synonyms": [
+        "expandable",
+        "flexible",
+        "adaptable"
+      ],
+      "antonyms": [
+        "rigid",
+        "fixed",
+        "limited"
+      ],
+      "level": "B2",
+      "dayNumber": 58,
+      "accentColor": "#14B8A6",
+      "secondaryAccent": "#EC4899",
+      "bgGradient": [
+        "#0A1A18",
+        "#0F2D28",
+        "#081415"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-059",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Latency",
+      "phonetic": "/ˈleɪ.tən.si/",
+      "partOfSpeech": "noun",
+      "definition": "The delay before a transfer of data begins following an instruction",
+      "examples": [
+        {
+          "sentence": "Low latency is essential for online gaming.",
+          "highlight": "latency"
+        },
+        {
+          "sentence": "The new network reduced latency by 50 percent.",
+          "highlight": "latency"
+        }
+      ],
+      "synonyms": [
+        "delay",
+        "lag",
+        "response time"
+      ],
+      "antonyms": [
+        "speed",
+        "immediacy"
+      ],
+      "level": "C1",
+      "dayNumber": 59,
+      "accentColor": "#F97316",
+      "secondaryAccent": "#6366F1",
+      "bgGradient": [
+        "#1A100A",
+        "#2D1A0F",
+        "#140E08"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-060",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Ubiquitous",
+      "phonetic": "/juːˈbɪk.wɪ.təs/",
+      "partOfSpeech": "adjective",
+      "definition": "Present, appearing, or found everywhere",
+      "examples": [
+        {
+          "sentence": "Smartphones have become ubiquitous in modern life.",
+          "highlight": "ubiquitous"
+        },
+        {
+          "sentence": "Coffee shops are ubiquitous in most major cities.",
+          "highlight": "ubiquitous"
+        }
+      ],
+      "synonyms": [
+        "omnipresent",
+        "universal",
+        "pervasive"
+      ],
+      "antonyms": [
+        "rare",
+        "scarce",
+        "uncommon"
+      ],
+      "level": "C1",
+      "dayNumber": 60,
+      "accentColor": "#0EA5E9",
+      "secondaryAccent": "#F59E0B",
+      "bgGradient": [
+        "#0A121A",
+        "#0F2035",
+        "#080D14"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-061",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Nourish",
+      "phonetic": "/ˈnʌr.ɪʃ/",
+      "partOfSpeech": "verb",
+      "definition": "To provide with the food or substances necessary for growth and health",
+      "examples": [
+        {
+          "sentence": "A balanced diet nourishes both body and mind.",
+          "highlight": "nourishes"
+        },
+        {
+          "sentence": "Reading good books nourishes the soul.",
+          "highlight": "nourishes"
+        }
+      ],
+      "synonyms": [
+        "feed",
+        "sustain",
+        "nurture"
+      ],
+      "antonyms": [
+        "starve",
+        "deprive",
+        "neglect"
+      ],
+      "level": "B1",
+      "dayNumber": 61,
+      "accentColor": "#6366F1",
+      "secondaryAccent": "#06B6D4",
+      "bgGradient": [
+        "#0F0A1A",
+        "#1A1035",
+        "#0D0B14"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-062",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Fatigue",
+      "phonetic": "/fəˈtiːɡ/",
+      "partOfSpeech": "noun",
+      "definition": "Extreme tiredness resulting from physical or mental effort",
+      "examples": [
+        {
+          "sentence": "Mental fatigue can be just as debilitating as physical exhaustion.",
+          "highlight": "fatigue"
+        },
+        {
+          "sentence": "Chronic fatigue affects millions of people worldwide.",
+          "highlight": "fatigue"
+        }
+      ],
+      "synonyms": [
+        "exhaustion",
+        "tiredness",
+        "weariness"
+      ],
+      "antonyms": [
+        "energy",
+        "vitality",
+        "vigor"
+      ],
+      "level": "B2",
+      "dayNumber": 62,
+      "accentColor": "#F43F5E",
+      "secondaryAccent": "#F43F5E",
+      "bgGradient": [
+        "#1A0A10",
+        "#2D1520",
+        "#140810"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-063",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Mindful",
+      "phonetic": "/ˈmaɪnd.fəl/",
+      "partOfSpeech": "adjective",
+      "definition": "Conscious or aware of something; focusing on the present moment",
+      "examples": [
+        {
+          "sentence": "Being mindful of your breathing can reduce stress.",
+          "highlight": "mindful"
+        },
+        {
+          "sentence": "She practiced mindful eating to enjoy her meals more fully.",
+          "highlight": "mindful"
+        }
+      ],
+      "synonyms": [
+        "aware",
+        "conscious",
+        "attentive"
+      ],
+      "antonyms": [
+        "careless",
+        "oblivious",
+        "distracted"
+      ],
+      "level": "B1",
+      "dayNumber": 63,
+      "accentColor": "#10B981",
+      "secondaryAccent": "#10B981",
+      "bgGradient": [
+        "#0A1A14",
+        "#0F2D20",
+        "#081410"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-064",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Chronic",
+      "phonetic": "/ˈkrɒn.ɪk/",
+      "partOfSpeech": "adjective",
+      "definition": "Persisting for a long time or constantly recurring",
+      "examples": [
+        {
+          "sentence": "Chronic stress can lead to serious health problems.",
+          "highlight": "Chronic"
+        },
+        {
+          "sentence": "She has been dealing with chronic back pain for years.",
+          "highlight": "chronic"
+        }
+      ],
+      "synonyms": [
+        "persistent",
+        "long-lasting",
+        "ongoing"
+      ],
+      "antonyms": [
+        "acute",
+        "temporary",
+        "brief"
+      ],
+      "level": "B2",
+      "dayNumber": 64,
+      "accentColor": "#F59E0B",
+      "secondaryAccent": "#F97316",
+      "bgGradient": [
+        "#1A150A",
+        "#2D2210",
+        "#141008"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-065",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Rejuvenate",
+      "phonetic": "/rɪˈdʒuː.vɪ.neɪt/",
+      "partOfSpeech": "verb",
+      "definition": "To make someone or something look or feel younger, fresher, or more lively",
+      "examples": [
+        {
+          "sentence": "A good night of sleep can rejuvenate both body and mind.",
+          "highlight": "rejuvenate"
+        },
+        {
+          "sentence": "The spa treatment was designed to rejuvenate tired skin.",
+          "highlight": "rejuvenate"
+        }
+      ],
+      "synonyms": [
+        "refresh",
+        "revitalize",
+        "restore"
+      ],
+      "antonyms": [
+        "exhaust",
+        "drain",
+        "age"
+      ],
+      "level": "B2",
+      "dayNumber": 65,
+      "accentColor": "#06B6D4",
+      "secondaryAccent": "#8B5CF6",
+      "bgGradient": [
+        "#0A1518",
+        "#0F2A30",
+        "#081215"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-066",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Symptom",
+      "phonetic": "/ˈsɪmp.təm/",
+      "partOfSpeech": "noun",
+      "definition": "A physical or mental sign indicating a condition or disease",
+      "examples": [
+        {
+          "sentence": "A persistent cough is a common symptom of the flu.",
+          "highlight": "symptom"
+        },
+        {
+          "sentence": "Headaches can be a symptom of dehydration.",
+          "highlight": "symptom"
+        }
+      ],
+      "synonyms": [
+        "sign",
+        "indication",
+        "indicator"
+      ],
+      "antonyms": [
+        "cause",
+        "cure",
+        "remedy"
+      ],
+      "level": "B1",
+      "dayNumber": 66,
+      "accentColor": "#8B5CF6",
+      "secondaryAccent": "#14B8A6",
+      "bgGradient": [
+        "#120A1A",
+        "#1F1035",
+        "#0E0B14"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-067",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Holistic",
+      "phonetic": "/hoʊˈlɪs.tɪk/",
+      "partOfSpeech": "adjective",
+      "definition": "Relating to the whole of something, rather than just a part",
+      "examples": [
+        {
+          "sentence": "A holistic approach to health considers mind, body, and spirit.",
+          "highlight": "holistic"
+        },
+        {
+          "sentence": "The doctor recommended a holistic treatment plan.",
+          "highlight": "holistic"
+        }
+      ],
+      "synonyms": [
+        "comprehensive",
+        "integrated",
+        "complete"
+      ],
+      "antonyms": [
+        "partial",
+        "narrow",
+        "fragmented"
+      ],
+      "level": "B2",
+      "dayNumber": 67,
+      "accentColor": "#EC4899",
+      "secondaryAccent": "#0EA5E9",
+      "bgGradient": [
+        "#1A0A14",
+        "#2D1525",
+        "#140810"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-068",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Detox",
+      "phonetic": "/ˈdiː.tɒks/",
+      "partOfSpeech": "noun",
+      "definition": "A process of removing toxic substances from the body",
+      "examples": [
+        {
+          "sentence": "She went on a digital detox and avoided screens for a week.",
+          "highlight": "detox"
+        },
+        {
+          "sentence": "Drinking plenty of water helps your body detox naturally.",
+          "highlight": "detox"
+        }
+      ],
+      "synonyms": [
+        "cleanse",
+        "purification",
+        "flush"
+      ],
+      "antonyms": [
+        "contamination",
+        "intoxication"
+      ],
+      "level": "B1",
+      "dayNumber": 68,
+      "accentColor": "#14B8A6",
+      "secondaryAccent": "#EC4899",
+      "bgGradient": [
+        "#0A1A18",
+        "#0F2D28",
+        "#081415"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-069",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Immunity",
+      "phonetic": "/ɪˈmjuː.nɪ.ti/",
+      "partOfSpeech": "noun",
+      "definition": "The body's ability to resist infection and disease",
+      "examples": [
+        {
+          "sentence": "Regular exercise helps boost your immunity.",
+          "highlight": "immunity"
+        },
+        {
+          "sentence": "Vaccines work by building immunity against specific diseases.",
+          "highlight": "immunity"
+        }
+      ],
+      "synonyms": [
+        "resistance",
+        "protection",
+        "defense"
+      ],
+      "antonyms": [
+        "vulnerability",
+        "susceptibility"
+      ],
+      "level": "B2",
+      "dayNumber": 69,
+      "accentColor": "#F97316",
+      "secondaryAccent": "#6366F1",
+      "bgGradient": [
+        "#1A100A",
+        "#2D1A0F",
+        "#140E08"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-070",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Stamina",
+      "phonetic": "/ˈstæm.ɪ.nə/",
+      "partOfSpeech": "noun",
+      "definition": "The ability to sustain prolonged physical or mental effort",
+      "examples": [
+        {
+          "sentence": "Marathon runners need incredible stamina.",
+          "highlight": "stamina"
+        },
+        {
+          "sentence": "You can build mental stamina through consistent practice.",
+          "highlight": "stamina"
+        }
+      ],
+      "synonyms": [
+        "endurance",
+        "staying power",
+        "resilience"
+      ],
+      "antonyms": [
+        "weakness",
+        "frailty",
+        "fatigue"
+      ],
+      "level": "B1",
+      "dayNumber": 70,
+      "accentColor": "#0EA5E9",
+      "secondaryAccent": "#F59E0B",
+      "bgGradient": [
+        "#0A121A",
+        "#0F2035",
+        "#080D14"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-071",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Sustainable",
+      "phonetic": "/səˈsteɪ.nə.bəl/",
+      "partOfSpeech": "adjective",
+      "definition": "Able to be maintained at a certain rate without depleting natural resources",
+      "examples": [
+        {
+          "sentence": "We need to find sustainable sources of energy.",
+          "highlight": "sustainable"
+        },
+        {
+          "sentence": "Sustainable fashion aims to reduce waste in the clothing industry.",
+          "highlight": "Sustainable"
+        }
+      ],
+      "synonyms": [
+        "renewable",
+        "eco-friendly",
+        "viable"
+      ],
+      "antonyms": [
+        "unsustainable",
+        "wasteful",
+        "destructive"
+      ],
+      "level": "B2",
+      "dayNumber": 71,
+      "accentColor": "#6366F1",
+      "secondaryAccent": "#06B6D4",
+      "bgGradient": [
+        "#0F0A1A",
+        "#1A1035",
+        "#0D0B14"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-072",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Biodiversity",
+      "phonetic": "/ˌbaɪ.oʊ.daɪˈvɜːr.sɪ.ti/",
+      "partOfSpeech": "noun",
+      "definition": "The variety of plant and animal life in a particular habitat",
+      "examples": [
+        {
+          "sentence": "The Amazon rainforest is known for its incredible biodiversity.",
+          "highlight": "biodiversity"
+        },
+        {
+          "sentence": "Loss of biodiversity threatens the stability of ecosystems.",
+          "highlight": "biodiversity"
+        }
+      ],
+      "synonyms": [
+        "ecological variety",
+        "species richness"
+      ],
+      "antonyms": [
+        "monoculture",
+        "uniformity"
+      ],
+      "level": "B2",
+      "dayNumber": 72,
+      "accentColor": "#F43F5E",
+      "secondaryAccent": "#F43F5E",
+      "bgGradient": [
+        "#1A0A10",
+        "#2D1520",
+        "#140810"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-073",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Pristine",
+      "phonetic": "/ˈprɪs.tiːn/",
+      "partOfSpeech": "adjective",
+      "definition": "In its original condition; unspoiled and clean",
+      "examples": [
+        {
+          "sentence": "The beach was pristine, with crystal-clear water and white sand.",
+          "highlight": "pristine"
+        },
+        {
+          "sentence": "They explored a pristine forest untouched by humans.",
+          "highlight": "pristine"
+        }
+      ],
+      "synonyms": [
+        "immaculate",
+        "unspoiled",
+        "pure"
+      ],
+      "antonyms": [
+        "polluted",
+        "contaminated",
+        "dirty"
+      ],
+      "level": "C1",
+      "dayNumber": 73,
+      "accentColor": "#10B981",
+      "secondaryAccent": "#10B981",
+      "bgGradient": [
+        "#0A1A14",
+        "#0F2D20",
+        "#081410"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-074",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Ecosystem",
+      "phonetic": "/ˈiː.koʊˌsɪs.təm/",
+      "partOfSpeech": "noun",
+      "definition": "A community of living organisms interacting with their environment",
+      "examples": [
+        {
+          "sentence": "Coral reefs are fragile ecosystems that support thousands of species.",
+          "highlight": "ecosystems"
+        },
+        {
+          "sentence": "Pollution is disrupting the ecosystem of the lake.",
+          "highlight": "ecosystem"
+        }
+      ],
+      "synonyms": [
+        "habitat",
+        "biome",
+        "environment"
+      ],
+      "antonyms": [],
+      "level": "B2",
+      "dayNumber": 74,
+      "accentColor": "#F59E0B",
+      "secondaryAccent": "#F97316",
+      "bgGradient": [
+        "#1A150A",
+        "#2D2210",
+        "#141008"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-075",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Drought",
+      "phonetic": "/draʊt/",
+      "partOfSpeech": "noun",
+      "definition": "A prolonged period of abnormally low rainfall leading to a shortage of water",
+      "examples": [
+        {
+          "sentence": "The severe drought destroyed crops across the region.",
+          "highlight": "drought"
+        },
+        {
+          "sentence": "California has experienced several devastating droughts.",
+          "highlight": "droughts"
+        }
+      ],
+      "synonyms": [
+        "dry spell",
+        "water shortage",
+        "aridity"
+      ],
+      "antonyms": [
+        "flood",
+        "deluge",
+        "downpour"
+      ],
+      "level": "B2",
+      "dayNumber": 75,
+      "accentColor": "#06B6D4",
+      "secondaryAccent": "#8B5CF6",
+      "bgGradient": [
+        "#0A1518",
+        "#0F2A30",
+        "#081215"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-076",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Flourish",
+      "phonetic": "/ˈflʌr.ɪʃ/",
+      "partOfSpeech": "verb",
+      "definition": "To grow or develop in a healthy or vigorous way",
+      "examples": [
+        {
+          "sentence": "Wildflowers flourish in the spring after winter rains.",
+          "highlight": "flourish"
+        },
+        {
+          "sentence": "The garden flourished under her careful attention.",
+          "highlight": "flourished"
+        }
+      ],
+      "synonyms": [
+        "thrive",
+        "bloom",
+        "prosper"
+      ],
+      "antonyms": [
+        "wither",
+        "decline",
+        "perish"
+      ],
+      "level": "B2",
+      "dayNumber": 76,
+      "accentColor": "#8B5CF6",
+      "secondaryAccent": "#14B8A6",
+      "bgGradient": [
+        "#120A1A",
+        "#1F1035",
+        "#0E0B14"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-077",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Erosion",
+      "phonetic": "/ɪˈroʊ.ʒən/",
+      "partOfSpeech": "noun",
+      "definition": "The gradual wearing away of rock, soil, or land by natural forces",
+      "examples": [
+        {
+          "sentence": "Coastal erosion is threatening homes near the cliffs.",
+          "highlight": "erosion"
+        },
+        {
+          "sentence": "Planting trees helps prevent soil erosion.",
+          "highlight": "erosion"
+        }
+      ],
+      "synonyms": [
+        "wearing away",
+        "deterioration",
+        "degradation"
+      ],
+      "antonyms": [
+        "buildup",
+        "accumulation",
+        "growth"
+      ],
+      "level": "B2",
+      "dayNumber": 77,
+      "accentColor": "#EC4899",
+      "secondaryAccent": "#0EA5E9",
+      "bgGradient": [
+        "#1A0A14",
+        "#2D1525",
+        "#140810"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-078",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Habitat",
+      "phonetic": "/ˈhæb.ɪ.tæt/",
+      "partOfSpeech": "noun",
+      "definition": "The natural home or environment of an animal, plant, or organism",
+      "examples": [
+        {
+          "sentence": "Deforestation is destroying the natural habitat of many species.",
+          "highlight": "habitat"
+        },
+        {
+          "sentence": "The zoo tries to recreate each animal's natural habitat.",
+          "highlight": "habitat"
+        }
+      ],
+      "synonyms": [
+        "environment",
+        "territory",
+        "home"
+      ],
+      "antonyms": [],
+      "level": "B1",
+      "dayNumber": 78,
+      "accentColor": "#14B8A6",
+      "secondaryAccent": "#EC4899",
+      "bgGradient": [
+        "#0A1A18",
+        "#0F2D28",
+        "#081415"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-079",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Renewable",
+      "phonetic": "/rɪˈnjuː.ə.bəl/",
+      "partOfSpeech": "adjective",
+      "definition": "A natural resource that is not depleted when used; can be replenished",
+      "examples": [
+        {
+          "sentence": "Solar and wind power are renewable sources of energy.",
+          "highlight": "renewable"
+        },
+        {
+          "sentence": "The country aims to get 80% of its power from renewable sources.",
+          "highlight": "renewable"
+        }
+      ],
+      "synonyms": [
+        "sustainable",
+        "replenishable",
+        "green"
+      ],
+      "antonyms": [
+        "non-renewable",
+        "finite",
+        "exhaustible"
+      ],
+      "level": "B2",
+      "dayNumber": 79,
+      "accentColor": "#F97316",
+      "secondaryAccent": "#6366F1",
+      "bgGradient": [
+        "#1A100A",
+        "#2D1A0F",
+        "#140E08"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-080",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Catastrophe",
+      "phonetic": "/kəˈtæs.trə.fi/",
+      "partOfSpeech": "noun",
+      "definition": "An event causing great and sudden damage or suffering; a disaster",
+      "examples": [
+        {
+          "sentence": "The oil spill was an environmental catastrophe.",
+          "highlight": "catastrophe"
+        },
+        {
+          "sentence": "Scientists warn that climate change could lead to catastrophe.",
+          "highlight": "catastrophe"
+        }
+      ],
+      "synonyms": [
+        "disaster",
+        "calamity",
+        "crisis"
+      ],
+      "antonyms": [
+        "blessing",
+        "fortune",
+        "miracle"
+      ],
+      "level": "B2",
+      "dayNumber": 80,
+      "accentColor": "#0EA5E9",
+      "secondaryAccent": "#F59E0B",
+      "bgGradient": [
+        "#0A121A",
+        "#0F2035",
+        "#080D14"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-081",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Compromise",
+      "phonetic": "/ˈkɒm.prə.maɪz/",
+      "partOfSpeech": "noun",
+      "definition": "An agreement reached by each side making concessions",
+      "examples": [
+        {
+          "sentence": "A good relationship requires compromise from both sides.",
+          "highlight": "compromise"
+        },
+        {
+          "sentence": "They reached a compromise after hours of discussion.",
+          "highlight": "compromise"
+        }
+      ],
+      "synonyms": [
+        "agreement",
+        "settlement",
+        "middle ground"
+      ],
+      "antonyms": [
+        "disagreement",
+        "stubbornness",
+        "deadlock"
+      ],
+      "level": "B1",
+      "dayNumber": 81,
+      "accentColor": "#6366F1",
+      "secondaryAccent": "#06B6D4",
+      "bgGradient": [
+        "#0F0A1A",
+        "#1A1035",
+        "#0D0B14"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-082",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Trustworthy",
+      "phonetic": "/ˈtrʌstˌwɜːr.ði/",
+      "partOfSpeech": "adjective",
+      "definition": "Able to be relied on as honest or truthful",
+      "examples": [
+        {
+          "sentence": "She is one of the most trustworthy people I know.",
+          "highlight": "trustworthy"
+        },
+        {
+          "sentence": "A trustworthy friend keeps your secrets safe.",
+          "highlight": "trustworthy"
+        }
+      ],
+      "synonyms": [
+        "reliable",
+        "dependable",
+        "honest"
+      ],
+      "antonyms": [
+        "untrustworthy",
+        "unreliable",
+        "deceitful"
+      ],
+      "level": "B1",
+      "dayNumber": 82,
+      "accentColor": "#F43F5E",
+      "secondaryAccent": "#F43F5E",
+      "bgGradient": [
+        "#1A0A10",
+        "#2D1520",
+        "#140810"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-083",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Vulnerable",
+      "phonetic": "/ˈvʌl.nər.ə.bəl/",
+      "partOfSpeech": "adjective",
+      "definition": "Open to being emotionally or physically hurt; exposed to harm",
+      "examples": [
+        {
+          "sentence": "Being vulnerable in a relationship builds deeper trust.",
+          "highlight": "vulnerable"
+        },
+        {
+          "sentence": "Children are especially vulnerable to online risks.",
+          "highlight": "vulnerable"
+        }
+      ],
+      "synonyms": [
+        "exposed",
+        "defenseless",
+        "susceptible"
+      ],
+      "antonyms": [
+        "protected",
+        "resilient",
+        "invulnerable"
+      ],
+      "level": "B2",
+      "dayNumber": 83,
+      "accentColor": "#10B981",
+      "secondaryAccent": "#10B981",
+      "bgGradient": [
+        "#0A1A14",
+        "#0F2D20",
+        "#081410"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-084",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Reconcile",
+      "phonetic": "/ˈrek.ən.saɪl/",
+      "partOfSpeech": "verb",
+      "definition": "To restore friendly relations after a conflict or disagreement",
+      "examples": [
+        {
+          "sentence": "After years apart, the two friends finally reconciled.",
+          "highlight": "reconciled"
+        },
+        {
+          "sentence": "It took time to reconcile their differences.",
+          "highlight": "reconcile"
+        }
+      ],
+      "synonyms": [
+        "reunite",
+        "resolve",
+        "make up"
+      ],
+      "antonyms": [
+        "separate",
+        "conflict",
+        "argue"
+      ],
+      "level": "B2",
+      "dayNumber": 84,
+      "accentColor": "#F59E0B",
+      "secondaryAccent": "#F97316",
+      "bgGradient": [
+        "#1A150A",
+        "#2D2210",
+        "#141008"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-085",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Boundary",
+      "phonetic": "/ˈbaʊn.dər.i/",
+      "partOfSpeech": "noun",
+      "definition": "A limit that defines what is acceptable behavior in a relationship",
+      "examples": [
+        {
+          "sentence": "Setting healthy boundaries is essential for self-care.",
+          "highlight": "boundaries"
+        },
+        {
+          "sentence": "She learned to set clear boundaries at work.",
+          "highlight": "boundaries"
+        }
+      ],
+      "synonyms": [
+        "limit",
+        "border",
+        "line"
+      ],
+      "antonyms": [
+        "freedom",
+        "openness"
+      ],
+      "level": "B1",
+      "dayNumber": 85,
+      "accentColor": "#06B6D4",
+      "secondaryAccent": "#8B5CF6",
+      "bgGradient": [
+        "#0A1518",
+        "#0F2A30",
+        "#081215"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-086",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Affection",
+      "phonetic": "/əˈfek.ʃən/",
+      "partOfSpeech": "noun",
+      "definition": "A gentle feeling of fondness or liking",
+      "examples": [
+        {
+          "sentence": "He showed his affection by always remembering small details.",
+          "highlight": "affection"
+        },
+        {
+          "sentence": "A simple hug can express deep affection.",
+          "highlight": "affection"
+        }
+      ],
+      "synonyms": [
+        "love",
+        "fondness",
+        "tenderness"
+      ],
+      "antonyms": [
+        "hatred",
+        "hostility",
+        "indifference"
+      ],
+      "level": "B1",
+      "dayNumber": 86,
+      "accentColor": "#8B5CF6",
+      "secondaryAccent": "#14B8A6",
+      "bgGradient": [
+        "#120A1A",
+        "#1F1035",
+        "#0E0B14"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-087",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Betrayal",
+      "phonetic": "/bɪˈtreɪ.əl/",
+      "partOfSpeech": "noun",
+      "definition": "The action of being disloyal to someone who trusts you",
+      "examples": [
+        {
+          "sentence": "The betrayal of his closest friend left him devastated.",
+          "highlight": "betrayal"
+        },
+        {
+          "sentence": "Betrayal in a relationship is one of the hardest things to forgive.",
+          "highlight": "Betrayal"
+        }
+      ],
+      "synonyms": [
+        "treachery",
+        "disloyalty",
+        "deception"
+      ],
+      "antonyms": [
+        "loyalty",
+        "faithfulness",
+        "devotion"
+      ],
+      "level": "B2",
+      "dayNumber": 87,
+      "accentColor": "#EC4899",
+      "secondaryAccent": "#0EA5E9",
+      "bgGradient": [
+        "#1A0A14",
+        "#2D1525",
+        "#140810"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-088",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Cherish",
+      "phonetic": "/ˈtʃer.ɪʃ/",
+      "partOfSpeech": "verb",
+      "definition": "To protect and care for someone lovingly; to hold dear",
+      "examples": [
+        {
+          "sentence": "I will always cherish the memories we made together.",
+          "highlight": "cherish"
+        },
+        {
+          "sentence": "She cherished every moment with her grandmother.",
+          "highlight": "cherished"
+        }
+      ],
+      "synonyms": [
+        "treasure",
+        "value",
+        "adore"
+      ],
+      "antonyms": [
+        "neglect",
+        "disregard",
+        "abandon"
+      ],
+      "level": "B1",
+      "dayNumber": 88,
+      "accentColor": "#14B8A6",
+      "secondaryAccent": "#EC4899",
+      "bgGradient": [
+        "#0A1A18",
+        "#0F2D28",
+        "#081415"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-089",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Platonic",
+      "phonetic": "/pləˈtɒn.ɪk/",
+      "partOfSpeech": "adjective",
+      "definition": "A close relationship that is intimate and affectionate but not romantic",
+      "examples": [
+        {
+          "sentence": "They have a deep platonic friendship that has lasted decades.",
+          "highlight": "platonic"
+        },
+        {
+          "sentence": "Platonic love can be just as meaningful as romantic love.",
+          "highlight": "Platonic"
+        }
+      ],
+      "synonyms": [
+        "non-romantic",
+        "friendly",
+        "spiritual"
+      ],
+      "antonyms": [
+        "romantic",
+        "passionate",
+        "sexual"
+      ],
+      "level": "C1",
+      "dayNumber": 89,
+      "accentColor": "#F97316",
+      "secondaryAccent": "#6366F1",
+      "bgGradient": [
+        "#1A100A",
+        "#2D1A0F",
+        "#140E08"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-090",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Devotion",
+      "phonetic": "/dɪˈvoʊ.ʃən/",
+      "partOfSpeech": "noun",
+      "definition": "Love, loyalty, or enthusiasm for a person, activity, or cause",
+      "examples": [
+        {
+          "sentence": "Her devotion to her family is truly inspiring.",
+          "highlight": "devotion"
+        },
+        {
+          "sentence": "The teacher's devotion to her students changed many lives.",
+          "highlight": "devotion"
+        }
+      ],
+      "synonyms": [
+        "dedication",
+        "commitment",
+        "loyalty"
+      ],
+      "antonyms": [
+        "indifference",
+        "neglect",
+        "disloyalty"
+      ],
+      "level": "B2",
+      "dayNumber": 90,
+      "accentColor": "#0EA5E9",
+      "secondaryAccent": "#F59E0B",
+      "bgGradient": [
+        "#0A121A",
+        "#0F2035",
+        "#080D14"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-091",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Aesthetic",
+      "phonetic": "/esˈθet.ɪk/",
+      "partOfSpeech": "adjective",
+      "definition": "Concerned with beauty or the appreciation of beauty",
+      "examples": [
+        {
+          "sentence": "The building has a minimalist aesthetic that appeals to modern tastes.",
+          "highlight": "aesthetic"
+        },
+        {
+          "sentence": "She has a strong aesthetic sense when it comes to interior design.",
+          "highlight": "aesthetic"
+        }
+      ],
+      "synonyms": [
+        "artistic",
+        "visual",
+        "beautiful"
+      ],
+      "antonyms": [
+        "ugly",
+        "unattractive",
+        "tasteless"
+      ],
+      "level": "B2",
+      "dayNumber": 91,
+      "accentColor": "#6366F1",
+      "secondaryAccent": "#06B6D4",
+      "bgGradient": [
+        "#0F0A1A",
+        "#1A1035",
+        "#0D0B14"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-092",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Inspire",
+      "phonetic": "/ɪnˈspaɪər/",
+      "partOfSpeech": "verb",
+      "definition": "To fill someone with the urge or ability to do or feel something creative",
+      "examples": [
+        {
+          "sentence": "Great art has the power to inspire people across generations.",
+          "highlight": "inspire"
+        },
+        {
+          "sentence": "Her story inspired me to start writing my own book.",
+          "highlight": "inspired"
+        }
+      ],
+      "synonyms": [
+        "motivate",
+        "encourage",
+        "stimulate"
+      ],
+      "antonyms": [
+        "discourage",
+        "demotivate",
+        "bore"
+      ],
+      "level": "B1",
+      "dayNumber": 92,
+      "accentColor": "#F43F5E",
+      "secondaryAccent": "#F43F5E",
+      "bgGradient": [
+        "#1A0A10",
+        "#2D1520",
+        "#140810"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-093",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Ephemeral",
+      "phonetic": "/ɪˈfem.ər.əl/",
+      "partOfSpeech": "adjective",
+      "definition": "Lasting for a very short time",
+      "examples": [
+        {
+          "sentence": "The ephemeral beauty of cherry blossoms draws millions of visitors.",
+          "highlight": "ephemeral"
+        },
+        {
+          "sentence": "Street art is often ephemeral, lasting only until the next rain.",
+          "highlight": "ephemeral"
+        }
+      ],
+      "synonyms": [
+        "fleeting",
+        "transient",
+        "momentary"
+      ],
+      "antonyms": [
+        "permanent",
+        "enduring",
+        "eternal"
+      ],
+      "level": "C1",
+      "dayNumber": 93,
+      "accentColor": "#10B981",
+      "secondaryAccent": "#10B981",
+      "bgGradient": [
+        "#0A1A14",
+        "#0F2D20",
+        "#081410"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-094",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Masterpiece",
+      "phonetic": "/ˈmɑːs.tər.piːs/",
+      "partOfSpeech": "noun",
+      "definition": "A work of outstanding artistry, skill, or workmanship",
+      "examples": [
+        {
+          "sentence": "The Mona Lisa is considered Leonardo da Vinci's masterpiece.",
+          "highlight": "masterpiece"
+        },
+        {
+          "sentence": "Every chef dreams of creating a culinary masterpiece.",
+          "highlight": "masterpiece"
+        }
+      ],
+      "synonyms": [
+        "magnum opus",
+        "gem",
+        "tour de force"
+      ],
+      "antonyms": [
+        "failure",
+        "flop",
+        "dud"
+      ],
+      "level": "B1",
+      "dayNumber": 94,
+      "accentColor": "#F59E0B",
+      "secondaryAccent": "#F97316",
+      "bgGradient": [
+        "#1A150A",
+        "#2D2210",
+        "#141008"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-095",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Nuance",
+      "phonetic": "/ˈnjuː.ɑːns/",
+      "partOfSpeech": "noun",
+      "definition": "A subtle difference in meaning, expression, or sound",
+      "examples": [
+        {
+          "sentence": "She captured every nuance of emotion in her performance.",
+          "highlight": "nuance"
+        },
+        {
+          "sentence": "Understanding cultural nuances is key to effective communication.",
+          "highlight": "nuances"
+        }
+      ],
+      "synonyms": [
+        "subtlety",
+        "shade",
+        "distinction"
+      ],
+      "antonyms": [
+        "obviousness",
+        "bluntness"
+      ],
+      "level": "C1",
+      "dayNumber": 95,
+      "accentColor": "#06B6D4",
+      "secondaryAccent": "#8B5CF6",
+      "bgGradient": [
+        "#0A1518",
+        "#0F2A30",
+        "#081215"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-096",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Versatile",
+      "phonetic": "/ˈvɜːr.sə.taɪl/",
+      "partOfSpeech": "adjective",
+      "definition": "Able to adapt or be adapted to many different functions or activities",
+      "examples": [
+        {
+          "sentence": "She is a versatile musician who can play five instruments.",
+          "highlight": "versatile"
+        },
+        {
+          "sentence": "The versatile fabric works for both casual and formal wear.",
+          "highlight": "versatile"
+        }
+      ],
+      "synonyms": [
+        "adaptable",
+        "flexible",
+        "all-round"
+      ],
+      "antonyms": [
+        "limited",
+        "inflexible",
+        "specialized"
+      ],
+      "level": "B2",
+      "dayNumber": 96,
+      "accentColor": "#8B5CF6",
+      "secondaryAccent": "#14B8A6",
+      "bgGradient": [
+        "#120A1A",
+        "#1F1035",
+        "#0E0B14"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-097",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Evocative",
+      "phonetic": "/ɪˈvɒk.ə.tɪv/",
+      "partOfSpeech": "adjective",
+      "definition": "Bringing strong images, memories, or feelings to mind",
+      "examples": [
+        {
+          "sentence": "The evocative music transported the audience to another era.",
+          "highlight": "evocative"
+        },
+        {
+          "sentence": "Her painting is deeply evocative of summer in the countryside.",
+          "highlight": "evocative"
+        }
+      ],
+      "synonyms": [
+        "suggestive",
+        "reminiscent",
+        "expressive"
+      ],
+      "antonyms": [
+        "uninspiring",
+        "bland",
+        "forgettable"
+      ],
+      "level": "C1",
+      "dayNumber": 97,
+      "accentColor": "#EC4899",
+      "secondaryAccent": "#0EA5E9",
+      "bgGradient": [
+        "#1A0A14",
+        "#2D1525",
+        "#140810"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-098",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Curate",
+      "phonetic": "/kjʊˈreɪt/",
+      "partOfSpeech": "verb",
+      "definition": "To select, organize, and present content or items carefully",
+      "examples": [
+        {
+          "sentence": "She curated an impressive collection of contemporary art.",
+          "highlight": "curated"
+        },
+        {
+          "sentence": "The playlist was carefully curated for the perfect road trip.",
+          "highlight": "curated"
+        }
+      ],
+      "synonyms": [
+        "organize",
+        "select",
+        "assemble"
+      ],
+      "antonyms": [
+        "disorganize",
+        "scatter",
+        "neglect"
+      ],
+      "level": "B2",
+      "dayNumber": 98,
+      "accentColor": "#14B8A6",
+      "secondaryAccent": "#EC4899",
+      "bgGradient": [
+        "#0A1A18",
+        "#0F2D28",
+        "#081415"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-099",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Whimsical",
+      "phonetic": "/ˈwɪm.zɪ.kəl/",
+      "partOfSpeech": "adjective",
+      "definition": "Playfully quaint or fanciful, especially in an appealing way",
+      "examples": [
+        {
+          "sentence": "The garden had a whimsical design with fairy lights and sculptures.",
+          "highlight": "whimsical"
+        },
+        {
+          "sentence": "His whimsical illustrations delight both children and adults.",
+          "highlight": "whimsical"
+        }
+      ],
+      "synonyms": [
+        "playful",
+        "fanciful",
+        "quirky"
+      ],
+      "antonyms": [
+        "serious",
+        "conventional",
+        "dull"
+      ],
+      "level": "C1",
+      "dayNumber": 99,
+      "accentColor": "#F97316",
+      "secondaryAccent": "#6366F1",
+      "bgGradient": [
+        "#1A100A",
+        "#2D1A0F",
+        "#140E08"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-100",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Eloquent",
+      "phonetic": "/ˈel.ə.kwənt/",
+      "partOfSpeech": "adjective",
+      "definition": "Fluent or persuasive in speaking or writing",
+      "examples": [
+        {
+          "sentence": "She delivered an eloquent speech that moved the entire audience.",
+          "highlight": "eloquent"
+        },
+        {
+          "sentence": "His eloquent writing style makes complex topics accessible.",
+          "highlight": "eloquent"
+        }
+      ],
+      "synonyms": [
+        "articulate",
+        "expressive",
+        "persuasive"
+      ],
+      "antonyms": [
+        "inarticulate",
+        "awkward",
+        "stumbling"
+      ],
+      "level": "C1",
+      "dayNumber": 100,
+      "accentColor": "#0EA5E9",
+      "secondaryAccent": "#F59E0B",
+      "bgGradient": [
+        "#0A121A",
+        "#0F2035",
+        "#080D14"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-101",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Existential",
+      "phonetic": "/ˌeɡ.zɪˈsten.ʃəl/",
+      "partOfSpeech": "adjective",
+      "definition": "Relating to human existence and the meaning of life",
+      "examples": [
+        {
+          "sentence": "Climate change poses an existential threat to island nations.",
+          "highlight": "existential"
+        },
+        {
+          "sentence": "He went through an existential crisis in his thirties.",
+          "highlight": "existential"
+        }
+      ],
+      "synonyms": [
+        "philosophical",
+        "fundamental",
+        "essential"
+      ],
+      "antonyms": [
+        "trivial",
+        "superficial",
+        "mundane"
+      ],
+      "level": "C1",
+      "dayNumber": 101,
+      "accentColor": "#6366F1",
+      "secondaryAccent": "#06B6D4",
+      "bgGradient": [
+        "#0F0A1A",
+        "#1A1035",
+        "#0D0B14"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-102",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Ephemeral",
+      "phonetic": "/ɪˈfem.ər.əl/",
+      "partOfSpeech": "adjective",
+      "definition": "Lasting for a very short time",
+      "examples": [
+        {
+          "sentence": "Fame on the internet is often ephemeral.",
+          "highlight": "ephemeral"
+        },
+        {
+          "sentence": "The ephemeral nature of life makes every moment precious.",
+          "highlight": "ephemeral"
+        }
+      ],
+      "synonyms": [
+        "fleeting",
+        "transient",
+        "brief"
+      ],
+      "antonyms": [
+        "eternal",
+        "permanent",
+        "lasting"
+      ],
+      "level": "C1",
+      "dayNumber": 102,
+      "accentColor": "#F43F5E",
+      "secondaryAccent": "#F43F5E",
+      "bgGradient": [
+        "#1A0A10",
+        "#2D1520",
+        "#140810"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-103",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Dichotomy",
+      "phonetic": "/daɪˈkɒt.ə.mi/",
+      "partOfSpeech": "noun",
+      "definition": "A division or contrast between two things that are completely different",
+      "examples": [
+        {
+          "sentence": "There is a false dichotomy between art and science.",
+          "highlight": "dichotomy"
+        },
+        {
+          "sentence": "The dichotomy between rich and poor continues to grow.",
+          "highlight": "dichotomy"
+        }
+      ],
+      "synonyms": [
+        "contrast",
+        "division",
+        "split"
+      ],
+      "antonyms": [
+        "unity",
+        "harmony",
+        "similarity"
+      ],
+      "level": "C1",
+      "dayNumber": 103,
+      "accentColor": "#10B981",
+      "secondaryAccent": "#10B981",
+      "bgGradient": [
+        "#0A1A14",
+        "#0F2D20",
+        "#081410"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-104",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Intrinsic",
+      "phonetic": "/ɪnˈtrɪn.zɪk/",
+      "partOfSpeech": "adjective",
+      "definition": "Belonging naturally; essential and inherent",
+      "examples": [
+        {
+          "sentence": "Curiosity is an intrinsic part of human nature.",
+          "highlight": "intrinsic"
+        },
+        {
+          "sentence": "The intrinsic value of education goes beyond getting a job.",
+          "highlight": "intrinsic"
+        }
+      ],
+      "synonyms": [
+        "inherent",
+        "innate",
+        "essential"
+      ],
+      "antonyms": [
+        "extrinsic",
+        "external",
+        "acquired"
+      ],
+      "level": "C1",
+      "dayNumber": 104,
+      "accentColor": "#F59E0B",
+      "secondaryAccent": "#F97316",
+      "bgGradient": [
+        "#1A150A",
+        "#2D2210",
+        "#141008"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-105",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Transcend",
+      "phonetic": "/trænˈsend/",
+      "partOfSpeech": "verb",
+      "definition": "To go beyond the range or limits of something",
+      "examples": [
+        {
+          "sentence": "Great music has the ability to transcend language barriers.",
+          "highlight": "transcend"
+        },
+        {
+          "sentence": "Her achievements transcend what anyone thought was possible.",
+          "highlight": "transcend"
+        }
+      ],
+      "synonyms": [
+        "surpass",
+        "exceed",
+        "go beyond"
+      ],
+      "antonyms": [
+        "fall short",
+        "stay within",
+        "limit"
+      ],
+      "level": "C1",
+      "dayNumber": 105,
+      "accentColor": "#06B6D4",
+      "secondaryAccent": "#8B5CF6",
+      "bgGradient": [
+        "#0A1518",
+        "#0F2A30",
+        "#081215"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-106",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Altruism",
+      "phonetic": "/ˈæl.tru.ɪ.zəm/",
+      "partOfSpeech": "noun",
+      "definition": "The selfless concern for the well-being of others",
+      "examples": [
+        {
+          "sentence": "True altruism means helping others without expecting anything in return.",
+          "highlight": "altruism"
+        },
+        {
+          "sentence": "Acts of altruism can create a ripple effect in communities.",
+          "highlight": "altruism"
+        }
+      ],
+      "synonyms": [
+        "selflessness",
+        "generosity",
+        "philanthropy"
+      ],
+      "antonyms": [
+        "selfishness",
+        "greed",
+        "egoism"
+      ],
+      "level": "C1",
+      "dayNumber": 106,
+      "accentColor": "#8B5CF6",
+      "secondaryAccent": "#14B8A6",
+      "bgGradient": [
+        "#120A1A",
+        "#1F1035",
+        "#0E0B14"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-107",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Pragmatic",
+      "phonetic": "/præɡˈmæt.ɪk/",
+      "partOfSpeech": "adjective",
+      "definition": "Dealing with things sensibly and realistically rather than ideally",
+      "examples": [
+        {
+          "sentence": "We need a pragmatic approach to solving this problem.",
+          "highlight": "pragmatic"
+        },
+        {
+          "sentence": "She is a pragmatic leader who focuses on what works.",
+          "highlight": "pragmatic"
+        }
+      ],
+      "synonyms": [
+        "practical",
+        "realistic",
+        "sensible"
+      ],
+      "antonyms": [
+        "idealistic",
+        "impractical",
+        "unrealistic"
+      ],
+      "level": "C1",
+      "dayNumber": 107,
+      "accentColor": "#EC4899",
+      "secondaryAccent": "#0EA5E9",
+      "bgGradient": [
+        "#1A0A14",
+        "#2D1525",
+        "#140810"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-108",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Resilience",
+      "phonetic": "/rɪˈzɪl.i.əns/",
+      "partOfSpeech": "noun",
+      "definition": "The capacity to recover quickly from difficulties; mental toughness",
+      "examples": [
+        {
+          "sentence": "Resilience is not about never falling, but about getting back up.",
+          "highlight": "Resilience"
+        },
+        {
+          "sentence": "The community showed incredible resilience after the disaster.",
+          "highlight": "resilience"
+        }
+      ],
+      "synonyms": [
+        "toughness",
+        "fortitude",
+        "grit"
+      ],
+      "antonyms": [
+        "fragility",
+        "weakness",
+        "vulnerability"
+      ],
+      "level": "B2",
+      "dayNumber": 108,
+      "accentColor": "#14B8A6",
+      "secondaryAccent": "#EC4899",
+      "bgGradient": [
+        "#0A1A18",
+        "#0F2D28",
+        "#081415"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-109",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Enigma",
+      "phonetic": "/ɪˈnɪɡ.mə/",
+      "partOfSpeech": "noun",
+      "definition": "A person or thing that is mysterious, puzzling, or difficult to understand",
+      "examples": [
+        {
+          "sentence": "The disappearance remains an enigma to this day.",
+          "highlight": "enigma"
+        },
+        {
+          "sentence": "She was an enigma — brilliant but impossible to predict.",
+          "highlight": "enigma"
+        }
+      ],
+      "synonyms": [
+        "mystery",
+        "puzzle",
+        "riddle"
+      ],
+      "antonyms": [
+        "clarity",
+        "certainty",
+        "obviousness"
+      ],
+      "level": "C1",
+      "dayNumber": 109,
+      "accentColor": "#F97316",
+      "secondaryAccent": "#6366F1",
+      "bgGradient": [
+        "#1A100A",
+        "#2D1A0F",
+        "#140E08"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-110",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Juxtapose",
+      "phonetic": "/ˌdʒʌk.stəˈpoʊz/",
+      "partOfSpeech": "verb",
+      "definition": "To place two things side by side for comparison or contrast",
+      "examples": [
+        {
+          "sentence": "The artist juxtaposed light and dark to create a powerful effect.",
+          "highlight": "juxtaposed"
+        },
+        {
+          "sentence": "The documentary juxtaposes wealth and poverty in the same city.",
+          "highlight": "juxtaposes"
+        }
+      ],
+      "synonyms": [
+        "compare",
+        "contrast",
+        "place side by side"
+      ],
+      "antonyms": [
+        "separate",
+        "isolate"
+      ],
+      "level": "C1",
+      "dayNumber": 110,
+      "accentColor": "#0EA5E9",
+      "secondaryAccent": "#F59E0B",
+      "bgGradient": [
+        "#0A121A",
+        "#0F2035",
+        "#080D14"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-111",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Savory",
+      "phonetic": "/ˈseɪ.vər.i/",
+      "partOfSpeech": "adjective",
+      "definition": "Having a salty or spicy flavor rather than a sweet one",
+      "examples": [
+        {
+          "sentence": "The restaurant is known for its savory dishes and bold flavors.",
+          "highlight": "savory"
+        },
+        {
+          "sentence": "I prefer savory snacks over sweet ones.",
+          "highlight": "savory"
+        }
+      ],
+      "synonyms": [
+        "salty",
+        "spicy",
+        "flavorful"
+      ],
+      "antonyms": [
+        "sweet",
+        "bland",
+        "tasteless"
+      ],
+      "level": "B1",
+      "dayNumber": 111,
+      "accentColor": "#6366F1",
+      "secondaryAccent": "#06B6D4",
+      "bgGradient": [
+        "#0F0A1A",
+        "#1A1035",
+        "#0D0B14"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-112",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Appetite",
+      "phonetic": "/ˈæp.ɪ.taɪt/",
+      "partOfSpeech": "noun",
+      "definition": "A natural desire to satisfy a bodily need, especially for food",
+      "examples": [
+        {
+          "sentence": "Exercise usually increases your appetite.",
+          "highlight": "appetite"
+        },
+        {
+          "sentence": "She has a big appetite for learning new things.",
+          "highlight": "appetite"
+        }
+      ],
+      "synonyms": [
+        "hunger",
+        "craving",
+        "desire"
+      ],
+      "antonyms": [
+        "fullness",
+        "satiety",
+        "disgust"
+      ],
+      "level": "A2",
+      "dayNumber": 112,
+      "accentColor": "#F43F5E",
+      "secondaryAccent": "#F43F5E",
+      "bgGradient": [
+        "#1A0A10",
+        "#2D1520",
+        "#140810"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-113",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Cuisine",
+      "phonetic": "/kwɪˈziːn/",
+      "partOfSpeech": "noun",
+      "definition": "A style or method of cooking, especially associated with a particular country",
+      "examples": [
+        {
+          "sentence": "Japanese cuisine is admired for its balance and presentation.",
+          "highlight": "cuisine"
+        },
+        {
+          "sentence": "The city offers a diverse range of international cuisines.",
+          "highlight": "cuisines"
+        }
+      ],
+      "synonyms": [
+        "cooking",
+        "gastronomy",
+        "food"
+      ],
+      "antonyms": [],
+      "level": "B1",
+      "dayNumber": 113,
+      "accentColor": "#10B981",
+      "secondaryAccent": "#10B981",
+      "bgGradient": [
+        "#0A1A14",
+        "#0F2D20",
+        "#081410"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-114",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Gourmet",
+      "phonetic": "/ɡʊərˈmeɪ/",
+      "partOfSpeech": "adjective",
+      "definition": "Of high quality and sophistication in food and drink",
+      "examples": [
+        {
+          "sentence": "The hotel offers a gourmet dining experience.",
+          "highlight": "gourmet"
+        },
+        {
+          "sentence": "She turned simple ingredients into a gourmet meal.",
+          "highlight": "gourmet"
+        }
+      ],
+      "synonyms": [
+        "fine",
+        "premium",
+        "deluxe"
+      ],
+      "antonyms": [
+        "basic",
+        "plain",
+        "ordinary"
+      ],
+      "level": "B2",
+      "dayNumber": 114,
+      "accentColor": "#F59E0B",
+      "secondaryAccent": "#F97316",
+      "bgGradient": [
+        "#1A150A",
+        "#2D2210",
+        "#141008"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-115",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Garnish",
+      "phonetic": "/ˈɡɑːr.nɪʃ/",
+      "partOfSpeech": "verb",
+      "definition": "To decorate or embellish food with a small amount of another food",
+      "examples": [
+        {
+          "sentence": "Garnish the soup with fresh herbs before serving.",
+          "highlight": "Garnish"
+        },
+        {
+          "sentence": "The dessert was garnished with edible flowers.",
+          "highlight": "garnished"
+        }
+      ],
+      "synonyms": [
+        "decorate",
+        "adorn",
+        "embellish"
+      ],
+      "antonyms": [
+        "strip",
+        "plain"
+      ],
+      "level": "B1",
+      "dayNumber": 115,
+      "accentColor": "#06B6D4",
+      "secondaryAccent": "#8B5CF6",
+      "bgGradient": [
+        "#0A1518",
+        "#0F2A30",
+        "#081215"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-116",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Delicacy",
+      "phonetic": "/ˈdel.ɪ.kə.si/",
+      "partOfSpeech": "noun",
+      "definition": "A type of food considered to be especially rare or luxurious",
+      "examples": [
+        {
+          "sentence": "Sushi-grade tuna is considered a delicacy in many countries.",
+          "highlight": "delicacy"
+        },
+        {
+          "sentence": "The local delicacy is a spiced lamb stew served with flatbread.",
+          "highlight": "delicacy"
+        }
+      ],
+      "synonyms": [
+        "treat",
+        "specialty",
+        "luxury"
+      ],
+      "antonyms": [
+        "staple",
+        "basic food"
+      ],
+      "level": "B2",
+      "dayNumber": 116,
+      "accentColor": "#8B5CF6",
+      "secondaryAccent": "#14B8A6",
+      "bgGradient": [
+        "#120A1A",
+        "#1F1035",
+        "#0E0B14"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-117",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Aromatic",
+      "phonetic": "/ˌær.əˈmæt.ɪk/",
+      "partOfSpeech": "adjective",
+      "definition": "Having a pleasant and distinctive smell",
+      "examples": [
+        {
+          "sentence": "The kitchen was filled with the aromatic scent of fresh bread.",
+          "highlight": "aromatic"
+        },
+        {
+          "sentence": "Aromatic herbs like basil and rosemary transform any dish.",
+          "highlight": "Aromatic"
+        }
+      ],
+      "synonyms": [
+        "fragrant",
+        "scented",
+        "perfumed"
+      ],
+      "antonyms": [
+        "odorless",
+        "unscented",
+        "foul"
+      ],
+      "level": "B2",
+      "dayNumber": 117,
+      "accentColor": "#EC4899",
+      "secondaryAccent": "#0EA5E9",
+      "bgGradient": [
+        "#1A0A14",
+        "#2D1525",
+        "#140810"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-118",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Bland",
+      "phonetic": "/blænd/",
+      "partOfSpeech": "adjective",
+      "definition": "Lacking strong features or flavor; not stimulating",
+      "examples": [
+        {
+          "sentence": "The food was bland and needed more seasoning.",
+          "highlight": "bland"
+        },
+        {
+          "sentence": "Hospital food has a reputation for being bland.",
+          "highlight": "bland"
+        }
+      ],
+      "synonyms": [
+        "tasteless",
+        "dull",
+        "flavorless"
+      ],
+      "antonyms": [
+        "flavorful",
+        "spicy",
+        "rich"
+      ],
+      "level": "B1",
+      "dayNumber": 118,
+      "accentColor": "#14B8A6",
+      "secondaryAccent": "#EC4899",
+      "bgGradient": [
+        "#0A1A18",
+        "#0F2D28",
+        "#081415"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-119",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Indulge",
+      "phonetic": "/ɪnˈdʌldʒ/",
+      "partOfSpeech": "verb",
+      "definition": "To allow oneself to enjoy the pleasure of something",
+      "examples": [
+        {
+          "sentence": "She decided to indulge in a slice of chocolate cake.",
+          "highlight": "indulge"
+        },
+        {
+          "sentence": "It's okay to indulge once in a while.",
+          "highlight": "indulge"
+        }
+      ],
+      "synonyms": [
+        "treat",
+        "pamper",
+        "gratify"
+      ],
+      "antonyms": [
+        "abstain",
+        "deny",
+        "restrict"
+      ],
+      "level": "B2",
+      "dayNumber": 119,
+      "accentColor": "#F97316",
+      "secondaryAccent": "#6366F1",
+      "bgGradient": [
+        "#1A100A",
+        "#2D1A0F",
+        "#140E08"
+      ]
+    }
+  },
+  {
+    "postId": "vocab-120",
+    "templateId": "vocab-card",
+    "format": "story",
+    "props": {
+      "word": "Palate",
+      "phonetic": "/ˈpæl.ɪt/",
+      "partOfSpeech": "noun",
+      "definition": "A person's ability to distinguish between and appreciate different flavors",
+      "examples": [
+        {
+          "sentence": "A wine sommelier has a highly developed palate.",
+          "highlight": "palate"
+        },
+        {
+          "sentence": "The dish was designed to satisfy every palate.",
+          "highlight": "palate"
+        }
+      ],
+      "synonyms": [
+        "taste",
+        "sense of taste",
+        "taste buds"
+      ],
+      "antonyms": [],
+      "level": "B2",
+      "dayNumber": 120,
+      "accentColor": "#0EA5E9",
+      "secondaryAccent": "#F59E0B",
+      "bgGradient": [
+        "#0A121A",
+        "#0F2035",
+        "#080D14"
+      ]
+    }
+  }
+]

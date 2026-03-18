@@ -40,6 +40,9 @@ import './templates/kids-bedtime-story';
 // Motivational narration (scene-based, audio-sync)
 import './templates/motivational-narration';
 
+// Language learning templates
+import './templates/vocab-card';
+
 export const RemotionRoot: React.FC = () => {
   const allTemplates = registry.getAll();
 

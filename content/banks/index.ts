@@ -10,6 +10,7 @@ import { motivationalBank } from './motivational';
 import { jokesBank } from './jokes';
 import { howToBank } from './how-to';
 import { newsBank } from './news';
+import { vocabEnglishBank } from './vocab-english';
 
 export type { ContentBank, ContentPost, ContentSection, AccentColor } from './types';
 
@@ -18,6 +19,7 @@ export const banks: Record<string, ContentBank> = {
   jokes: jokesBank,
   'how-to': howToBank,
   news: newsBank,
+  'vocab-english': vocabEnglishBank,
 };
 
 export function getBank(nicheId: string): ContentBank | undefined {
