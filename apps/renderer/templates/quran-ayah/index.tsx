@@ -367,7 +367,7 @@ const QuranAyah: React.FC<QuranAyahProps & { theme: Theme; format: Format }> = (
   const frame = useCurrentFrame();
   const { fps, durationInFrames } = useVideoConfig();
   const {
-    scenes, reciterName, audioUrl, accentColor, secondaryAccent,
+    scenes, reciterName, audioUrl, audioStartMs, accentColor, secondaryAccent,
     bgGradient, highlightColor, ornamentOpacity, transitionMs,
     surahName, surahNameArabic, surahNumber,
     introHoldFrames, outroHoldFrames, logoUrl, brandName, socialHandle, ctaText,
@@ -412,14 +412,14 @@ const QuranAyah: React.FC<QuranAyahProps & { theme: Theme; format: Format }> = (
       <CornerOrnament position="bottom-left" color={accentColor} opacity={ornamentOpacity} size={portrait ? 80 : 60} />
       <CornerOrnament position="bottom-right" color={accentColor} opacity={ornamentOpacity} size={portrait ? 80 : 60} />
 
-      {/* Audio — delayed by intro using Sequence */}
-      {audioUrl && introHoldFrames > 0 && (
+      {/* Audio — delayed by intro, with optional startFrom for split parts */}
+      {audioUrl && (
         <Sequence from={introHoldFrames}>
-          <Audio src={audioUrl.startsWith('http') ? audioUrl : staticFile(audioUrl)} />
+          <Audio
+            src={audioUrl.startsWith('http') ? audioUrl : staticFile(audioUrl)}
+            startFrom={Math.round((audioStartMs / 1000) * fps)}
+          />
         </Sequence>
-      )}
-      {audioUrl && introHoldFrames === 0 && (
-        <Audio src={audioUrl.startsWith('http') ? audioUrl : staticFile(audioUrl)} />
       )}
 
       {/* INTRO */}

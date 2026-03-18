@@ -51,6 +51,7 @@ export const quranAyahSchema = z.object({
   ]),
   reciterName: z.string().default('Mishary Rashid Al-Afasy'),
   audioUrl: z.string().optional(),
+  audioStartMs: z.number().default(0), // offset into full surah audio for split parts
   // Intro/Outro
   introHoldFrames: z.number().default(75), // 2.5s logo intro
   outroHoldFrames: z.number().default(90), // 3s logo outro
