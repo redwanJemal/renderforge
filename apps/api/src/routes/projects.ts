@@ -10,11 +10,13 @@ projectsRouter.use("*", authMiddleware);
 const createSchema = z.object({
   name: z.string().min(1).max(255),
   slug: z.string().min(1).max(100).regex(/^[a-z0-9-]+$/),
-  description: z.string().optional(),
-  logoUrl: z.string().optional(),
+  description: z.string().nullable().optional(),
+  logoUrl: z.string().nullable().optional(),
   socialHandles: z.record(z.string()).optional(),
   colorPalette: z.record(z.string()).optional(),
-  defaultVoiceId: z.string().optional(),
+  defaultVoiceId: z.string().nullable().optional(),
+  enableIntro: z.boolean().optional(),
+  enableOutro: z.boolean().optional(),
   status: z.enum(["active", "paused", "archived"]).optional(),
 });
 

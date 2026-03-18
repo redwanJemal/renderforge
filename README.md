@@ -114,9 +114,9 @@ git push origin master
 SSH into the VPS and run:
 
 ```bash
-cd /path/to/renderforge
-docker compose -f docker-compose.coolify.yml build
-docker compose -f docker-compose.coolify.yml up -d
+cd ~/renderforge
+docker compose -f docker-compose.coolify.yml build api admin
+docker compose -f docker-compose.coolify.yml up -d --force-recreate api admin
 ```
 
 **3. Seed data (first deploy or reset)**
@@ -124,15 +124,17 @@ docker compose -f docker-compose.coolify.yml up -d
 After the containers are up and the API has auto-migrated the schema:
 
 ```bash
-# From the VPS (with DATABASE_URL pointing to the renderforge-db container)
-DATABASE_URL="postgresql://renderforge:<password>@renderforge-db:5432/renderforge" \
-  pnpm db:seed-all
-```
+# Get the DB container IP
+DB_IP=$(docker inspect renderforge-db --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}')
 
-Or run it inside the API container:
+# Full seed (YLD project + 200 posts + niches + BGM)
+DATABASE_URL="postgresql://renderforge:renderforge@${DB_IP}:5432/renderforge" pnpm db:seed-all
 
-```bash
-docker exec -it renderforge-api sh -c "cd /app && npx tsx scripts/seed-all.ts"
+# Quran content (88 surahs × 2 channels = 372 posts)
+DATABASE_URL="postgresql://renderforge:renderforge@${DB_IP}:5432/renderforge" npx tsx scripts/seed-quran.ts
+
+# LinguaForge vocabulary (120 vocab cards)
+DATABASE_URL="postgresql://renderforge:renderforge@${DB_IP}:5432/renderforge" npx tsx scripts/seed-linguaforge.ts
 ```
 
 ### Required Environment Variables
@@ -189,6 +191,31 @@ Wipes all data and creates:
 - 200 posts (100 content x 2 formats), status: `ready`
 - 5 BGM tracks
 
+### Quran Content Seed
+
+```bash
+# Seed 88 surahs × 2 channels (English + Amharic) = 372 posts
+DATABASE_URL="postgresql://renderforge:renderforge@<db-host>:5432/renderforge" \
+  npx tsx scripts/seed-quran.ts
+```
+
+Creates:
+- **Quran English** project — Arabic + Sahih International translation
+- **ቁርአን አማርኛ** project — Arabic + Amharic (Sadiq & Sani) translation
+- 186 posts per channel (long surahs split into 20-ayah parts)
+- 2,891 total ayahs across 88 surahs
+- ~62 days of content at 3 posts/day
+- Schedule: 3 posts/day, every day (auto-render enabled)
+- Reciter: Mishary Rashid Al-Afasy with word-by-word timing
+
+### LinguaForge Vocabulary Seed
+
+```bash
+npx tsx scripts/seed-linguaforge.ts
+```
+
+Creates 120 English vocabulary flashcard posts using the vocab-card template.
+
 ### Legacy Seeds
 
 ```bash
@@ -237,6 +264,8 @@ renderforge/
 | **Kids** | kids-counting-fun, kids-alphabet-adventure, kids-icon-quiz, kids-bedtime-story |
 | **Premium** | showcase, countdown, kinetic-text, split-reveal, orbit, glitch-text, neon-glow, parallax-layers, gold-reveal, slider |
 | **Sports** | match-fixture, post-match, breaking-news |
+| **Quran** | quran-ayah (word-by-word highlight, multi-language) |
+| **Language** | vocab-card (vocabulary flashcards) |
 | **Special** | dubai-luxury, ramadan-greeting |
 
 ---
