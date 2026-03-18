@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   AbsoluteFill,
+  Img,
   useCurrentFrame,
   useVideoConfig,
   interpolate,
@@ -27,10 +28,20 @@ import { BounceIn } from '../../components/kids';
 // are overridden by audio-sync.ts based on TTS narration length.
 // ══════════════════════════════════════════════════════════════
 
+const dialogSchema = z.object({
+  kidText: z.string(),
+  narratorResponse: z.string(),
+  dialogType: z.enum(["curiosity", "emotional", "participatory"]),
+  durationFrames: z.number().optional(),
+});
+
 const storyPageSchema = z.object({
   text: z.string(),
   illustration: z.string().optional(), // description (for future image support)
   bgGradient: z.string().optional(),   // override gradient for this page
+  imageUrl: z.string().optional(),     // presigned URL for illustration
+  imageS3Key: z.string().optional(),   // S3 key (resolved at render time)
+  dialog: dialogSchema.optional(),     // kid interjection after narration
   // Audio-sync timing
   startFrame: z.number().optional(),
   durationFrames: z.number().optional(),
@@ -55,6 +66,10 @@ const kidsBedtimeSchema = z.object({
   moonColor: z.string(),
   textColor: z.string(),
   accentColor: z.string(),
+  // Dialog & image options
+  dialogBubbleColor: z.string().optional(),
+  kidAvatarIcon: z.string().optional(),
+  imageVignetteOpacity: z.number().optional(),
 });
 
 export type KidsBedtimeProps = z.infer<typeof kidsBedtimeSchema>;
@@ -239,37 +254,224 @@ const StarryNight: React.FC<{
   );
 };
 
-// ── Page Turn Transition ───────────────────────────────
+// ── Crossfade Page Transition ─────────────────────────
 
-const PageTransition: React.FC<{
-  progress: number; // 0 = fully showing current page, 1 = fully showing next
+const CrossfadePage: React.FC<{
+  overlapBefore: number;
+  overlapAfter: number;
+  totalDuration: number;
   children: React.ReactNode;
-}> = ({ progress, children }) => {
-  const opacity = interpolate(progress, [0, 0.3, 0.7, 1], [1, 0, 0, 1], {
+}> = ({ overlapBefore, overlapAfter, totalDuration, children }) => {
+  const frame = useCurrentFrame();
+
+  // Fade in during the overlap-before region
+  const fadeIn = overlapBefore > 0
+    ? interpolate(frame, [0, overlapBefore], [0, 1], {
+        extrapolateLeft: 'clamp',
+        extrapolateRight: 'clamp',
+      })
+    : 1;
+
+  // Fade out during the overlap-after region
+  const fadeOutStart = totalDuration - overlapAfter;
+  const fadeOut = overlapAfter > 0
+    ? interpolate(frame, [fadeOutStart, totalDuration], [1, 0], {
+        extrapolateLeft: 'clamp',
+        extrapolateRight: 'clamp',
+      })
+    : 1;
+
+  return (
+    <AbsoluteFill style={{ opacity: fadeIn * fadeOut }}>
+      {children}
+    </AbsoluteFill>
+  );
+};
+
+// ── Illustration Image (Ken Burns) ────────────────────
+
+const IllustrationImage: React.FC<{
+  src: string;
+  durationFrames: number;
+  vignetteOpacity: number;
+}> = ({ src, durationFrames, vignetteOpacity }) => {
+  const frame = useCurrentFrame();
+
+  const scale = interpolate(frame, [0, durationFrames], [1.0, 1.08], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
 
-  const translateX = interpolate(progress, [0, 0.3, 0.7, 1], [0, -30, 30, 0], {
-    extrapolateLeft: 'clamp',
-    extrapolateRight: 'clamp',
-  });
-
-  const scale = interpolate(progress, [0, 0.5, 1], [1, 0.97, 1], {
+  const imageOpacity = interpolate(frame, [0, 30], [0, 1], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
 
   return (
+    <AbsoluteFill style={{ opacity: imageOpacity }}>
+      <AbsoluteFill style={{ transform: `scale(${scale})`, overflow: 'hidden' }}>
+        <Img
+          src={src}
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+          }}
+        />
+      </AbsoluteFill>
+      {/* Vignette overlay */}
+      <AbsoluteFill
+        style={{
+          background: `radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,${vignetteOpacity}) 100%)`,
+          pointerEvents: 'none',
+        }}
+      />
+    </AbsoluteFill>
+  );
+};
+
+// ── Dialog Bubble ─────────────────────────────────────
+
+const DIALOG_TYPE_COLORS: Record<string, string> = {
+  curiosity: '#87CEEB',
+  emotional: '#FFB6C1',
+  participatory: '#90EE90',
+};
+
+const DialogBubble: React.FC<{
+  dialog: z.infer<typeof dialogSchema>;
+  bubbleColor: string;
+  portrait: boolean;
+  fps: number;
+  enterFrame: number;
+}> = ({ dialog, bubbleColor, portrait, fps, enterFrame }) => {
+  const frame = useCurrentFrame();
+  const localFrame = frame - enterFrame;
+
+  if (localFrame < 0) return null;
+
+  const tintColor = DIALOG_TYPE_COLORS[dialog.dialogType] ?? bubbleColor;
+
+  // Bouncy entrance for kid bubble
+  const kidProgress = spring({
+    frame: localFrame,
+    fps,
+    config: { damping: 8, stiffness: 150, mass: 0.5 },
+  });
+
+  // Narrator response appears after kid bubble
+  const responseDelay = 30;
+  const responseFrame = Math.max(0, localFrame - responseDelay);
+  const responseOpacity = interpolate(responseFrame, [0, 15], [0, 1], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+  });
+  const responseY = interpolate(responseFrame, [0, 20], [10, 0], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+  });
+
+  const fontSize = portrait ? 28 : 24;
+  const responseFontSize = portrait ? 26 : 22;
+
+  return (
     <div
       style={{
-        width: '100%',
-        height: '100%',
-        opacity,
-        transform: `translateX(${translateX}px) scale(${scale})`,
+        position: 'absolute',
+        bottom: portrait ? '14%' : '12%',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        width: portrait ? '85%' : '70%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: 12,
       }}
     >
-      {children}
+      {/* Kid speech bubble */}
+      <div
+        style={{
+          transform: `scale(${kidProgress})`,
+          transformOrigin: 'bottom center',
+          backgroundColor: tintColor,
+          borderRadius: 20,
+          padding: '16px 24px',
+          position: 'relative',
+          maxWidth: '90%',
+          boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
+        }}
+      >
+        {/* Avatar circle */}
+        <div
+          style={{
+            position: 'absolute',
+            top: -18,
+            left: 16,
+            width: 36,
+            height: 36,
+            borderRadius: '50%',
+            backgroundColor: '#FFF',
+            border: `3px solid ${tintColor}`,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: 18,
+          }}
+        >
+          🧒
+        </div>
+        <p
+          style={{
+            margin: 0,
+            marginTop: 4,
+            fontSize,
+            fontFamily: 'Quicksand, Nunito, -apple-system, sans-serif',
+            fontWeight: 600,
+            color: '#1A1A2E',
+            lineHeight: 1.4,
+          }}
+        >
+          {dialog.kidText}
+        </p>
+        {/* Bubble tail */}
+        <div
+          style={{
+            position: 'absolute',
+            bottom: -10,
+            left: 30,
+            width: 0,
+            height: 0,
+            borderLeft: '10px solid transparent',
+            borderRight: '10px solid transparent',
+            borderTop: `12px solid ${tintColor}`,
+          }}
+        />
+      </div>
+
+      {/* Narrator response */}
+      <div
+        style={{
+          opacity: responseOpacity,
+          transform: `translateY(${responseY}px)`,
+          textAlign: 'center',
+          padding: '0 20px',
+        }}
+      >
+        <p
+          style={{
+            margin: 0,
+            fontSize: responseFontSize,
+            fontFamily: 'Quicksand, Nunito, -apple-system, sans-serif',
+            fontWeight: 500,
+            fontStyle: 'italic',
+            color: '#F0E6D3',
+            textShadow: '0 2px 8px rgba(0,0,0,0.5)',
+            lineHeight: 1.5,
+          }}
+        >
+          {dialog.narratorResponse}
+        </p>
+      </div>
     </div>
   );
 };
@@ -284,7 +486,10 @@ const StoryPageView: React.FC<{
   textColor: string;
   accentColor: string;
   fps: number;
-}> = ({ page, pageNumber, totalPages, portrait, textColor, accentColor, fps }) => {
+  dialogBubbleColor: string;
+  imageVignetteOpacity: number;
+  pageDurationFrames: number;
+}> = ({ page, pageNumber, totalPages, portrait, textColor, accentColor, fps, dialogBubbleColor, imageVignetteOpacity, pageDurationFrames }) => {
   const frame = useCurrentFrame();
 
   // Text fade-in with gentle spring
@@ -329,6 +534,15 @@ const StoryPageView: React.FC<{
     );
   });
 
+  const hasImage = !!page.imageUrl;
+  const hasDialog = !!page.dialog;
+  const duration = page.durationFrames ?? pageDurationFrames;
+  // Dialog appears at ~60% of page duration
+  const dialogEnterFrame = Math.round(duration * 0.6);
+  const textShadow = hasImage
+    ? '0 2px 12px rgba(0,0,0,0.7), 0 0 30px rgba(0,0,0,0.4)'
+    : '0 2px 8px rgba(0,0,0,0.3)';
+
   return (
     <AbsoluteFill
       style={{
@@ -337,6 +551,15 @@ const StoryPageView: React.FC<{
         justifyContent: 'center',
       }}
     >
+      {/* Illustration image with Ken Burns */}
+      {hasImage && (
+        <IllustrationImage
+          src={page.imageUrl!}
+          durationFrames={duration}
+          vignetteOpacity={imageVignetteOpacity}
+        />
+      )}
+
       {particles}
 
       <div
@@ -346,6 +569,7 @@ const StoryPageView: React.FC<{
           padding,
           maxWidth: portrait ? '100%' : '80%',
           textAlign: 'center',
+          zIndex: 1,
         }}
       >
         {/* Open quote */}
@@ -368,13 +592,24 @@ const StoryPageView: React.FC<{
             color: textColor,
             fontFamily: 'Quicksand, Nunito, -apple-system, sans-serif',
             fontWeight: 500,
-            textShadow: '0 2px 8px rgba(0,0,0,0.3)',
+            textShadow,
             margin: 0,
           }}
         >
           {page.text}
         </p>
       </div>
+
+      {/* Dialog bubble */}
+      {hasDialog && (
+        <DialogBubble
+          dialog={page.dialog!}
+          bubbleColor={dialogBubbleColor}
+          portrait={portrait}
+          fps={fps}
+          enterFrame={dialogEnterFrame}
+        />
+      )}
 
       {/* Page indicator */}
       <div
@@ -386,6 +621,7 @@ const StoryPageView: React.FC<{
           display: 'flex',
           gap: 8,
           opacity: textOpacity * 0.5,
+          zIndex: 2,
         }}
       >
         {Array.from({ length: totalPages }, (_, i) => (
@@ -683,20 +919,35 @@ const KidsBedtimeStory: React.FC<KidsBedtimeProps & { theme?: Theme; format?: Fo
         />
       </Sequence>
 
-      {/* Story Pages */}
+      {/* Story Pages with crossfade transitions */}
       {props.pages.map((page, i) => {
         const { start, duration } = pageTimings[i];
+        // Crossfade: extend sequence to overlap with adjacent pages
+        const overlapBefore = i > 0 ? transitionDuration : 0;
+        const overlapAfter = i < props.pages.length - 1 ? transitionDuration : 0;
+        const seqFrom = start - overlapBefore;
+        const seqDuration = duration + overlapBefore + overlapAfter;
+
         return (
-          <Sequence key={i} from={start} durationInFrames={duration}>
-            <StoryPageView
-              page={page}
-              pageNumber={i}
-              totalPages={props.pages.length}
-              portrait={portrait}
-              textColor={props.textColor}
-              accentColor={props.accentColor}
-              fps={fps}
-            />
+          <Sequence key={i} from={seqFrom} durationInFrames={seqDuration}>
+            <CrossfadePage
+              overlapBefore={overlapBefore}
+              overlapAfter={overlapAfter}
+              totalDuration={seqDuration}
+            >
+              <StoryPageView
+                page={page}
+                pageNumber={i}
+                totalPages={props.pages.length}
+                portrait={portrait}
+                textColor={props.textColor}
+                accentColor={props.accentColor}
+                fps={fps}
+                dialogBubbleColor={props.dialogBubbleColor ?? '#FFE4B5'}
+                imageVignetteOpacity={props.imageVignetteOpacity ?? 0.4}
+                pageDurationFrames={duration}
+              />
+            </CrossfadePage>
           </Sequence>
         );
       })}

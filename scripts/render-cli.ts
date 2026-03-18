@@ -12,15 +12,20 @@ import path from 'path';
 import fs from 'fs';
 
 // Register templates (side-effect imports)
-import '../src/templates/product-launch';
-import '../src/templates/quote-of-day';
-import '../src/templates/stats-recap';
-import '../src/templates/testimonial';
-import '../src/templates/announcement';
+import '../apps/renderer/templates/product-launch';
+import '../apps/renderer/templates/quote-of-day';
+import '../apps/renderer/templates/stats-recap';
+import '../apps/renderer/templates/testimonial';
+import '../apps/renderer/templates/announcement';
+import '../apps/renderer/templates/kids-bedtime-story';
+import '../apps/renderer/templates/kids-counting-fun';
+import '../apps/renderer/templates/kids-alphabet-adventure';
+import '../apps/renderer/templates/kids-icon-quiz';
+import '../apps/renderer/templates/motivational-narration';
 
-import { registry } from '../src/core/registry';
-import { getTheme } from '../src/themes';
-import { FORMATS, Format } from '../src/types';
+import { registry } from '../apps/renderer/core/registry';
+import { getTheme } from '../apps/renderer/themes';
+import { FORMATS, Format } from '../apps/renderer/types';
 
 interface CLIArgs {
   template: string;
@@ -190,7 +195,7 @@ Codec:      ${args.codec}
     // Bundle
     console.log('📦 Bundling project...');
     const bundleLocation = await bundle({
-      entryPoint: path.resolve(__dirname, '../src/index.ts'),
+      entryPoint: path.resolve(__dirname, '../apps/renderer/index.ts'),
       onProgress: (progress: number) => {
         process.stdout.write(
           `\r   Progress: ${Math.round(progress * 100)}%`

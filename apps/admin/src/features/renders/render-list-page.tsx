@@ -51,6 +51,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { Skeleton } from "@/components/ui/skeleton";
+import { TablePagination } from "@/components/ui/table-pagination";
 import { useRenders, useCreateRender, useDeleteRender, useBulkDeleteRenders, type Render } from "@/hooks/use-renders";
 import { useAllRendersSSE } from "@/hooks/use-sse";
 import { NewRenderDialog } from "./new-render-dialog";
@@ -155,6 +156,7 @@ function formatLabel(format: string) {
 export function RenderListPage() {
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [page, setPage] = useState(1);
+  const [perPage, setPerPage] = useState(20);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState<Render | null>(null);
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
@@ -166,6 +168,7 @@ export function RenderListPage() {
   const { data, isLoading, isError } = useRenders({
     status: statusFilter === "all" ? undefined : statusFilter,
     page,
+    perPage,
   });
 
   const retryRender = useCreateRender();
@@ -174,7 +177,6 @@ export function RenderListPage() {
   const progressMap = useAllRendersSSE();
 
   const renderItems = data?.items ?? [];
-  const totalPages = data?.totalPages ?? 1;
 
   const allSelected = renderItems.length > 0 && renderItems.every((r) => selectedIds.has(r.id));
   const someSelected = selectedIds.size > 0;
@@ -501,28 +503,15 @@ export function RenderListPage() {
         </Table>
       </div>
 
-      {totalPages > 1 && (
-        <div className="flex items-center justify-center gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            disabled={page <= 1}
-            onClick={() => setPage((p) => Math.max(1, p - 1))}
-          >
-            Previous
-          </Button>
-          <span className="text-sm text-muted-foreground">
-            Page {page} of {totalPages}
-          </span>
-          <Button
-            variant="outline"
-            size="sm"
-            disabled={page >= totalPages}
-            onClick={() => setPage((p) => p + 1)}
-          >
-            Next
-          </Button>
-        </div>
+      {data && (
+        <TablePagination
+          page={data.page}
+          totalPages={data.totalPages}
+          total={data.total}
+          perPage={perPage}
+          onPageChange={setPage}
+          onPerPageChange={(v) => { setPerPage(v); setPage(1); }}
+        />
       )}
 
       <NewRenderDialog open={dialogOpen} onOpenChange={setDialogOpen} />
