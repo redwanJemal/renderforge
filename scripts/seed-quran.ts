@@ -5,15 +5,17 @@
  *   1. Quran English — Arabic + English translation
  *   2. Quran Amharic — Arabic + Amharic translation
  *
+ * Each surah = 1 post (no splitting). Audio and word-timing synced from quran.com API.
+ *
  * Content Strategy:
  *   Phase 1: Juz' Amma (Surahs 78-114) — 37 short surahs, ideal for short-form video
  *   Phase 2: Popular mid-length surahs (Ya-Sin, Ar-Rahman, Al-Mulk, etc.)
- *   Phase 3: Medium surahs (30-60 ayahs) for longer recitations
+ *   Phase 3: Medium surahs for extended content
  *
  * Posting Schedule (3 posts/day):
  *   05:30 EAT — Pre-Fajr (dawn prayer prep)
  *   12:30 EAT — Dhuhr break (midday engagement)
- *   20:00 EAT — Post-Isha (evening wind-down, peak engagement)
+ *   20:00 EAT — Post-Isha (peak evening engagement)
  *
  * Run: DATABASE_URL="postgresql://..." npx tsx scripts/seed-quran.ts
  */
@@ -56,45 +58,42 @@ const POPULAR_SURAHS = [
 
 // Phase 3: Medium surahs for extended content
 const MEDIUM_SURAHS = [
-  1,   // Al-Fatihah (7 ayahs) — essential opening
-  13,  // Ar-Ra'd (43 ayahs) — thunder
-  14,  // Ibrahim (52 ayahs) — Abraham
-  19,  // Maryam (98 ayahs) — Mary
-  22,  // Al-Hajj (78 ayahs) — pilgrimage
-  24,  // An-Nur (64 ayahs) — light
-  25,  // Al-Furqan (77 ayahs) — criterion
-  29,  // Al-'Ankabut (69 ayahs) — spider
-  30,  // Ar-Rum (60 ayahs) — Romans
-  34,  // Saba (54 ayahs) — Sheba
-  35,  // Fatir (45 ayahs) — originator
-  39,  // Az-Zumar (75 ayahs) — groups
-  40,  // Ghafir (85 ayahs) — forgiver
-  41,  // Fussilat (54 ayahs) — explained in detail
-  45,  // Al-Jathiyah (37 ayahs) — crouching
-  46,  // Al-Ahqaf (35 ayahs) — sand dunes
-  47,  // Muhammad (38 ayahs) — Prophet Muhammad
-  51,  // Adh-Dhariyat (60 ayahs) — winnowing winds
-  53,  // An-Najm (62 ayahs) — star
-  54,  // Al-Qamar (55 ayahs) — moon
-  58,  // Al-Mujadila (22 ayahs) — pleading woman
-  59,  // Al-Hashr (24 ayahs) — exile
-  60,  // Al-Mumtahanah (13 ayahs) — examined
-  61,  // As-Saf (14 ayahs) — ranks
-  62,  // Al-Jumu'ah (11 ayahs) — Friday
-  63,  // Al-Munafiqun (11 ayahs) — hypocrites
-  64,  // At-Taghabun (18 ayahs) — mutual disillusion
-  65,  // At-Talaq (12 ayahs) — divorce
-  66,  // At-Tahrim (12 ayahs) — prohibition
-  68,  // Al-Qalam (52 ayahs) — pen
-  69,  // Al-Haqqah (52 ayahs) — reality
-  70,  // Al-Ma'arij (44 ayahs) — ascending stairways
+  1,   // Al-Fatihah (7 ayahs)
+  13,  // Ar-Ra'd (43 ayahs)
+  14,  // Ibrahim (52 ayahs)
+  19,  // Maryam (98 ayahs)
+  22,  // Al-Hajj (78 ayahs)
+  24,  // An-Nur (64 ayahs)
+  25,  // Al-Furqan (77 ayahs)
+  29,  // Al-'Ankabut (69 ayahs)
+  30,  // Ar-Rum (60 ayahs)
+  34,  // Saba (54 ayahs)
+  35,  // Fatir (45 ayahs)
+  39,  // Az-Zumar (75 ayahs)
+  40,  // Ghafir (85 ayahs)
+  41,  // Fussilat (54 ayahs)
+  45,  // Al-Jathiyah (37 ayahs)
+  46,  // Al-Ahqaf (35 ayahs)
+  47,  // Muhammad (38 ayahs)
+  51,  // Adh-Dhariyat (60 ayahs)
+  53,  // An-Najm (62 ayahs)
+  54,  // Al-Qamar (55 ayahs)
+  58,  // Al-Mujadila (22 ayahs)
+  59,  // Al-Hashr (24 ayahs)
+  60,  // Al-Mumtahanah (13 ayahs)
+  61,  // As-Saf (14 ayahs)
+  62,  // Al-Jumu'ah (11 ayahs)
+  63,  // Al-Munafiqun (11 ayahs)
+  64,  // At-Taghabun (18 ayahs)
+  65,  // At-Talaq (12 ayahs)
+  66,  // At-Tahrim (12 ayahs)
+  68,  // Al-Qalam (52 ayahs)
+  69,  // Al-Haqqah (52 ayahs)
+  70,  // Al-Ma'arij (44 ayahs)
 ];
 
 // Combine all — deduplicate and sort
 const ALL_SURAHS = [...new Set([...JUZ_AMMA, ...POPULAR_SURAHS, ...MEDIUM_SURAHS])].sort((a, b) => a - b);
-
-// For surahs > 30 ayahs, split into parts (max ~15 ayahs per video for optimal watch time)
-const MAX_AYAHS_PER_VIDEO = 20;
 
 interface VerseTiming {
   verse_key: string;
@@ -111,7 +110,6 @@ interface QuranVerse {
 }
 
 async function fetchVerses(chapterNum: number, translationId: number): Promise<QuranVerse[]> {
-  // Handle chapters with >50 verses by paginating
   const allVerses: QuranVerse[] = [];
   let page = 1;
   while (true) {
@@ -181,14 +179,14 @@ const CHANNELS: ChannelConfig[] = [
   },
 ];
 
-async function buildSurahPosts(chapterNum: number, translationId: number, channel: ChannelConfig) {
+async function buildSurahPost(chapterNum: number, translationId: number, channel: ChannelConfig) {
   const [chapter, verses, audio] = await Promise.all([
     fetchChapter(chapterNum),
     fetchVerses(chapterNum, translationId),
     fetchAudio(chapterNum),
   ]);
 
-  const allScenes = verses.map((v, i) => {
+  const scenes = verses.map((v, i) => {
     const timing = audio.timings[i];
     const trans = v.translations?.[0]?.text;
     return {
@@ -201,61 +199,38 @@ async function buildSurahPosts(chapterNum: number, translationId: number, channe
     };
   });
 
-  // Split into parts if surah is long
-  const parts: typeof allScenes[] = [];
-  if (allScenes.length <= MAX_AYAHS_PER_VIDEO) {
-    parts.push(allScenes);
-  } else {
-    for (let i = 0; i < allScenes.length; i += MAX_AYAHS_PER_VIDEO) {
-      parts.push(allScenes.slice(i, i + MAX_AYAHS_PER_VIDEO));
-    }
-  }
+  const lastTiming = audio.timings[audio.timings.length - 1];
+  const totalDurationMs = lastTiming ? lastTiming.timestamp_to : 15000;
+  const firstVerse = scenes[0]?.verseKey.split(':')[1] ?? '1';
+  const lastVerse = scenes[scenes.length - 1]?.verseKey.split(':')[1] ?? '1';
 
-  return parts.map((scenes, partIndex) => {
-    // Rebase timing for split parts — offset so each part starts at 0ms
-    const baseMs = scenes[0].startMs;
-    const rebasedScenes = scenes.map(s => ({
-      ...s,
-      startMs: s.startMs - baseMs,
-      endMs: s.endMs - baseMs,
-      wordSegments: s.wordSegments.map(([idx, start, end]) =>
-        [idx, start - baseMs, end - baseMs] as [number, number, number]
-      ),
-    }));
-
-    const lastTiming = rebasedScenes[rebasedScenes.length - 1];
-    const totalDurationMs = lastTiming ? lastTiming.endMs : 15000;
-
-    const partLabel = parts.length > 1 ? ` (Part ${partIndex + 1}/${parts.length})` : '';
-    const firstVerse = scenes[0].verseKey.split(':')[1];
-    const lastVerse = scenes[scenes.length - 1].verseKey.split(':')[1];
-    const verseRange = parts.length > 1 ? ` [${firstVerse}-${lastVerse}]` : '';
-
-    return {
-      title: `${chapter.name_simple} — ${chapter.name_arabic}${partLabel}${verseRange}`,
-      sceneProps: {
-        surahName: chapter.name_simple,
-        surahNameArabic: chapter.name_arabic,
-        surahNumber: chapterNum,
-        scenes: rebasedScenes,
-        reciterName: 'Mishary Rashid Al-Afasy',
-        audioUrl: audio.audioUrl,
-        brandName: channel.brandName,
-        socialHandle: channel.socialHandle,
-        ctaText: channel.ctaText,
-        introHoldFrames: 75,
-        outroHoldFrames: 90,
-        accentColor: '#C9A84C',
-        secondaryAccent: '#8B6914',
-        bgGradient: ['#0A0A12', '#0F1028', '#08081A'],
-        highlightColor: '#F5D778',
-        ornamentOpacity: 0.15,
-        transitionMs: 500,
-      },
-      totalDurationMs,
-      ayahCount: scenes.length,
-    };
-  });
+  return {
+    title: `${chapter.name_simple} — ${chapter.name_arabic}`,
+    surahName: chapter.name_simple,
+    surahNameArabic: chapter.name_arabic,
+    ayahCount: scenes.length,
+    ayahRange: `${firstVerse}-${lastVerse}`,
+    sceneProps: {
+      surahName: chapter.name_simple,
+      surahNameArabic: chapter.name_arabic,
+      surahNumber: chapterNum,
+      scenes,
+      reciterName: 'Mishary Rashid Al-Afasy',
+      audioUrl: audio.audioUrl,
+      brandName: channel.brandName,
+      socialHandle: channel.socialHandle,
+      ctaText: channel.ctaText,
+      introHoldFrames: 75,
+      outroHoldFrames: 90,
+      accentColor: '#C9A84C',
+      secondaryAccent: '#8B6914',
+      bgGradient: ['#0A0A12', '#0F1028', '#08081A'],
+      highlightColor: '#F5D778',
+      ornamentOpacity: 0.15,
+      transitionMs: 500,
+    },
+    totalDurationMs,
+  };
 }
 
 async function seedChannel(channel: ChannelConfig) {
@@ -326,22 +301,22 @@ async function seedChannel(channel: ChannelConfig) {
     console.log(`  Cleaned ${existingPosts.length} existing posts`);
   }
 
-  // Clean existing schedules for this project's quran-ayah template
+  // Clean existing schedules
   await db.delete(projectSchedules).where(eq(projectSchedules.projectId, projectId));
 
-  // Create posting schedules — 3 posts/day, every day
+  // Create posting schedule — 3 posts/day, every day
   await db.insert(projectSchedules).values({
     projectId,
     templateId: 'quran-ayah',
     format: 'story',
     postsPerDay: 3,
-    daysOfWeek: [0, 1, 2, 3, 4, 5, 6], // Every day
+    daysOfWeek: [0, 1, 2, 3, 4, 5, 6],
     autoRender: true,
     enabled: true,
   });
   console.log(`  Schedule: 3 posts/day, every day (story format)`);
 
-  // Fetch and seed all surahs
+  // Fetch and seed all surahs — 1 surah = 1 post (no splitting)
   console.log(`\n  Fetching ${ALL_SURAHS.length} surahs...\n`);
   const postValues: Array<{
     nicheId: string;
@@ -357,25 +332,30 @@ async function seedChannel(channel: ChannelConfig) {
 
   for (const chapterNum of ALL_SURAHS) {
     try {
-      const surahPosts = await buildSurahPosts(chapterNum, channel.translationId, channel);
+      const post = await buildSurahPost(chapterNum, channel.translationId, channel);
+      const durationMin = (post.totalDurationMs / 60000).toFixed(1);
+      console.log(`    ${post.title} — ${post.ayahCount} ayahs, ${durationMin}m`);
+      totalAyahs += post.ayahCount;
 
-      for (const post of surahPosts) {
-        console.log(`    ${post.title} — ${post.ayahCount} ayahs, ${(post.totalDurationMs / 1000).toFixed(1)}s`);
-        totalAyahs += post.ayahCount;
-
-        postValues.push({
-          nicheId, projectId,
-          title: post.title,
-          status: 'ready' as const,
-          theme: 'default',
-          templateId: 'quran-ayah',
-          format: 'story',
-          metadata: {
-            sceneProps: post.sceneProps,
-            totalDurationMs: post.totalDurationMs,
+      postValues.push({
+        nicheId, projectId,
+        title: post.title,
+        status: 'ready' as const,
+        theme: 'default',
+        templateId: 'quran-ayah',
+        format: 'story',
+        metadata: {
+          sceneProps: post.sceneProps,
+          totalDurationMs: post.totalDurationMs,
+          // Thumbnail metadata — used by render worker
+          thumbnailMeta: {
+            surahName: post.surahName,
+            surahNameArabic: post.surahNameArabic,
+            ayahRange: post.ayahRange,
+            ayahCount: post.ayahCount,
           },
-        });
-      }
+        },
+      });
 
       // Rate limit API calls
       await new Promise(r => setTimeout(r, 300));
@@ -400,9 +380,9 @@ async function seedChannel(channel: ChannelConfig) {
 
 async function main() {
   console.log("═══════════════════════════════════════════════════");
-  console.log("  Quran — Multi-Channel Mass Seed");
+  console.log("  Quran — Multi-Channel Seed");
   console.log("═══════════════════════════════════════════════════");
-  console.log(`  Surahs: ${ALL_SURAHS.length} (Juz' Amma + Popular + Medium)`);
+  console.log(`  Surahs: ${ALL_SURAHS.length} (1 post per surah, no splitting)`);
   console.log(`  Channels: ${CHANNELS.length} (English + Amharic)`);
   console.log(`  Schedule: 3 posts/day, 7 days/week`);
   console.log("═══════════════════════════════════════════════════");

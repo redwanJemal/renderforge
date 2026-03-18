@@ -337,8 +337,11 @@ async function processRenderJob(job: Job<RenderJobData>) {
         const audioDurationMs = lastScene?.endMs ?? 0;
         const introFrames = (templateProps.introHoldFrames as number) ?? 75;
         const outroFrames = (templateProps.outroHoldFrames as number) ?? 90;
-        // intro + audio + gap + outro + fade
-        totalFrames = introFrames + Math.ceil((audioDurationMs / 1000) * fps) + 10 + outroFrames + 20;
+        const transitionMs = (templateProps.transitionMs as number) ?? 500;
+        const transitionFrames = Math.ceil((transitionMs / 1000) * fps);
+        // intro + audio + hold for last verse translation + transition gap + outro + final fade
+        const lastVerseHoldFrames = 60; // 2s hold after last ayah for translation to show
+        totalFrames = introFrames + Math.ceil((audioDurationMs / 1000) * fps) + lastVerseHoldFrames + transitionFrames + outroFrames + 30;
       } else {
         // For vocab-card and similar, add intro + base content + outro
         const baseFrames = REGISTRY_DIRECT_TEMPLATES[templateId].durationInFrames;
@@ -727,6 +730,17 @@ async function processRenderJob(job: Job<RenderJobData>) {
         // Kids: capture at introDurationFrames + 40 (first section with objects visible)
         const kidsIntro = (templateProps.introDurationFrames as number) ?? 120;
         thumbFrame = kidsIntro + 40;
+      } else if (isRegistryDirectTemplate(templateId) && templateId === "quran-ayah") {
+        // Quran: capture when first ayah Arabic text is fully visible
+        const introFrames = (templateProps.introHoldFrames as number) ?? 75;
+        const quranScenes = templateProps.scenes as Array<{ startMs: number; endMs: number }> | undefined;
+        if (quranScenes && quranScenes.length > 0) {
+          // Midpoint of first ayah (after intro offset)
+          const firstAyahMidMs = (quranScenes[0].startMs + quranScenes[0].endMs) / 2;
+          thumbFrame = introFrames + Math.round((firstAyahMidMs / 1000) * fps);
+        } else {
+          thumbFrame = introFrames + 60; // ~2s after intro
+        }
       } else {
         const firstScene = (templateProps.scenes as Array<{ startFrame: number; durationFrames: number }>)?.[0];
         const introFrames = (templateProps.introHoldFrames as number) ?? 60;
