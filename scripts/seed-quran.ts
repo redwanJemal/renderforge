@@ -104,6 +104,7 @@ interface ChannelConfig {
   translationId: number;
   nicheSlug: string;
   nicheName: string;
+  logoS3Key?: string;
 }
 
 const CHANNELS: ChannelConfig[] = [
@@ -128,6 +129,7 @@ const CHANNELS: ChannelConfig[] = [
     translationId: TRANSLATION_AM,
     nicheSlug: 'quran-amharic',
     nicheName: 'Quran Amharic Recitation',
+    logoS3Key: 'logos/ethio-islamic-logo.png',
   },
 ];
 
@@ -263,6 +265,7 @@ async function seedChannel(channel: ChannelConfig) {
     await db.update(projects).set({
       name: channel.name,
       description: channel.description,
+      logoUrl: channel.logoS3Key ?? null,
       socialHandles: {
         tiktok: channel.socialHandle,
         youtube: channel.name.replace(/\s/g, ''),
@@ -279,6 +282,7 @@ async function seedChannel(channel: ChannelConfig) {
       name: channel.name,
       slug: channel.slug,
       description: channel.description,
+      logoUrl: channel.logoS3Key,
       colorPalette: { primary: '#C9A84C', secondary: '#8B6914', accent: '#C9A84C', background: '#0A0A12' },
       socialHandles: {
         tiktok: channel.socialHandle,
