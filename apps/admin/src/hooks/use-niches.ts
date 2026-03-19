@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { api } from "@/lib/api";
 
-type Niche = {
+export type Niche = {
   id: string;
   slug: string;
   name: string;
+  projectId: string | null;
   defaultTemplateId: string;
   voiceId: string;
   languages: string[];

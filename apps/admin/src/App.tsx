@@ -14,6 +14,7 @@ import { SettingsPage } from "@/features/settings/settings-page";
 import { ImageLibraryPage } from "@/features/images/image-library-page";
 import { ProjectListPage } from "@/features/projects/project-list-page";
 import { ProjectDetailPage } from "@/features/projects/project-detail-page";
+import { QuranBuilderPage } from "@/features/quran/quran-builder-page";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -41,6 +42,7 @@ export function App() {
                 <Route path="renders/:id" element={<RenderDetailPage />} />
                 <Route path="images" element={<ImageLibraryPage />} />
                 <Route path="niches" element={<NicheListPage />} />
+                <Route path="quran-builder" element={<QuranBuilderPage />} />
                 <Route path="analytics" element={<AnalyticsPage />} />
                 <Route path="settings" element={<SettingsPage />} />
 

@@ -9,6 +9,7 @@ import {
   ChevronsLeft,
   ChevronsRight,
   Clapperboard,
+  BookOpen,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
@@ -21,6 +22,7 @@ import {
 const navItems = [
   { href: "/", label: "Dashboard", icon: LayoutDashboard },
   { href: "/projects", label: "Projects", icon: FolderKanban },
+  { href: "/quran-builder", label: "Quran Builder", icon: BookOpen },
   { href: "/images", label: "Images", icon: ImageIcon },
   { href: "/analytics", label: "Analytics", icon: BarChart3 },
   { href: "/settings", label: "Settings", icon: Settings },

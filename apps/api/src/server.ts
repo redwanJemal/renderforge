@@ -21,6 +21,7 @@ import { publishingRouter } from "./routes/publishing.js";
 import { storageProxy } from "./routes/storage-proxy.js";
 import { imagesRouter } from "./routes/images.js";
 import { projectsRouter } from "./routes/projects.js";
+import { quranRouter } from "./routes/quran.js";
 import { createRenderWorker } from "./jobs/render-worker.js";
 import { createPublishWorker } from "./jobs/publish-worker.js";
 import { createScheduleWorker } from "./jobs/schedule-worker.js";
@@ -52,6 +53,7 @@ app.route("/api/settings", settingsRouter);
 app.route("/api/publishing", publishingRouter);
 app.route("/api/images", imagesRouter);
 app.route("/api/projects", projectsRouter);
+app.route("/api/quran", quranRouter);
 app.route("/api/storage", storageProxy);
 
 // Root
