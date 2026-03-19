@@ -15,7 +15,7 @@ if (!process.env.DATABASE_URL) {
   process.env.DATABASE_URL = "postgresql://renderforge:renderforge@localhost:5432/renderforge";
 }
 
-import { db, projects, projectSchedules, niches, posts, renders, eq, inArray } from "@renderforge/db";
+import { db, projects, projectSchedules, niches, posts, renders, scheduledPosts, eq, inArray } from "@renderforge/db";
 
 const RECITER_ID = 7; // Mishary Al-Afasy
 const TRANSLATION_EN = 20; // Sahih International
@@ -37,6 +37,18 @@ const MEDIUM_SURAHS = [
 ];
 
 const ALL_SURAHS = [...new Set([...JUZ_AMMA, ...POPULAR_SURAHS, ...MEDIUM_SURAHS])].sort((a, b) => a - b);
+
+// ── Color Themes — rotate for visual variety ─────────────────────────────
+const THEMES = [
+  { accent: '#C9A84C', secondary: '#8B6914', highlight: '#F5D778', bg: ['#0A0A12', '#0F1028', '#08081A'] }, // Classic Gold
+  { accent: '#22C55E', secondary: '#166534', highlight: '#86EFAC', bg: ['#041A0E', '#0A2E1A', '#031208'] }, // Emerald
+  { accent: '#60A5FA', secondary: '#1E40AF', highlight: '#93C5FD', bg: ['#0A0F1A', '#0F1A30', '#080D18'] }, // Sapphire Blue
+  { accent: '#A78BFA', secondary: '#6D28D9', highlight: '#C4B5FD', bg: ['#0F0A1A', '#1A1035', '#0D0B14'] }, // Royal Purple
+  { accent: '#F472B6', secondary: '#BE185D', highlight: '#FBCFE8', bg: ['#1A0A12', '#2E0F1A', '#140810'] }, // Rose
+  { accent: '#FB923C', secondary: '#C2410C', highlight: '#FED7AA', bg: ['#1A100A', '#2E1A0F', '#140D08'] }, // Amber
+  { accent: '#2DD4BF', secondary: '#0F766E', highlight: '#99F6E4', bg: ['#0A1A18', '#0F2E28', '#081410'] }, // Teal
+  { accent: '#E2E8F0', secondary: '#94A3B8', highlight: '#F8FAFC', bg: ['#0F1115', '#1A1E25', '#0B0E12'] }, // Silver
+];
 
 interface VerseTiming {
   verse_key: string;
@@ -191,7 +203,7 @@ function rebaseScenes(scenes: Scene[], baseMs: number): Scene[] {
   }));
 }
 
-async function buildSurahPosts(chapterNum: number, translationId: number, channel: ChannelConfig) {
+async function buildSurahPosts(chapterNum: number, translationId: number, channel: ChannelConfig, themeIndex: number) {
   const [chapter, verses, audio] = await Promise.all([
     fetchChapter(chapterNum),
     fetchVerses(chapterNum, translationId),
@@ -222,6 +234,8 @@ async function buildSurahPosts(chapterNum: number, translationId: number, channe
     const partLabel = parts.length > 1 ? ` (${partIndex + 1}/${parts.length})` : '';
     const verseRange = `${firstVerse}-${lastVerse}`;
 
+    const theme = THEMES[(themeIndex + partIndex) % THEMES.length];
+
     return {
       title: `${chapter.name_simple} — ${chapter.name_arabic}${partLabel}`,
       surahName: chapter.name_simple,
@@ -242,10 +256,10 @@ async function buildSurahPosts(chapterNum: number, translationId: number, channe
         ctaText: channel.ctaText,
         introHoldFrames: 75,
         outroHoldFrames: 90,
-        accentColor: '#C9A84C',
-        secondaryAccent: '#8B6914',
-        bgGradient: ['#0A0A12', '#0F1028', '#08081A'],
-        highlightColor: '#F5D778',
+        accentColor: theme.accent,
+        secondaryAccent: theme.secondary,
+        bgGradient: theme.bg,
+        highlightColor: theme.highlight,
         ornamentOpacity: 0.15,
         transitionMs: 500,
       },
@@ -318,7 +332,13 @@ async function seedChannel(channel: ChannelConfig) {
   // Clean existing
   const existingPosts = await db.select({ id: posts.id }).from(posts).where(eq(posts.nicheId, nicheId));
   if (existingPosts.length > 0) {
-    await db.delete(renders).where(inArray(renders.postId, existingPosts.map(p => p.id)));
+    const postIds = existingPosts.map(p => p.id);
+    // Clean scheduled_posts that reference renders for these posts
+    const existingRenders = await db.select({ id: renders.id }).from(renders).where(inArray(renders.postId, postIds));
+    if (existingRenders.length > 0) {
+      await db.delete(scheduledPosts).where(inArray(scheduledPosts.renderId, existingRenders.map(r => r.id)));
+    }
+    await db.delete(renders).where(inArray(renders.postId, postIds));
     await db.delete(posts).where(eq(posts.nicheId, nicheId));
     console.log(`  Cleaned ${existingPosts.length} existing posts`);
   }
@@ -352,9 +372,10 @@ async function seedChannel(channel: ChannelConfig) {
   }> = [];
   let totalAyahs = 0;
 
-  for (const chapterNum of ALL_SURAHS) {
+  for (let surahIdx = 0; surahIdx < ALL_SURAHS.length; surahIdx++) {
+    const chapterNum = ALL_SURAHS[surahIdx];
     try {
-      const surahPosts = await buildSurahPosts(chapterNum, channel.translationId, channel);
+      const surahPosts = await buildSurahPosts(chapterNum, channel.translationId, channel, surahIdx);
 
       for (const post of surahPosts) {
         const durationMin = (post.totalDurationMs / 60000).toFixed(1);

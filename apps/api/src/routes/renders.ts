@@ -180,20 +180,114 @@ rendersRouter.post("/batch", async (c) => {
   return c.json({ renders: created, count: created.length }, 201);
 });
 
-// Delete a render
+// ── Helper: cancel a BullMQ job by jobId ──
+async function cancelJob(jobId: string | null): Promise<boolean> {
+  if (!jobId) return false;
+  const queue = getRenderQueue();
+  try {
+    const job = await queue.getJob(jobId);
+    if (!job) return false;
+    const state = await job.getState();
+    if (state === "waiting" || state === "delayed") {
+      await job.remove();
+      return true;
+    }
+    if (state === "active") {
+      await job.moveToFailed(new Error("Cancelled by user"), "0", true);
+      return true;
+    }
+    return false;
+  } catch {
+    return false;
+  }
+}
+
+// Cancel a render (stop queued/active job)
+rendersRouter.post("/:id/cancel", async (c) => {
+  const id = c.req.param("id");
+  const [render] = await db.select().from(renders).where(eq(renders.id, id)).limit(1);
+  if (!render) return c.json({ error: "Not found" }, 404);
+
+  if (render.status === "completed" || render.status === "cancelled") {
+    return c.json({ error: `Render is already ${render.status}` }, 400);
+  }
+
+  // Cancel the BullMQ job
+  await cancelJob(render.jobId);
+
+  // Update DB status
+  await db.update(renders).set({
+    status: "cancelled",
+    error: "Cancelled by user",
+    updatedAt: new Date(),
+  }).where(eq(renders.id, id));
+
+  return c.json({ success: true, id, status: "cancelled" });
+});
+
+// Bulk cancel renders
+rendersRouter.post("/bulk-cancel", async (c) => {
+  const { ids } = z.object({ ids: z.array(z.string().uuid()) }).parse(await c.req.json());
+  if (ids.length === 0) return c.json({ cancelled: 0 });
+
+  const items = await db.select().from(renders).where(inArray(renders.id, ids));
+  let cancelled = 0;
+
+  for (const render of items) {
+    if (render.status === "completed" || render.status === "cancelled") continue;
+    await cancelJob(render.jobId);
+    await db.update(renders).set({
+      status: "cancelled", error: "Cancelled by user", updatedAt: new Date(),
+    }).where(eq(renders.id, render.id));
+    cancelled++;
+  }
+
+  return c.json({ cancelled });
+});
+
+// Drain queue — cancel ALL queued/waiting jobs
+rendersRouter.post("/drain", async (c) => {
+  const queue = getRenderQueue();
+
+  // Get all waiting jobs and remove them
+  const waiting = await queue.getJobs(["waiting", "delayed"]);
+  let drained = 0;
+
+  for (const job of waiting) {
+    try {
+      const renderId = job.data?.renderId;
+      await job.remove();
+      if (renderId) {
+        await db.update(renders).set({
+          status: "cancelled", error: "Queue drained", updatedAt: new Date(),
+        }).where(eq(renders.id, renderId));
+      }
+      drained++;
+    } catch {
+      // Job may have already been processed
+    }
+  }
+
+  return c.json({ drained, message: `${drained} queued jobs removed` });
+});
+
+// Delete a render (also cancels the job)
 rendersRouter.delete("/:id", async (c) => {
   const id = c.req.param("id");
   const [render] = await db.select().from(renders).where(eq(renders.id, id)).limit(1);
   if (!render) return c.json({ error: "Not found" }, 404);
 
-  // If it has an output file in S3, delete it
+  // Cancel BullMQ job if still running/queued
+  await cancelJob(render.jobId);
+
+  // Delete S3 files
   if (render.outputUrl) {
     try {
       const { storage } = await import("../services/storage.js");
-      const key = `renders/${render.id}.mp4`;
-      await storage.delete(key);
+      await storage.delete(`renders/${render.id}.mp4`);
+      await storage.delete(`thumbnails/${render.id}.jpg`);
     } catch {
-      // File may not exist, continue with DB deletion
+      // File may not exist
     }
   }
 
@@ -201,20 +295,22 @@ rendersRouter.delete("/:id", async (c) => {
   return c.json({ success: true });
 });
 
-// Bulk delete renders
+// Bulk delete renders (also cancels jobs)
 rendersRouter.post("/bulk-delete", async (c) => {
   const { ids } = z.object({ ids: z.array(z.string().uuid()) }).parse(await c.req.json());
   if (ids.length === 0) return c.json({ deleted: 0 });
 
-  // Delete S3 files
-  for (const id of ids) {
+  const items = await db.select().from(renders).where(inArray(renders.id, ids));
+
+  for (const render of items) {
+    // Cancel job
+    await cancelJob(render.jobId);
+    // Delete S3 files
     try {
       const { storage } = await import("../services/storage.js");
-      await storage.delete(`renders/${id}.mp4`);
-      await storage.delete(`thumbnails/${id}.jpg`);
-    } catch {
-      // Continue if file doesn't exist
-    }
+      await storage.delete(`renders/${render.id}.mp4`);
+      await storage.delete(`thumbnails/${render.id}.jpg`);
+    } catch { /* continue */ }
   }
 
   await db.delete(renders).where(inArray(renders.id, ids));
@@ -289,6 +385,39 @@ rendersRouter.get("/:id/download", async (c) => {
     });
   } catch {
     return c.json({ error: "File not found in storage" }, 404);
+  }
+});
+
+// Download render thumbnail
+rendersRouter.get("/:id/thumbnail", async (c) => {
+  const [render] = await db
+    .select({ id: renders.id, thumbnailUrl: renders.thumbnailUrl, postId: renders.postId })
+    .from(renders)
+    .where(eq(renders.id, c.req.param("id")))
+    .limit(1);
+  if (!render) return c.json({ error: "Not found" }, 404);
+  if (!render.thumbnailUrl) return c.json({ error: "No thumbnail available" }, 404);
+
+  try {
+    const { storage } = await import("../services/storage.js");
+    const key = render.thumbnailUrl;
+
+    // Get post title for filename
+    const [post] = await db.select({ title: posts.title }).from(posts).where(eq(posts.id, render.postId)).limit(1);
+    const safeTitle = (post?.title ?? "thumbnail").replace(/[^a-zA-Z0-9_-]/g, "_").substring(0, 50);
+    const filename = `${safeTitle}-thumb.jpg`;
+
+    const buffer = await storage.download(key);
+    return new Response(buffer, {
+      status: 200,
+      headers: {
+        "Content-Type": "image/jpeg",
+        "Content-Disposition": `attachment; filename="${filename}"`,
+        "Content-Length": String(buffer.length),
+      },
+    });
+  } catch {
+    return c.json({ error: "Thumbnail not found in storage" }, 404);
   }
 });
 

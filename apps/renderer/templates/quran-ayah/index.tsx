@@ -308,7 +308,7 @@ const AyahScene: React.FC<{
       {/* Arabic text with word reveal + highlighting */}
       <div style={{
         display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center',
-        gap: portrait ? 16 : 12, direction: 'rtl', lineHeight: 2.4, maxWidth: '95%',
+        gap: portrait ? 18 : 14, direction: 'rtl', lineHeight: 2.6, maxWidth: '95%',
       }}>
         {arabicWords.map((word, i) => {
           const wordIndex = i + 1;
@@ -320,7 +320,7 @@ const AyahScene: React.FC<{
 
           return (
             <span key={i} style={{
-              fontSize: responsiveFontSize(portrait ? 48 : 40, format, 'heading'),
+              fontSize: responsiveFontSize(portrait ? 58 : 46, format, 'heading'),
               fontFamily: '"Noto Sans Arabic", "Amiri", "Traditional Arabic", serif',
               color: isHighlighted ? highlightColor : wasHighlighted ? '#FFFFFFDD' : '#FFFFFF90',
               fontWeight: 400, display: 'inline-block', opacity: wordOpacity,
@@ -331,31 +331,19 @@ const AyahScene: React.FC<{
             </span>
           );
         })}
-        <VerseNumber number={verseNum} color={accentColor} size={portrait ? 34 : 30} />
+        <VerseNumber number={verseNum} color={accentColor} size={portrait ? 38 : 32} />
       </div>
 
       {/* Translation */}
       {scene.translation && (
         <div style={{
           opacity: translationOpacity, maxWidth: '90%',
-          fontSize: responsiveFontSize(portrait ? 19 : 17, format, 'body'),
+          fontSize: responsiveFontSize(portrait ? 26 : 20, format, 'body'),
           fontFamily: 'Inter, "Noto Sans Ethiopic", sans-serif',
-          color: 'rgba(255,255,255,0.65)', fontWeight: 400, fontStyle: 'italic',
+          color: 'rgba(255,255,255,0.8)', fontWeight: 400, fontStyle: 'italic',
           textAlign: 'center', lineHeight: 1.7,
         }}>
           {scene.translation.replace(/<[^>]*>/g, '')}
-        </div>
-      )}
-
-      {/* Scene dots */}
-      {totalScenes > 1 && (
-        <div style={{ position: 'absolute', bottom: portrait ? 80 : 40, display: 'flex', alignItems: 'center', gap: 5 }}>
-          {Array.from({ length: totalScenes }, (_, i) => (
-            <div key={i} style={{
-              width: i === sceneIndex ? 22 : 5, height: 5, borderRadius: 3,
-              background: i === sceneIndex ? accentColor : `${accentColor}35`,
-            }} />
-          ))}
         </div>
       )}
     </AbsoluteFill>
@@ -451,17 +439,21 @@ const QuranAyah: React.FC<QuranAyahProps & { theme: Theme; format: Format }> = (
       {/* Reciter (during ayah scenes only) */}
       {frame > introHoldFrames && frame < outroStartFrame && (
         <div style={{
-          position: 'absolute', bottom: portrait ? 45 : 20,
+          position: 'absolute', bottom: portrait ? 55 : 25,
           left: 0, right: 0, display: 'flex', justifyContent: 'center',
-          opacity: 0.35,
         }}>
-          <span style={{
-            fontSize: responsiveFontSize(11, format, 'caption'),
-            fontFamily: 'Inter, sans-serif', color: `${accentColor}90`,
-            letterSpacing: 1.5, textTransform: 'uppercase',
+          <div style={{
+            padding: '6px 18px', borderRadius: 16,
+            background: 'rgba(0,0,0,0.35)', backdropFilter: 'blur(8px)',
           }}>
-            {reciterName}
-          </span>
+            <span style={{
+              fontSize: responsiveFontSize(14, format, 'caption'),
+              fontFamily: 'Inter, sans-serif', color: `${accentColor}DD`,
+              letterSpacing: 1.5, textTransform: 'uppercase', fontWeight: 500,
+            }}>
+              {reciterName}
+            </span>
+          </div>
         </div>
       )}
 

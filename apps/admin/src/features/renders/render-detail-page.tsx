@@ -81,6 +81,27 @@ function formatLabel(format: string) {
   }
 }
 
+async function downloadThumbnail(renderId: string) {
+  const token = localStorage.getItem("rf_token");
+  const res = await fetch(`/api/renders/${renderId}/thumbnail`, {
+    headers: token ? { Authorization: `Bearer ${token}` } : {},
+  });
+  if (!res.ok) {
+    toast.error("Thumbnail download failed");
+    return;
+  }
+  const blob = await res.blob();
+  const disposition = res.headers.get("content-disposition");
+  const match = disposition?.match(/filename="?([^"]+)"?/);
+  const filename = match?.[1] || `thumbnail-${renderId}.jpg`;
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
 async function downloadRender(renderId: string) {
   const token = localStorage.getItem("rf_token");
   const res = await fetch(`/api/renders/${renderId}/download`, {
@@ -367,11 +388,18 @@ export function RenderDetailPage() {
             </div>
             {render.thumbnailUrl && (
               <div className="mt-4">
-                <p className="text-sm text-muted-foreground mb-2">Thumbnail</p>
+                <div className="flex items-center justify-between mb-2">
+                  <p className="text-sm text-muted-foreground">Thumbnail</p>
+                  <Button variant="ghost" size="sm" onClick={() => downloadThumbnail(render.id)}>
+                    <Download className="mr-1 h-3 w-3" />
+                    Download
+                  </Button>
+                </div>
                 <img
                   src={render.thumbnailUrl}
                   alt="Thumbnail"
-                  className="rounded-lg border max-h-[200px] object-contain"
+                  className="rounded-lg border max-h-[200px] object-contain cursor-pointer"
+                  onClick={() => downloadThumbnail(render.id)}
                 />
               </div>
             )}
