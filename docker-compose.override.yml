@@ -1,19 +1,16 @@
 services:
-  # Stub postgres — real DB is Coolify-managed renderforge-db
+  # No volumes — fresh DB each deploy, setup wizard seeds on first boot
   postgres:
-    entrypoint: ["sh", "-c", "while true; do sleep 3600; done"]
-    restart: "no"
-    healthcheck:
-      test: ["CMD-SHELL", "true"]
-      interval: 2s
-      timeout: 2s
-      retries: 1
+    restart: unless-stopped
+
+  redis:
+    restart: unless-stopped
 
   api:
     environment:
       - NODE_ENV=production
       - PORT=3100
-      - DATABASE_URL=postgresql://renderforge:renderforge@renderforge-db:5432/renderforge
+      - DATABASE_URL=postgresql://renderforge:renderforge@postgres:5432/renderforge
       - REDIS_URL=redis://redis:6379
       - JWT_SECRET=${JWT_SECRET:-renderforge-production-secret}
       - S3_ENDPOINT=${S3_ENDPOINT}
@@ -21,14 +18,6 @@ services:
       - S3_SECRET_KEY=${S3_SECRET_KEY}
       - S3_BUCKET=${S3_BUCKET:-forgebase}
       - SEED_PROJECTS=${SEED_PROJECTS:-yld,quran,linguaforge,kids}
-    networks:
-      - default
-      - renderforge-internal
 
   admin:
     restart: on-failure
-
-networks:
-  renderforge-internal:
-    name: renderforge_renderforge-internal
-    external: true
