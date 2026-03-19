@@ -113,10 +113,18 @@ export async function seedKids() {
 
   const nicheMap = new Map<string, string>();
   for (const n of nicheData) {
-    const [niche] = await db.insert(niches).values({ ...n, projectId: project.id }).returning();
-    nicheMap.set(n.slug, niche.id);
+    // Check if niche slug already exists (e.g. YLD seeder creates kids-bedtime)
+    const existing = await db.select({ id: niches.id }).from(niches).where(eq(niches.slug, n.slug)).limit(1);
+    if (existing.length > 0) {
+      // Update to link to this project
+      await db.update(niches).set({ projectId: project.id, name: n.name, defaultTemplateId: n.defaultTemplateId }).where(eq(niches.id, existing[0].id));
+      nicheMap.set(n.slug, existing[0].id);
+    } else {
+      const [niche] = await db.insert(niches).values({ ...n, projectId: project.id }).returning();
+      nicheMap.set(n.slug, niche.id);
+    }
   }
-  console.log(`  ${nicheData.length} niches created`);
+  console.log(`  ${nicheData.length} niches created/linked`);
 
   const allPosts: Array<{
     nicheId: string;
