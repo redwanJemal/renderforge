@@ -314,9 +314,31 @@ const AyahScene: React.FC<{
           const wordIndex = i + 1;
           const isHighlighted = isActive && wordIndex === activeWordIndex;
           const wasHighlighted = isActive && (activeWordIndex > wordIndex || verseComplete);
+
+          // Find the word segment — try exact index match first, then positional
           const seg = scene.wordSegments.find((s) => s[0] === wordIndex);
-          const wordRevealFrame = seg ? Math.round(((seg[1] + audioOffsetMs) / 1000) * fps) : enterStart;
-          const wordOpacity = interpolate(frame, [wordRevealFrame - 3, wordRevealFrame + 5], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+
+          // Calculate reveal frame: word only appears when audio reaches it
+          let wordRevealFrame: number;
+          if (seg) {
+            // Has segment data — reveal exactly when audio reaches this word
+            wordRevealFrame = Math.round(((seg[1] + audioOffsetMs) / 1000) * fps);
+          } else if (scene.wordSegments.length > 0) {
+            // No segment for this word — interpolate based on position in verse
+            // Spread unmatched words evenly across the verse duration
+            const firstSegMs = scene.wordSegments[0][1];
+            const lastSegMs = scene.wordSegments[scene.wordSegments.length - 1][2];
+            const verseDurationMs = lastSegMs - firstSegMs;
+            const progress = arabicWords.length > 1 ? i / (arabicWords.length - 1) : 0;
+            const estimatedMs = firstSegMs + verseDurationMs * progress;
+            wordRevealFrame = Math.round(((estimatedMs + audioOffsetMs) / 1000) * fps);
+          } else {
+            // No segments at all — reveal progressively after scene start
+            wordRevealFrame = sceneStartFrame + i * 3;
+          }
+
+          // Word stays hidden (opacity 0) until its reveal frame
+          const wordOpacity = interpolate(frame, [wordRevealFrame, wordRevealFrame + 8], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
 
           return (
             <span key={i} style={{
