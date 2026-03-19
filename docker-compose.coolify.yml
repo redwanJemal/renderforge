@@ -19,6 +19,7 @@ services:
       - S3_SECRET_KEY=${S3_SECRET_KEY:?Set S3_SECRET_KEY}
       - S3_BUCKET=${S3_BUCKET:-forgebase}
       - CORS_ORIGINS=${CORS_ORIGINS:-https://renderforge.endlessmaker.com}
+      - SEED_PROJECTS=${SEED_PROJECTS:-yld,quran,linguaforge,kids}
     labels:
       - traefik.enable=false
     depends_on:
@@ -73,8 +74,6 @@ services:
       - POSTGRES_DB=${POSTGRES_DB:-renderforge}
       - POSTGRES_USER=${POSTGRES_USER:-renderforge}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
-    volumes:
-      - renderforge_pgdata:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-renderforge} -d ${POSTGRES_DB:-renderforge}"]
       start_period: 10s
@@ -88,8 +87,6 @@ services:
     image: redis:7-alpine
     container_name: renderforge-redis
     restart: always
-    volumes:
-      - renderforge_redisdata:/data
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
@@ -105,6 +102,4 @@ networks:
     external: true
 
 volumes:
-  renderforge_pgdata:
-  renderforge_redisdata:
   renderforge_output:
