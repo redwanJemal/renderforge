@@ -12,6 +12,8 @@ import {
   MoreHorizontal,
   Send,
   Image,
+  Ban,
+  XCircle,
 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -52,7 +54,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Skeleton } from "@/components/ui/skeleton";
 import { TablePagination } from "@/components/ui/table-pagination";
-import { useRenders, useCreateRender, useDeleteRender, useBulkDeleteRenders, type Render } from "@/hooks/use-renders";
+import { useRenders, useCreateRender, useDeleteRender, useBulkDeleteRenders, useCancelRender, useBulkCancelRenders, useDrainQueue, type Render } from "@/hooks/use-renders";
 import { useAllRendersSSE } from "@/hooks/use-sse";
 import { NewRenderDialog } from "./new-render-dialog";
 import { PublishDialog } from "./publish-dialog";
@@ -174,6 +176,9 @@ export function RenderListPage() {
   const retryRender = useCreateRender();
   const deleteRender = useDeleteRender();
   const bulkDelete = useBulkDeleteRenders();
+  const cancelRender = useCancelRender();
+  const bulkCancel = useBulkCancelRenders();
+  const drainQueue = useDrainQueue();
   const progressMap = useAllRendersSSE();
 
   const renderItems = data?.items ?? [];
@@ -243,6 +248,38 @@ export function RenderListPage() {
     }
   }
 
+  async function handleCancel(render: Render) {
+    try {
+      await cancelRender.mutateAsync(render.id);
+      toast.success("Render cancelled");
+    } catch {
+      toast.error("Failed to cancel render");
+    }
+  }
+
+  async function handleBulkCancel() {
+    try {
+      const cancellable = renderItems
+        .filter((r) => selectedIds.has(r.id) && (getStatus(r) === "queued" || getStatus(r) === "rendering"))
+        .map((r) => r.id);
+      if (cancellable.length === 0) { toast.error("No cancellable renders selected"); return; }
+      await bulkCancel.mutateAsync(cancellable);
+      toast.success(`Cancelled ${cancellable.length} render(s)`);
+      setSelectedIds(new Set());
+    } catch {
+      toast.error("Failed to cancel renders");
+    }
+  }
+
+  async function handleDrainQueue() {
+    try {
+      const result = await drainQueue.mutateAsync();
+      toast.success((result as any).message || "Queue drained");
+    } catch {
+      toast.error("Failed to drain queue");
+    }
+  }
+
   async function handleBulkDownload() {
     for (const render of selectedCompleted) {
       if (render.outputUrl) {
@@ -297,12 +334,20 @@ export function RenderListPage() {
             ))}
           </SelectContent>
         </Select>
+        <Button variant="outline" size="sm" onClick={handleDrainQueue}>
+          <Ban className="mr-2 h-4 w-4" />
+          Drain Queue
+        </Button>
       </div>
 
       {/* Bulk Action Bar */}
       {someSelected && (
         <div className="flex items-center gap-3 p-3 rounded-lg border bg-muted/50">
           <span className="text-sm font-medium">{selectedIds.size} selected</span>
+          <Button variant="outline" size="sm" onClick={handleBulkCancel}>
+            <XCircle className="mr-2 h-4 w-4" />
+            Cancel Selected
+          </Button>
           <Button variant="outline" size="sm" onClick={() => setBulkDeleteOpen(true)}>
             <Trash2 className="mr-2 h-4 w-4" />
             Delete Selected
@@ -478,6 +523,15 @@ export function RenderListPage() {
                             </>
                           )}
                           <DropdownMenuSeparator />
+                          {(status === "queued" || status === "rendering") && (
+                            <DropdownMenuItem
+                              className="text-orange-600 focus:text-orange-600"
+                              onClick={() => handleCancel(render)}
+                            >
+                              <XCircle className="mr-2 h-4 w-4" />
+                              Cancel
+                            </DropdownMenuItem>
+                          )}
                           <DropdownMenuItem
                             disabled={retryRender.isPending}
                             onClick={() => handleRerender(render)}

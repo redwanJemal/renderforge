@@ -75,6 +75,30 @@ export function useCreateBatchRender() {
   });
 }
 
+export function useCancelRender() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => api.post(`/api/renders/${id}/cancel`),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["renders"] }),
+  });
+}
+
+export function useBulkCancelRenders() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (ids: string[]) => api.post("/api/renders/bulk-cancel", { ids }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["renders"] }),
+  });
+}
+
+export function useDrainQueue() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: () => api.post("/api/renders/drain"),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["renders"] }),
+  });
+}
+
 export function useDeleteRender() {
   const queryClient = useQueryClient();
   return useMutation({

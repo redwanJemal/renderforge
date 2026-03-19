@@ -28,6 +28,8 @@ COPY apps/renderer/ apps/renderer/
 COPY packages/db/ packages/db/
 COPY packages/shared/ packages/shared/
 COPY public/ public/
+COPY scripts/ scripts/
+COPY content/banks/ content/banks/
 
 # Stage 3: Runtime
 FROM node:22-slim AS runtime

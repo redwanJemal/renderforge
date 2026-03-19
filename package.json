@@ -17,6 +17,7 @@
     "db:seed": "pnpm --filter @renderforge/db seed",
     "db:seed-all": "pnpm --filter @renderforge/db seed-all",
     "db:seed-yld-100": "pnpm --filter @renderforge/db seed-yld-100",
+    "db:seed-init": "SEED_PROJECTS=yld,quran,linguaforge,kids pnpm --filter @renderforge/db seed-init",
     "db:studio": "pnpm --filter @renderforge/db studio",
     "render": "tsx scripts/render-cli.ts",
     "lint": "eslint src/",

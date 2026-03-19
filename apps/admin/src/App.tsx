@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { DashboardLayout } from "@/components/layout/dashboard-layout";
 import { ProtectedRoute } from "@/components/layout/protected-route";
 import { LoginPage } from "@/features/auth/login-page";
+import { SetupPage } from "@/features/setup/setup-page";
 import { DashboardPage } from "@/features/dashboard/dashboard-page";
 import { PostDetailPage } from "@/features/posts/post-detail-page";
 import { RenderDetailPage } from "@/features/renders/render-detail-page";
@@ -31,6 +32,7 @@ export function App() {
       <ThemeProvider>
         <BrowserRouter>
           <Routes>
+            <Route path="/setup" element={<SetupPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route element={<ProtectedRoute />}>
               <Route element={<DashboardLayout />}>

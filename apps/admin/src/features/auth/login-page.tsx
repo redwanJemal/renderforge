@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useState, useEffect, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { Clapperboard, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -18,6 +18,20 @@ export function LoginPage() {
   const { login, isLoading, error, clearError } = useAuthStore();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  // Redirect to setup if no users exist
+  useEffect(() => {
+    fetch("/api/setup/status")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.needsSetup) {
+          navigate("/setup", { replace: true });
+        }
+      })
+      .catch(() => {
+        // API unreachable, stay on login
+      });
+  }, [navigate]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();

@@ -22,6 +22,7 @@ import { storageProxy } from "./routes/storage-proxy.js";
 import { imagesRouter } from "./routes/images.js";
 import { projectsRouter } from "./routes/projects.js";
 import { quranRouter } from "./routes/quran.js";
+import { setupRouter } from "./routes/setup.js";
 import { createRenderWorker } from "./jobs/render-worker.js";
 import { createPublishWorker } from "./jobs/publish-worker.js";
 import { createScheduleWorker } from "./jobs/schedule-worker.js";
@@ -37,6 +38,7 @@ app.onError(errorHandler);
 // Public routes
 app.route("/health", health);
 app.route("/api/auth", auth);
+app.route("/api/setup", setupRouter);
 app.route("/api/sse", sse);
 
 // Protected routes

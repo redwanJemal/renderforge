@@ -43,6 +43,9 @@ import './templates/motivational-narration';
 // Language learning templates
 import './templates/vocab-card';
 
+// Islamic content templates
+import './templates/quran-ayah';
+
 export const RemotionRoot: React.FC = () => {
   const allTemplates = registry.getAll();
 
