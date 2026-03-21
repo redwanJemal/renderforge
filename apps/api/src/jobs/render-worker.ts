@@ -121,7 +121,7 @@ function getPremiumCompositionId(templateId: string, format: string): string {
 function buildYLDIntroProps(
   postScenes: Array<{ displayText: string | null; extraProps: unknown }>,
   metadata: Record<string, unknown>,
-  projectDefaults?: { logoUrl?: string; accentColor?: string; bgGradient?: string[]; socialHandles?: Record<string, string> },
+  projectDefaults?: { logoUrl?: string; accentColor?: string; bgGradient?: string[]; socialHandles?: Record<string, string>; enableIntro?: boolean; enableOutro?: boolean },
 ): Record<string, unknown> {
   // Map scenes by key (sortOrder: 0=intro, 1=headline, 2=subheader, 3=badge, 4=cta)
   const sceneMap: Record<string, { text: string; highlight?: string }> = {};
@@ -221,6 +221,9 @@ function buildYLDIntroProps(
       badgeAppear: 290,
       ctaAppear: 330,
     },
+    // Audio mixing timing — narration starts after intro, ends before outro
+    introHoldFrames: projectDefaults?.enableIntro === false ? 0 : 60,
+    outroHoldFrames: projectDefaults?.enableOutro === false ? 0 : 60,
   };
 }
 
@@ -438,8 +441,24 @@ async function processRenderJob(job: Job<RenderJobData>) {
       } else {
         templateProps = buildYLDIntroProps(postScenes, metadata, projectDefaults);
       }
-      // yld-intro has a fixed animation timeline, ~12 seconds is ideal
-      totalFrames = 400; // ~13.3s at 30fps — enough for all animations + fade out
+      // Calculate duration from scene audio when available
+      const sceneDurations = postScenes
+        .filter((s) => s.durationSeconds && parseFloat(String(s.durationSeconds)) > 0)
+        .map((s) => parseFloat(String(s.durationSeconds)));
+
+      const introFrames = (templateProps.introHoldFrames as number) ?? 60;
+      const outroFrames = (templateProps.outroHoldFrames as number) ?? 60;
+
+      if (sceneDurations.length > 0) {
+        const totalAudioSec = sceneDurations.reduce((sum, d) => sum + d, 0);
+        const audioFrames = Math.ceil(totalAudioSec * fps);
+        // Ensure video is at least as long as the animation timeline (400 frames)
+        totalFrames = Math.max(400, introFrames + audioFrames + outroFrames);
+        console.log(`[render-worker] yld-intro audio-driven: ${sceneDurations.length} scenes, ${totalAudioSec.toFixed(1)}s audio, intro=${introFrames}, outro=${outroFrames}, totalFrames=${totalFrames}`);
+      } else {
+        // No audio — fixed animation timeline
+        totalFrames = 400; // ~13.3s at 30fps — enough for all animations + fade out
+      }
     } else {
       // Original motivational-narration or other template logic
       const ENTRANCES = ["scaleIn", "slideUp", "fadeIn", "slideLeft", "slam"] as const;

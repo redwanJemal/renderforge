@@ -34,6 +34,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Progress } from "@/components/ui/progress";
@@ -476,8 +477,6 @@ export function PostDetailPage() {
                         {t.name}
                       </SelectItem>
                     ))}
-                    <SelectItem value="motivational-narration">Motivational Narration</SelectItem>
-                    <SelectItem value="yld-intro">YLD Intro</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -797,138 +796,142 @@ export function PostDetailPage() {
         </CardHeader>
         <CardContent>
           {editing ? (
-            <div className="space-y-4">
-              {editScenes.map((scene, index) => (
-                <div key={index} className="rounded-lg border p-4 space-y-3">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span className="font-medium text-sm text-muted-foreground">
-                        Scene {index + 1}
-                      </span>
+            <ScrollArea className="max-h-[60vh] pr-4">
+              <div className="space-y-4">
+                {editScenes.map((scene, index) => (
+                  <div key={index} className="rounded-lg border p-4 space-y-3">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="font-medium text-sm text-muted-foreground">
+                          Scene {index + 1}
+                        </span>
+                      </div>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-7 w-7 text-destructive hover:text-destructive"
+                        onClick={() => removeScene(index)}
+                      >
+                        <Trash2 className="h-3 w-3" />
+                      </Button>
                     </div>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="h-7 w-7 text-destructive hover:text-destructive"
-                      onClick={() => removeScene(index)}
-                    >
-                      <Trash2 className="h-3 w-3" />
-                    </Button>
-                  </div>
-                  <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="space-y-1">
+                        <Label className="text-xs">Key</Label>
+                        <Input
+                          value={scene.key}
+                          onChange={(e) => updateScene(index, "key", e.target.value)}
+                          placeholder="e.g. intro, headline"
+                        />
+                      </div>
+                      <div className="space-y-1">
+                        <Label className="text-xs">Entrance</Label>
+                        <Select
+                          value={scene.entrance}
+                          onValueChange={(v) => updateScene(index, "entrance", v)}
+                        >
+                          <SelectTrigger>
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {ENTRANCES.map((e) => (
+                              <SelectItem key={e} value={e}>
+                                {e}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
                     <div className="space-y-1">
-                      <Label className="text-xs">Key</Label>
-                      <Input
-                        value={scene.key}
-                        onChange={(e) => updateScene(index, "key", e.target.value)}
-                        placeholder="e.g. intro, headline"
+                      <Label className="text-xs">Display Text</Label>
+                      <Textarea
+                        value={scene.displayText}
+                        onChange={(e) => updateScene(index, "displayText", e.target.value)}
+                        rows={2}
                       />
                     </div>
                     <div className="space-y-1">
-                      <Label className="text-xs">Entrance</Label>
-                      <Select
-                        value={scene.entrance}
-                        onValueChange={(v) => updateScene(index, "entrance", v)}
-                      >
-                        <SelectTrigger>
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {ENTRANCES.map((e) => (
-                            <SelectItem key={e} value={e}>
-                              {e}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                      <Label className="text-xs">Narration Text</Label>
+                      <Textarea
+                        value={scene.narrationText}
+                        onChange={(e) => updateScene(index, "narrationText", e.target.value)}
+                        rows={2}
+                      />
                     </div>
                   </div>
-                  <div className="space-y-1">
-                    <Label className="text-xs">Display Text</Label>
-                    <Textarea
-                      value={scene.displayText}
-                      onChange={(e) => updateScene(index, "displayText", e.target.value)}
-                      rows={2}
-                    />
-                  </div>
-                  <div className="space-y-1">
-                    <Label className="text-xs">Narration Text</Label>
-                    <Textarea
-                      value={scene.narrationText}
-                      onChange={(e) => updateScene(index, "narrationText", e.target.value)}
-                      rows={2}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            </ScrollArea>
           ) : scenes.length === 0 ? (
             <p className="text-sm text-muted-foreground">No scenes added yet.</p>
           ) : (
-            <div className="space-y-4">
-              {scenes.map((scene) => (
-                <div key={scene.id} className="rounded-lg border p-4 space-y-3">
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-center gap-2">
-                      <Circle
-                        className={cn(
-                          "h-3 w-3 fill-current",
-                          scene.audioUrl ? "text-green-500" : "text-red-500",
-                        )}
-                      />
-                      <span className="font-medium">
-                        {scene.sortOrder + 1}. {scene.key}
-                      </span>
-                      <Badge variant="outline" className="text-xs">
-                        {scene.entrance}
-                      </Badge>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      {scene.audioUrl ? (
-                        <span className="text-xs text-muted-foreground">
-                          {scene.durationSeconds
-                            ? `${parseFloat(scene.durationSeconds).toFixed(1)}s`
-                            : "Audio attached"}
+            <ScrollArea className="max-h-[60vh] pr-4">
+              <div className="space-y-4">
+                {scenes.map((scene) => (
+                  <div key={scene.id} className="rounded-lg border p-4 space-y-3">
+                    <div className="flex items-start justify-between">
+                      <div className="flex items-center gap-2">
+                        <Circle
+                          className={cn(
+                            "h-3 w-3 fill-current",
+                            scene.audioUrl ? "text-green-500" : "text-red-500",
+                          )}
+                        />
+                        <span className="font-medium">
+                          {scene.sortOrder + 1}. {scene.key}
                         </span>
-                      ) : (
-                        <>
-                          <input
-                            type="file"
-                            accept="audio/*"
-                            className="hidden"
-                            ref={(el) => {
-                              fileInputRefs.current[scene.id] = el;
-                            }}
-                            onChange={(e) => {
-                              const file = e.target.files?.[0];
-                              if (file) handleAudioUpload(scene.id, file);
-                            }}
-                          />
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => fileInputRefs.current[scene.id]?.click()}
-                          >
-                            <Upload className="mr-1 h-3 w-3" />
-                            Upload Audio
-                          </Button>
-                        </>
-                      )}
+                        <Badge variant="outline" className="text-xs">
+                          {scene.entrance}
+                        </Badge>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        {scene.audioUrl ? (
+                          <span className="text-xs text-muted-foreground">
+                            {scene.durationSeconds
+                              ? `${parseFloat(scene.durationSeconds).toFixed(1)}s`
+                              : "Audio attached"}
+                          </span>
+                        ) : (
+                          <>
+                            <input
+                              type="file"
+                              accept="audio/*"
+                              className="hidden"
+                              ref={(el) => {
+                                fileInputRefs.current[scene.id] = el;
+                              }}
+                              onChange={(e) => {
+                                const file = e.target.files?.[0];
+                                if (file) handleAudioUpload(scene.id, file);
+                              }}
+                            />
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => fileInputRefs.current[scene.id]?.click()}
+                            >
+                              <Upload className="mr-1 h-3 w-3" />
+                              Upload Audio
+                            </Button>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                    <div className="grid gap-2 text-sm">
+                      <div>
+                        <span className="font-medium text-muted-foreground">Display: </span>
+                        {scene.displayText}
+                      </div>
+                      <div>
+                        <span className="font-medium text-muted-foreground">Narration: </span>
+                        {scene.narrationText}
+                      </div>
                     </div>
                   </div>
-                  <div className="grid gap-2 text-sm">
-                    <div>
-                      <span className="font-medium text-muted-foreground">Display: </span>
-                      {scene.displayText}
-                    </div>
-                    <div>
-                      <span className="font-medium text-muted-foreground">Narration: </span>
-                      {scene.narrationText}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            </ScrollArea>
           )}
         </CardContent>
       </Card>
