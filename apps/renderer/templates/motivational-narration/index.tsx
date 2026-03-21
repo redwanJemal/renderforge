@@ -15,7 +15,22 @@ import { meta } from './meta';
 import { motivationalNarrationSchema, defaultProps } from './schema';
 import type { MotivationalNarrationProps, Scene } from './schema';
 
-// ── Particles Background ──────────────────────
+// ── Helpers ──────────────────────────────────
+
+function seededRandom(seed: number): number {
+  const x = Math.sin(seed * 9301 + 49297) * 49297;
+  return x - Math.floor(x);
+}
+
+/** Resolve logo — use directly if URL, otherwise staticFile() for local files */
+function resolveLogoSrc(logo: string): string {
+  if (logo.startsWith('http://') || logo.startsWith('https://') || logo.startsWith('data:')) {
+    return logo;
+  }
+  return staticFile(logo);
+}
+
+// ── Particles ──────────────────────────────
 
 const Particle: React.FC<{
   index: number;
@@ -23,29 +38,151 @@ const Particle: React.FC<{
 }> = ({ index, color }) => {
   const frame = useCurrentFrame();
   const seed = index * 137.5;
-  const x = ((seed * 7.3) % 100);
-  const size = 2 + (seed % 4);
-  const speed = 0.3 + (seed % 5) * 0.1;
-  const y = ((frame * speed + seed * 3) % 120) - 10;
-  const drift = Math.sin(frame * 0.02 + seed) * 15;
-  const opacity = interpolate(y, [0, 20, 80, 110], [0, 0.6, 0.6, 0], {
-    extrapolateLeft: 'clamp',
-    extrapolateRight: 'clamp',
-  });
+  const x = seededRandom(seed * 7) * 100;
+  const y = 30 + seededRandom(seed * 13) * 70;
+  const size = 2 + seededRandom(seed * 3) * 5;
+  const delay = seededRandom(seed * 11) * 40;
+  const speed = 0.2 + seededRandom(seed * 17) * 0.5;
+  const baseOpacity = 0.2 + seededRandom(seed * 23) * 0.5;
+
+  const adj = Math.max(0, frame - delay);
+  const fadeIn = interpolate(adj, [0, 30], [0, baseOpacity], { extrapolateRight: 'clamp' });
 
   return (
     <div
       style={{
         position: 'absolute',
-        left: `${x + drift * 0.3}%`,
+        left: `${x}%`,
         top: `${y}%`,
         width: size,
         height: size,
         borderRadius: '50%',
         background: color,
-        opacity: opacity * 0.5,
+        filter: size > 4 ? 'blur(2px)' : undefined,
+        opacity: fadeIn,
+        transform: `translateY(${adj * speed * -0.4}px) translateX(${Math.sin(adj * 0.02 + x) * 15}px)`,
+        boxShadow: `0 0 ${size * 2}px ${color}`,
       }}
     />
+  );
+};
+
+// ── Scan Line ──────────────────────────────
+
+const ScanLine: React.FC<{ accent: string }> = ({ accent }) => {
+  const frame = useCurrentFrame();
+  return (
+    <div
+      style={{
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top: `${interpolate(frame % 120, [0, 120], [-5, 105])}%`,
+        height: 2,
+        background: `linear-gradient(90deg, transparent, ${accent}, transparent)`,
+        opacity: 0.12,
+        filter: 'blur(1px)',
+      }}
+    />
+  );
+};
+
+// ── Text Animations ──────────────────────────
+
+const CharRevealText: React.FC<{
+  text: string;
+  delay: number;
+  style: React.CSSProperties;
+  highlight?: string;
+  accent?: string;
+}> = ({ text, delay, style, highlight, accent }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  const highlightLower = highlight?.toLowerCase() ?? '';
+  const textLower = text.toLowerCase();
+  const hlStart = highlightLower ? textLower.indexOf(highlightLower) : -1;
+  const hlEnd = hlStart >= 0 ? hlStart + highlightLower.length : -1;
+
+  return (
+    <div style={{ ...style, display: 'flex', flexWrap: 'wrap', justifyContent: style.textAlign === 'left' ? 'flex-start' : 'center' }}>
+      {text.split('').map((char, i) => {
+        const charDelay = delay + i * 1.8;
+        const adj = Math.max(0, frame - charDelay);
+        const progress = spring({
+          frame: adj,
+          fps,
+          config: { damping: 12, stiffness: 200, mass: 0.3 },
+        });
+        const opacity = interpolate(adj, [0, 6], [0, 1], {
+          extrapolateLeft: 'clamp',
+          extrapolateRight: 'clamp',
+        });
+        const isHighlight = accent && hlStart >= 0 && i >= hlStart && i < hlEnd;
+
+        return (
+          <span
+            key={i}
+            style={{
+              display: 'inline-block',
+              opacity,
+              transform: `translateY(${(1 - progress) * 20}px) scale(${0.5 + progress * 0.5})`,
+              color: isHighlight ? accent : style.color,
+              textShadow: isHighlight ? `0 0 30px ${accent}66` : undefined,
+              whiteSpace: char === ' ' ? 'pre' : undefined,
+            }}
+          >
+            {char}
+          </span>
+        );
+      })}
+    </div>
+  );
+};
+
+const WordRevealText: React.FC<{
+  text: string;
+  delay: number;
+  style: React.CSSProperties;
+  highlight?: string;
+  accent?: string;
+}> = ({ text, delay, style, highlight, accent }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const words = text.split(' ');
+
+  return (
+    <div style={{ ...style, display: 'flex', flexWrap: 'wrap', justifyContent: style.textAlign === 'left' ? 'flex-start' : 'center', gap: '0 0.3em' }}>
+      {words.map((word, i) => {
+        const wordDelay = delay + i * 4;
+        const adj = Math.max(0, frame - wordDelay);
+        const progress = spring({
+          frame: adj,
+          fps,
+          config: { damping: 14, stiffness: 120, mass: 0.5 },
+        });
+        const opacity = interpolate(adj, [0, 8], [0, 1], {
+          extrapolateLeft: 'clamp',
+          extrapolateRight: 'clamp',
+        });
+        const isHighlight = accent && highlight && highlight.toLowerCase().includes(word.toLowerCase());
+
+        return (
+          <span
+            key={i}
+            style={{
+              display: 'inline-block',
+              opacity,
+              transform: `translateY(${(1 - progress) * 30}px)`,
+              color: isHighlight ? accent : style.color,
+              textShadow: isHighlight ? `0 0 30px ${accent}66` : undefined,
+            }}
+          >
+            {word}
+          </span>
+        );
+      })}
+    </div>
   );
 };
 
@@ -66,6 +203,7 @@ const AccentBar: React.FC<{
         width: `${progress * 100}%`,
         height: barHeight,
         background: `linear-gradient(90deg, ${color}, ${color}88)`,
+        boxShadow: `0 0 10px ${color}66`,
         transition: 'width 0.1s linear',
       }}
     />
@@ -88,31 +226,24 @@ const SceneView: React.FC<{
 }> = ({ scene, localFrame, transitionFrames, isLast, isFirst, theme, format, accentColor, sceneIndex, totalScenes }) => {
   const { fps } = useVideoConfig();
 
-  // Distinct page transition: fade through black
+  // Fade transitions
   const enterDuration = transitionFrames + 5;
   const exitDuration = transitionFrames + 5;
 
-  // Enter: fade in from black (0 → enterDuration)
-  const enterProgress = interpolate(
-    localFrame,
-    [0, enterDuration],
-    [0, 1],
-    { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' },
-  );
+  const enterProgress = interpolate(localFrame, [0, enterDuration], [0, 1], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+  });
 
-  // Exit: fade out to black (durationFrames - exitDuration → durationFrames)
-  // Last scene also fades out so it doesn't overlap with the outro
   const exitStart = scene.durationFrames - exitDuration;
-  const exitProgress = interpolate(
-    localFrame,
-    [exitStart, scene.durationFrames],
-    [1, 0],
-    { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' },
-  );
+  const exitProgress = interpolate(localFrame, [exitStart, scene.durationFrames], [1, 0], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+  });
 
   const visibility = Math.min(enterProgress, exitProgress);
 
-  // Entrance-specific transforms
+  // Entrance transforms
   let translateX = 0;
   let translateY = 0;
   let scale = 1;
@@ -147,43 +278,31 @@ const SceneView: React.FC<{
       break;
   }
 
-  // Subtext staggered entrance
-  const subtextDelay = Math.min(20, enterDuration + 5);
-  const subtextOpacity = interpolate(
-    localFrame,
-    [subtextDelay, subtextDelay + 15],
-    [0, 1],
-    { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' },
-  );
-
-  const padding = responsivePadding(format);
+  const padding = responsivePadding(60, format);
   const textSize = responsiveFontSize(scene.textSize, format, 'heading');
   const subtextSize = responsiveFontSize(scene.subtextSize || 28, format, 'body');
 
-  // Render text with highlighted words
-  const renderHighlightedText = (text: string, highlight?: string) => {
-    if (!highlight) return text;
-    const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
-    return parts.map((part, i) =>
-      part.toLowerCase() === highlight.toLowerCase() ? (
-        <span key={i} style={{ color: accentColor }}>{part}</span>
-      ) : (
-        <span key={i}>{part}</span>
-      ),
-    );
-  };
+  // Animated divider under text
+  const dividerWidth = interpolate(enterProgress, [0, 1], [0, 55]);
+  const dividerOpacity = interpolate(localFrame, [enterDuration, enterDuration + 10], [0, 1], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+  });
 
-  // Scene counter for page feel
+  // Scene counter
   const counterOpacity = interpolate(localFrame, [enterDuration, enterDuration + 10], [0, 0.4], {
-    extrapolateLeft: 'clamp', extrapolateRight: 'clamp',
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
   }) * exitProgress;
+
+  const useCharReveal = scene.entrance === 'fadeIn' || scene.entrance === 'scaleIn';
 
   return (
     <AbsoluteFill style={{ opacity: visibility }}>
-      {/* Scene-specific background overlay for page distinction */}
+      {/* Scene-specific radial light */}
       <AbsoluteFill
         style={{
-          background: `radial-gradient(ellipse at ${50 + sceneIndex * 5}% ${40 + sceneIndex * 3}%, rgba(255,255,255,0.02) 0%, transparent 70%)`,
+          background: `radial-gradient(ellipse at ${50 + sceneIndex * 8}% ${40 + sceneIndex * 5}%, ${accentColor}08 0%, transparent 60%)`,
         }}
       />
 
@@ -217,22 +336,40 @@ const SceneView: React.FC<{
           </div>
         )}
 
-        {/* Main text */}
-        <div
-          style={{
-            fontSize: textSize,
-            fontWeight: 800,
-            fontFamily: theme.fonts.heading,
-            color: '#ffffff',
-            textAlign: scene.textAlign,
-            lineHeight: 1.3,
-            whiteSpace: 'pre-line',
-            textShadow: '0 4px 20px rgba(0,0,0,0.5)',
-            maxWidth: '90%',
-          }}
-        >
-          {renderHighlightedText(scene.text, scene.highlight)}
-        </div>
+        {/* Main text — use charReveal or wordReveal for richer animation */}
+        {useCharReveal ? (
+          <CharRevealText
+            text={scene.text}
+            delay={5}
+            highlight={scene.highlight}
+            accent={accentColor}
+            style={{
+              fontSize: textSize,
+              fontWeight: 800,
+              fontFamily: theme.fonts.heading,
+              color: '#ffffff',
+              textAlign: scene.textAlign,
+              lineHeight: 1.3,
+              maxWidth: '90%',
+            }}
+          />
+        ) : (
+          <WordRevealText
+            text={scene.text}
+            delay={3}
+            highlight={scene.highlight}
+            accent={accentColor}
+            style={{
+              fontSize: textSize,
+              fontWeight: 800,
+              fontFamily: theme.fonts.heading,
+              color: '#ffffff',
+              textAlign: scene.textAlign,
+              lineHeight: 1.3,
+              maxWidth: '90%',
+            }}
+          />
+        )}
 
         {/* Subtext */}
         {scene.subtext && (
@@ -241,32 +378,101 @@ const SceneView: React.FC<{
               fontSize: subtextSize,
               fontWeight: 400,
               fontFamily: theme.fonts.body,
-              color: 'rgba(255,255,255,0.75)',
+              color: 'rgba(255,255,255,0.5)',
               textAlign: scene.textAlign,
-              lineHeight: 1.5,
+              lineHeight: 1.7,
               marginTop: 20,
-              opacity: subtextOpacity,
+              opacity: interpolate(localFrame, [enterDuration + 5, enterDuration + 20], [0, 1], {
+                extrapolateLeft: 'clamp',
+                extrapolateRight: 'clamp',
+              }) * exitProgress,
               whiteSpace: 'pre-line',
               maxWidth: '85%',
+              letterSpacing: '0.02em',
             }}
           >
             {scene.subtext}
           </div>
         )}
 
-        {/* Accent underline */}
+        {/* Accent divider line — like yld-intro */}
         <div
           style={{
-            width: interpolate(enterProgress, [0, 1], [0, 120]),
-            height: 3,
-            background: accentColor,
-            marginTop: 24,
-            borderRadius: 2,
+            width: `${dividerWidth}%`,
+            height: 2,
+            background: `linear-gradient(90deg, transparent, ${accentColor}, transparent)`,
+            marginTop: 28,
+            opacity: dividerOpacity * exitProgress,
             alignSelf: scene.textAlign === 'left' ? 'flex-start' : 'center',
-            opacity: visibility,
           }}
         />
       </AbsoluteFill>
+    </AbsoluteFill>
+  );
+};
+
+// ── Intro/Outro Logo Section ──────────────────
+
+const LogoSection: React.FC<{
+  logo?: string;
+  title?: string;
+  logoSize: number;
+  accentColor: string;
+  opacity: number;
+  scale: number;
+  glowIntensity: number;
+  dividerProgress: number;
+  theme: Theme;
+  format: Format;
+}> = ({ logo, title, logoSize, accentColor, opacity, scale, glowIntensity, dividerProgress, theme, format }) => {
+  return (
+    <AbsoluteFill
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        opacity,
+        transform: `scale(${scale})`,
+      }}
+    >
+      {logo && (
+        <Img
+          src={resolveLogoSrc(logo)}
+          style={{
+            width: logoSize * 2,
+            height: logoSize * 2,
+            objectFit: 'contain',
+            marginBottom: 20,
+            filter: `drop-shadow(0 0 ${40 * glowIntensity}px ${accentColor}80) drop-shadow(0 0 ${80 * glowIntensity}px ${accentColor}33)`,
+          }}
+        />
+      )}
+      {title && (
+        <div
+          style={{
+            fontSize: responsiveFontSize(28, format, 'caption'),
+            fontWeight: 300,
+            fontFamily: theme.fonts.heading,
+            color: 'rgba(255,255,255,0.55)',
+            letterSpacing: '0.35em',
+            textTransform: 'uppercase',
+            marginTop: 8,
+          }}
+        >
+          {title}
+        </div>
+      )}
+      {/* Accent divider */}
+      <div
+        style={{
+          width: dividerProgress,
+          height: 2,
+          background: `linear-gradient(90deg, transparent, ${accentColor}, transparent)`,
+          marginTop: 16,
+          opacity: opacity > 0.5 ? 1 : opacity * 2,
+        }}
+      />
     </AbsoluteFill>
   );
 };
@@ -280,7 +486,7 @@ const MotivationalNarration: React.FC<
   const { fps, durationInFrames } = useVideoConfig();
   const p = props;
 
-  // Find which scene is active based on startFrame/durationFrames
+  // Active scene detection
   let activeSceneIndex = -1;
   for (let i = 0; i < p.scenes.length; i++) {
     const s = p.scenes[i];
@@ -295,64 +501,63 @@ const MotivationalNarration: React.FC<
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
-  const globalFadeOut = interpolate(
-    frame,
-    [durationInFrames - 15, durationInFrames],
-    [1, 0],
-    { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' },
-  );
+  const globalFadeOut = interpolate(frame, [durationInFrames - 20, durationInFrames], [1, 0], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+  });
   const globalOpacity = Math.min(globalFadeIn, globalFadeOut);
 
-  // ── INTRO (2s): logo + channel name, scale in, hold, fade out ──
+  // ── INTRO ──
   const introEnd = p.introHoldFrames;
   const introLogoScale = spring({
     frame,
     fps,
-    config: { damping: 14, stiffness: 80, mass: 0.6 },
+    config: { damping: 15, stiffness: 60, mass: 1.0 },
   });
-  const introLogoOpacity = interpolate(frame, [0, 15], [0, 1], {
+  const introOpacity = interpolate(frame, [0, 25], [0, 1], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
-  const introFadeOut = interpolate(
-    frame,
-    [introEnd - 12, introEnd],
-    [1, 0],
-    { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' },
-  );
-  const introGlow = Math.sin(frame * 0.08) * 0.3 + 0.7;
+  const introFadeOut = interpolate(frame, [introEnd - 15, introEnd], [1, 0], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+  });
+  const introGlow = Math.sin(frame * 0.06) * 0.3 + 0.7;
+  const introDivider = interpolate(frame, [15, 40], [0, 100], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+  });
 
-  // ── OUTRO (2s): logo + channel name fade back in after last scene ──
+  // ── OUTRO ──
   const lastScene = p.scenes[p.scenes.length - 1];
-  const outroHoldFrames = p.outroHoldFrames ?? 60;
   const scenesEnd = lastScene ? lastScene.startFrame + lastScene.durationFrames : introEnd;
-  const outroStart = scenesEnd + 8; // small gap after last scene
+  const outroStart = scenesEnd + 8;
   const outroLogoScale = spring({
     frame: Math.max(0, frame - outroStart),
     fps,
-    config: { damping: 14, stiffness: 80, mass: 0.6 },
+    config: { damping: 15, stiffness: 60, mass: 1.0 },
   });
-  const outroOpacity = interpolate(
-    frame,
-    [outroStart, outroStart + 15],
-    [0, 1],
-    { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' },
-  );
-  const outroFadeOut = interpolate(
-    frame,
-    [durationInFrames - 20, durationInFrames],
-    [1, 0],
-    { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' },
-  );
+  const outroOpacity = interpolate(frame, [outroStart, outroStart + 20], [0, 1], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+  });
+  const outroFadeOut = interpolate(frame, [durationInFrames - 20, durationInFrames], [1, 0], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+  });
+  const outroDivider = interpolate(frame - outroStart, [5, 25], [0, 100], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+  });
 
-  // Overall progress for accent bar
+  // Progress bar
   const totalEnd = lastScene ? lastScene.startFrame + lastScene.durationFrames : durationInFrames;
   const overallProgress = interpolate(frame, [0, totalEnd], [0, 1], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
 
-  // Vignette pulse synced to scene transitions
+  // Vignette pulse on scene transitions
   const vignettePulse = activeSceneIndex >= 0
     ? interpolate(
         frame - p.scenes[activeSceneIndex].startFrame,
@@ -367,95 +572,50 @@ const MotivationalNarration: React.FC<
       {/* Background gradient */}
       <AbsoluteFill
         style={{
-          background: `radial-gradient(ellipse at 50% 40%, ${p.bgGradient[1]} 0%, ${p.bgGradient[0]} 50%, ${p.bgGradient[2]} 100%)`,
+          background: `radial-gradient(ellipse at 50% 35%, ${p.bgGradient[1]} 0%, ${p.bgGradient[0]} 40%, ${p.bgGradient[2]} 100%)`,
         }}
       />
 
-      {/* Subtle grid */}
+      {/* Grid overlay */}
       <AbsoluteFill
         style={{
-          backgroundImage: `linear-gradient(${p.accentColor}08 1px, transparent 1px), linear-gradient(90deg, ${p.accentColor}08 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(${p.accentColor}4D 1px, transparent 1px), linear-gradient(90deg, ${p.accentColor}4D 1px, transparent 1px)`,
           backgroundSize: '60px 60px',
-          opacity: 0.4,
+          opacity: 0.035,
         }}
       />
 
       {/* Particles */}
       {p.particlesEnabled && (
         <AbsoluteFill>
-          {Array.from({ length: 25 }, (_, i) => (
-            <Particle key={i} index={i} color={p.accentColor} />
+          {Array.from({ length: 40 }, (_, i) => (
+            <Particle key={i} index={i} color={`${p.accentColor}99`} />
           ))}
         </AbsoluteFill>
       )}
 
       {/* Scan line */}
-      <AbsoluteFill
-        style={{
-          background: `linear-gradient(transparent 0%, transparent ${((frame * 0.5) % 100)}%, ${p.accentColor}06 ${((frame * 0.5) % 100)}%, transparent ${((frame * 0.5) % 100) + 2}%)`,
-          pointerEvents: 'none',
-        }}
-      />
+      <ScanLine accent={p.accentColor} />
 
-      {/* ── INTRO: Logo + channel name (2s) ── */}
+      {/* ── INTRO: Logo + channel name ── */}
       {(p.logo || p.title) && frame < introEnd + 5 && (
-        <AbsoluteFill
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            opacity: introLogoOpacity * introFadeOut,
-            transform: `scale(${introLogoScale})`,
-          }}
-        >
-          {p.logo && (
-            <Img
-              src={staticFile(p.logo)}
-              style={{
-                width: p.logoSize * 1.8,
-                height: p.logoSize * 1.8,
-                objectFit: 'contain',
-                marginBottom: 20,
-                filter: `drop-shadow(0 0 ${40 * introGlow}px ${p.accentColor}80) drop-shadow(0 0 ${80 * introGlow}px ${p.accentColor}33)`,
-              }}
-            />
-          )}
-          {p.title && (
-            <div
-              style={{
-                fontSize: responsiveFontSize(28, props.format, 'caption'),
-                fontWeight: 600,
-                fontFamily: props.theme.fonts.heading,
-                color: 'rgba(255,255,255,0.6)',
-                letterSpacing: 4,
-                textTransform: 'uppercase',
-                marginTop: 8,
-              }}
-            >
-              {p.title}
-            </div>
-          )}
-          {/* Accent divider under logo */}
-          <div
-            style={{
-              width: interpolate(frame, [10, 30], [0, 100], {
-                extrapolateLeft: 'clamp',
-                extrapolateRight: 'clamp',
-              }),
-              height: 2,
-              background: `linear-gradient(90deg, transparent, ${p.accentColor}, transparent)`,
-              marginTop: 16,
-              opacity: introLogoOpacity,
-            }}
-          />
-        </AbsoluteFill>
+        <LogoSection
+          logo={p.logo}
+          title={p.title}
+          logoSize={p.logoSize}
+          accentColor={p.accentColor}
+          opacity={introOpacity * introFadeOut}
+          scale={introLogoScale}
+          glowIntensity={introGlow}
+          dividerProgress={introDivider}
+          theme={props.theme}
+          format={props.format}
+        />
       )}
 
-      {/* Scenes — each scene fades through black for distinct page feel */}
+      {/* Scenes */}
       {p.scenes.map((scene, i) => {
         const localFrame = frame - scene.startFrame;
-        // Only render if within range (with buffer for transitions)
         if (localFrame < -5 || localFrame > scene.durationFrames + 5) return null;
         const clampedLocal = Math.max(0, localFrame);
         return (
@@ -475,64 +635,26 @@ const MotivationalNarration: React.FC<
         );
       })}
 
-      {/* ── OUTRO: Logo + channel name (2s) ── */}
+      {/* ── OUTRO: Logo + channel name ── */}
       {(p.logo || p.title) && frame > outroStart - 5 && (
-        <AbsoluteFill
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            opacity: outroOpacity * outroFadeOut,
-            transform: `scale(${outroLogoScale})`,
-          }}
-        >
-          {p.logo && (
-            <Img
-              src={staticFile(p.logo)}
-              style={{
-                width: p.logoSize * 1.8,
-                height: p.logoSize * 1.8,
-                objectFit: 'contain',
-                marginBottom: 20,
-                filter: `drop-shadow(0 0 30px ${p.accentColor}80)`,
-              }}
-            />
-          )}
-          {p.title && (
-            <div
-              style={{
-                fontSize: responsiveFontSize(28, props.format, 'caption'),
-                fontWeight: 600,
-                fontFamily: props.theme.fonts.heading,
-                color: 'rgba(255,255,255,0.6)',
-                letterSpacing: 4,
-                textTransform: 'uppercase',
-                marginTop: 8,
-              }}
-            >
-              {p.title}
-            </div>
-          )}
-          {/* Accent divider */}
-          <div
-            style={{
-              width: interpolate(frame - outroStart, [5, 20], [0, 100], {
-                extrapolateLeft: 'clamp',
-                extrapolateRight: 'clamp',
-              }),
-              height: 2,
-              background: `linear-gradient(90deg, transparent, ${p.accentColor}, transparent)`,
-              marginTop: 16,
-            }}
-          />
-        </AbsoluteFill>
+        <LogoSection
+          logo={p.logo}
+          title={p.title}
+          logoSize={p.logoSize}
+          accentColor={p.accentColor}
+          opacity={outroOpacity * outroFadeOut}
+          scale={outroLogoScale}
+          glowIntensity={0.7}
+          dividerProgress={outroDivider}
+          theme={props.theme}
+          format={props.format}
+        />
       )}
 
       {/* Vignette */}
       <AbsoluteFill
         style={{
-          background: `radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,${0.6 + vignettePulse}) 100%)`,
+          background: `radial-gradient(ellipse at center, transparent 35%, rgba(0,0,0,${0.65 + vignettePulse}) 100%)`,
           pointerEvents: 'none',
         }}
       />
