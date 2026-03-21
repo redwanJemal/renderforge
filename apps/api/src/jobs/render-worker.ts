@@ -464,9 +464,16 @@ async function processRenderJob(job: Job<RenderJobData>) {
       const ENTRANCES = ["scaleIn", "slideUp", "fadeIn", "slideLeft", "slam"] as const;
       const SCENE_KEYS = ["intro", "headline", "subheader", "badge", "cta"];
 
-      if (metadata.sceneProps && typeof metadata.sceneProps === "object") {
-        templateProps = metadata.sceneProps as Record<string, unknown>;
-        // Normalize logo — yld-intro stores logo as object { file, size, ... }, motivational-narration expects a string
+      // Check if sceneProps is in motivational-narration format (has scenes array)
+      // vs yld-intro format (has header/theme/timing objects) — if it's yld-intro format, ignore and rebuild from DB scenes
+      const sp = (metadata.sceneProps && typeof metadata.sceneProps === "object")
+        ? metadata.sceneProps as Record<string, unknown>
+        : null;
+      const isMotivationalFormat = sp && Array.isArray(sp.scenes);
+
+      if (sp && isMotivationalFormat) {
+        templateProps = sp;
+        // Normalize logo in case it's still an object from a prior template
         if (templateProps.logo && typeof templateProps.logo === "object") {
           const logoObj = templateProps.logo as Record<string, unknown>;
           templateProps.logo = (logoObj.file as string) ?? projectDefaults.logoUrl ?? "yld-logo-white.png";
