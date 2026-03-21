@@ -466,7 +466,12 @@ async function processRenderJob(job: Job<RenderJobData>) {
 
       if (metadata.sceneProps && typeof metadata.sceneProps === "object") {
         templateProps = metadata.sceneProps as Record<string, unknown>;
-        if (!templateProps.logo) {
+        // Normalize logo — yld-intro stores logo as object { file, size, ... }, motivational-narration expects a string
+        if (templateProps.logo && typeof templateProps.logo === "object") {
+          const logoObj = templateProps.logo as Record<string, unknown>;
+          templateProps.logo = (logoObj.file as string) ?? projectDefaults.logoUrl ?? "yld-logo-white.png";
+        }
+        if (!templateProps.logo || typeof templateProps.logo !== "string") {
           templateProps.logo = projectDefaults.logoUrl ?? "yld-logo-white.png";
           templateProps.logoSize = 120;
         }
